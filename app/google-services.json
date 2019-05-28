@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "768736683244",
+    "firebase_url": "https://bazarayeshproject.firebaseio.com",
+    "project_id": "bazarayeshproject",
+    "storage_bucket": "bazarayeshproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768736683244:android:4045f5fbd1529411",
+        "android_client_info": {
+          "package_name": "com.idpz.bazarayesh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768736683244-vqegh0d5kmmuhutgcgjo8hemgtcdpnlb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.idpz.bazarayesh",
+            "certificate_hash": "0e968309c281837d2d9455054710b5e14a426db6"
+          }
+        },
+        {
+          "client_id": "768736683244-6e69sgkpm35c5e83qev5ek5ku0ehliot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO38xlmLmVeM6eVlcJW-ldAth9WldsQQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768736683244-6e69sgkpm35c5e83qev5ek5ku0ehliot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

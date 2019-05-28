@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LogIn"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:id="@+id/logo"
+        app:srcCompat="@drawable/ic_comb"/>
+    <com.idpz.bazarayesh.Views.mTextViewB
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
+        android:textSize="18dp"
+        android:layout_centerHorizontal="true"/>
+
+
+    <com.idpz.bazarayesh.Views.mEditText
+        android:id="@+id/txtMobile"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:background="@drawable/layout_corners_shape"
+        android:ems="10"
+        android:layout_centerInParent="true"
+        android:hint="@string/mobileNum"
+        android:inputType="textPersonName"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/dark" />
+
+    <com.idpz.bazarayesh.Views.mButton
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/btnLogin"
+        android:layout_below="@id/txtMobile"
+        android:background="@drawable/button_shape"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/login"
+        android:textColor="@color/white"/>
+
+</RelativeLayout>

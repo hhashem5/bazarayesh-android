@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">باز آرایش</string>
+    <string name="title_home">خانه</string>
+    <string name="title_profile">پروفایل</string>
+    <string name="title_advertise">آگهی</string>
+    <string name="full_name">نام و نام خانوادگی:</string>
+    <string name="phone">شماره تماس:</string>
+    <string name="barber_shop">آرایشگاه</string>
+    <string name="institude">آموزشگاه</string>
+    <string name="shop">فروشگاه</string>
+    <string name="teacher">مدرس</string>
+    <string name="hairdresser">آرایشگر</string>
+    <string name="login">ثبت نام</string>
+    <string name="mobileNum">شماره تماس :</string>
+    <string name="vrify">ورود</string>
+    <string name="code">کد تایید</string>
+    <string name="correct">تصحیح شماره</string>
+    <string name="resend">ارسال مجدد کد</string>
+    <string name="timer">00:00</string>
+    <string name="error1">شماره موبایل حتما باید 11 رقم باشد.</string>
+    <string name="nonet">خطا در اتصال به اینترنت</string>
+    <string name="wait">لطفا تامل نمایید...</string>
+    <string name="error2">کد تایید وارد شده صحیح نیست</string>
+</resources>

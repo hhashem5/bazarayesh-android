@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_back">
+
+    <include layout="@layout/mtoolbar" />
+
+    <ScrollView
+        android:id="@+id/svL"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/myProfile_photoLikes"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/user"  />
+
+            <com.idpz.bazarayesh.Views.mEditText
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_corners_shape"
+                android:ems="10"
+                android:hint="@string/full_name"
+                android:inputType="textPersonName"
+                android:paddingRight="16dp"
+                android:textColor="@color/dark" />
+
+            <com.idpz.bazarayesh.Views.mEditText
+                android:id="@+id/txtPhone"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_corners_shape"
+                android:ems="10"
+                android:hint="@string/phone"
+                android:inputType="textPersonName"
+                android:paddingRight="16dp"
+                android:textColor="@color/dark" />
+
+            <com.idpz.bazarayesh.Views.mEditText
+                android:id="@+id/txtAddress"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_corners_shape"
+                android:ems="10"
+                android:hint="آدرس:"
+                android:inputType="textPersonName"
+                android:paddingRight="16dp"
+                android:textColor="@color/dark" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/grey_60" />
+
+            <com.idpz.bazarayesh.Views.mTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="@string/barber_shop"
+                android:textColor="@color/link_blue"
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/grey_60" />
+
+
+
+
+
+            <com.idpz.bazarayesh.Views.mTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="@string/shop"
+                android:textColor="@color/link_blue"
+                android:textSize="18dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/grey_60" />
+
+            <com.idpz.bazarayesh.Views.mTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="@string/teacher"
+                android:textColor="@color/link_blue"
+                android:textSize="18dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/grey_60" />
+
+            <com.idpz.bazarayesh.Views.mTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="@string/hairdresser"
+                android:textColor="@color/link_blue"
+                android:textSize="18dp" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

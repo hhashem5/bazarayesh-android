@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".VerificationActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        app:srcCompat="@drawable/ic_comb" />
+
+    <com.idpz.bazarayesh.Views.mTextViewB
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:id="@+id/txtMobile"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true" />
+
+    <com.idpz.bazarayesh.Views.mEditText
+        android:id="@+id/txtCode"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_weight="1"
+        android:background="@drawable/layout_corners_shape"
+        android:ems="10"
+        android:hint="@string/code"
+        android:inputType="textPersonName"
+        android:gravity="center"
+        android:paddingRight="16dp"
+        android:textColor="@color/dark" />
+
+    <com.idpz.bazarayesh.Views.mButton
+        android:id="@+id/btnVerify"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/txtCode"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/button_shape"
+        android:text="@string/vrify"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnVerify"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+
+        >
+
+        <com.idpz.bazarayesh.Views.mTextView
+            android:id="@+id/correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/correct"
+            android:textColor="@color/white" />
+
+        <com.idpz.bazarayesh.Views.mTextView
+            android:id="@+id/resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/resend"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <com.idpz.bazarayesh.Views.mTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timer"
+        android:layout_below="@id/rel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="@string/timer"
+        android:textColor="@color/white" />
+</RelativeLayout>
