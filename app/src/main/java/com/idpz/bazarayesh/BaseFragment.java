@@ -9,11 +9,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class BaseFragment extends Fragment {
 
     TextView tooTitle;
+    ImageView imgbBack;
+
 
     @Nullable
     @Override
@@ -23,6 +26,9 @@ public class BaseFragment extends Fragment {
 
     public void settoolbarText(String tag, View v) {
         tooTitle = v.findViewById(R.id.tooTitle);
+        imgbBack =v.findViewById(R.id.imgbBack);
+
+
         tooTitle.setText(tag);
 
     }

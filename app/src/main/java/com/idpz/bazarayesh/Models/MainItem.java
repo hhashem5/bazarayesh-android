@@ -1,0 +1,54 @@
+package com.idpz.bazarayesh.Models;
+
+public class MainItem {
+
+    public String id;
+
+    public int Image;
+
+    public String color;
+
+    public String title;
+
+    public int getImage() {
+        return Image;
+    }
+
+    public void setImage(int image) {
+        Image = image;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public MainItem(String id, int image, String color, String title) {
+        this.id = id;
+        Image = image;
+        this.color = color;
+        this.title = title;
+    }
+
+    public MainItem() {
+    }
+}

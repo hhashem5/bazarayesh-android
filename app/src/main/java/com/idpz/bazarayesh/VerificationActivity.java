@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.idpz.bazarayesh.Models.VerifyResponse;
 import com.idpz.bazarayesh.Views.mButton;
 import com.idpz.bazarayesh.Views.mEditText;
 import com.idpz.bazarayesh.Views.mTextView;
@@ -108,10 +109,9 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         String url = tools.baseUrl + "checkAuthCode";
 
         RequestParams params = new RequestParams();
-        params.put("mobile", "");
-        params.put("code", "");
-        params.put("token_fb", "");
-        params.put("APP_KEY ", "");
+        params.put("mobile", tools.getSharePrf("mobile"));
+        params.put("code", txtCode.getText().toString());
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
 
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
@@ -125,6 +125,25 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                 try {
 
                     pd.dismiss();
+
+                    if (responseString.contains("200"))
+                    {
+
+                        VerifyResponse response=gson.fromJson(responseString,VerifyResponse.class);
+
+                    tools.addToSharePrf("api_token", response.getUser().getApiToken());
+                    Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
+                    i1.setAction(Intent.ACTION_MAIN);
+                    i1.addCategory(Intent.CATEGORY_HOME);
+                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    overridePendingTransition(0,0);
+                    startActivity(i1);
+
+                    customType(context, LEFT_TO_RIGHT);
+
+                    finish();}
                 } catch (Exception e) {
                 }
             }

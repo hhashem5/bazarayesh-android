@@ -74,6 +74,7 @@ public class LogIn extends BaseActivity implements View.OnClickListener {
                             if (tools.isNetworkAvailable()) {
                                 loginFunc();
                                 tools.hideInternet();
+
                             } else
                                 Toast.makeText(context, getString(R.string.nonet), Toast.LENGTH_SHORT).show();
 
@@ -104,12 +105,12 @@ public class LogIn extends BaseActivity implements View.OnClickListener {
         String url = tools.baseUrl + "registerWithMobile";
         RequestParams params = new RequestParams();
 
-        params.put("mobile", "09198981243");
+        params.put("mobile", txtMobile.getText().toString());
 
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
 
 
-        tools.client.post(url, params, new TextHttpResponseHandler() {
+        tools.client.get(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d(TAG, "onFailure: " + throwable);

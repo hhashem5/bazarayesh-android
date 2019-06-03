@@ -19,7 +19,7 @@ import com.loopj.android.http.RequestParams;
 
 public class Tools {
 
-    public String baseUrl = "https://192.168.100.24/api/";
+    public String baseUrl = "http://arayesh.myzibadasht.ir/api/";
 
     public AsyncHttpClient client = new AsyncHttpClient();
 

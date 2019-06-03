@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.idpz.bazarayesh.Utils.Tools;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -28,13 +29,14 @@ public class BaseActivity extends AppCompatActivity {
 
     Tools tools=new Tools(context);
     String response;
-
     ProgressDialog pd;
+    Gson gson=new Gson();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
         tools = new Tools(context);
+
 
 
     }

@@ -7,9 +7,12 @@
     <color name="white">#ffffff</color>
     <color name="activity_back">#ededed</color>
 
+    <color name="primaryBlue">#87bcc2</color>
+    <color name="primaryPurple">#a492ac</color>
+    <color name="darkPink">#a83a7f</color>
     <color name="grey_60">#C7C3C3</color>
     <color name="link_blue">#0288D1</color>
-    <color name="black" >#000</color>
+    <color name="black">#000</color>
     <color name="dialog_background">#EEFFFFFF</color>
 
 </resources>

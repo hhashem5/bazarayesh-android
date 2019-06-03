@@ -1,6 +1,7 @@
 package com.idpz.bazarayesh;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -10,9 +11,12 @@ import android.view.MenuItem;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import ss.com.bannerslider.Slider;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity {
+import static maes.tech.intentanim.CustomIntent.customType;
+
+public class MainActivity extends BaseActivity {
 
     BottomNavigationView navigation;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -22,17 +26,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        if (tools.getSharePrf("api_token") == "") {
+            Intent i1 = new Intent(getApplicationContext(), LogIn.class);
+            i1.setAction(Intent.ACTION_MAIN);
+            i1.addCategory(Intent.CATEGORY_HOME);
+            i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            overridePendingTransition(0, 0);
+
+            startActivity(i1);
+
+            customType(context, LEFT_TO_RIGHT);
+
+            finish();
+        }
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         initViews();
 
+        navigation.setSelectedItemId(R.id.navigation_home);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        loadFragment(new HomeFragment());
+        loadFragment(new HomeFragment(context));
 
     }
 
     public void initViews() {
         navigation = findViewById(R.id.navigation);
+
 
     }
 
@@ -58,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new AdvertiseFragment();
                     break;
                 case R.id.navigation_home:
-                    fragment = new HomeFragment();
+                    fragment = new HomeFragment(context);
                     break;
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();
