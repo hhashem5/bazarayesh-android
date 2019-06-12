@@ -2,25 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.idpz.bazarayesh">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".Utils.AppController"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VerificationActivity"
-            android:theme="@style/AppTheme3">
-
-        </activity>
+        <activity android:name=".SubProfileActivity"
+            android:theme="@style/AppTheme3"></activity>
+        <activity
+            android:name=".VerificationActivity"
+            android:theme="@style/AppTheme3"></activity>
         <activity android:name=".BaseActivity" />
-        <activity android:name=".LogIn"
-            android:theme="@style/AppTheme3">
-
-        </activity>
+        <activity
+            android:name=".LogIn"
+            android:theme="@style/AppTheme3"></activity>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme3">
@@ -30,7 +33,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Utils.crop.CropImageActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAk-z90OCFAeZPGxmY6qehdU9BSZIWJ0fM" />
     </application>
 
 </manifest>

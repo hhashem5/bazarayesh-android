@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         if (tools.getSharePrf("api_token") == "") {
             Intent i1 = new Intent(getApplicationContext(), LogIn.class);
             i1.setAction(Intent.ACTION_MAIN);
@@ -48,7 +47,18 @@ public class MainActivity extends BaseActivity {
         navigation.setSelectedItemId(R.id.navigation_home);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        loadFragment(new HomeFragment(context));
+        try {
+
+
+            if (getIntent().getStringExtra("back").equals("1")) {
+                loadFragment(new ProfileFragment());
+
+            } else loadFragment(new HomeFragment(context));
+        } catch (NullPointerException e) {
+
+
+            loadFragment(new HomeFragment(context));
+        }
 
     }
 

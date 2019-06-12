@@ -17,6 +17,8 @@ import com.idpz.bazarayesh.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 
+import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
+
 public class Tools {
 
     public String baseUrl = "http://arayesh.myzibadasht.ir/api/";
@@ -31,7 +33,7 @@ public class Tools {
 
     public Tools(Context context) {
         this.context = context;
-        activity = (Activity) context;
+       // activity = (Activity) context;
 
     }
 
@@ -63,12 +65,12 @@ public class Tools {
     }
 
     public void addToSharePrf(String key, String value) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit()
+        PreferenceManager.getDefaultSharedPreferences(getAppContext()).edit()
                 .putString(key, value).apply();
     }
 
 
     public String getSharePrf(String key) {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(key, "");
+        return PreferenceManager.getDefaultSharedPreferences(getAppContext()).getString(key, "");
     }
 }

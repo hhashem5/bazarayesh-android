@@ -6,6 +6,9 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.idpz.bazarayesh.Utils.Tools;
@@ -24,13 +27,15 @@ public class BaseActivity extends AppCompatActivity {
     public static String BOTTOM_TO_UP = "bottom-to-up";
     public static String UP_TO_BOTTOM = "up-to-bottom";
     public static String FADEIN_TO_FADEOUT = "fadein-to-fadeout";
-    public static String ROTATIONOUT_TO_ROTATIONIN ="rotateout-to-rotatein";
+    public static String ROTATIONOUT_TO_ROTATIONIN = "rotateout-to-rotatein";
 
 
-    Tools tools=new Tools(context);
-    String response;
+    Tools tools = new Tools(context);
     ProgressDialog pd;
-    Gson gson=new Gson();
+    TextView tooTitle;
+    ImageView imgbBack;
+    Gson gson = new Gson();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,14 @@ public class BaseActivity extends AppCompatActivity {
         tools = new Tools(context);
 
 
+    }
+
+    public void settoolbarText(String tag) {
+        tooTitle = findViewById(R.id.tooTitle);
+        imgbBack = findViewById(R.id.imgbBack);
+
+
+        tooTitle.setText(tag);
 
     }
 

@@ -189,4 +189,6 @@ public class HomeFragment extends BaseFragment {
         recyclerView.setAdapter(itemAdapter);
 
     }
+
+
 }

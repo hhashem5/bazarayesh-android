@@ -68,67 +68,66 @@
                 android:paddingRight="16dp"
                 android:textColor="@color/dark" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_60" />
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="2dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:background="@color/grey_60" />-->
 
             <com.idpz.bazarayesh.Views.mTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="16dp"
+                android:id="@+id/beautyshop"
                 android:text="@string/barber_shop"
-                android:textColor="@color/link_blue"
+                android:gravity="center"
+                android:background="@drawable/layout_corners_shape_transparent"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_60" />
+
 
 
 
 
 
             <com.idpz.bazarayesh.Views.mTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
                 android:text="@string/shop"
-                android:textColor="@color/link_blue"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/layout_corners_shape_transparent"
+
                 android:textSize="18dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_60" />
+
 
             <com.idpz.bazarayesh.Views.mTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
                 android:text="@string/teacher"
-                android:textColor="@color/link_blue"
+                android:gravity="center"
+android:layout_marginBottom="16dp"
+                android:background="@drawable/layout_corners_shape_transparent"
+                android:textColor="@color/white"
                 android:textSize="18dp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_60" />
+
 
             <com.idpz.bazarayesh.Views.mTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
                 android:text="@string/hairdresser"
-                android:textColor="@color/link_blue"
+                android:gravity="center"
+                android:background="@drawable/layout_corners_shape_transparent"
+
+                android:textColor="@color/white"
                 android:textSize="18dp" />
         </LinearLayout>
     </ScrollView>

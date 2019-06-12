@@ -1,0 +1,2302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/lnIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/toolbar"
+        android:gravity="center|center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_corners_shape"
+            android:elevation="3dp"
+            android:orientation="horizontal">
+
+
+
+
+            <ImageView
+                android:id="@+id/imgbThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/step2" />
+            <ImageView
+                android:id="@+id/imgbTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/step3"
+
+                />
+            <ImageView
+                android:id="@+id/imgbOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/step12" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/page1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lnIndicator"
+        android:visibility="visible">
+
+        <ScrollView
+            android:id="@+id/svL1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="50dp"
+            android:visibility="visible">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lnIndicator"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="نام آرایشگاه" />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txtName"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/Name"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/boss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtName"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="نام مدیر آرایشگاه " />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txtBoss"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/boss"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/romour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtBoss"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="شهرت آرایشگاه " />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txtfame"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/romour"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/dark" />
+
+
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtfame"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="عکس اصلی"
+                    android:textColor="@color/black" />
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="تصویری از نمای بیرون آرایشگاه یا لوگوی آرایشگاه آپلود کنید"
+                    android:textColor="@color/gray" />
+
+
+                <RelativeLayout
+                    android:id="@+id/relLogo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/title2"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/dashed_back">
+
+
+                    <ImageView
+                        android:id="@+id/imgPic1"
+                        android:layout_width="59dp"
+                        android:layout_height="49dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_camera" />
+
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtPic1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgPic1"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:text="افزودن عکس"
+                        android:textColor="@color/gray" />
+
+                    <ImageButton
+                        android:id="@+id/imgbDropPic2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="right"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                    <ImageView
+                        android:id="@+id/imgbDonePic1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/round_black_transparent"
+                        android:padding="8dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_done_all_green" />
+
+                    <ImageView
+                        android:id="@+id/logoimg1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:visibility="visible" />
+
+                    <!--<com.idpz.bazarayesh.Views.mTextView-->
+                    <!--android:id="@+id/titleimg1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:background="@color/dark_gray"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:text="title" />-->
+
+                    <ImageButton
+                        android:id="@+id/closeimg1"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="right"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.idpz.bazarayesh.Views.mButton
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
+            android:background="@color/black"
+            android:text="مرحله ی بعد"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/page2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lnIndicator"
+        android:visibility="gone">
+
+        <ScrollView
+            android:id="@+id/svL3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="شماره تلفن" />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txtphone"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/Name"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/lnIndicator"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="آدرس" />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txtaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/Name"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/telegram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="کانال تلگرام" />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txttelegram"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/Name"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/dark" />
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="صفحه اینستاگرام" />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txtinstagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/Name"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:paddingRight="16dp"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/txtmap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="تعیین محل روی نقشه" />
+
+                <RelativeLayout
+                    android:id="@+id/lnRelFrag"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/dashed_back"
+                    android:padding="4dp">
+
+                    <!--<fragment-->
+                    <!--android:id="@+id/map"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginTop="-100dp"-->
+                    <!--android:layout_marginBottom="-100dp"-->
+                    <!--class="com.google.android.gms.maps.SupportMapFragment"/>-->
+
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/map"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+        <com.idpz.bazarayesh.Views.mButton
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
+            android:background="@color/black"
+            android:text="مرحله ی بعد"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/page3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lnIndicator"
+        android:visibility="gone">
+
+        <ScrollView
+            android:id="@+id/svL2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="48dp"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="عکس های محیط داخلی آرایشگاه"
+                    android:textColor="@color/dark"
+
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear18"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel55"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic55"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic55"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic55"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic55"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/scroll"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/light_gray" />
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle49"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="عکس های جوایز دریافت شده"
+                    android:textColor="@color/dark"
+
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear17"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel79"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic79"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic79"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic77"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic77"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/scroll"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/light_gray" />
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="مشتری های معروف "
+                    android:textColor="@color/dark" />
+
+
+                <HorizontalScrollView
+                    android:id="@+id/scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title3">
+
+                    <LinearLayout
+                        android:id="@+id/linear0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+
+                        <RelativeLayout
+                            android:id="@+id/rel2"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/dashed_back"
+                            android:gravity="bottom">
+
+
+                            <ImageView
+                                android:id="@+id/imgPic3"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="8dp"
+                                app:srcCompat="@drawable/ic_camera" />
+
+
+                            <com.idpz.bazarayesh.Views.mTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/imgPic3"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center"
+                                android:text="افزودن عکس"
+                                android:textColor="@color/gray" />
+
+                            <ImageButton
+                                android:id="@+id/imgbDropPic3"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="right"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:visibility="gone"
+                                app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                            <ImageView
+                                android:id="@+id/imgbDonePic3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/round_black_transparent"
+                                android:padding="8dp"
+                                android:visibility="gone"
+                                app:srcCompat="@drawable/ic_done_all_green" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+
+                <View
+                    android:id="@+id/devider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/scroll"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/light_gray" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/devider2"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="دوره های گذرانده شده "
+                    android:textColor="@color/dark" />
+
+
+                <HorizontalScrollView
+                    android:id="@+id/scroll2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title4">
+
+                    <LinearLayout
+                        android:id="@+id/linear16"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+
+                        <RelativeLayout
+                            android:id="@+id/rel6"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginRight="16dp"
+                            android:background="@drawable/dashed_back"
+                            android:gravity="bottom">
+
+
+                            <ImageView
+                                android:id="@+id/imgPic6"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="8dp"
+                                app:srcCompat="@drawable/ic_camera" />
+
+
+                            <com.idpz.bazarayesh.Views.mTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/imgPic6"
+                                android:layout_marginTop="4dp"
+                                android:gravity="center"
+                                android:text="افزودن عکس"
+                                android:textColor="@color/gray" />
+
+                            <ImageButton
+                                android:id="@+id/imgbDropPic6"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="right"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:visibility="gone"
+                                app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                            <ImageView
+                                android:id="@+id/imgbDonePic6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/round_black_transparent"
+                                android:padding="8dp"
+                                android:visibility="gone"
+                                app:srcCompat="@drawable/ic_done_all_green" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/scroll"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/light_gray" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="خدمات قابل ارائه "
+                    android:textColor="@color/black" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="پوست  "
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="اپلاسیون"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:id="@+id/scroll1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title12">
+
+                    <LinearLayout
+                        android:id="@+id/linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:orientation="horizontal">
+
+
+                        <RelativeLayout
+                            android:id="@+id/relative1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+                            <RelativeLayout
+                                android:id="@+id/rel12"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic13"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic13"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic13"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic13"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+
+
+                        </RelativeLayout>
+
+                        <include
+                            layout="@layout/my_image_layout"
+                            android:visibility="gone" />
+
+                        <!--<RelativeLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="16dp"-->
+                        <!--android:layout_gravity="bottom"-->
+                        <!--android:layout_weight="1">-->
+
+                        <!--<TextView-->
+                        <!--android:id="@+id/mtitle2"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:text="ابرو"-->
+                        <!--android:textColor="@color/dark_gray"-->
+
+                        <!--/>-->
+
+                        <!--<RelativeLayout-->
+                        <!--android:id="@+id/rel13"-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="100dp"-->
+                        <!--android:layout_below="@+id/mtitle2"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:gravity="bottom"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:background="@drawable/dashed_back">-->
+
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/imgPic14"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="50dp"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--app:srcCompat="@drawable/ic_camera" />-->
+
+
+                        <!--<com.idpz.bazarayesh.Views.mTextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_below="@+id/imgPic14"-->
+                        <!--android:layout_marginTop="4dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="افزودن عکس"-->
+                        <!--android:textColor="@color/gray" />-->
+
+                        <!--<ImageButton-->
+                        <!--android:id="@+id/imgbDropPic14"-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:layout_gravity="right"-->
+                        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                        <!--android:visibility="gone"-->
+                        <!--app:srcCompat="@drawable/ic_iconfinder_close_2190987" />-->
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/imgbDonePic14"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:background="@drawable/round_black_transparent"-->
+                        <!--android:padding="8dp"-->
+                        <!--android:visibility="gone"-->
+                        <!--app:srcCompat="@drawable/ic_done_all_green" />-->
+                        <!--</RelativeLayout>-->
+                        <!--</RelativeLayout>-->
+
+                        <!--<RelativeLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="16dp"-->
+                        <!--android:layout_gravity="bottom"-->
+                        <!--android:layout_weight="1">-->
+
+                        <!--<TextView-->
+                        <!--android:id="@+id/mtitle3"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:text="ناخن"-->
+                        <!--android:textColor="@color/dark_gray"-->
+
+                        <!--/>-->
+
+                        <!--<RelativeLayout-->
+                        <!--android:id="@+id/rel14"-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="100dp"-->
+                        <!--android:layout_below="@+id/mtitle3"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:gravity="bottom"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:background="@drawable/dashed_back">-->
+
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/imgPic15"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="50dp"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--app:srcCompat="@drawable/ic_camera" />-->
+
+
+                        <!--<com.idpz.bazarayesh.Views.mTextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_below="@+id/imgPic15"-->
+                        <!--android:layout_marginTop="4dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="افزودن عکس"-->
+                        <!--android:textColor="@color/gray" />-->
+
+                        <!--<ImageButton-->
+                        <!--android:id="@+id/imgbDropPic15"-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:layout_gravity="right"-->
+                        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                        <!--android:visibility="gone"-->
+                        <!--app:srcCompat="@drawable/ic_iconfinder_close_2190987" />-->
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/imgbDonePic15"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:background="@drawable/round_black_transparent"-->
+                        <!--android:padding="8dp"-->
+                        <!--android:visibility="gone"-->
+                        <!--app:srcCompat="@drawable/ic_done_all_green" />-->
+                        <!--</RelativeLayout>-->
+                        <!--</RelativeLayout>-->
+
+                        <!--<RelativeLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginRight="16dp"-->
+                        <!--android:layout_gravity="bottom"-->
+                        <!--android:layout_weight="1">-->
+
+                        <!--<TextView-->
+                        <!--android:id="@+id/mtitle4"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:text="مژه"-->
+                        <!--android:textColor="@color/dark_gray"-->
+
+                        <!--/>-->
+
+                        <!--<RelativeLayout-->
+                        <!--android:id="@+id/rel16"-->
+                        <!--android:layout_width="100dp"-->
+                        <!--android:layout_height="100dp"-->
+                        <!--android:layout_below="@+id/mtitle4"-->
+                        <!--android:layout_alignParentRight="true"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--android:gravity="bottom"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:background="@drawable/dashed_back">-->
+
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/imgPic16"-->
+                        <!--android:layout_width="50dp"-->
+                        <!--android:layout_height="50dp"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:layout_marginTop="8dp"-->
+                        <!--app:srcCompat="@drawable/ic_camera" />-->
+
+
+                        <!--<com.idpz.bazarayesh.Views.mTextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_below="@+id/imgPic16"-->
+                        <!--android:layout_marginTop="4dp"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="افزودن عکس"-->
+                        <!--android:textColor="@color/gray" />-->
+
+                        <!--<ImageButton-->
+                        <!--android:id="@+id/imgbDropPic16"-->
+                        <!--android:layout_width="30dp"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:layout_gravity="right"-->
+                        <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+                        <!--android:visibility="gone"-->
+                        <!--app:srcCompat="@drawable/ic_iconfinder_close_2190987" />-->
+
+                        <!--<ImageView-->
+                        <!--android:id="@+id/imgbDonePic16"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:background="@drawable/round_black_transparent"-->
+                        <!--android:padding="8dp"-->
+                        <!--android:visibility="gone"-->
+                        <!--app:srcCompat="@drawable/ic_done_all_green" />-->
+                        <!--</RelativeLayout>-->
+                        <!--</RelativeLayout>-->
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="تاتو"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mtitle6">
+
+                    <LinearLayout
+                        android:id="@+id/linear2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1"
+                            android:gravity="bottom">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel18"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic18"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic18"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic19"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic29"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text=" مراقبت از پوست"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1"
+                            android:gravity="bottom">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel17"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic17"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic17"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic18"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic19"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/light_gray" />
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="مو"
+                    android:textColor="@color/black"
+
+                    />
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="شینیون"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel29"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic10"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic10"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic20"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic30"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="کوتاهی مو"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear6"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel19"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic19"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic19"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic29"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic39"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="رنگ ومش"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear7"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel14"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic22"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic22"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic22"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic22"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="کراتین کوتاهی مو"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear8"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel24"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic23"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic23"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic23"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic23"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="اکستنشن مو"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear9"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel26"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic26"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic26"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic26"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic26"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="بافت و براشینگ"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear10"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel25"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic25"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic25"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic25"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic25"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/light_gray" />
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="چهره"
+                    android:textColor="@color/dark_gray" />
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle17"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="مکاپ و گریم عمومی"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel27"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic27"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic27"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic27"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic27"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/light_gray" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="ابرو"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="ابرو و میکروپیگمنتیشن"
+                    android:textColor="@color/dark_gray"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear12"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel39"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic39"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic39"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic37"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic37"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/light_gray" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="ناخن"
+                    android:textColor="@color/dark"
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear13"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel49"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic49"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic49"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic47"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic47"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/light_gray" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:text="مژه"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="اکستنشن مژه"
+                    android:textColor="@color/dark_gray"
+
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear14"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel59"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic59"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic59"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic57"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic57"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:text="کاشت مژه"
+                    android:textColor="@color/dark_gray"
+
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear15"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel69"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic69"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic69"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic67"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic67"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/light_gray" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <com.idpz.bazarayesh.Views.mButton
+            android:id="@+id/btn3"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="8dp"
+            android:background="@color/black"
+            android:text="تایید"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/bottom_sheet_behavior" />
+    </android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

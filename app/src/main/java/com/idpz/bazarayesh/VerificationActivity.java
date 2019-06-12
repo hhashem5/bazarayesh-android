@@ -141,7 +141,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                     overridePendingTransition(0,0);
                     startActivity(i1);
 
-                    customType(context, LEFT_TO_RIGHT);
+                    customType(context, RIGHT_TO_LEFT);
 
                     finish();}
                 } catch (Exception e) {

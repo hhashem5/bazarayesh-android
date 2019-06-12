@@ -13,6 +13,14 @@
     <color name="grey_60">#C7C3C3</color>
     <color name="link_blue">#0288D1</color>
     <color name="black">#000</color>
+    <color name="gray">#83787878</color>
+
+    <color name="dark_gray">#83424141</color>
+
     <color name="dialog_background">#EEFFFFFF</color>
+    <color name="material_red">#EA4335</color>
+    <item name="material_green" type="color">#388E3C</item>
+    <color name="light_gray">#83D2CFCF</color>
+
 
 </resources>
