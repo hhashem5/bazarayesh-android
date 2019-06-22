@@ -24,9 +24,9 @@
             android:layout_height="20dp"
             android:layout_alignParentBottom="true"
             android:background="#B9000000"
-            android:textColor="@color/white"
             android:gravity="center"
-            android:text="title" />
+            android:text="title"
+            android:textColor="@color/white" />
 
         <ImageButton
             android:id="@+id/imgbDropPic1"
@@ -36,5 +36,20 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:visibility="visible"
             app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:background="#EDF1EBEB"
+            android:visibility="gone"
+            android:id="@+id/linearRetry">
+
+            <ImageView
+                android:id="@+id/retry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        />
     </RelativeLayout>
 </RelativeLayout>

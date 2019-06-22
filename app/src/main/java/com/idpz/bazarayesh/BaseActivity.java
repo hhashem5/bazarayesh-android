@@ -31,17 +31,16 @@ public class BaseActivity extends AppCompatActivity {
 
 
     Tools tools = new Tools(context);
-    ProgressDialog pd;
-    TextView tooTitle;
-    ImageView imgbBack;
+    public ProgressDialog pd;
+    public TextView tooTitle;
+    public ImageView imgbBack;
     Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
-        tools = new Tools(context);
 
+        tools = new Tools(context);
 
     }
 

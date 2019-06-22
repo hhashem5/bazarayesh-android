@@ -21,6 +21,8 @@ import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 
 public class Tools {
 
+    public static String state;
+
     public String baseUrl = "http://arayesh.myzibadasht.ir/api/";
 
     public AsyncHttpClient client = new AsyncHttpClient();

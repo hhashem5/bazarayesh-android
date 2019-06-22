@@ -1,5 +1,6 @@
 package com.idpz.bazarayesh;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,10 @@ public class SubProfileActivity extends BaseActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
 
+    public static int tag;
+
+    String title = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +30,36 @@ public class SubProfileActivity extends BaseActivity {
         initViews();
         settoolbarText(getString(R.string.title_profile));
 
-        tabLayout.addTab(tabLayout.newTab().setText("پروفایل آرایشگر"));
+
+        Intent intent = getIntent();
+
+        try {
+            tag = (int) intent.getExtras().get("type");
+
+
+            if (intent.getExtras().get("type").equals(1)) {
+                title = "آرایشگاه";
+            } else if (intent.getExtras().get("type").equals(2)) {
+                title = "آرایشگر";
+            } else if (intent.getExtras().get("type").equals(3)) {
+                title = "آموزشگاه";
+
+
+            } else if (intent.getExtras().get("type").equals(4)) {
+                title = "مدرس";
+
+            } else if (intent.getExtras().get("type").equals(5)) {
+                title = "فروشگاه";
+
+            }
+        } catch (Exception e) {
+        }
+
+        tabLayout.addTab(tabLayout.newTab().setText(" پروفایل " + title));
         tabLayout.addTab(tabLayout.newTab().setText("مدیریت آگهی ها"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
 
         //   tabLayout.setTabGravity(TabLayout.MODE_FIXED);
 
@@ -63,20 +94,19 @@ public class SubProfileActivity extends BaseActivity {
         viewPager = findViewById(R.id.viewPager);
     }
 
-    @Override public void onBackPressed() {
+    @Override
+    public void onBackPressed() {
 
 
         List<Fragment> fragmentList = getSupportFragmentManager().getFragments();
         if (fragmentList != null) {
             //TODO: Perform your logic to pass back press here
-            for(Fragment fragment : fragmentList){
-                if(fragment instanceof IOnBackPressed){
-                    ((IOnBackPressed)fragment).onBackPressed();
+            for (Fragment fragment : fragmentList) {
+                if (fragment instanceof IOnBackPressed) {
+                    ((IOnBackPressed) fragment).onBackPressed();
                 }
             }
         }
-
-
 
 
     }

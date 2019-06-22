@@ -27,6 +27,7 @@
             android:textColor="@color/dark"
             android:textSize="15dp" />
 
+
         <ImageButton
             android:id="@+id/imgbBack"
             android:layout_width="50dp"
@@ -36,6 +37,7 @@
             android:tint="@color/dark"
             android:visibility="gone"
             app:srcCompat="@drawable/ic_back" />
+
 
 
     </RelativeLayout>

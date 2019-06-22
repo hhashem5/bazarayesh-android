@@ -110,7 +110,7 @@ public class LogIn extends BaseActivity implements View.OnClickListener {
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
 
 
-        tools.client.get(url, params, new TextHttpResponseHandler() {
+        tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d(TAG, "onFailure: " + throwable);

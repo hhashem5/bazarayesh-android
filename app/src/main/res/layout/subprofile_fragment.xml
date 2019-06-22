@@ -27,11 +27,13 @@
                 android:id="@+id/imgbThree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="-8dp"
                 app:srcCompat="@drawable/step2" />
             <ImageView
                 android:id="@+id/imgbTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="-8dp"
                 app:srcCompat="@drawable/step3"
 
                 />
@@ -58,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="48dp"
             android:visibility="visible">
 
 
@@ -274,6 +276,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/lnIndicator"
+
         android:visibility="gone">
 
         <ScrollView
@@ -281,6 +284,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="48dp"
+
             android:visibility="visible">
 
             <LinearLayout
@@ -312,7 +317,8 @@
                     android:background="@drawable/layout_corners_shape_border"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:textColor="@color/dark" />
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -337,7 +343,8 @@
                     android:background="@drawable/layout_corners_shape_border"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:textColor="@color/dark" />
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -361,7 +368,8 @@
                     android:background="@drawable/layout_corners_shape_border"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:textColor="@color/dark" />
 
 
@@ -385,7 +393,8 @@
                     android:background="@drawable/layout_corners_shape_border"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
                     android:textColor="@color/dark" />
 
                 <com.idpz.bazarayesh.Views.mTextView

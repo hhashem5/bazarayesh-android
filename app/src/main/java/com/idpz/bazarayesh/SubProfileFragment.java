@@ -3,6 +3,7 @@ package com.idpz.bazarayesh;
 import android.Manifest;
 import android.animation.Animator;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,6 +33,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +61,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.idpz.bazarayesh.Models.UserResponse;
+import com.idpz.bazarayesh.Models.VerifyResponse;
+import com.idpz.bazarayesh.Utils.Tools;
 import com.idpz.bazarayesh.Utils.crop.CropUtil;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -76,7 +81,9 @@ import cz.msebera.android.httpclient.Header;
 
 import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
 import static com.idpz.bazarayesh.BaseActivity.LEFT_TO_RIGHT;
+import static com.idpz.bazarayesh.SubProfileActivity.*;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
+import static com.idpz.bazarayesh.Utils.Tools.gson;
 import static maes.tech.intentanim.CustomIntent.customType;
 
 public class SubProfileFragment extends BaseFragment implements View.OnClickListener, IOnBackPressed, LocationListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
@@ -93,7 +100,9 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     RelativeLayout rel12, relative, page1, page2, page3, relLogo, rel18, rel17, rel29, rel19, rel14,
             rel24, rel6, rel26, rel25, rel27, rel39, rel49, rel59, rel69, rel2, lnRelFrag, rel55, rel79;
     Button btn1, btn2, btn3;
-    LinearLayout linear0, linear, tempLinear, linear2, linear3, linear5, linear6, linear7, linear8, linear9, linear10, linear11, linear12, linear13, linear14, linear15, linear16, linear18, linear17;
+    LinearLayout linear0, linear, tempLinear, linear2, linear3, linear5, linear6, linear7,
+            linear8, linear9, linear10, linear11, linear12, linear13,
+            linear14, linear15, linear16, linear18, linear17, linearRetry;
     ImageView imgbOne, imgbTwo, imgbThree, clickedImageView, clickedDrop, imgPic1, imgPic3, logoimg1;
 
     EditText txtName, txtBoss, txtFame, txtphone, txtaddress, txttelegram, txtinstagram;
@@ -108,8 +117,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
     View inflatedLayout, tempView, v;
 
-    TextView txtTilte, titleimg1, txtPic1,tempTextView;
-    ImageView myImageView;
+    TextView txtTilte, titleimg1, txtPic1, tempTextView;
+    ImageView myImageView, imgRetry;
     ImageButton imgbDropPic13, closeimg1, imgDropTemp, imgbDropPic2;
 
     List<View> myViews = new ArrayList<>();
@@ -132,6 +141,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     int service_type, type;
     String title;
 
+
+    boolean flag = true;
 
     @Nullable
     @Override
@@ -235,6 +246,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         linear0 = v.findViewById(R.id.linear0);
         linear16 = v.findViewById(R.id.linear16);
         linear17 = v.findViewById(R.id.linear17);
+        linear18 = v.findViewById(R.id.linear18);
 
         mMapView = (MapView) v.findViewById(R.id.map);
 
@@ -261,6 +273,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         rel2.setOnClickListener(this);
         rel6.setOnClickListener(this);
         rel79.setOnClickListener(this);
+        rel55.setOnClickListener(this);
 
 
         // turnOnGPS();
@@ -282,7 +295,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                 LatLng latLong = new LatLng(35.684209, 51.388263);
 
-
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(35.709561, 51.372652), 5);
+                mMap.moveCamera(cameraUpdate);
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -458,7 +472,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                         byte[] imageBytes = baos.toByteArray();
 
-
                         if (clickedImageView == logoimg1) {
 
                             logoimg1.setVisibility(View.VISIBLE);
@@ -475,69 +488,69 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                             file = saveImage(getAppContext(), bytePic);
 
 
-//                            switch (tempLinear.getId()){
+//       todo                     switch (tempLinear.getId()){
 //                                case R.id.linear:
 //                                    membersFilesRegister(6, "", file, title);
 //
 //                                    break;
 //                            }
-                            if (tempLinear == linear) {
-                                service_type = 2;
-                                type = 1;
-
-                            } else if (tempLinear == linear0) {
-                                membersFilesRegister(6, "", file, title);
-
-                            } else if (tempLinear == linear2) {
-                                membersFilesRegister(1, "3", file, "");
-                            } else if (tempLinear == linear3) {
-                                membersFilesRegister(1, "4", file, "");
-
-                            } else if (tempLinear == linear5) {
-                                membersFilesRegister(1, "5", file, "");
-
-                            } else if (tempLinear == linear6) {
-                                membersFilesRegister(1, "6", file, "");
-
-                            } else if (tempLinear == linear7) {
-                                membersFilesRegister(1, "7", file, "");
-
-                            } else if (tempLinear == linear8) {
-                                membersFilesRegister(1, "8", file, "");
-
-                            } else if (tempLinear == linear9) {
-                                membersFilesRegister(1, "9", file, "");
-
-                            } else if (tempLinear == linear10) {
-                                membersFilesRegister(1, "10", file, "");
-
-                            } else if (tempLinear == linear11) {
-                                membersFilesRegister(1, "11", file, "");
-
-                            } else if (tempLinear == linear12) {
-                                membersFilesRegister(1, "14", file, "");
-
-                            } else if (tempLinear == linear13) {
-                                membersFilesRegister(1, "13", file, "");
-
-                            } else if (tempLinear == linear14) {
-                                membersFilesRegister(1, "12", file, "");
-
-                            } else if (tempLinear == linear15) {
-                                membersFilesRegister(1, "4", file, "");
-
-                            } else if (tempLinear == linear16) {
-                                membersFilesRegister(3, "", file, title);
-
-                            } else if (tempLinear == linear17) {
-                                membersFilesRegister(2, "", file, title);
-
-                            } else if (tempLinear == linear18) {
-                                membersFilesRegister(4, "", file, "");
-
-                            }
-
-                        }
+//                            if (tempLinear == linear) {
+//
+//                                membersFilesRegister(1, "2", file, "");
+//
+//                            } else if (tempLinear == linear0) {
+//                                membersFilesRegister(6, "", file, title);
+//
+//                            } else if (tempLinear == linear2) {
+//                                membersFilesRegister(1, "3", file, "");
+//                            } else if (tempLinear == linear3) {
+//                                membersFilesRegister(1, "4", file, "");
+//
+//                            } else if (tempLinear == linear5) {
+//                                membersFilesRegister(1, "5", file, "");
+//
+//                            } else if (tempLinear == linear6) {
+//                                membersFilesRegister(1, "6", file, "");
+//
+//                            } else if (tempLinear == linear7) {
+//                                membersFilesRegister(1, "7", file, "");
+//
+//                            } else if (tempLinear == linear8) {
+//                                membersFilesRegister(1, "8", file, "");
+//
+//                            } else if (tempLinear == linear9) {
+//                                membersFilesRegister(1, "9", file, "");
+//
+//                            } else if (tempLinear == linear10) {
+//                                membersFilesRegister(1, "10", file, "");
+//
+//                            } else if (tempLinear == linear11) {
+//                                membersFilesRegister(1, "11", file, "");
+//
+//                            } else if (tempLinear == linear12) {
+//                                membersFilesRegister(1, "14", file, "");
+//
+//                            } else if (tempLinear == linear13) {
+//                                membersFilesRegister(1, "13", file, "");
+//
+//                            } else if (tempLinear == linear14) {
+//                                membersFilesRegister(1, "12", file, "");
+//
+//                            } else if (tempLinear == linear15) {
+//                                membersFilesRegister(1, "4", file, "");
+//
+//                            } else if (tempLinear == linear16) {
+//                                membersFilesRegister(3, "", file, title);
+//
+//                            } else if (tempLinear == linear17) {
+//                                membersFilesRegister(2, "", file, title);
+//
+//                            } else if (tempLinear == linear18) {
+//                                membersFilesRegister(4, "", file, "");
+//
+//                            }
+//
+                     }
 
 
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -795,22 +808,42 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
             case R.id.btn2:
 
-                pd.show();
-
-                getMemberRegister();
-                break;
+                page2.setVisibility(View.GONE);
+                page3.setVisibility(View.VISIBLE);
+                imgbOne.setImageResource(R.drawable.step1);
+                imgbTwo.setImageResource(R.drawable.step3);
+                imgbThree.setImageResource(R.drawable.step22);
+//          todo     if (flag) {
+//                    pd.show();
+//                    getMemberRegister();
+//                } else {
+//                    YoYo.with(Techniques.SlideInLeft)
+//                            .duration(300)
+//                            .repeat(0).withListener(new Animator.AnimatorListener() {
+//                        @Override
+//                        public void onAnimationStart(Animator animation) {
+//                            page2.setVisibility(View.GONE);
+//                            page3.setVisibility(View.VISIBLE);
+//                            imgbOne.setImageResource(R.drawable.step1);
+//                            imgbTwo.setImageResource(R.drawable.step3);
+//                            imgbThree.setImageResource(R.drawable.step22);
+//                        }
+//                        @Override
+//                        public void onAnimationEnd(Animator animation) {
+//                        }
+//                        @Override
+//                        public void onAnimationCancel(Animator animation) {
+//                        }
+//                        @Override
+//                        public void onAnimationRepeat(Animator animation) {
+//                        }
+//                    }).playOn(v.findViewById(R.id.page2));
+//                    state = 3;
+//                }
+               break;
 
             case R.id.btn3:
-                if (!txtphone.equals(""))
-
-                    getMemberRegister();
-
-
-                else {
-                    txtphone.setError("شماره تلفن را وارد نمایید");
-
-                    txtphone.requestFocus();
-                }
+                successDialog("با موفقیت ثبت شد.");
                 break;
 
             case R.id.closeimg1:
@@ -922,17 +955,19 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 txtTilte = inflatedLayout.findViewById(R.id.title);
                 myImageView = inflatedLayout.findViewById(R.id.img);
                 imgbDropPic13 = inflatedLayout.findViewById(R.id.imgbDropPic1);
+                imgRetry = inflatedLayout.findViewById(R.id.retry);
+                linearRetry = inflatedLayout.findViewById(R.id.linearRetry);
 
                 tempView = inflatedLayout;
-
                 btnSelect(myImageView, imgbDropPic13, linear);
                 txtTilte.setText(input.getText().toString());
-                tempTextView=txtTilte;
+                tempTextView = txtTilte;
 
                 title = input.getText().toString();
                 dialog.dismiss();
             }
         });
+
         builder.setNegativeButton(FontUtils.typeface(typeface, "انصراف"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -1063,15 +1098,15 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
         RequestParams params = new RequestParams();
 
-        params.put("type", 1);
+        params.put("type", tag);
         params.put("full_name", txtName.getText().toString());
         params.put("manager_name", txtBoss.getText().toString());
         params.put("phone1", txtphone.getText().toString());
         params.put("address", txtaddress.getText().toString());
         params.put("telegram", txttelegram.getText().toString());
         params.put("instagram", txtinstagram.getText().toString());
-        params.put("lat", lat);
-        params.put("lng", lng);
+        params.put("lat", 37.44545);//todo lat
+        params.put("lng", 51.57768);//todo lng
         try {
             params.put("logo", mainFile);
         } catch (FileNotFoundException e) {
@@ -1087,44 +1122,57 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                pd.dismiss();
 
+                Toast.makeText(getContext(), "ثبت اطلاعات انجام نشد لطفا بعدا دوباره امتحان کنید", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
 
-                pd.dismiss();
-                YoYo.with(Techniques.SlideInLeft)
-                        .duration(300)
-                        .repeat(0).withListener(new Animator.AnimatorListener() {
-                    @Override
-                    public void onAnimationStart(Animator animation) {
+                    pd.dismiss();
 
-                        page2.setVisibility(View.GONE);
-                        page3.setVisibility(View.VISIBLE);
-                        imgbOne.setImageResource(R.drawable.step1);
-                        imgbTwo.setImageResource(R.drawable.step3);
-                        imgbThree.setImageResource(R.drawable.step22);
+                    if (responseString.contains("\"code\":200")) {
 
+                        flag = false;
+                        UserResponse response = gson.fromJson(responseString, UserResponse.class);
+
+                        tools.addToSharePrf("userId", response.getMember().getId().toString());
+                        YoYo.with(Techniques.SlideInLeft)
+                                .duration(300)
+                                .repeat(0).withListener(new Animator.AnimatorListener() {
+                            @Override
+                            public void onAnimationStart(Animator animation) {
+
+                                page2.setVisibility(View.GONE);
+                                page3.setVisibility(View.VISIBLE);
+                                imgbOne.setImageResource(R.drawable.step1);
+                                imgbTwo.setImageResource(R.drawable.step3);
+                                imgbThree.setImageResource(R.drawable.step22);
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animator animation) {
+
+                            }
+                        }).playOn(v.findViewById(R.id.page2));
+
+                        state = 3;
                     }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-                }).playOn(v.findViewById(R.id.page2));
-
-                state = 3;
+                } catch (Exception e) {
+                }
             }
         });
     }
@@ -1133,21 +1181,18 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     public void membersFilesRegister(final int type, final String service_type, final File pic, final String title) throws FileNotFoundException {
 
         RequestParams params = new RequestParams();
+        pd.show();
+
+        linearRetry.setVisibility(View.GONE);
 
 
-        try {
-            params.put("pic", pic);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        // params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("id", tools.getSharePrf("userId"));
+        params.put("api_token", tools.getSharePrf("api_token"));
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        params.put("data", pic);
+        params.put("type", type);
         if (!service_type.equals(""))
             params.put("service_type", service_type);
-        params.put("pic", pic);
-        params.put("type", type);
         if (!title.equals(""))
             params.put("title", title);
 
@@ -1157,19 +1202,21 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
-                Glide.with(getContext())
-                        .load(R.drawable.retry)
-                        .into(clickedImageView);
+                pd.dismiss();
+//                Glide.with(getContext())
+//                        .load(R.drawable.retry)
+//                        .into(clickedImageView);
 //                clickedImageView.setBackgroundColor(getResources().getColor(R.color.grey_60,null));
 
                 imgDropTemp.setVisibility(View.GONE);
 
                 tempTextView.setVisibility(View.GONE);
-                clickedImageView.setOnClickListener(new View.OnClickListener() {
+
+                linearRetry.setVisibility(View.VISIBLE);
+                imgRetry.setImageResource(R.drawable.retry);
+                linearRetry.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        pd.show();
                         try {
                             membersFilesRegister(type, service_type, pic, title);
                         } catch (FileNotFoundException e) {
@@ -1258,6 +1305,45 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API).build();
+    }
+
+    public void successDialog(String text) {
+
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        dialog.setContentView(R.layout.payment_ok);
+        dialog.setCancelable(false);
+        dialog.show();
+        TextView content = dialog.findViewById(R.id.content);
+        Button btnOk = dialog.findViewById(R.id.btnOk);
+        Button btnGo = dialog.findViewById(R.id.btnGo);
+        content.setText(text);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i1 = new Intent(getContext(), MainActivity.class);
+                i1.putExtra("back", "1");
+                i1.setAction(Intent.ACTION_MAIN);
+
+                i1.addCategory(Intent.CATEGORY_HOME);
+                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                getActivity().startActivity(i1);
+                customType(getContext(), LEFT_TO_RIGHT);
+                getActivity().finish();
+                dialog.dismiss();
+            }
+        });
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
+
     }
 }
 

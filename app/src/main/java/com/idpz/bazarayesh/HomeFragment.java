@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.idpz.bazarayesh.Adapters.MainItemAdapter;
 import com.idpz.bazarayesh.Adapters.MainSliderAdapter;
@@ -27,36 +30,48 @@ import java.util.List;
 import ss.com.bannerslider.Slider;
 import ss.com.bannerslider.event.OnSlideClickListener;
 
-@SuppressLint("ValidFragment")
-public class HomeFragment extends BaseFragment {
+import static com.idpz.bazarayesh.BaseActivity.BOTTOM_TO_UP;
+import static com.idpz.bazarayesh.BaseActivity.LEFT_TO_RIGHT;
+import static com.idpz.bazarayesh.BaseActivity.RIGHT_TO_LEFT;
+import static com.idpz.bazarayesh.MainActivity.navigation;
+import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
+import static maes.tech.intentanim.CustomIntent.customType;
+
+public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
     private Slider banner_slider;
 
     RecyclerView recyclerView;
-    private Context context;
+
     List<MainItem> items = new ArrayList<>();
     final List<PicName> picNames = new ArrayList<>();
+
+    private boolean doubleBackToExitPressedOnce = false;
+
+    public String page = "page1";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View v = inflater.inflate(R.layout.home_fragment, container, false);
+        // tools.state = "2";
+
         settoolbarText(getString(R.string.title_home), v);
         initViews(v);
         picNames.add(new PicName(1, "jsj", "https://setare.com/files/fa/news/1397/8/21/200856_426.jpg", "memo0"));
         picNames.add(new PicName(2, "jsj", "http://kheshtan.ir/wp-content/uploads/2019/04/kh9.jpg", "memo0"));
 
-        Slider.init(new GlideImageLoadingService(context));
+        Slider.init(new GlideImageLoadingService(getContext()));
 
-        banner_slider.setAdapter(new MainSliderAdapter(picNames, context));
+        banner_slider.setAdapter(new MainSliderAdapter(picNames, getContext()));
         banner_slider.setOnSlideClickListener(new OnSlideClickListener() {
             @Override
             public void onSlideClick(int position) {
 
             }
         });
-        setMyAdapter("page1", v);
+        setMyAdapter("page1");
 
         return v;
 
@@ -70,11 +85,6 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-
-    @SuppressLint("ValidFragment")
-    public HomeFragment(Context context) {
-        this.context = context;
-    }
 
     public void addItems(String status) {
 
@@ -131,12 +141,14 @@ public class HomeFragment extends BaseFragment {
     }
 
 
-    public void setMyAdapter(final String status, final View v) {
+    public void setMyAdapter(final String status) {
+
+        page = status;
         items = new ArrayList<>();
 
         addItems(status);
 
-        MainItemAdapter itemAdapter = new MainItemAdapter(items, (Activity) context, new MainItemAdapter.OnItemClickListener() {
+        MainItemAdapter itemAdapter = new MainItemAdapter(items, getActivity(), new MainItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, Object object) {
                 //   items = new ArrayList<>();
@@ -144,19 +156,39 @@ public class HomeFragment extends BaseFragment {
                 MainItem item = (MainItem) object;
 
 
-
                 switch (item.getId()) {
-                    case "1":
-                        setMyAdapter("page2", v);
+                    case "3":
+                        setMyAdapter("page2");
 
                         break;
                     case "5":
-                        setMyAdapter("page3", v);
+                        setMyAdapter("page3");
 
                         break;
+                    //modares
+                    case "2":
+
+                        break;
+
+                    case "1":
+                        Intent intent = new Intent(getAppContext(), MapsActivity.class);
+                        intent.setAction(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        customType(getContext(), BOTTOM_TO_UP);
+
+
+                        startActivity(intent);
+                        customType(getContext(), RIGHT_TO_LEFT);
+
+                        getActivity().finish();
+
+                        break;
+
+
                 }
-
-
 
 
             }
@@ -167,8 +199,8 @@ public class HomeFragment extends BaseFragment {
                 imgbBack.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        setMyAdapter("page1", v);
-                   //     settoolbarText("خانه", v);
+                        setMyAdapter("page1");
+                        //     settoolbarText("خانه", v);
                         imgbBack.setVisibility(View.GONE);
 
                     }
@@ -178,17 +210,66 @@ public class HomeFragment extends BaseFragment {
                 imgbBack.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        setMyAdapter("page2", v);
+                        setMyAdapter("page2");
 
 
                     }
                 });
                 break;
         }
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(itemAdapter);
 
     }
 
+
+    private boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean onBackPressed() {
+
+        switch (page) {
+            case "page1":
+                if (doubleBackToExitPressedOnce) {
+                    getActivity().finish();
+                }
+
+                doubleBackToExitPressedOnce = true;
+                Toast.makeText(getContext(), "برای خروج دوباره کلید بازگشت را بزنید", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        doubleBackToExitPressedOnce = false;
+                    }
+                }, 2000);
+
+                break;
+
+            case "page2":
+                setMyAdapter("page1");
+                //     settoolbarText("خانه", v);
+                imgbBack.setVisibility(View.GONE);
+                break;
+
+            case "page3":
+                setMyAdapter("page2");
+
+                break;
+        }
+
+        return false;
+    }
 
 }

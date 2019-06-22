@@ -49,6 +49,17 @@ public class MainItem {
         this.title = title;
     }
 
+    public MainItem(int image, String title) {
+        Image = image;
+        this.title = title;
+    }
+
+
+
     public MainItem() {
+    }
+
+    public MainItem(String title) {
+        this.title = title;
     }
 }

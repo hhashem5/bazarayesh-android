@@ -57,6 +57,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.MyView
 
             }
         });
+
     }
 
     @Override
@@ -81,6 +82,7 @@ public class MainItemAdapter extends RecyclerView.Adapter<MainItemAdapter.MyView
             image = view.findViewById(R.id.image);
 
             relativeLayout = view.findViewById(R.id.rel);
+
 
         }
 

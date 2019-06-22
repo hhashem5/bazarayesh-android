@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Advertisements.TakhfifKhadamat">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <include layout="@layout/mtoolbar" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/toolbar"
+                    android:layout_marginRight="16dp"
+                    android:text="مشخصات کلی"
+                    android:textColor="@color/dark" />
+
+                <RelativeLayout
+                    android:id="@+id/relative_since"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/title"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp">
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/since"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="32dp"
+                        android:text="از تاریخ" />
+
+                    <ImageView
+                        android:id="@+id/arrow1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/relative_since"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/grey_60" />
+
+                <RelativeLayout
+                    android:id="@+id/relative_until"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/divider1"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp">
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/until"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="32dp"
+                        android:text="تا تاخریخ" />
+
+                    <ImageView
+                        android:id="@+id/arrow2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/relative_until"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/grey_60" />
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_percent"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/divider2"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp">
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/percent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="32dp"
+                        android:text="درصد تخفیف" />
+
+                    <ImageView
+                        android:id="@+id/arrow3"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="8dp"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/relative_percent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@color/grey_60" />
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_relation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/divider3"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="8dp">
+
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+
+                        android:text="به مناسبت" />
+
+                    <com.idpz.bazarayesh.Views.mEditText
+                        android:id="@+id/txtRelation"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_below="@+id/txtTitle"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/layout_corners_shape_border"
+
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_services"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relative_relation"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="8dp">
+
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtTitle2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+
+                        android:text="انجام امور" />
+
+                    <com.idpz.bazarayesh.Views.mEditText
+                        android:id="@+id/txtServices"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_below="@+id/txtTitle2"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/layout_corners_shape_border"
+
+                        />
+
+                </RelativeLayout>
+
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relative_services"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="توضیحات آگهی"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/title3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title2"
+                    android:layout_marginRight="16dp"
+                    android:text="@string/detail"
+
+                    android:textColor="@color/dark_gray" />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="148dp"
+                    android:layout_below="@+id/title3"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/layout_corners_shape_border" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

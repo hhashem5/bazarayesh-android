@@ -30,9 +30,7 @@ import static maes.tech.intentanim.CustomIntent.customType;
 
 public class VerificationActivity extends BaseActivity implements View.OnClickListener {
     mEditText txtCode;
-
     mButton btnVerify;
-
     TextView correct, resend, timer_txt, txtMobile;
 
     Timer timer;
@@ -126,24 +124,24 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
                     pd.dismiss();
 
-                    if (responseString.contains("200"))
-                    {
+                    if (responseString.contains("200")) {
 
-                        VerifyResponse response=gson.fromJson(responseString,VerifyResponse.class);
+                        VerifyResponse response = gson.fromJson(responseString, VerifyResponse.class);
 
-                    tools.addToSharePrf("api_token", response.getUser().getApiToken());
-                    Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
-                    i1.setAction(Intent.ACTION_MAIN);
-                    i1.addCategory(Intent.CATEGORY_HOME);
-                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    overridePendingTransition(0,0);
-                    startActivity(i1);
+                        tools.addToSharePrf("api_token", response.getUser().getApiToken());
+                        Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
+                        i1.setAction(Intent.ACTION_MAIN);
+                        i1.addCategory(Intent.CATEGORY_HOME);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        overridePendingTransition(0, 0);
+                        startActivity(i1);
 
-                    customType(context, RIGHT_TO_LEFT);
+                        customType(context, RIGHT_TO_LEFT);
 
-                    finish();}
+                        finish();
+                    }
                 } catch (Exception e) {
                 }
             }

@@ -7,7 +7,18 @@
     android:background="@color/activity_back">
 
     <include layout="@layout/mtoolbar" />
+    <ScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <android.support.constraint.ConstraintLayout
         android:id="@+id/consSlider"
         android:layout_width="match_parent"
@@ -39,145 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/consSlider"
         android:layout_marginTop="16dp" />
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@+id/consSlider"-->
-    <!--android:layout_marginTop="16dp"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:gravity="center_horizontal">-->
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="180dp"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-
-    <!--android:background="@color/colorPrimaryDark">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/imgHairDresser"-->
-    <!--android:layout_width="100dp"-->
-    <!--android:layout_height="100dp"-->
-    <!--android:layout_centerInParent="true"-->
-    <!--app:srcCompat="@drawable/ic_chair" />-->
-
-    <!--<com.idpz.bazarayesh.Views.mTextViewB-->
-    <!--android:id="@+id/txtTitle"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@id/imgHairDresser"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_margin="4dp"-->
-    <!--android:text="آرایشگاه"-->
-
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="11dp" />-->
-
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/rel2"-->
-    <!--android:layout_width="180dp"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:background="@color/primaryBlue">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/imgBarber"-->
-    <!--android:layout_width="100dp"-->
-    <!--android:layout_height="100dp"-->
-    <!--android:layout_centerInParent="true"-->
-
-    <!--app:srcCompat="@drawable/ic_teacher" />-->
-
-    <!--<com.idpz.bazarayesh.Views.mTextViewB-->
-    <!--android:id="@+id/txtTitle2"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@id/imgBarber"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_margin="4dp"-->
-    <!--android:text="مدرس"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="11dp" />-->
-
-
-    <!--</RelativeLayout>-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="16dp"-->
-    <!--android:gravity="center_horizontal">-->
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="180dp"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:background="@color/primaryPurple"-->
-
-    <!--&gt;-->
-
-    <!--<com.makeramen.roundedimageview.RoundedImageView-->
-    <!--android:id="@+id/imgTeacher"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-
-
-    <!--/>-->
-
-    <!--<com.idpz.bazarayesh.Views.mTextViewB-->
-    <!--android:id="@+id/txtTitle3"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@id/imgTeacher"-->
-    <!--android:layout_margin="4dp"-->
-    <!--android:text=""-->
-    <!--android:textColor="@color/black"-->
-    <!--android:textSize="11dp" />-->
-
-
-    <!--</RelativeLayout>-->
-
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/rel4"-->
-    <!--android:layout_width="180dp"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:background="@color/colorAccent">-->
-
-    <!--<com.makeramen.roundedimageview.RoundedImageView-->
-    <!--android:id="@+id/imgInstitude"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-
-
-    <!--/>-->
-
-    <!--<com.idpz.bazarayesh.Views.mTextViewB-->
-    <!--android:id="@+id/txtTitle4"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@id/imgInstitude"-->
-    <!--android:layout_margin="4dp"-->
-    <!--android:text=""-->
-    <!--android:textColor="@color/black"-->
-    <!--android:textSize="11dp" />-->
-
-
-    <!--</RelativeLayout>-->
-    <!--</LinearLayout>-->
-
-
-    <!--</LinearLayout>-->
+        </RelativeLayout>
+    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
