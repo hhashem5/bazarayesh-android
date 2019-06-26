@@ -4,6 +4,8 @@ package com.idpz.bazarayesh.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class User {
 
     @SerializedName("id")
@@ -57,6 +59,10 @@ public class User {
     @SerializedName("last_login")
     @Expose
     private Object lastLogin;
+
+    @SerializedName("member")
+    @Expose
+    private List<Member> member = null;
 
     public Integer getId() {
         return id;
@@ -194,4 +200,11 @@ public class User {
         this.lastLogin = lastLogin;
     }
 
+    public List<Member> getMember() {
+        return member;
+    }
+
+    public void setMember(List<Member> member) {
+        this.member = member;
+    }
 }

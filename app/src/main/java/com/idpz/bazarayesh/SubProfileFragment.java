@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.media.ExifInterface;
@@ -61,13 +60,20 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.idpz.bazarayesh.Models.Award;
+import com.idpz.bazarayesh.Models.Course;
+import com.idpz.bazarayesh.Models.FamousCustomer;
+import com.idpz.bazarayesh.Models.MyMember;
+import com.idpz.bazarayesh.Models.Service;
 import com.idpz.bazarayesh.Models.UserResponse;
-import com.idpz.bazarayesh.Models.VerifyResponse;
-import com.idpz.bazarayesh.Utils.Tools;
+import com.idpz.bazarayesh.Models.WorkplacePic;
 import com.idpz.bazarayesh.Utils.crop.CropUtil;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.soundcloud.android.crop.Crop;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -75,7 +81,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -98,7 +106,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     private boolean doubleBackToExitPressedOnce = false;
 
     RelativeLayout rel12, relative, page1, page2, page3, relLogo, rel18, rel17, rel29, rel19, rel14,
-            rel24, rel6, rel26, rel25, rel27, rel39, rel49, rel59, rel69, rel2, lnRelFrag, rel55, rel79;
+            rel24, rel6, rel26, rel25, rel27, rel39, rel49, rel59, rel69, rel2, lnRelFrag, rel55, rel79, relRoumer;
     Button btn1, btn2, btn3;
     LinearLayout linear0, linear, tempLinear, linear2, linear3, linear5, linear6, linear7,
             linear8, linear9, linear10, linear11, linear12, linear13,
@@ -117,13 +125,17 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
     View inflatedLayout, tempView, v;
 
-    TextView txtTilte, titleimg1, txtPic1, tempTextView;
+    TextView txtTilte, titleimg1, txtPic1, tempTextView, name, boss, romour;
     ImageView myImageView, imgRetry;
     ImageButton imgbDropPic13, closeimg1, imgDropTemp, imgbDropPic2;
 
     List<View> myViews = new ArrayList<>();
+    List<String> keyList = new ArrayList<>();
     List<LinearLayout> myLinears = new ArrayList<>();
 
+    List<View> viewsList = new ArrayList<>();
+    List<ImageButton> drops = new ArrayList<>();
+    List<LinearLayout> linearLayouts = new ArrayList<>();
 
     private GoogleApiClient googleApiClient;
     private SupportMapFragment mapFragment;
@@ -144,6 +156,13 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
     boolean flag = true;
 
+    boolean memberInfoFlag = false;
+
+    String member_id;
+    private int pos = 0;
+
+    String id;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -156,12 +175,52 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         pd = new ProgressDialog(getActivity());
         pd.setCancelable(false);
         pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
+
         mMapView.onCreate(savedInstanceState);
 
         buildGoogleApiClient();
 
 
         mMapView.onResume();
+
+
+        if (tag == 1) {
+            boss.setText("نام مدیر آرایشگاه");
+            name.setText("نام آرایشگاه");
+            romour.setText("شهرت مدیر آرایشگاه");
+
+            //title = "آرایشگاه";
+        } else if (tag == 2) {
+            boss.setText("نام آرایشگاه محل کار");
+            name.setText("نام آرایشگر");
+            romour.setText("شهرت آرایشگر");
+            //title = "آرایشگر";
+        } else if (tag == 3) {
+            boss.setText("نام مدیر آموزشگاه");
+            name.setText("نام آموزشگاه");
+
+            relRoumer.setVisibility(View.GONE);
+            //romour.setText("شهرت مدیر آموزشگاه");
+
+            //title = "آموزشگاه";
+
+
+        } else if (tag == 4) {
+            boss.setText("نام آرایشگاه یا آموزشگاه محل کار");
+            name.setText("نام مدرس");
+            // romour.setText("شهرت آرایشگر");
+            // title = "مدرس";
+
+            relRoumer.setVisibility(View.GONE);
+        } else if (tag == 5) {
+            //title = "فروشگاه";
+            boss.setText("نام مدیر فروشگاه");
+            name.setText("نام فروشگاه");
+            relRoumer.setVisibility(View.GONE);
+
+        }
+
+
         return v;
     }
 
@@ -249,6 +308,14 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         linear18 = v.findViewById(R.id.linear18);
 
         mMapView = (MapView) v.findViewById(R.id.map);
+
+        romour = v.findViewById(R.id.romour);
+
+        boss = v.findViewById(R.id.boss);
+
+        name = v.findViewById(R.id.Name);
+
+        relRoumer = v.findViewById(R.id.relRoumer);
 
         rel12.setOnClickListener(this);
         btn1.setOnClickListener(this);
@@ -362,6 +429,9 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
 
         prepareProfilePictureDirectory();
+
+        getMemberInfo();
+
 
     }
 
@@ -487,70 +557,70 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                             bytePic = Base64.encodeToString(imageBytes, Base64.DEFAULT);
                             file = saveImage(getAppContext(), bytePic);
 
-
-//       todo                     switch (tempLinear.getId()){
+//
+//                            switch (tempLinear.getId()) {
 //                                case R.id.linear:
-//                                    membersFilesRegister(6, "", file, title);
+//                                    membersFilesRegister(6,,"", file, title);
 //
 //                                    break;
 //                            }
-//                            if (tempLinear == linear) {
-//
-//                                membersFilesRegister(1, "2", file, "");
-//
-//                            } else if (tempLinear == linear0) {
-//                                membersFilesRegister(6, "", file, title);
-//
-//                            } else if (tempLinear == linear2) {
-//                                membersFilesRegister(1, "3", file, "");
-//                            } else if (tempLinear == linear3) {
-//                                membersFilesRegister(1, "4", file, "");
-//
-//                            } else if (tempLinear == linear5) {
-//                                membersFilesRegister(1, "5", file, "");
-//
-//                            } else if (tempLinear == linear6) {
-//                                membersFilesRegister(1, "6", file, "");
-//
-//                            } else if (tempLinear == linear7) {
-//                                membersFilesRegister(1, "7", file, "");
-//
-//                            } else if (tempLinear == linear8) {
-//                                membersFilesRegister(1, "8", file, "");
-//
-//                            } else if (tempLinear == linear9) {
-//                                membersFilesRegister(1, "9", file, "");
-//
-//                            } else if (tempLinear == linear10) {
-//                                membersFilesRegister(1, "10", file, "");
-//
-//                            } else if (tempLinear == linear11) {
-//                                membersFilesRegister(1, "11", file, "");
-//
-//                            } else if (tempLinear == linear12) {
-//                                membersFilesRegister(1, "14", file, "");
-//
-//                            } else if (tempLinear == linear13) {
-//                                membersFilesRegister(1, "13", file, "");
-//
-//                            } else if (tempLinear == linear14) {
-//                                membersFilesRegister(1, "12", file, "");
-//
-//                            } else if (tempLinear == linear15) {
-//                                membersFilesRegister(1, "4", file, "");
-//
-//                            } else if (tempLinear == linear16) {
-//                                membersFilesRegister(3, "", file, title);
-//
-//                            } else if (tempLinear == linear17) {
-//                                membersFilesRegister(2, "", file, title);
-//
-//                            } else if (tempLinear == linear18) {
-//                                membersFilesRegister(4, "", file, "");
-//
-//                            }
-//
-                     }
+                            if (tempLinear == linear) {
+
+                                membersFilesRegister("service",1, "service_id","2", file, "");
+
+                            } else if (tempLinear == linear0) {
+                                membersFilesRegister("famous_customer",6, "famous_customer_id","", file, title);
+
+                            } else if (tempLinear == linear2) {
+                                membersFilesRegister("service",1, "service_id","3", file, "");
+                            } else if (tempLinear == linear3) {
+                                membersFilesRegister("service",1,"service_id" ,"4", file, "");
+
+                            } else if (tempLinear == linear5) {
+                                membersFilesRegister("service",1, "service_id","5", file, "");
+
+                            } else if (tempLinear == linear6) {
+                                membersFilesRegister("service",1, "service_id","6", file, "");
+
+                            } else if (tempLinear == linear7) {
+                                membersFilesRegister("service",1, "service_id","7", file, "");
+
+                            } else if (tempLinear == linear8) {
+                                membersFilesRegister("service",1, "service_id","8", file, "");
+
+                            } else if (tempLinear == linear9) {
+                                membersFilesRegister("service",1, "service_id","9", file, "");
+
+                            } else if (tempLinear == linear10) {
+                                membersFilesRegister("service",1, "service_id","10", file, "");
+
+                            } else if (tempLinear == linear11) {
+                                membersFilesRegister("service",1,"service_id" ,"11", file, "");
+
+                            } else if (tempLinear == linear12) {
+                                membersFilesRegister("service",1,"service_id" ,"14", file, "");
+
+                            } else if (tempLinear == linear13) {
+                                membersFilesRegister("service",1, "service_id","13", file, "");
+
+                            } else if (tempLinear == linear14) {
+                                membersFilesRegister("service",1, "service_id","12", file, "");
+
+                            } else if (tempLinear == linear15) {
+                                membersFilesRegister("service",1, "service_id","15", file, "");
+
+                            } else if (tempLinear == linear16) {
+                                membersFilesRegister("course",3, "course_id","", file, title);
+
+                            } else if (tempLinear == linear17) {
+                                membersFilesRegister("award",2,"award_id" ,"", file, title);
+
+                            } else if (tempLinear == linear18) {
+                                membersFilesRegister("workplace_pic",4,"workplace_pic_id" ,"", file, "");
+
+                            }
+
+                        }
 
 
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -560,18 +630,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                                 .into(clickedImageView);
 
 
-                        for (final View view : myViews) {
-                            if (view.getVerticalScrollbarPosition() == imgDropTemp.getVerticalScrollbarPosition()) {
-                                imgDropTemp.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-
-                                        tempLinear.removeView(view);
-                                    }
-                                });
-
-                            }
-                        }
 
 
                     } catch (Exception E) {
@@ -808,42 +866,48 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
             case R.id.btn2:
 
-                page2.setVisibility(View.GONE);
-                page3.setVisibility(View.VISIBLE);
-                imgbOne.setImageResource(R.drawable.step1);
-                imgbTwo.setImageResource(R.drawable.step3);
-                imgbThree.setImageResource(R.drawable.step22);
-//          todo     if (flag) {
-//                    pd.show();
-//                    getMemberRegister();
-//                } else {
-//                    YoYo.with(Techniques.SlideInLeft)
-//                            .duration(300)
-//                            .repeat(0).withListener(new Animator.AnimatorListener() {
-//                        @Override
-//                        public void onAnimationStart(Animator animation) {
-//                            page2.setVisibility(View.GONE);
-//                            page3.setVisibility(View.VISIBLE);
-//                            imgbOne.setImageResource(R.drawable.step1);
-//                            imgbTwo.setImageResource(R.drawable.step3);
-//                            imgbThree.setImageResource(R.drawable.step22);
-//                        }
-//                        @Override
-//                        public void onAnimationEnd(Animator animation) {
-//                        }
-//                        @Override
-//                        public void onAnimationCancel(Animator animation) {
-//                        }
-//                        @Override
-//                        public void onAnimationRepeat(Animator animation) {
-//                        }
-//                    }).playOn(v.findViewById(R.id.page2));
-//                    state = 3;
-//                }
-               break;
+//                page2.setVisibility(View.GONE);
+//                page3.setVisibility(View.VISIBLE);
+//                imgbOne.setImageResource(R.drawable.step1);
+//                imgbTwo.setImageResource(R.drawable.step3);
+//                imgbThree.setImageResource(R.drawable.step22);
+                if (flag) {//&& !memberInfoFlag
+
+                    pd.show();
+                    getMemberRegister();
+                } else {
+                    YoYo.with(Techniques.SlideInLeft)
+                            .duration(300)
+                            .repeat(0).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
+                            page2.setVisibility(View.GONE);
+                            page3.setVisibility(View.VISIBLE);
+                            imgbOne.setImageResource(R.drawable.step1);
+                            imgbTwo.setImageResource(R.drawable.step3);
+                            imgbThree.setImageResource(R.drawable.step22);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
+                        }
+                    }).playOn(v.findViewById(R.id.page2));
+                    state = 3;
+                }
+                break;
 
             case R.id.btn3:
+
                 successDialog("با موفقیت ثبت شد.");
+
                 break;
 
             case R.id.closeimg1:
@@ -853,6 +917,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 imgPic1.setVisibility(View.VISIBLE);
                 closeimg1.setVisibility(View.GONE);
                 logoimg1.setVisibility(View.GONE);
+
                 break;
 
             case R.id.rel18:
@@ -940,7 +1005,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSans(FaNum).ttf");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(FontUtils.typeface(typeface, "نام خدمت مورد نظر را وارد کنید"));
+        builder.setMessage(FontUtils.typeface(typeface, "عنوان را وارد کنید"));
         final EditText input = new EditText(getContext());
         input.setPadding(40, 20, 40, 20);
         input.setTypeface(typeface);
@@ -962,6 +1027,12 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 btnSelect(myImageView, imgbDropPic13, linear);
                 txtTilte.setText(input.getText().toString());
                 tempTextView = txtTilte;
+
+
+
+                viewsList.add(inflatedLayout);
+                drops.add(imgbDropPic13);
+                linearLayouts.add(linear);
 
                 title = input.getText().toString();
                 dialog.dismiss();
@@ -1116,6 +1187,36 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
 
 
+        if (!tools.getSharePrf("memberId1").equals("") || !tools.getSharePrf("memberId2").equals("") || !tools.getSharePrf("memberId3").equals("") || !tools.getSharePrf("memberId4").equals("") || !tools.getSharePrf("memberId5").equals("")) {
+            switch (tag) {
+
+                case 1:
+                    params.put("member_id", tools.getSharePrf("memberId1"));
+
+                    params.put("tag", "edit");
+                    break;
+                case 2:
+                    params.put("member_id", tools.getSharePrf("memberId2"));
+                    params.put("tag", "edit");
+
+                    break;
+                case 3:
+                    params.put("member_id", tools.getSharePrf("memberId3"));
+                    params.put("tag", "edit");
+
+                    break;
+                case 4:
+                    params.put("member_id", tools.getSharePrf("memberId4"));
+                    params.put("tag", "edit");
+
+                    break;
+                case 5:
+                    params.put("member_id", tools.getSharePrf("memberId5"));
+                    params.put("tag", "edit");
+
+                    break;
+            }
+        }
         String url = tools.baseUrl + "membersRegister";
 
 
@@ -1138,47 +1239,75 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                         flag = false;
                         UserResponse response = gson.fromJson(responseString, UserResponse.class);
 
+                        switch (tag) {
+                            case 1:
+                                tools.addToSharePrf("memberId1", response.getMember().getId().toString());
+
+                                break;
+                            case 2:
+                                tools.addToSharePrf("memberId2", response.getMember().getId().toString());
+
+                                break;
+
+                            case 3:
+                                tools.addToSharePrf("memberId3", response.getMember().getId().toString());
+
+                                break;
+                            case 4:
+                                tools.addToSharePrf("memberId4", response.getMember().getId().toString());
+
+                                break;
+                            case 5:
+
+                                tools.addToSharePrf("memberId5", response.getMember().getId().toString());
+
+                                break;
+                        }
+
                         tools.addToSharePrf("userId", response.getMember().getId().toString());
-                        YoYo.with(Techniques.SlideInLeft)
-                                .duration(300)
-                                .repeat(0).withListener(new Animator.AnimatorListener() {
-                            @Override
-                            public void onAnimationStart(Animator animation) {
 
-                                page2.setVisibility(View.GONE);
-                                page3.setVisibility(View.VISIBLE);
-                                imgbOne.setImageResource(R.drawable.step1);
-                                imgbTwo.setImageResource(R.drawable.step3);
-                                imgbThree.setImageResource(R.drawable.step22);
-
-                            }
-
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationCancel(Animator animation) {
-
-                            }
-
-                            @Override
-                            public void onAnimationRepeat(Animator animation) {
-
-                            }
-                        }).playOn(v.findViewById(R.id.page2));
-
-                        state = 3;
                     }
                 } catch (Exception e) {
                 }
+
+
+                YoYo.with(Techniques.SlideInLeft)
+                        .duration(300)
+                        .repeat(0).withListener(new Animator.AnimatorListener() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+
+                        page2.setVisibility(View.GONE);
+                        page3.setVisibility(View.VISIBLE);
+                        imgbOne.setImageResource(R.drawable.step1);
+                        imgbTwo.setImageResource(R.drawable.step3);
+                        imgbThree.setImageResource(R.drawable.step22);
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationCancel(Animator animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animator animation) {
+
+                    }
+                }).playOn(v.findViewById(R.id.page2));
+
+                state = 3;
             }
         });
     }
 
 
-    public void membersFilesRegister(final int type, final String service_type, final File pic, final String title) throws FileNotFoundException {
+    public void membersFilesRegister(final String tag, final int type, final String key, final String service_type, final File pic, final String title) throws FileNotFoundException {
 
         RequestParams params = new RequestParams();
         pd.show();
@@ -1197,7 +1326,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             params.put("title", title);
 
         String url = tools.baseUrl + "membersFilesRegister";
-
 
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
@@ -1218,7 +1346,12 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     @Override
                     public void onClick(View view) {
                         try {
-                            membersFilesRegister(type, service_type, pic, title);
+                            membersFilesRegister(tag,type,key ,service_type, pic, title);
+                            imgDropTemp.setVisibility(View.VISIBLE);
+
+                            tempTextView.setVisibility(View.VISIBLE);
+
+
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -1230,6 +1363,53 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
                 pd.dismiss();
+
+
+                try {
+                    JSONObject jsonObject=new JSONObject(responseString);
+                id=jsonObject.get("id").toString();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+//                for (final View view : myViews) {
+//                    if (view.getVerticalScrollbarPosition() == imgDropTemp.getVerticalScrollbarPosition()) {
+//                        imgDropTemp.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//
+//                                tempLinear.removeView(view);
+//
+//                                // deletePic(,,,view,tools.getSharePrf("userId"),tempLinear);
+//                            }
+//                        });
+//
+//                    }
+//                }
+
+
+
+                linear.setTag(id);
+                imgbDropPic13.setTag(id);
+                inflatedLayout.setTag(id);
+
+
+                for (int i = 0; i < drops.size(); i++) {
+                    final int finalI = i;
+                    for (int j = 0; j < drops.size(); j++) {
+                        final int finalJ = j;
+                        imgbDropPic13.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (drops.get(finalJ).getTag() == viewsList.get(finalJ).getTag()) {
+                                    viewsList.get(finalJ).setVisibility(View.GONE);
+                                   deletePic(tag,key,id , inflatedLayout, tools.getSharePrf("userId"),linear);
+                                }
+                            }
+                        });
+                    }
+                }
 
             }
         });
@@ -1323,6 +1503,33 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             public void onClick(View v) {
                 Intent i1 = new Intent(getContext(), MainActivity.class);
                 i1.putExtra("back", "1");
+
+                switch (tag) {
+                    case 1:
+                        tools.addToSharePrf("beautyshop", "1");
+
+                        break;
+
+                    case 2:
+                        tools.addToSharePrf("hairdersser", "1");
+
+                        break;
+                    case 3:
+                        tools.addToSharePrf("institude", "1");
+
+                        break;
+
+                    case 4:
+                        tools.addToSharePrf("teacher", "1");
+
+                        break;
+                    case 5:
+                        tools.addToSharePrf("store", "1");
+
+                        break;
+                }
+
+
                 i1.setAction(Intent.ACTION_MAIN);
 
                 i1.addCategory(Intent.CATEGORY_HOME);
@@ -1343,6 +1550,275 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             }
         });
 
+
+    }
+
+
+    public void getMemberInfo() {
+
+        String url = tools.baseUrl + "member_info";
+
+        RequestParams params = new RequestParams();
+        switch (tag) {
+            case 1:
+                member_id = tools.getSharePrf("memberId1");
+                //    params.put("id", );
+
+                break;
+            case 2:
+
+                member_id = tools.getSharePrf("memberId2");
+                // params.put("id", tools.getSharePrf("memberId2"));
+
+                break;
+            case 3:
+                member_id = tools.getSharePrf("memberId3");
+
+                //  params.put("id", tools.getSharePrf("memberId3"));
+
+                break;
+            case 4:
+                member_id = tools.getSharePrf("memberId4");
+
+                // params.put("id", tools.getSharePrf("memberId4"));
+
+                break;
+            case 5:
+                member_id = tools.getSharePrf("memberId5");
+
+                // params.put("id", tools.getSharePrf("memberId5"));
+
+                break;
+        }
+        try {
+            params.put("id", member_id);
+        } catch (Exception e) {
+        }
+
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                try {
+
+                    // memberInfoFlag=true;
+
+                    MyMember response = gson.fromJson(responseString, MyMember.class);
+
+                    txtName.setText(response.getData().getFullName());
+
+                    txtBoss.setText(response.getData().getManagerName());
+
+                    txtphone.setText(response.getData().getPhone1());
+
+
+                    Glide.with(getContext())
+                            .load("http://arayesh.myzibadasht.ir" + response.getData().getLogo())
+                            .into(logoimg1);
+
+
+                    for (final Award award : response.getData().getAward()) {
+
+                        setImage("http://arayesh.myzibadasht.ir" + award.getData(), linear17, "award", "award_id", award.getId().toString(), award.getTitle(), member_id);
+
+                        //todo public bayad hazf beshe
+                    }
+                    for (Service service : response.getData().getService()) {
+
+
+                        switch (service.getServiceType()) {
+                            case 1:
+//todo arayesh vize aros
+                                //   setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear17);
+
+                                break;
+
+                            case 2:
+                                tempLinear = linear;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 3:
+                                tempLinear = linear2;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear2, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 4:
+                                tempLinear = linear3;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear3, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+
+                            case 5:
+                                tempLinear = linear5;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear5, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+
+                            case 6:
+                                tempLinear = linear6;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear6, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+
+                            case 7:
+                                tempLinear = linear7;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear7, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 8:
+                                tempLinear = linear8;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear8, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 9:
+                                tempLinear = linear9;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear9, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 10:
+                                tempLinear = linear10;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear10, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 11:
+                                tempLinear = linear11;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear11, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 12:
+                                tempLinear = linear17;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear17, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 13:
+                                tempLinear = linear13;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear13, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 14:
+                                tempLinear = linear14;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear12, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+                            case 15:
+                                tempLinear = linear15;
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear15, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                break;
+
+
+                        }
+
+
+                    }
+
+                    for (Course course : response.getData().getCourse()) {
+                        setImage("http://arayesh.myzibadasht.ir/" + course.getData(), linear16, "course", "course_id", course.getId().toString(), course.getTitle(), member_id);
+
+                    }
+
+                    for (WorkplacePic workplacePic : response.getData().getWorkplacePic()) {
+                        setImage("http://arayesh.myzibadasht.ir/" + workplacePic.getPic(), linear18, "workplace_pic", "workplace_pic_id", workplacePic.getId().toString(), "", member_id);
+
+                    }
+
+                    for (FamousCustomer famousCustomer : response.getData().getFamousCustomer()) {
+                        setImage("http://arayesh.myzibadasht.ir/" + famousCustomer.getPic(), linear0, "famous_customer", "famous_customer_id", famousCustomer.getId().toString(), "", member_id);
+
+
+                    }
+
+
+                } catch (Exception e) {
+                    Log.d("error", e.toString());
+                }
+            }
+        });
+    }
+
+    public void setImage(String url, final LinearLayout linear, final String tag, final String key, final String id, String title, final String member_id) {
+
+        inflatedLayout = getLayoutInflater().inflate(R.layout.my_image_layout, null);
+
+        txtTilte = inflatedLayout.findViewById(R.id.title);
+        myImageView = inflatedLayout.findViewById(R.id.img);
+        imgbDropPic13 = inflatedLayout.findViewById(R.id.imgbDropPic1);
+        imgRetry = inflatedLayout.findViewById(R.id.retry);
+        linearRetry = inflatedLayout.findViewById(R.id.linearRetry);
+
+        linear.setTag(id);
+        imgbDropPic13.setTag(id);
+        inflatedLayout.setTag(id);
+
+        viewsList.add(inflatedLayout);
+        drops.add(imgbDropPic13);
+        linearLayouts.add(linear);
+
+
+        txtTilte.setText(title);
+
+        Glide.with(getContext())
+                .load(url)
+                .into(myImageView);
+
+        linear.addView(inflatedLayout);
+
+        for (int i = 0; i < drops.size(); i++) {
+            final int finalI = i;
+            for (int j = 0; j < drops.size(); j++) {
+                final int finalJ = j;
+                imgbDropPic13.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (drops.get(finalJ).getTag() == viewsList.get(finalJ).getTag()) {
+                                viewsList.get(finalJ).setVisibility(View.GONE);
+                            deletePic(tag, key, id, inflatedLayout, member_id, linear);
+                        }
+                    }
+                });
+            }
+        }
+
+
+
+    }
+
+
+    public void deletePic(String tag, String key, String id, final View v, String member_id, final LinearLayout linear) {
+
+        String url = tools.baseUrl + "member_picDel";
+        RequestParams params = new RequestParams();
+        params.put("tag", tag);
+        params.put(key, id);
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+
+        params.put("member_id", member_id);
+
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                if (responseString.contains("ok")) {
+                    linear.removeView(v);
+
+                }
+            }
+        });
 
     }
 }

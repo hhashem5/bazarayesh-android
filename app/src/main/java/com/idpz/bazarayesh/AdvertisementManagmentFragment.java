@@ -20,12 +20,15 @@ import com.idpz.bazarayesh.Advertisements.EstekhdamActivity;
 import com.idpz.bazarayesh.Advertisements.KargahAmozeshi;
 import com.idpz.bazarayesh.Advertisements.SabtnamDoreAmozeshi;
 import com.idpz.bazarayesh.Advertisements.TakhfifAmozeshi;
+import com.idpz.bazarayesh.Advertisements.TakhfifKhadamat;
+import com.idpz.bazarayesh.Advertisements.VagozariArayeshgah;
 import com.idpz.bazarayesh.Models.MainItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.idpz.bazarayesh.BaseActivity.RIGHT_TO_LEFT;
+import static com.idpz.bazarayesh.SubProfileActivity.tag;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 import static maes.tech.intentanim.CustomIntent.customType;
 
@@ -73,7 +76,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
         RecyclerView recyclerView = inflatedLayout.findViewById(R.id.recycle);
 
-        TextView title=inflatedLayout.findViewById(R.id.tooTitle);
+        TextView title = inflatedLayout.findViewById(R.id.tooTitle);
         title.setText("دسته بندی آگهی ها");
 
         addItems();
@@ -87,6 +90,8 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                     case "آگهی بازدید عروس":
 
                         Intent i1 = new Intent(getContext(), BazdidAroosActivity.class);
+                        i1.putExtra("tag",tag);
+
                         i1.setAction(Intent.ACTION_MAIN);
                         i1.addCategory(Intent.CATEGORY_HOME);
                         i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -99,6 +104,8 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "استخدام":
                         Intent i2 = new Intent(getContext(), EstekhdamActivity.class);
+                        i2.putExtra("tag",tag);
+
                         i2.setAction(Intent.ACTION_MAIN);
                         i2.addCategory(Intent.CATEGORY_HOME);
                         i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -111,6 +118,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "ثبتنام دوره های آموزشی":
                         Intent i3 = new Intent(getContext(), SabtnamDoreAmozeshi.class);
+                        i3.putExtra("tag",tag);
                         i3.setAction(Intent.ACTION_MAIN);
                         i3.addCategory(Intent.CATEGORY_HOME);
                         i3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -123,6 +131,8 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "شروع ثبتنام کارگاه آموزشی":
                         Intent i4 = new Intent(getContext(), KargahAmozeshi.class);
+                        i4.putExtra("tag",tag);
+
                         i4.setAction(Intent.ACTION_MAIN);
                         i4.addCategory(Intent.CATEGORY_HOME);
                         i4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -136,12 +146,43 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "تخفیف  دوره و کارگاه آموزشی":
                         Intent i5 = new Intent(getContext(), TakhfifAmozeshi.class);
+                        i5.putExtra("tag",tag);
+
                         i5.setAction(Intent.ACTION_MAIN);
                         i5.addCategory(Intent.CATEGORY_HOME);
                         i5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         i5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i5);
+                        customType(getContext(), RIGHT_TO_LEFT);
+                        getActivity().finish();
+                        break;
+
+                    case "واگذاری فضای آرایشگاهی":
+                        Intent i6 = new Intent(getContext(), VagozariArayeshgah.class);
+                        i6.putExtra("tag",tag);
+
+                        i6.setAction(Intent.ACTION_MAIN);
+                        i6.addCategory(Intent.CATEGORY_HOME);
+                        i6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i6);
+                        customType(getContext(), RIGHT_TO_LEFT);
+                        getActivity().finish();
+                        break;
+
+                    case "تخفیف خدمات آرایشکاهی":
+
+                        Intent i7 = new Intent(getContext(), TakhfifKhadamat.class);
+                        i7.putExtra("tag",tag);
+
+                        i7.setAction(Intent.ACTION_MAIN);
+                        i7.addCategory(Intent.CATEGORY_HOME);
+                        i7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(i7);
                         customType(getContext(), RIGHT_TO_LEFT);
                         getActivity().finish();
                         break;
@@ -163,18 +204,63 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
         items = new ArrayList<>();
 
-        items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
-        items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی"));
-        items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "ثبتنام دوره های آموزشی"));
-        items.add(new MainItem(R.drawable.ic_bride, "آگهی بازدید عروس"));
+        switch (tag) {
+
+            case 1:
+                tools.addToSharePrf("beautyshop", "1");
+                items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
+                items.add(new MainItem(R.drawable.ic_bride, "آگهی بازدید عروس"));
+                items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی"));
+                items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی"));
+                items.add(new MainItem(R.drawable.ic_noun_facial_wash, "تخفیف خدمات آرایشکاهی"));
+
+                break;
+
+            case 2:
+                tools.addToSharePrf("hairdersser", "1");
+                items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
+                items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی"));
+                items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی"));
+
+                break;
+            case 3:
+                tools.addToSharePrf("institude", "1");
+                items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
+                items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "ثبتنام دوره های آموزشی"));
+                items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی"));
+                items.add(new MainItem(R.drawable.ic_teaching, "تخفیف  دوره و کارگاه آموزشی"));
+
+                break;
+
+            case 4:
+                tools.addToSharePrf("teacher", "1");
+                items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
+                items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "ثبتنام دوره های آموزشی"));
+                items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی"));
+                items.add(new MainItem(R.drawable.ic_teaching, "تخفیف  دوره و کارگاه آموزشی"));
+
+                break;
+            case 5:
+                tools.addToSharePrf("store", "1");
+                items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
+                items.add(new MainItem(R.drawable.ic_employees, "تخفیف محصولات آرایشی"));
 
 
-        items.add(new MainItem(R.drawable.ic_teaching, "تخفیف  دوره و کارگاه آموزشی"));
-        items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی"));
-        items.add(new MainItem(R.drawable.ic_facial_cream_tube, "تخفیف 3 محصولات"));
-        items.add(new MainItem(R.drawable.ic_spray_bottle, "واگذاری تجهیزات آرایشگاهی"));
-        items.add(new MainItem(R.drawable.ic_noun_facial_wash, "خدمات آرایشکاهی"));
+                break;
+
+            default:
+
+                items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
+                items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی"));
+                items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "ثبتنام دوره های آموزشی"));
+                items.add(new MainItem(R.drawable.ic_bride, "آگهی بازدید عروس"));
+                items.add(new MainItem(R.drawable.ic_teaching, "تخفیف  دوره و کارگاه آموزشی"));
+                items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی"));
+                items.add(new MainItem(R.drawable.ic_noun_facial_wash, "تخفیف خدمات آرایشکاهی"));
+                items.add(new MainItem(R.drawable.ic_facial_cream_tube, "تخفیف 3 محصولات"));
+                items.add(new MainItem(R.drawable.ic_spray_bottle, "واگذاری تجهیزات آرایشگاهی"));
 
 
+        }
     }
 }

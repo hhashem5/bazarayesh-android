@@ -125,11 +125,16 @@
                     android:paddingRight="8dp"
                     android:textColor="@color/dark" />
 
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtBoss"
+                    android:id="@+id/relRoumer">
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/romour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtBoss"
                     android:layout_alignParentRight="true"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
@@ -151,7 +156,7 @@
                     android:paddingRight="8dp"
                     android:textColor="@color/dark" />
 
-
+                </RelativeLayout>
 
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -303,7 +308,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
-                    android:text="شماره تلفن" />
+                    android:text="شماره تلفن همراه" />
 
                 <com.idpz.bazarayesh.Views.mEditText
                     android:id="@+id/txtphone"
@@ -2200,7 +2205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
-                    android:text="کاشت مژه"
+                    android:text="خودآرایی"
                     android:textColor="@color/dark_gray"
 
 

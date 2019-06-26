@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -85,6 +87,47 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
+
+        txtCode.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 4) {
+                    if (tools.isNetworkAvailable()) {
+                        if (txtCode.getText().toString().length() == 4) {
+                            verifyFunc();
+
+                        } else {
+                            Toast.makeText(context, getString(R.string.error2), Toast.LENGTH_LONG).show();
+                        }
+                    } else tools.noInternet(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            if (tools.isNetworkAvailable()) {
+                                verifyFunc();
+                                tools.hideInternet();
+                            } else
+                                Toast.makeText(context, getString(R.string.nonet), Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+//                if(s.length() != 0)
+//                    field2.setText("");
+            }
+        });
     }
 
     public void initViews() {

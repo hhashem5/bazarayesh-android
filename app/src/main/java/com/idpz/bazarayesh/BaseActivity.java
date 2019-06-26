@@ -30,7 +30,7 @@ public class BaseActivity extends AppCompatActivity {
     public static String ROTATIONOUT_TO_ROTATIONIN = "rotateout-to-rotatein";
 
 
-    Tools tools = new Tools(context);
+   public Tools tools = new Tools(context);
     public ProgressDialog pd;
     public TextView tooTitle;
     public ImageView imgbBack;
@@ -47,12 +47,8 @@ public class BaseActivity extends AppCompatActivity {
     public void settoolbarText(String tag) {
         tooTitle = findViewById(R.id.tooTitle);
         imgbBack = findViewById(R.id.imgbBack);
-
-
         tooTitle.setText(tag);
-
     }
-
 
 }
 

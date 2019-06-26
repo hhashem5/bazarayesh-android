@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-android:gravity="center_horizontal"
     android:background="@color/activity_back"
-    >
+    android:layoutDirection="ltr"
+    android:gravity="center_horizontal">
 
     <android.support.v7.widget.CardView
         android:id="@+id/card1"
@@ -68,21 +68,20 @@ android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="آگهی های منقضی شده"
-                android:textColor="@color/dark"
-                />
+                android:textColor="@color/dark" />
         </RelativeLayout>
 
 
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/card3"
         android:layout_width="120dp"
         android:layout_height="250dp"
-        android:id="@+id/card3"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
         android:layout_toRightOf="@+id/card2">

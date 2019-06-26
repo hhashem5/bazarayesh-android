@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative"
     android:layout_width="100dp"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:layoutDirection="ltr"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"

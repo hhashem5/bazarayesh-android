@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -19,6 +20,8 @@ import com.idpz.bazarayesh.BaseActivity;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.R;
 import com.idpz.bazarayesh.SubProfileActivity;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -26,6 +29,8 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 import static maes.tech.intentanim.CustomIntent.customType;
@@ -38,6 +43,8 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
     private BottomSheetBehavior bottomSheetBehavior;
     List<MainItem> items;
     private static final String TIMEPICKER = "TimePickerDialog",DATEPICKER = "DatePickerDialog";
+
+    Button btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +64,7 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
         txt_day = findViewById(R.id.txt_day);
         txt_subject = findViewById(R.id.txt_subject);
         txt_degree=findViewById(R.id.txt_degree);
+        btn=findViewById(R.id.btn);
 
 
         relative_day = findViewById(R.id.relative_day);
@@ -83,11 +91,14 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
 
+            case R.id.btn:
+            //    registerKargahAmozeshi();
+                break;
+
             case R.id.relative_corse:
                 initComponent("مبحث");
                 break;
             case R.id.relative_day:
-
                 PersianCalendar now3 = new PersianCalendar();
                 DatePickerDialog dpd2 = DatePickerDialog.newInstance(
                         KargahAmozeshi.this,
@@ -240,5 +251,74 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
         finish();
         super.onBackPressed();
     }
+
+//    public void registerKargahAmozeshi() {
+//
+//        String url = tools.baseUrl + "ads_store";
+//        pd.show();
+//        RequestParams params = new RequestParams();
+//        params.put("member", "bride");
+//
+//
+//
+//        params.put("date", mdate);
+//        params.put("shour", shour);
+//        params.put("ehour", ehour);
+//        params.put("description", etDescription.getText().toString());
+//
+//
+//        switch (tag) {
+//            case 1:
+//                member_id = tools.getSharePrf("memberId1");
+//                //    params.put("id", );
+//
+//                break;
+//            case 2:
+//
+//                member_id = tools.getSharePrf("memberId2");
+//                // params.put("id", tools.getSharePrf("memberId2"));
+//
+//                break;
+//            case 3:
+//                member_id = tools.getSharePrf("memberId3");
+//
+//                //  params.put("id", tools.getSharePrf("memberId3"));
+//
+//                break;
+//            case 4:
+//                member_id = tools.getSharePrf("memberId4");
+//
+//                // params.put("id", tools.getSharePrf("memberId4"));
+//
+//                break;
+//            case 5:
+//                member_id = tools.getSharePrf("memberId5");
+//
+//                // params.put("id", tools.getSharePrf("memberId5"));
+//
+//                break;
+//        }
+//        params.put("mem_id", member_id);
+//
+//        params.put("api_token", tools.getSharePrf("api_token"));
+//        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+//        tools.client.post(url, params, new TextHttpResponseHandler() {
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//
+//                pd.dismiss();
+//            }
+//
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+//
+//                pd.dismiss();
+//
+//            }
+//        });
+//
+//
+//    }
+
 
 }

@@ -4,11 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+
     tools:context=".Advertisements.VagozariArayeshgah">
+
+    <include layout="@layout/mtoolbar" />
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +26,6 @@
                 android:layout_height="match_parent">
 
 
-                <include layout="@layout/mtoolbar" />
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/title"

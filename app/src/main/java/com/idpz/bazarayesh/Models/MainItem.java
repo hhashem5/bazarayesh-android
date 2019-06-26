@@ -62,4 +62,9 @@ public class MainItem {
     public MainItem(String title) {
         this.title = title;
     }
+
+    public MainItem( String title,String id) {
+        this.id = id;
+        this.title = title;
+    }
 }

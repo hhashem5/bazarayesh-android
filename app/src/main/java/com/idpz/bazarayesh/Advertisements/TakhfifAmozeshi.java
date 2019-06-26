@@ -74,7 +74,6 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
         relative_until.setOnClickListener(this);
         relative_percent.setOnClickListener(this);
         relative_since.setOnClickListener(this);
-
         imgbBack.setOnClickListener(this);
 
 

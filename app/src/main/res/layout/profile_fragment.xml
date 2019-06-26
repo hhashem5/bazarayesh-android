@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
     android:background="@color/activity_back">
 
     <include layout="@layout/mtoolbar" />
@@ -11,8 +12,8 @@
         android:id="@+id/svL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="4dp"
-        android:layout_below="@+id/toolbar">
+        android:layout_below="@+id/toolbar"
+        android:layout_marginBottom="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,72 +75,146 @@
             <!--android:layout_height="2dp"-->
             <!--android:layout_marginTop="8dp"-->
             <!--android:background="@color/grey_60" />-->
-
-            <com.idpz.bazarayesh.Views.mTextView
-                android:id="@+id/beautyshop"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="64dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/layout_corners_shape_transparent"
-                android:gravity="center"
-                android:text="@string/barber_shop"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:background="@drawable/layout_corners_shape_transparent">
 
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/beautyshop"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:text="@string/barber_shop"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
-            <com.idpz.bazarayesh.Views.mTextView
-                android:id="@+id/store"
+                <ImageView
+                    android:id="@+id/check1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    app:srcCompat="@drawable/mic_check_green"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/layout_corners_shape_transparent"
-                android:gravity="center"
-                android:text="@string/shop"
+                android:background="@drawable/layout_corners_shape_transparent">
 
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/store"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/shop"
 
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
-            <com.idpz.bazarayesh.Views.mTextView
-                android:id="@+id/teacher"
+                <ImageView
+                    android:id="@+id/check2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    app:srcCompat="@drawable/mic_check_green"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/layout_corners_shape_transparent"
-                android:gravity="center"
-                android:text="@string/teacher"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:background="@drawable/layout_corners_shape_transparent">
 
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/teacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/teacher"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
-            <com.idpz.bazarayesh.Views.mTextView
-                android:id="@+id/hairdersser"
+                <ImageView
+                    android:id="@+id/check3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    app:srcCompat="@drawable/mic_check_green"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="16dp"
-
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/layout_corners_shape_transparent"
-                android:gravity="center"
-                android:text="@string/hairdresser"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/layout_corners_shape_transparent">
 
-            <com.idpz.bazarayesh.Views.mTextView
-                android:id="@+id/institude"
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/hairdersser"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/hairdresser"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+
+                <ImageView
+                    android:id="@+id/check4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    app:srcCompat="@drawable/mic_check_green"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/layout_corners_shape_transparent"
-                android:gravity="center"
-                android:text="@string/institude"
-                android:textColor="@color/white"
-                android:textSize="18dp" />
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/layout_corners_shape_transparent">
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/institude"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/institude"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
+
+                <ImageView
+                    android:id="@+id/check5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    app:srcCompat="@drawable/mic_check_green"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>

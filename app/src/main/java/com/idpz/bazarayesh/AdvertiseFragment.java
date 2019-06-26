@@ -66,14 +66,14 @@ public class AdvertiseFragment extends BaseFragment implements IOnBackPressed {
         items = new ArrayList<>();
 
         items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
-        items.add(new MainItem(R.drawable.ic_teaching, "تخفیف 2 ویدئوهای آموزشی"));
+        items.add(new MainItem(R.drawable.ic_teaching, "کارگاه اموزشی"));
         items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی"));
-        items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "ثبتنام دوره های آموزشی"));
-        items.add(new MainItem(R.drawable.ic_bride, "آگهی بازدید عروس"));
-        items.add(new MainItem(R.drawable.ic_facial_cream_tube, "تخفیف 3 محصولات"));
+        items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "دوره های آموزشی"));
+        items.add(new MainItem(R.drawable.ic_bride, " بازدید عروس"));
+        items.add(new MainItem(R.drawable.ic_facial_cream_tube, "تخفیف خدمات آرایشی"));
         items.add(new MainItem(R.drawable.ic_spray_bottle, "واگذاری تجهیزات آرایشگاهی"));
-        items.add(new MainItem(R.drawable.ic_noun_facial_wash, "خدمات آرایشکاهی"));
-        items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام خدمات آرایشگاهی"));
+        items.add(new MainItem(R.drawable.ic_noun_facial_wash, "تخفیف محصولات آرایشی"));
+        items.add(new MainItem(R.drawable.ic_noun_teacher, "تخفیف دوره آموزشی"));
 
 
     }

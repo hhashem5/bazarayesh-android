@@ -94,12 +94,13 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
                 MainItem item2 = new MainItem("2", R.drawable.ic_teacher, "#a492ac", "مدرس");
                 MainItem item3 = new MainItem("3", R.drawable.ic_makeover, "#87bcc2", "آرایشگر");
                 MainItem item4 = new MainItem("4", R.drawable.ic_salon, "#EC87AC", "آموزشگاه");
-
+                MainItem item0 = new MainItem("0", R.drawable.ic_salon, "#E555AC", "فروشگاه");
+                items.add(item3);
 
                 items.add(item1);
                 items.add(item2);
-                items.add(item3);
                 items.add(item4);
+                items.add(item0);
 
                 break;
 

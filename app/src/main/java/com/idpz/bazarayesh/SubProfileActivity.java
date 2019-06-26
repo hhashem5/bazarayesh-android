@@ -26,9 +26,9 @@ public class SubProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_profile);
 
+        settoolbarText(getString(R.string.title_profile));
 
         initViews();
-        settoolbarText(getString(R.string.title_profile));
 
 
         Intent intent = getIntent();
@@ -43,14 +43,10 @@ public class SubProfileActivity extends BaseActivity {
                 title = "آرایشگر";
             } else if (intent.getExtras().get("type").equals(3)) {
                 title = "آموزشگاه";
-
-
             } else if (intent.getExtras().get("type").equals(4)) {
                 title = "مدرس";
-
             } else if (intent.getExtras().get("type").equals(5)) {
                 title = "فروشگاه";
-
             }
         } catch (Exception e) {
         }

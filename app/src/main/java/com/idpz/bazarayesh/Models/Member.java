@@ -23,7 +23,7 @@ public class Member {
     private String managerName;
     @SerializedName("logo")
     @Expose
-    private String logo;
+    private Object logo;
     @SerializedName("teaser")
     @Expose
     private Object teaser;
@@ -107,11 +107,11 @@ public class Member {
         this.managerName = managerName;
     }
 
-    public String getLogo() {
+    public Object getLogo() {
         return logo;
     }
 
-    public void setLogo(String logo) {
+    public void setLogo(Object logo) {
         this.logo = logo;
     }
 
