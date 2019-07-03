@@ -1,6 +1,8 @@
 package com.idpz.bazarayesh.Advertisements;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -15,9 +19,12 @@ import android.widget.TextView;
 
 import com.idpz.bazarayesh.Adapters.DialogItemAdapter;
 import com.idpz.bazarayesh.BaseActivity;
+import com.idpz.bazarayesh.FontUtils;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.R;
 import com.idpz.bazarayesh.SubProfileActivity;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
@@ -25,6 +32,8 @@ import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 import static maes.tech.intentanim.CustomIntent.customType;
@@ -45,10 +54,23 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
 
     int flag;
 
+
+    Typeface irsans;
+
+    String member_id;
+    int tag;
+
+    String since, until, subject;
+
+    EditText etRelation, etServices, etDescription, etDuration;
+
+    Button btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sabtnam_dore_amozeshi);
+        tag = (int) getIntent().getExtras().get("tag");
 
         settoolbarText("ثبتنام دوره آموزشی");
         initViews();
@@ -67,11 +89,23 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
         relative_until = findViewById(R.id.relative_until);
         relative_subject = findViewById(R.id.relative_subject);
 
+        etRelation = findViewById(R.id.etRelation);
+
+        etServices = findViewById(R.id.etServices);
+
+        etDescription = findViewById(R.id.etDescription);
+
+        etDuration = findViewById(R.id.etDuration);
+
+        btn = findViewById(R.id.btn);
+
         relative_subject.setOnClickListener(this);
         relative_until.setOnClickListener(this);
         relative_since.setOnClickListener(this);
 
         imgbBack.setOnClickListener(this);
+
+        btn.setOnClickListener(this);
 
         LinearLayout llBottomSheet = findViewById(R.id.linear_bottomsheet);
 
@@ -79,6 +113,13 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
 
         // change the state of the bottom sheet
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
+
+
+        pd = new ProgressDialog(context);
+        pd.setCancelable(false);
+        pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
     }
 
     @Override
@@ -138,6 +179,10 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
 
                 break;
 
+            case R.id.btn:
+                sabtDore();
+                break;
+
         }
 
 
@@ -145,14 +190,18 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "تاریخ " + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
         switch (flag) {
             case 1:
-                txt_since.setText(date);
+                since = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+                txt_since.setText("تاریخ " + since);
+
+
                 break;
             case 2:
 
-                txt_until.setText(date);
+                until = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                txt_until.setText("تاریخ " + since);
                 break;
         }
     }
@@ -222,6 +271,7 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
                 MainItem item = (MainItem) object;
 
                 txt_subject.setText(item.getTitle());
+                subject = item.getId();
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
             }
@@ -235,12 +285,12 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
 
 
     public void addItems() {
-        MainItem item1 = new MainItem("مو");
-        MainItem item2 = new MainItem("پوست");
-        MainItem item3 = new MainItem("ابرو");
-        MainItem item4 = new MainItem("ناخن");
-        MainItem item5 = new MainItem("مژه");
-        MainItem item6 = new MainItem("چهره");
+        MainItem item1 = new MainItem("مو", "2");
+        MainItem item2 = new MainItem("پوست", "1");
+        MainItem item3 = new MainItem("ابرو", "3");
+        MainItem item4 = new MainItem("ناخن", "5");
+        MainItem item5 = new MainItem("مژه", "6");
+        MainItem item6 = new MainItem("چهره", "4");
 
 
         items.add(item1);
@@ -250,6 +300,7 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
         items.add(item5);
         items.add(item6);
     }
+
     @Override
     public void onBackPressed() {
         Intent i1 = new Intent(SabtnamDoreAmozeshi.this, SubProfileActivity.class);
@@ -263,4 +314,82 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
         finish();
         super.onBackPressed();
     }
+
+
+    public void sabtDore() {
+
+        String url = tools.baseUrl + "ads_store";
+        pd.show();
+        RequestParams params = new RequestParams();
+        params.put("member", "reg_course");
+
+
+        params.put("scourse", since);
+        params.put("duration", etDuration.getText().toString());
+        params.put("topic", Integer.getInteger(subject));
+        params.put("ecourse", until);
+        params.put("course_name", etRelation.getText().toString());
+        params.put("evidence", etServices.getText().toString());
+
+        params.put("description", etDescription.getText().toString());
+
+
+        switch (tag) {
+            case 1:
+                member_id = tools.getSharePrf("memberId1");
+                //    params.put("id", );
+
+                break;
+            case 2:
+
+                member_id = tools.getSharePrf("memberId2");
+                // params.put("id", tools.getSharePrf("memberId2"));
+
+                break;
+            case 3:
+                member_id = tools.getSharePrf("memberId3");
+
+                //  params.put("id", tools.getSharePrf("memberId3"));
+
+                break;
+            case 4:
+                member_id = tools.getSharePrf("memberId4");
+
+                // params.put("id", tools.getSharePrf("memberId4"));
+
+                break;
+            case 5:
+                member_id = tools.getSharePrf("memberId5");
+
+                // params.put("id", tools.getSharePrf("memberId5"));
+
+                break;
+        }
+        params.put("mem_id", member_id);
+
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                pd.dismiss();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                if (responseString.contains("200")){
+
+
+                    successDialog("آگهی شما با موفقیت ثبت شد.");
+
+                }
+                pd.dismiss();
+
+            }
+        });
+
+
+    }
+
 }

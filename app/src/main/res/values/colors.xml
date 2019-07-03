@@ -22,6 +22,7 @@
     <color name="material_red">#EA4335</color>
     <item name="material_green" type="color">#388E3C</item>
     <color name="light_gray">#83D2CFCF</color>
+    <color name="transparent">#00FFFFFF</color>
 
 
 </resources>

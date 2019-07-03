@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.idpz.bazarayesh.Adapters.DialogItemAdapter;
 import com.idpz.bazarayesh.BaseActivity;
 import com.idpz.bazarayesh.FontUtils;
+import com.idpz.bazarayesh.MainActivity;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.R;
 import com.idpz.bazarayesh.SubProfileActivity;
@@ -495,7 +496,13 @@ public class EstekhdamActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
+
+                if (responseString.contains("200")){
+                    successDialog("آگهی شما با موفقیت ثبت شد.");
+
+                }
                 pd.dismiss();
+
 
             }
         });

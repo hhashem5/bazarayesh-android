@@ -50,6 +50,8 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
     public String page = "page1";
 
+    int type;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -138,6 +140,62 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
                 items.add(item15);
                 break;
 
+
+            case "page3_1":
+
+
+                MainItem item16 = new MainItem("16", R.drawable.ic_chair, "#b83a7f", "اپیلاسیون");
+                MainItem item17 = new MainItem("17", R.drawable.ic_teacher, "#a592ac", "تاتو");
+                MainItem item18 = new MainItem("18", R.drawable.ic_makeover, "#c7bcc2", "مراقبت از پوست");
+                MainItem item19 = new MainItem("19", R.drawable.ic_salon, "#EC77AC", "اصلاح صورت");
+
+
+                items.add(item16);
+                items.add(item17);
+                items.add(item18);
+                items.add(item19);
+                break;
+
+
+            case "page3_2":
+
+                MainItem item20 = new MainItem("20", R.drawable.ic_chair, "#b83a7f", "مکاپ و گریم");
+                MainItem item21 = new MainItem("21", R.drawable.ic_teacher, "#a592ac", "آرایش عروس");
+
+
+                items.add(item20);
+                items.add(item21);
+
+                break;
+
+            case "page3_3":
+
+                MainItem item22 = new MainItem("22", R.drawable.ic_chair, "#b83a7f", "اکستنشن کار مژه");
+
+
+                items.add(item22);
+
+                break;
+
+            case "page3_4":
+
+                MainItem item23 = new MainItem("23", R.drawable.ic_chair, "#b83a7f", "ناخن کار");
+
+
+                items.add(item23);
+
+                break;
+
+            case "page3_5":
+
+                MainItem item24 = new MainItem("24", R.drawable.ic_chair, "#b83a7f", "ابرو کار");
+
+
+                items.add(item24);
+
+                break;
+
+
         }
     }
 
@@ -158,33 +216,171 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
 
                 switch (item.getId()) {
-                    case "3":
+
+
+                    case "0":
+                        type = 5;
+
+
+                        Intent intent4 = new Intent(getAppContext(), MapsActivity.class);
+                        intent4.putExtra("type", type);
+                        intent4.setAction(Intent.ACTION_MAIN);
+                        intent4.addCategory(Intent.CATEGORY_HOME);
+                        intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        customType(getContext(), BOTTOM_TO_UP);
+
+
+                        startActivity(intent4);
+                        customType(getContext(), RIGHT_TO_LEFT);
+
+                        getActivity().finish();
+                        break;
+                    case "1":
+                        type = 1;
+
+                        Intent intent5 = new Intent(getAppContext(), MapsActivity.class);
+                        intent5.putExtra("type", type);
+                        intent5.setAction(Intent.ACTION_MAIN);
+                        intent5.addCategory(Intent.CATEGORY_HOME);
+                        intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        customType(getContext(), BOTTOM_TO_UP);
+
+
+                        startActivity(intent5);
+                        customType(getContext(), RIGHT_TO_LEFT);
+
+                        getActivity().finish();
+
+                        break;
+
+                    //modares
+                    case "2":
+                        type = 4;
                         setMyAdapter("page2");
 
                         break;
+
+                    //arayeshgar
+                    case "3":
+                        type = 2;
+                        setMyAdapter("page2");
+
+                        break;
+
+                    case "4":
+                        type = 3;
+                        Intent intent6 = new Intent(getAppContext(), MapsActivity.class);
+                        intent6.putExtra("type", type);
+                        intent6.setAction(Intent.ACTION_MAIN);
+                        intent6.addCategory(Intent.CATEGORY_HOME);
+                        intent6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        customType(getContext(), BOTTOM_TO_UP);
+
+
+                        startActivity(intent6);
+                        customType(getContext(), RIGHT_TO_LEFT);
+
+                        getActivity().finish();
+
+                        break;
+
+
                     case "5":
                         setMyAdapter("page3");
 
                         break;
-                    //modares
-                    case "2":
+
+
+                    case "6":
+                        setMyAdapter("page3_1");
+                        break;
+
+                    case "7":
+                        setMyAdapter("page3_5");
+                        break;
+
+
+                    case "8":
+                        setMyAdapter("page3_4");
 
                         break;
 
-                    case "1":
-                        Intent intent = new Intent(getAppContext(), MapsActivity.class);
-                        intent.setAction(Intent.ACTION_MAIN);
-                        intent.addCategory(Intent.CATEGORY_HOME);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        customType(getContext(), BOTTOM_TO_UP);
+                    case "9":
+
+                        setMyAdapter("page3_3");
+
+                        break;
+
+                    case "10":
+                        setMyAdapter("page3_2");
+
+                        break;
 
 
-                        startActivity(intent);
-                        customType(getContext(), RIGHT_TO_LEFT);
+                    /////////////////////////////////////////////////////////////////
 
-                        getActivity().finish();
+                    case "11":
+                        startmActivity("service_type", 5);
+
+                        break;
+
+
+                    case "12":
+                        startmActivity("service_type", 10);
+
+                        break;
+                    case "13":
+                        startmActivity("service_type", 6);
+
+                        break;
+                    case "14":
+                        startmActivity("service_type", 7);
+
+                        break;
+                    case "15":
+                        startmActivity("service_type", 8);
+
+                        break;
+                    case "16":
+                        startmActivity("service_type", 1);
+
+                        break;
+                    case "17":
+                        startmActivity("service_type", 2);
+
+                        break;
+                    case "18":
+                        startmActivity("service_type", 3);
+
+                        break;
+                    case "19":
+                        startmActivity("service_type", 4);
+
+                        break;
+                    case "20":
+                        startmActivity("service_type", 11);
+
+                        break;
+                    case "21":
+                        startmActivity("service_type", 12);
+
+                        break;
+                    case "22":
+                        startmActivity("service_type", 13);
+
+                        break;
+                    case "23":
+                        startmActivity("service_type", 14);
+
+                        break;
+                    case "24":
+                        startmActivity("service_type", 15);
 
                         break;
 
@@ -208,6 +404,59 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
                 });
                 break;
             case "page3":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+
+            case "page3_1":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+
+            case "page3_5":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+
+            case "page3_4":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+            case "page3_3":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+            case "page3_2":
                 imgbBack.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -268,9 +517,81 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
                 setMyAdapter("page2");
 
                 break;
+
+
+            case "page3_1":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+
+            case "page3_5":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+
+            case "page3_4":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+            case "page3_3":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
+            case "page3_2":
+                imgbBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setMyAdapter("page2");
+
+
+                    }
+                });
+                break;
         }
 
         return false;
+    }
+
+    public void startmActivity(String key, int value) {
+        Intent intent4 = new Intent(getAppContext(), MapsActivity.class);
+        intent4.putExtra(key, value);
+        intent4.putExtra("type", type);
+        intent4.setAction(Intent.ACTION_MAIN);
+        intent4.addCategory(Intent.CATEGORY_HOME);
+        intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        customType(getContext(), BOTTOM_TO_UP);
+
+
+        startActivity(intent4);
+        customType(getContext(), RIGHT_TO_LEFT);
+
+        getActivity().finish();
     }
 
 }

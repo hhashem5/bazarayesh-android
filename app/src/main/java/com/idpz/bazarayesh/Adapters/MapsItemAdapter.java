@@ -47,6 +47,13 @@ public class MapsItemAdapter extends RecyclerView.Adapter<MapsItemAdapter.MyView
         holder.image.setImageResource(item.getImage());
         holder.title.setText(item.getTitle());
 
+        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onItemClick( position, items.get(position));
+
+            }
+        });
 
     }
 
@@ -63,6 +70,7 @@ public class MapsItemAdapter extends RecyclerView.Adapter<MapsItemAdapter.MyView
         CircleImageView image;
 
 
+
         public MyViewHolder(View view) {
             super(view);
 
@@ -70,6 +78,9 @@ public class MapsItemAdapter extends RecyclerView.Adapter<MapsItemAdapter.MyView
             title = view.findViewById(R.id.txtTitle);
 
             image = view.findViewById(R.id.image);
+
+
+            relativeLayout=view.findViewById(R.id.rel);
 
 
         }

@@ -23,6 +23,7 @@ import com.idpz.bazarayesh.Advertisements.TakhfifAmozeshi;
 import com.idpz.bazarayesh.Advertisements.TakhfifKhadamat;
 import com.idpz.bazarayesh.Advertisements.VagozariArayeshgah;
 import com.idpz.bazarayesh.Models.MainItem;
+import com.idpz.bazarayesh.Utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +40,13 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
     List<MainItem> items;
 
+    Tools tools;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.advertisement_managment_fragment, container, false);
+        tools = new Tools(getContext());
 
         initViews(v);
 
@@ -60,7 +63,47 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
         switch (view.getId()) {
             case R.id.card3:
-                AlertDialog();
+
+                switch (tag) {
+                    case 1:
+                        if (tools.getSharePrf("memberId1").equals("")) {
+                            tools.alertShow("ابتدا باید آرایشگاه خود را ثبت کنید سپس میتوانید آگهی ثبت کنید");
+                        } else AlertDialog();
+                        break;
+
+                    case 2:
+
+                        if (tools.getSharePrf("memberId2").equals("")) {
+                            tools.alertShow("ابتدا باید به عنوان آرایشگر ثبنام کنید سپس میتوانید آگهی ثبت کنید.");
+                        } else AlertDialog();
+                        break;
+
+                    case 3:
+
+                        if (tools.getSharePrf("memberId3").equals("")) {
+                            tools.alertShow("ابتدا باید آموزشگاه خود را ثبت کنید سپس میتوانید آگهی ثبت کنید.");
+                        } else
+                            AlertDialog();
+                        break;
+                    case 4:
+
+                        if (tools.getSharePrf("memberId4").equals("")) {
+                            tools.alertShow("ابتدا باید به عنوان مدرس ثبنام کنید سپس میتوانید آگهی ثبت کنید.");
+                        } else AlertDialog();
+
+                        break;
+                    case 5:
+
+                        if (tools.getSharePrf("memberId5").equals("")) {
+
+                            tools.alertShow("ابتدا باید فروشگاه خود را ثبت کنید سپس میتوانید آگهی ثبت کنید");
+                        } else AlertDialog();
+
+
+                        break;
+                }
+
+
                 break;
         }
     }
@@ -90,7 +133,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                     case "آگهی بازدید عروس":
 
                         Intent i1 = new Intent(getContext(), BazdidAroosActivity.class);
-                        i1.putExtra("tag",tag);
+                        i1.putExtra("tag", tag);
 
                         i1.setAction(Intent.ACTION_MAIN);
                         i1.addCategory(Intent.CATEGORY_HOME);
@@ -104,7 +147,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "استخدام":
                         Intent i2 = new Intent(getContext(), EstekhdamActivity.class);
-                        i2.putExtra("tag",tag);
+                        i2.putExtra("tag", tag);
 
                         i2.setAction(Intent.ACTION_MAIN);
                         i2.addCategory(Intent.CATEGORY_HOME);
@@ -118,7 +161,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "ثبتنام دوره های آموزشی":
                         Intent i3 = new Intent(getContext(), SabtnamDoreAmozeshi.class);
-                        i3.putExtra("tag",tag);
+                        i3.putExtra("tag", tag);
                         i3.setAction(Intent.ACTION_MAIN);
                         i3.addCategory(Intent.CATEGORY_HOME);
                         i3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -131,7 +174,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "شروع ثبتنام کارگاه آموزشی":
                         Intent i4 = new Intent(getContext(), KargahAmozeshi.class);
-                        i4.putExtra("tag",tag);
+                        i4.putExtra("tag", tag);
 
                         i4.setAction(Intent.ACTION_MAIN);
                         i4.addCategory(Intent.CATEGORY_HOME);
@@ -146,7 +189,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "تخفیف  دوره و کارگاه آموزشی":
                         Intent i5 = new Intent(getContext(), TakhfifAmozeshi.class);
-                        i5.putExtra("tag",tag);
+                        i5.putExtra("tag", tag);
 
                         i5.setAction(Intent.ACTION_MAIN);
                         i5.addCategory(Intent.CATEGORY_HOME);
@@ -160,7 +203,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     case "واگذاری فضای آرایشگاهی":
                         Intent i6 = new Intent(getContext(), VagozariArayeshgah.class);
-                        i6.putExtra("tag",tag);
+                        i6.putExtra("tag", tag);
 
                         i6.setAction(Intent.ACTION_MAIN);
                         i6.addCategory(Intent.CATEGORY_HOME);
@@ -175,7 +218,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                     case "تخفیف خدمات آرایشکاهی":
 
                         Intent i7 = new Intent(getContext(), TakhfifKhadamat.class);
-                        i7.putExtra("tag",tag);
+                        i7.putExtra("tag", tag);
 
                         i7.setAction(Intent.ACTION_MAIN);
                         i7.addCategory(Intent.CATEGORY_HOME);
@@ -187,6 +230,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                         getActivity().finish();
                         break;
                 }
+
 
             }
         });
@@ -208,6 +252,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
             case 1:
                 tools.addToSharePrf("beautyshop", "1");
+
                 items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
                 items.add(new MainItem(R.drawable.ic_bride, "آگهی بازدید عروس"));
                 items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی"));

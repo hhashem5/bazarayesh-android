@@ -31,10 +31,10 @@ public class User {
     private Object fbToken;
     @SerializedName("lat")
     @Expose
-    private Object lat;
+    private double lat;
     @SerializedName("lng")
     @Expose
-    private Object lng;
+    private double lng;
     @SerializedName("province")
     @Expose
     private Object province;
@@ -124,7 +124,7 @@ public class User {
         return lat;
     }
 
-    public void setLat(Object lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
@@ -132,7 +132,7 @@ public class User {
         return lng;
     }
 
-    public void setLng(Object lng) {
+    public void setLng(double lng) {
         this.lng = lng;
     }
 

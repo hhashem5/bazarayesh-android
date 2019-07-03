@@ -29,7 +29,6 @@ public class BaseFragment extends Fragment {
     TextView tooTitle;
     ImageView imgbBack;
 
-    Tools tools = new Tools(getAppContext());
 
 
     ProgressDialog pd;

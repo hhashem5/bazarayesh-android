@@ -8,6 +8,11 @@
 
     tools:context=".Advertisements.VagozariArayeshgah">
 
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <include layout="@layout/mtoolbar" />
 
 
@@ -139,6 +144,7 @@
                 </RelativeLayout>
 
                 <View
+
                     android:id="@+id/divider3"
                     android:layout_width="wrap_content"
                     android:layout_height="2dp"
@@ -147,9 +153,8 @@
                     android:layout_marginRight="8dp"
                     android:background="@color/grey_60" />
 
-
                 <RelativeLayout
-                    android:id="@+id/relative_relation"
+                    android:id="@+id/relative_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/divider3"
@@ -164,13 +169,51 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="16dp"
 
-                        android:text="نام دوره" />
+                        android:text="به مدت" />
 
                     <com.idpz.bazarayesh.Views.mEditText
-                        android:id="@+id/txtRelation"
+                        android:id="@+id/etDuration"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_below="@+id/txtTitle"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="16dp"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="16dp"
+                        android:background="@drawable/layout_corners_shape_border"
+
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+                <RelativeLayout
+                    android:id="@+id/relative_relation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relative_duration"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="8dp">
+
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtTitle3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="16dp"
+
+                        android:text="نام دوره" />
+
+                    <com.idpz.bazarayesh.Views.mEditText
+                        android:id="@+id/etRelation"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_below="@+id/txtTitle3"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
@@ -201,7 +244,7 @@
                         android:text="نوع مدرک" />
 
                     <com.idpz.bazarayesh.Views.mEditText
-                        android:id="@+id/txtServices"
+                        android:id="@+id/etServices"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:layout_below="@+id/txtTitle2"
@@ -238,6 +281,7 @@
                     android:textColor="@color/dark_gray" />
 
                 <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="148dp"
                     android:layout_below="@+id/title3"
@@ -251,6 +295,21 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <com.idpz.bazarayesh.Views.mButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/mdtp_ok"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_btn2"
+        />
+
+</RelativeLayout>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

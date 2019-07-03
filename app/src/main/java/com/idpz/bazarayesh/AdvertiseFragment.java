@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.idpz.bazarayesh.Adapters.MainAdvAdapter;
 import com.idpz.bazarayesh.Advertisements.BazdidAroosActivity;
 import com.idpz.bazarayesh.Models.MainItem;
+import com.idpz.bazarayesh.Utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class AdvertiseFragment extends BaseFragment implements IOnBackPressed {
     List<MainItem> items;
 
     MainAdvAdapter mainAdvAdapter;
+    Tools tools;
 
     RecyclerView recyclerView;
 
@@ -39,6 +41,7 @@ public class AdvertiseFragment extends BaseFragment implements IOnBackPressed {
         View v = inflater.inflate(R.layout.advertise_fragment, container, false);
 
         settoolbarText(getString(R.string.title_advertise), v);
+        tools = new Tools(getContext());
 
         initViews(v);
 

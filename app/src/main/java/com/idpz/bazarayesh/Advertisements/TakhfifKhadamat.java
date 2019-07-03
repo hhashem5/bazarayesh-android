@@ -1,5 +1,6 @@
 package com.idpz.bazarayesh.Advertisements;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,8 +18,12 @@ import com.idpz.bazarayesh.BaseActivity;
 import com.idpz.bazarayesh.FontUtils;
 import com.idpz.bazarayesh.R;
 import com.idpz.bazarayesh.SubProfileActivity;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+
+import cz.msebera.android.httpclient.Header;
 
 import static maes.tech.intentanim.CustomIntent.customType;
 
@@ -29,11 +35,21 @@ public class TakhfifKhadamat extends BaseActivity implements View.OnClickListene
 
     int flag;
 
+    EditText txt_relation,txt_srvices,etDescription;
+    String since, until;
+    String member_id;
+
+    int tag;
+
+    Typeface irsans;
+    Button btn;
     private static final String DATEPICKER = "DatePickerDialog";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_takhfif_khadamat);
+
+        tag = (int) getIntent().getExtras().get("tag");
 
         settoolbarText("تخفیف خدمات آرایشی");
         initViews();
@@ -50,6 +66,12 @@ public class TakhfifKhadamat extends BaseActivity implements View.OnClickListene
         txt_since=findViewById(R.id.txt_since);
         txt_until=findViewById(R.id.txt_until);
 
+        txt_relation = findViewById(R.id.txtRelation);
+        txt_srvices=findViewById(R.id.txtServices);
+        etDescription=findViewById(R.id.etDescription);
+
+        btn=findViewById(R.id.btn);
+
         relative_percent = findViewById(R.id.relative_percent);
         relative_since = findViewById(R.id.relative_since);
         relative_until = findViewById(R.id.relative_until);
@@ -58,7 +80,13 @@ public class TakhfifKhadamat extends BaseActivity implements View.OnClickListene
         relative_since.setOnClickListener(this);
         relative_percent.setOnClickListener(this);
         imgbBack.setOnClickListener(this);
+        btn.setOnClickListener(this);
 
+        irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
+
+        pd = new ProgressDialog(context);
+        pd.setCancelable(false);
+        pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
     }
 
     @Override
@@ -111,6 +139,10 @@ public class TakhfifKhadamat extends BaseActivity implements View.OnClickListene
                 finish();
 
                 break;
+
+            case R.id.btn:
+                takhfifKhadamat();
+                break;
         }
 
     }
@@ -154,15 +186,99 @@ public class TakhfifKhadamat extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "تاریخ " + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
         switch (flag) {
             case 1:
-                txt_since.setText(date);
+                since = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+
+                txt_since.setText("تاریخ " + since);
                 break;
             case 2:
+                until = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
 
-                txt_until.setText(date);
+                txt_until.setText("تاریخ " + until);
                 break;
         }
     }
+
+
+    public void takhfifKhadamat() {
+
+        String url = tools.baseUrl + "ads_store";
+        pd.show();
+        RequestParams params = new RequestParams();
+        params.put("member", "discount_ad");
+
+
+        params.put("ad_event", txt_relation.getText().toString());
+        params.put("sdate", since);
+        params.put("edate", until);
+        params.put("affair", txt_srvices.getText().toString());
+        //todo افراد params.put("specified", .getText().toString());
+        params.put("discount", txt_percent.getText().toString());
+
+
+        params.put("description", etDescription.getText().toString());
+
+
+        switch (tag) {
+            case 1:
+                member_id = tools.getSharePrf("memberId1");
+                //    params.put("id", );
+
+                break;
+            case 2:
+
+                member_id = tools.getSharePrf("memberId2");
+                // params.put("id", tools.getSharePrf("memberId2"));
+
+                break;
+            case 3:
+                member_id = tools.getSharePrf("memberId3");
+
+                //  params.put("id", tools.getSharePrf("memberId3"));
+
+                break;
+            case 4:
+                member_id = tools.getSharePrf("memberId4");
+
+                // params.put("id", tools.getSharePrf("memberId4"));
+
+                break;
+            case 5:
+                member_id = tools.getSharePrf("memberId5");
+
+                // params.put("id", tools.getSharePrf("memberId5"));
+
+                break;
+        }
+        params.put("mem_id", member_id);
+
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                pd.dismiss();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                if (responseString.contains("200")){
+
+
+
+                    successDialog("آگهی شما با موفقیت ثبت شد.");
+
+
+                }
+                pd.dismiss();
+
+            }
+        });
+
+
+    }
+
 }

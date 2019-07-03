@@ -121,7 +121,7 @@
                     android:textSize="18dp" />
 
                 <ImageView
-                    android:id="@+id/check2"
+                    android:id="@+id/check5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
@@ -149,7 +149,7 @@
                     android:textSize="18dp" />
 
                 <ImageView
-                    android:id="@+id/check3"
+                    android:id="@+id/check4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
@@ -178,7 +178,7 @@
 
 
                 <ImageView
-                    android:id="@+id/check4"
+                    android:id="@+id/check2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
@@ -206,7 +206,7 @@
                     android:textSize="18dp" />
 
                 <ImageView
-                    android:id="@+id/check5"
+                    android:id="@+id/check3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"

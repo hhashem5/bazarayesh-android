@@ -32,10 +32,10 @@ public class Member {
     private Object address;
     @SerializedName("lat")
     @Expose
-    private Integer lat;
+    private double lat;
     @SerializedName("lng")
     @Expose
-    private Integer lng;
+    private double lng;
     @SerializedName("phone1")
     @Expose
     private String phone1;
@@ -131,15 +131,15 @@ public class Member {
         this.address = address;
     }
 
-    public Integer getLat() {
+    public double getLat() {
         return lat;
     }
 
-    public void setLat(Integer lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
 
-    public Integer getLng() {
+    public double getLng() {
         return lng;
     }
 

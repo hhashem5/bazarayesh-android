@@ -75,4 +75,28 @@ public class Tools {
     public String getSharePrf(String key) {
         return PreferenceManager.getDefaultSharedPreferences(getAppContext()).getString(key, "");
     }
+
+
+    public void alertShow(String text) {
+
+        final Dialog message = new Dialog(context);
+        message.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        message.setContentView(R.layout.message_details_dialog);
+        message.setCancelable(true);
+        message.show();
+        TextView txtTitle = message.findViewById(R.id.txtTitle);
+        TextView txtBody = message.findViewById(R.id.txtBody);
+        TextView btnExit = message.findViewById(R.id.btnExit);
+        txtTitle.setText("پیام");
+        txtBody.setText(text);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message.dismiss();
+            }
+        });
+        message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+    }
+
 }

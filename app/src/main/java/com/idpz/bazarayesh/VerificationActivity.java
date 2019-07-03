@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.idpz.bazarayesh.Models.Member;
 import com.idpz.bazarayesh.Models.VerifyResponse;
 import com.idpz.bazarayesh.Views.mButton;
 import com.idpz.bazarayesh.Views.mEditText;
@@ -172,6 +173,33 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                         VerifyResponse response = gson.fromJson(responseString, VerifyResponse.class);
 
                         tools.addToSharePrf("api_token", response.getUser().getApiToken());
+                        for (Member member:response.getUser().getMember()){
+                         switch (member.getType()){
+
+                             case "1":
+                                 tools.addToSharePrf("memberId1", member.getId().toString());
+
+                                 break;
+                             case "2":
+                                 tools.addToSharePrf("memberId2",member.getId().toString());
+
+                                 break;
+
+                             case "3":
+                                 tools.addToSharePrf("memberId3", member.getId().toString());
+
+                                 break;
+                             case "4":
+                                 tools.addToSharePrf("memberId4", member.getId().toString());
+
+                                 break;
+                             case "5":
+
+                                 tools.addToSharePrf("memberId5", member.getId().toString());
+
+                                 break;
+                         }
+                        }
                         Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
                         i1.setAction(Intent.ACTION_MAIN);
                         i1.addCategory(Intent.CATEGORY_HOME);
@@ -186,6 +214,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                         finish();
                     }
                 } catch (Exception e) {
+                    e.getMessage();
                 }
             }
         });

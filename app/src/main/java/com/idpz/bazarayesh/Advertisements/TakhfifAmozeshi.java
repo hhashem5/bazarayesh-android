@@ -1,37 +1,34 @@
 package com.idpz.bazarayesh.Advertisements;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.idpz.bazarayesh.Adapters.DialogItemAdapter;
 import com.idpz.bazarayesh.BaseActivity;
 import com.idpz.bazarayesh.FontUtils;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.R;
 import com.idpz.bazarayesh.SubProfileActivity;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
+import cz.msebera.android.httpclient.Header;
+
 import static maes.tech.intentanim.CustomIntent.customType;
 
 public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
@@ -40,19 +37,30 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
 
     TextView txt_since, txt_until, txt_percent;
 
+    EditText etDescription, txt_services, txt_relation;
     int flag;
 
+    String since, until;
     LinearLayout llBottomSheet;
     private BottomSheetBehavior bottomSheetBehavior;
+
+    Button btn;
+    Typeface irsans;
+
 
     List<MainItem> items;
     View inflatedLayout;
     private static final String DATEPICKER = "DatePickerDialog";
 
+
+    String member_id;
+    int tag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_takhfif_amozeshi);
+        tag = (int) getIntent().getExtras().get("tag");
 
         settoolbarText("تخفیف دوره وکارگاه آموزشی");
         initViews();
@@ -65,19 +73,27 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
         txt_percent = findViewById(R.id.txt_percent);
         txt_since = findViewById(R.id.txt_since);
         txt_until = findViewById(R.id.txt_until);
+        txt_services = findViewById(R.id.txtServices);
+        etDescription=findViewById(R.id.etDescription);
+        btn = findViewById(R.id.btn);
 
         relative_since = findViewById(R.id.relative_since);
         relative_percent = findViewById(R.id.relative_percent);
         relative_until = findViewById(R.id.relative_until);
-
+        txt_relation = findViewById(R.id.txtRelation);
 
         relative_until.setOnClickListener(this);
         relative_percent.setOnClickListener(this);
         relative_since.setOnClickListener(this);
         imgbBack.setOnClickListener(this);
+        btn.setOnClickListener(this);
+
+        irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
 
 
-
+        pd = new ProgressDialog(context);
+        pd.setCancelable(false);
+        pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
     }
 
     @Override
@@ -130,20 +146,32 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
                 customType(TakhfifAmozeshi.this, LEFT_TO_RIGHT);
                 finish();
 
+
+                break;
+
+
+            case R.id.btn:
+
+                takhfifAmozeshi();
+
                 break;
         }
     }
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "تاریخ " + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+
         switch (flag) {
             case 1:
-                txt_since.setText(date);
+                since = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+
+                txt_since.setText("تاریخ " + since);
                 break;
             case 2:
+                until = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
 
-                txt_until.setText(date);
+                txt_until.setText("تاریخ " + until);
                 break;
         }
     }
@@ -153,7 +181,7 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/IRANSans(FaNum).ttf");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-       // builder.setMessage(FontUtils.typeface(typeface, "درصد تخفیف را به عدد وارد نمایید"));
+        // builder.setMessage(FontUtils.typeface(typeface, "درصد تخفیف را به عدد وارد نمایید"));
         LayoutInflater li = LayoutInflater.from(getApplicationContext());
         View promptsView = li.inflate(R.layout.alert_dialog, null);
 //        final EditText input = new EditText(context);
@@ -170,7 +198,7 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
         builder.setPositiveButton(FontUtils.typeface(typeface, "تایید"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                txt_percent.setText(" % " +userInput.getText().toString());
+                txt_percent.setText(" % " + userInput.getText().toString());
                 dialog.dismiss();
             }
         });
@@ -198,5 +226,84 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
         finish();
         super.onBackPressed();
     }
+
+    public void takhfifAmozeshi() {
+
+        String url = tools.baseUrl + "ads_store";
+        pd.show();
+        RequestParams params = new RequestParams();
+        params.put("member", "discount_ad");
+
+
+        params.put("ad_event", txt_relation.getText().toString());
+        params.put("sdate", since);
+        params.put("edate", until);
+        params.put("affair", txt_services.getText().toString());
+        //todo افراد params.put("specified", .getText().toString());
+        params.put("discount", txt_percent.getText().toString());
+
+
+        params.put("description", etDescription.getText().toString());
+
+
+        switch (tag) {
+            case 1:
+                member_id = tools.getSharePrf("memberId1");
+                //    params.put("id", );
+
+                break;
+            case 2:
+
+                member_id = tools.getSharePrf("memberId2");
+                // params.put("id", tools.getSharePrf("memberId2"));
+
+                break;
+            case 3:
+                member_id = tools.getSharePrf("memberId3");
+
+                //  params.put("id", tools.getSharePrf("memberId3"));
+
+                break;
+            case 4:
+                member_id = tools.getSharePrf("memberId4");
+
+                // params.put("id", tools.getSharePrf("memberId4"));
+
+                break;
+            case 5:
+                member_id = tools.getSharePrf("memberId5");
+
+                // params.put("id", tools.getSharePrf("memberId5"));
+
+                break;
+        }
+        params.put("mem_id", member_id);
+
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                pd.dismiss();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                if (responseString.contains("200")){
+
+
+
+                    successDialog("آگهی شما با موفقیت ثبت شد.");
+
+
+                }
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
 
 }

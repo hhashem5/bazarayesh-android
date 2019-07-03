@@ -1,7 +1,9 @@
 package com.idpz.bazarayesh.Advertisements;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 
 import com.idpz.bazarayesh.Adapters.DialogItemAdapter;
 import com.idpz.bazarayesh.BaseActivity;
+import com.idpz.bazarayesh.FontUtils;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.R;
 import com.idpz.bazarayesh.SubProfileActivity;
@@ -37,19 +41,30 @@ import static maes.tech.intentanim.CustomIntent.customType;
 
 public class KargahAmozeshi extends BaseActivity implements View.OnClickListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
-    TextView txt_corse, txt_day, txt_subject,txt_degree;
+    TextView txt_corse, txt_day, txt_subject, txt_degree;
 
     RelativeLayout relative_day, relative_corse, relative_subject;
     private BottomSheetBehavior bottomSheetBehavior;
     List<MainItem> items;
-    private static final String TIMEPICKER = "TimePickerDialog",DATEPICKER = "DatePickerDialog";
+    private static final String TIMEPICKER = "TimePickerDialog", DATEPICKER = "DatePickerDialog";
 
     Button btn;
+    EditText etDescription;
+
+    String day;
+
+    Typeface irsans;
+    String member_id;
+
+    String course;
+    int tag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kargah_amozeshi);
 
+        tag = (int) getIntent().getExtras().get("tag");
 
         settoolbarText("کارگاه آموزشی");
         initVeiws();
@@ -63,8 +78,9 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
         txt_corse = findViewById(R.id.txt_corse);
         txt_day = findViewById(R.id.txt_day);
         txt_subject = findViewById(R.id.txt_subject);
-        txt_degree=findViewById(R.id.txt_degree);
-        btn=findViewById(R.id.btn);
+        txt_degree = findViewById(R.id.txt_degree);
+        etDescription = findViewById(R.id.etDescription);
+        btn = findViewById(R.id.btn);
 
 
         relative_day = findViewById(R.id.relative_day);
@@ -76,7 +92,7 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
         relative_day.setOnClickListener(this);
         relative_subject.setOnClickListener(this);
         imgbBack.setOnClickListener(this);
-
+        btn.setOnClickListener(this);
 
         LinearLayout llBottomSheet = findViewById(R.id.linear_bottomsheet);
 
@@ -84,6 +100,12 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
 
         // change the state of the bottom sheet
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
+
+        pd = new ProgressDialog(context);
+        pd.setCancelable(false);
+        pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
     }
 
 
@@ -91,9 +113,6 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.btn:
-            //    registerKargahAmozeshi();
-                break;
 
             case R.id.relative_corse:
                 initComponent("مبحث");
@@ -123,7 +142,11 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
                 finish();
 
                 break;
+            case R.id.btn:
 
+                registerKargahAmozeshi();
+
+                break;
 
 
         }
@@ -131,8 +154,9 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        String date = "تاریخ " + dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-        txt_day.setText(date);
+        day = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+        txt_day.setText("تاریخ " + day);
+
     }
 
     @Override
@@ -140,7 +164,7 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
 
     }
 
-    private void initComponent( String title) {
+    private void initComponent(String title) {
 
         // get the bottom sheet view
         try {
@@ -205,6 +229,7 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
                 MainItem item = (MainItem) object;
 
                 txt_corse.setText(item.getTitle());
+                course = item.getId();
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
 
@@ -218,14 +243,13 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
     }
 
 
-
     public void addItems() {
-        MainItem item1 = new MainItem("مو");
-        MainItem item2 = new MainItem("پوست");
-        MainItem item3 = new MainItem("ابرو");
-        MainItem item4 = new MainItem("ناخن");
-        MainItem item5 = new MainItem("مژه");
-        MainItem item6 = new MainItem("چهره");
+        MainItem item1 = new MainItem("مو", "2");
+        MainItem item2 = new MainItem("پوست", "1");
+        MainItem item3 = new MainItem("ابرو", "3");
+        MainItem item4 = new MainItem("ناخن", "4");
+        MainItem item5 = new MainItem("مژه", "5");
+        MainItem item6 = new MainItem("چهره", "6");
 
 
         items.add(item1);
@@ -236,8 +260,8 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
         items.add(item6);
 
 
-
     }
+
     @Override
     public void onBackPressed() {
         Intent i1 = new Intent(KargahAmozeshi.this, SubProfileActivity.class);
@@ -252,73 +276,80 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
         super.onBackPressed();
     }
 
-//    public void registerKargahAmozeshi() {
-//
-//        String url = tools.baseUrl + "ads_store";
-//        pd.show();
-//        RequestParams params = new RequestParams();
-//        params.put("member", "bride");
-//
-//
-//
-//        params.put("date", mdate);
-//        params.put("shour", shour);
-//        params.put("ehour", ehour);
-//        params.put("description", etDescription.getText().toString());
-//
-//
-//        switch (tag) {
-//            case 1:
-//                member_id = tools.getSharePrf("memberId1");
-//                //    params.put("id", );
-//
-//                break;
-//            case 2:
-//
-//                member_id = tools.getSharePrf("memberId2");
-//                // params.put("id", tools.getSharePrf("memberId2"));
-//
-//                break;
-//            case 3:
-//                member_id = tools.getSharePrf("memberId3");
-//
-//                //  params.put("id", tools.getSharePrf("memberId3"));
-//
-//                break;
-//            case 4:
-//                member_id = tools.getSharePrf("memberId4");
-//
-//                // params.put("id", tools.getSharePrf("memberId4"));
-//
-//                break;
-//            case 5:
-//                member_id = tools.getSharePrf("memberId5");
-//
-//                // params.put("id", tools.getSharePrf("memberId5"));
-//
-//                break;
-//        }
-//        params.put("mem_id", member_id);
-//
-//        params.put("api_token", tools.getSharePrf("api_token"));
-//        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
-//        tools.client.post(url, params, new TextHttpResponseHandler() {
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//
-//                pd.dismiss();
-//            }
-//
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-//
-//                pd.dismiss();
-//
-//            }
-//        });
-//
-//
-//    }
+    public void registerKargahAmozeshi() {
+
+        String url = tools.baseUrl + "ads_store";
+        pd.show();
+        RequestParams params = new RequestParams();
+        params.put("member", "workshop");
+
+
+
+        params.put("date", day);
+        params.put("course", Integer.parseInt(course));
+        params.put("subject", txt_subject.getText().toString());
+        params.put("evidence", txt_degree.getText().toString());
+
+        params.put("description", etDescription.getText().toString());
+
+
+        switch (tag) {
+            case 1:
+                member_id = tools.getSharePrf("memberId1");
+                //    params.put("id", );
+
+                break;
+            case 2:
+
+                member_id = tools.getSharePrf("memberId2");
+                // params.put("id", tools.getSharePrf("memberId2"));
+
+                break;
+            case 3:
+                member_id = tools.getSharePrf("memberId3");
+
+                //  params.put("id", tools.getSharePrf("memberId3"));
+
+                break;
+            case 4:
+                member_id = tools.getSharePrf("memberId4");
+
+                // params.put("id", tools.getSharePrf("memberId4"));
+
+                break;
+            case 5:
+                member_id = tools.getSharePrf("memberId5");
+
+                // params.put("id", tools.getSharePrf("memberId5"));
+
+                break;
+        }
+        params.put("mem_id", member_id);
+
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+                pd.dismiss();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                if (responseString.contains("200")){
+
+
+                    successDialog("آگهی شما با موفقیت ثبت شد.");
+
+                }
+                pd.dismiss();
+
+            }
+        });
+
+
+    }
 
 
 }

@@ -284,8 +284,11 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                pd.dismiss();
+                if (responseString.contains("200")){
 
+                    successDialog("آگهی شما با موفقیت ثبت شد.");
+                }
+                pd.dismiss();
             }
         });
 

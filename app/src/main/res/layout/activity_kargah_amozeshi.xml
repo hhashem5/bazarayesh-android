@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
-
     tools:context=".Advertisements.KargahAmozeshi">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <include layout="@layout/mtoolbar" />
 
     <ScrollView
@@ -192,6 +193,7 @@
                 android:textColor="@color/dark_gray" />
 
             <com.idpz.bazarayesh.Views.mEditText
+                android:id="@+id/etDescription"
                 android:layout_width="match_parent"
                 android:layout_height="148dp"
                 android:layout_below="@+id/title3"
@@ -217,6 +219,8 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/background_btn2"
         />
+
+</RelativeLayout>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -278,5 +282,6 @@
                 android:background="@color/white" />
 
         </LinearLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -7,7 +7,9 @@
     android:layoutDirection="ltr"
 
     tools:context=".Advertisements.EstekhdamActivity">
-
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <include layout="@layout/mtoolbar" />
 
     <ScrollView
@@ -211,6 +213,7 @@
 
     </LinearLayout>
     </ScrollView>
+
     <com.idpz.bazarayesh.Views.mButton
         android:id="@+id/btn"
         android:layout_width="match_parent"
@@ -223,6 +226,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/background_btn2"
         />
+</RelativeLayout>
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -284,4 +288,6 @@
 
         </LinearLayout>
     </android.support.design.widget.CoordinatorLayout>
+
+
 </RelativeLayout>

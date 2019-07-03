@@ -167,10 +167,11 @@
                         android:layout_height="48dp"
                         android:layout_below="@+id/txtTitle"
                         android:layout_marginLeft="8dp"
+
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
                         android:paddingRight="16dp"
-                        android:paddingLeft="8dp"
+                        android:paddingLeft="16dp"
                         android:background="@drawable/layout_corners_shape_border"
 
                         />
@@ -203,7 +204,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
-                        android:paddingLeft="8dp"
+                        android:paddingLeft="16dp"
                         android:paddingRight="16dp"
                         android:background="@drawable/layout_corners_shape_border"
 
@@ -233,6 +234,7 @@
                     android:textColor="@color/dark_gray" />
 
                 <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/etDescription"
                     android:layout_width="match_parent"
                     android:layout_height="148dp"
                     android:layout_below="@+id/title3"
@@ -245,4 +247,18 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
+
+    <com.idpz.bazarayesh.Views.mButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/mdtp_ok"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/background_btn2"
+        />
 </RelativeLayout>

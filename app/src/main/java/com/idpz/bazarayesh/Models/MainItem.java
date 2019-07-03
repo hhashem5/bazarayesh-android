@@ -10,6 +10,9 @@ public class MainItem {
 
     public String title;
 
+    public String tag;
+
+
     public int getImage() {
         return Image;
     }
@@ -42,6 +45,14 @@ public class MainItem {
         this.id = id;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     public MainItem(String id, int image, String color, String title) {
         this.id = id;
         Image = image;
@@ -53,6 +64,15 @@ public class MainItem {
         Image = image;
         this.title = title;
     }
+
+
+    public MainItem(int image, String title,String tag) {
+        Image = image;
+        this.title = title;
+        this.tag=tag;
+
+    }
+
 
 
 

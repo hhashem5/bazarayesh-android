@@ -23,7 +23,6 @@ android {
     }
 
 
-
 }
 
 repositories {
@@ -70,13 +69,18 @@ dependencies {
     implementation 'com.google.android.gms:play-services-gcm:16.1.0'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     //----------------------------------------------------------------------------------------------
-   // implementation 'com.alirezaafkar:sundatepicker:2.1.2'
+    // implementation 'com.alirezaafkar:sundatepicker:2.1.2'
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
 
+    implementation 'com.airbnb.android:lottie:2.7.0'
+
+  //  implementation 'com.github.mumayank:AirLocation:1.2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 
     com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
 }

@@ -37,7 +37,7 @@
         android:background="@drawable/layout_corners_shape"
         android:ems="10"
         android:hint="@string/code"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:gravity="center"
         android:paddingRight="16dp"
         android:textColor="@color/dark" />

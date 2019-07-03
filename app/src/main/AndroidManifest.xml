@@ -21,21 +21,24 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/AppTheme"
-       >
-        <activity android:name=".Advertisements.TakhfifAmozeshi"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ShowMembersActivity"></activity>
+        <activity
+            android:name=".Advertisements.TakhfifAmozeshi"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3"></activity>
-        <activity android:name=".Advertisements.SabtnamDoreAmozeshi"
+            android:theme="@style/AppTheme3" />
+        <activity
+            android:name=".Advertisements.SabtnamDoreAmozeshi"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3"/>
-        <activity android:name=".Advertisements.TakhfifKhadamat"
+            android:theme="@style/AppTheme3" />
+        <activity
+            android:name=".Advertisements.TakhfifKhadamat"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3"/>
-        <activity android:name=".Advertisements.KargahAmozeshi"
+            android:theme="@style/AppTheme3" />
+        <activity
+            android:name=".Advertisements.KargahAmozeshi"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3"
-            />
+            android:theme="@style/AppTheme3" />
         <activity
             android:name=".Advertisements.VagozariArayeshgah"
             android:screenOrientation="portrait"
@@ -63,14 +66,16 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme3"/>
         <activity
             android:name=".SubProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3" />
+            android:theme="@style/AppTheme3"></activity>
         <activity
             android:name=".VerificationActivity"
-            android:theme="@style/AppTheme3" />
+            android:theme="@style/AppTheme3"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".BaseActivity"
             android:screenOrientation="portrait" />

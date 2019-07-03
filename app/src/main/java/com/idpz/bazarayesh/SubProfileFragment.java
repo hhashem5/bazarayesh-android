@@ -9,7 +9,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -30,6 +32,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -40,6 +43,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +71,7 @@ import com.idpz.bazarayesh.Models.MyMember;
 import com.idpz.bazarayesh.Models.Service;
 import com.idpz.bazarayesh.Models.UserResponse;
 import com.idpz.bazarayesh.Models.WorkplacePic;
+import com.idpz.bazarayesh.Utils.Tools;
 import com.idpz.bazarayesh.Utils.crop.CropUtil;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -97,6 +102,7 @@ import static maes.tech.intentanim.CustomIntent.customType;
 public class SubProfileFragment extends BaseFragment implements View.OnClickListener, IOnBackPressed, LocationListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
     private Handler mHandler;
     int state = 1;
+    Tools tools;
 
     private double lat = 0.0, lng = 0.0;
 
@@ -112,6 +118,9 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             linear8, linear9, linear10, linear11, linear12, linear13,
             linear14, linear15, linear16, linear18, linear17, linearRetry;
     ImageView imgbOne, imgbTwo, imgbThree, clickedImageView, clickedDrop, imgPic1, imgPic3, logoimg1;
+
+    ScrollView svL3;
+
 
     EditText txtName, txtBoss, txtFame, txtphone, txtaddress, txttelegram, txtinstagram;
     private BottomSheetBehavior mBehavior;
@@ -132,6 +141,10 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     List<View> myViews = new ArrayList<>();
     List<String> keyList = new ArrayList<>();
     List<LinearLayout> myLinears = new ArrayList<>();
+
+    List<View> viewsList1 = new ArrayList<>();
+    List<ImageButton> drops1 = new ArrayList<>();
+    List<LinearLayout> linearLayouts1 = new ArrayList<>();
 
     List<View> viewsList = new ArrayList<>();
     List<ImageButton> drops = new ArrayList<>();
@@ -161,15 +174,22 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     String member_id;
     private int pos = 0;
 
-    String id;
+    String id, key, mtag;
+
+    List<String> ids = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.subprofile_fragment, container, false);
+        tools = new Tools(getContext());
+
 
         initviews(v);
+
+        checkLocationPermission();
+
         irsans = Typeface.createFromAsset(getActivity().getAssets(), "fonts/iran_sans.ttf");
 
         pd = new ProgressDialog(getActivity());
@@ -227,6 +247,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
     public void initviews(View v) {
 
+        svL3 = v.findViewById(R.id.svL3);
         btn1 = v.findViewById(R.id.btn1);
         btn2 = v.findViewById(R.id.btn2);
         btn3 = v.findViewById(R.id.btn3);
@@ -309,6 +330,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
         mMapView = (MapView) v.findViewById(R.id.map);
 
+        //  mMapView.setClickable(true);
         romour = v.findViewById(R.id.romour);
 
         boss = v.findViewById(R.id.boss);
@@ -341,6 +363,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         rel6.setOnClickListener(this);
         rel79.setOnClickListener(this);
         rel55.setOnClickListener(this);
+//        googleMap.setOnMapClickListener(this);
 
 
         // turnOnGPS();
@@ -353,17 +376,65 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             e.printStackTrace();
         }
 
+        ImageView transparent_image = v.findViewById(R.id.transparent_image);
+
+        transparent_image.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Disallow ScrollView to intercept touch events.
+                        svL3.requestDisallowInterceptTouchEvent(true);
+                        // Disable touch on transparent view
+                        return false;
+
+                    case MotionEvent.ACTION_UP:
+                        // Allow ScrollView to intercept touch events.
+                        svL3.requestDisallowInterceptTouchEvent(false);
+                        return true;
+
+                    case MotionEvent.ACTION_MOVE:
+                        svL3.requestDisallowInterceptTouchEvent(true);
+                        return false;
+
+                    default:
+                        return true;
+                }
+            }
+        });
+
+
         mMapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(final GoogleMap mMap) {
 
 
                 googleMap = mMap;
-
                 LatLng latLong = new LatLng(35.684209, 51.388263);
 
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(35.709561, 51.372652), 5);
-                mMap.moveCamera(cameraUpdate);
+                googleMap.moveCamera(cameraUpdate);
+
+                mMap.addMarker(new MarkerOptions()
+                        .position(latLong)
+                        .draggable(true));
+                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng point) {
+                        googleMap.clear();
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLng(point));
+                        googleMap.addMarker(new MarkerOptions()
+                                .position(point)
+                                .draggable(true));
+                        lat = point.latitude;
+                        lng = point.longitude;
+
+                        lnRelFrag.setBackgroundResource(R.drawable.dashed_back_green);
+                    }
+                });
+
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
                     //    ActivityCompat#requestPermissions
@@ -383,7 +454,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 mMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(cameraPosition));
 
-                googleMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+                mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                     @Override
                     public void onMyLocationChange(Location location) {
                         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18);
@@ -408,21 +479,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 googleMap.setMyLocationEnabled(true);
                 googleMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-
-                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(LatLng point) {
-                        googleMap.clear();
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLng(point));
-                        googleMap.addMarker(new MarkerOptions()
-                                .position(point)
-                                .draggable(true));
-                        lat = point.latitude;
-                        lng = point.longitude;
-
-                        lnRelFrag.setBackgroundResource(R.drawable.dashed_back_green);
-                    }
-                });
 
             }
         });
@@ -566,58 +622,123 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 //                            }
                             if (tempLinear == linear) {
 
-                                membersFilesRegister("service",1, "service_id","2", file, "");
+                                membersFilesRegister("service", 1, "service_id", "2", file, "");
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear0) {
-                                membersFilesRegister("famous_customer",6, "famous_customer_id","", file, title);
+                                membersFilesRegister("famous_customer", 6, "famous_customer_id", "", file, title);
+
+                                mtag = "famous_customer";
+                                key = "famous_customer_id";
+
 
                             } else if (tempLinear == linear2) {
-                                membersFilesRegister("service",1, "service_id","3", file, "");
+                                membersFilesRegister("service", 1, "service_id", "3", file, "");
+                                mtag = "service";
+                                key = "service_id";
+
+
                             } else if (tempLinear == linear3) {
-                                membersFilesRegister("service",1,"service_id" ,"4", file, "");
+                                membersFilesRegister("service", 1, "service_id", "4", file, "");
+
+                                mtag = "service";
+                                key = "service_id";
+
 
                             } else if (tempLinear == linear5) {
-                                membersFilesRegister("service",1, "service_id","5", file, "");
+                                membersFilesRegister("service", 1, "service_id", "5", file, "");
+
+                                mtag = "service";
+                                key = "service_id";
+
 
                             } else if (tempLinear == linear6) {
-                                membersFilesRegister("service",1, "service_id","6", file, "");
+                                membersFilesRegister("service", 1, "service_id", "6", file, "");
+
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear7) {
-                                membersFilesRegister("service",1, "service_id","7", file, "");
+                                membersFilesRegister("service", 1, "service_id", "7", file, "");
+                                mtag = "service";
+                                key = "service_id";
+
 
                             } else if (tempLinear == linear8) {
-                                membersFilesRegister("service",1, "service_id","8", file, "");
+                                membersFilesRegister("service", 1, "service_id", "8", file, "");
+
+                                mtag = "service";
+                                key = "service_id";
+
 
                             } else if (tempLinear == linear9) {
-                                membersFilesRegister("service",1, "service_id","9", file, "");
+                                membersFilesRegister("service", 1, "service_id", "9", file, "");
+
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear10) {
-                                membersFilesRegister("service",1, "service_id","10", file, "");
+                                membersFilesRegister("service", 1, "service_id", "10", file, "");
+
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear11) {
-                                membersFilesRegister("service",1,"service_id" ,"11", file, "");
+                                membersFilesRegister("service", 1, "service_id", "11", file, "");
+
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear12) {
-                                membersFilesRegister("service",1,"service_id" ,"14", file, "");
+                                membersFilesRegister("service", 1, "service_id", "14", file, "");
+
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear13) {
-                                membersFilesRegister("service",1, "service_id","13", file, "");
+                                membersFilesRegister("service", 1, "service_id", "13", file, "");
+
+                                mtag = "service";
+                                key = "service_id";
+
 
                             } else if (tempLinear == linear14) {
-                                membersFilesRegister("service",1, "service_id","12", file, "");
+                                membersFilesRegister("service", 1, "service_id", "12", file, "");
+
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear15) {
-                                membersFilesRegister("service",1, "service_id","15", file, "");
+                                membersFilesRegister("service", 1, "service_id", "15", file, "");
+
+
+                                mtag = "service";
+                                key = "service_id";
 
                             } else if (tempLinear == linear16) {
-                                membersFilesRegister("course",3, "course_id","", file, title);
+                                membersFilesRegister("course", 3, "course_id", "", file, title);
+
+
+                                mtag = "course";
+                                key = "course_id";
 
                             } else if (tempLinear == linear17) {
-                                membersFilesRegister("award",2,"award_id" ,"", file, title);
+                                membersFilesRegister("award", 2, "award_id", "", file, title);
+                                mtag = "award";
+                                key = "award_id";
 
                             } else if (tempLinear == linear18) {
-                                membersFilesRegister("workplace_pic",4,"workplace_pic_id" ,"", file, "");
-
+                                membersFilesRegister("workplace_pic", 4, "workplace_pic_id", "", file, "");
+                                mtag = "workplace_pic";
+                                key = "workplace_pic_id";
                             }
 
                         }
@@ -628,8 +749,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                         Glide.with(getContext())
                                 .load(stream.toByteArray())
                                 .into(clickedImageView);
-
-
 
 
                     } catch (Exception E) {
@@ -906,7 +1025,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
             case R.id.btn3:
 
-                successDialog("با موفقیت ثبت شد.");
+                successDialog("پروفایل شما با موفقیت به روز رسانی شد.");
 
                 break;
 
@@ -918,6 +1037,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 closeimg1.setVisibility(View.GONE);
                 logoimg1.setVisibility(View.GONE);
 
+                //
+                // deletePic();
                 break;
 
             case R.id.rel18:
@@ -1027,7 +1148,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 btnSelect(myImageView, imgbDropPic13, linear);
                 txtTilte.setText(input.getText().toString());
                 tempTextView = txtTilte;
-
 
 
                 viewsList.add(inflatedLayout);
@@ -1176,8 +1296,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         params.put("address", txtaddress.getText().toString());
         params.put("telegram", txttelegram.getText().toString());
         params.put("instagram", txtinstagram.getText().toString());
-        params.put("lat", 37.44545);//todo lat
-        params.put("lng", 51.57768);//todo lng
+        params.put("lat", lat);//todo lat
+        params.put("lng", lng);//todo lng
         try {
             params.put("logo", mainFile);
         } catch (FileNotFoundException e) {
@@ -1268,6 +1388,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                     }
                 } catch (Exception e) {
+                    Log.e("parisa",e.toString());
                 }
 
 
@@ -1346,7 +1467,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     @Override
                     public void onClick(View view) {
                         try {
-                            membersFilesRegister(tag,type,key ,service_type, pic, title);
+                            membersFilesRegister(tag, type, key, service_type, pic, title);
                             imgDropTemp.setVisibility(View.VISIBLE);
 
                             tempTextView.setVisibility(View.VISIBLE);
@@ -1366,50 +1487,39 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
 
                 try {
-                    JSONObject jsonObject=new JSONObject(responseString);
-                id=jsonObject.get("id").toString();
+                    JSONObject jsonObject = new JSONObject(responseString);
+                    id = jsonObject.get("id").toString();
+                    ids.add(id);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
-//                for (final View view : myViews) {
-//                    if (view.getVerticalScrollbarPosition() == imgDropTemp.getVerticalScrollbarPosition()) {
-//                        imgDropTemp.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//
-//                                tempLinear.removeView(view);
-//
-//                                // deletePic(,,,view,tools.getSharePrf("userId"),tempLinear);
-//                            }
-//                        });
-//
-//                    }
-//                }
-
 
 
                 linear.setTag(id);
                 imgbDropPic13.setTag(id);
                 inflatedLayout.setTag(id);
 
+                viewsList1.add(inflatedLayout);
+                drops1.add(imgbDropPic13);
+                linearLayouts.add(linear);
 
-                for (int i = 0; i < drops.size(); i++) {
+
+                for (int i = 0; i < drops1.size(); i++) {
                     final int finalI = i;
-                    for (int j = 0; j < drops.size(); j++) {
+                    for (int j = 0; j < drops1.size(); j++) {
                         final int finalJ = j;
                         imgbDropPic13.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                if (drops.get(finalJ).getTag() == viewsList.get(finalJ).getTag()) {
-                                    viewsList.get(finalJ).setVisibility(View.GONE);
-                                   deletePic(tag,key,id , inflatedLayout, tools.getSharePrf("userId"),linear);
+                                if (drops1.get(finalJ).getTag() == viewsList1.get(finalJ).getTag()) {
+                                    viewsList1.get(finalJ).setVisibility(View.GONE);
+                                    deletePic(mtag, key, ids.get(finalI), inflatedLayout, tools.getSharePrf("userId"), linear);
                                 }
                             }
                         });
                     }
                 }
+
 
             }
         });
@@ -1487,69 +1597,104 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 .addApi(LocationServices.API).build();
     }
 
+//    public void successDialog(String text) {
+//
+//        final Dialog dialog = new Dialog(getContext());
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+//        dialog.setContentView(R.layout.payment_ok);
+//        dialog.setCancelable(false);
+//        dialog.show();
+//        TextView content = dialog.findViewById(R.id.content);
+//        Button btnOk = dialog.findViewById(R.id.btnOk);
+//        Button btnGo = dialog.findViewById(R.id.btnGo);
+//        content.setText(text);
+//        btnOk.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i1 = new Intent(getContext(), MainActivity.class);
+//                i1.putExtra("back", "1");
+//
+//                switch (tag) {
+//                    case 1:
+//                        tools.addToSharePrf("beautyshop", "1");
+//
+//                        break;
+//
+//                    case 2:
+//                        tools.addToSharePrf("hairdersser", "1");
+//
+//                        break;
+//                    case 3:
+//                        tools.addToSharePrf("institude", "1");
+//
+//                        break;
+//
+//                    case 4:
+//                        tools.addToSharePrf("teacher", "1");
+//
+//                        break;
+//                    case 5:
+//                        tools.addToSharePrf("store", "1");
+//
+//                        break;
+//                }
+//
+//
+//                i1.setAction(Intent.ACTION_MAIN);
+//
+//                i1.addCategory(Intent.CATEGORY_HOME);
+//                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                getActivity().startActivity(i1);
+//                customType(getContext(), LEFT_TO_RIGHT);
+//                getActivity().finish();
+//                dialog.dismiss();
+//            }
+//        });
+//        btnGo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//            }
+//        });
+//
+//
+//    }
+
     public void successDialog(String text) {
 
-        final Dialog dialog = new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-        dialog.setContentView(R.layout.payment_ok);
-        dialog.setCancelable(false);
-        dialog.show();
-        TextView content = dialog.findViewById(R.id.content);
-        Button btnOk = dialog.findViewById(R.id.btnOk);
-        Button btnGo = dialog.findViewById(R.id.btnGo);
-        content.setText(text);
-        btnOk.setOnClickListener(new View.OnClickListener() {
+        final Dialog message = new Dialog(getContext());
+        message.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        message.setContentView(R.layout.success_dialog);
+        message.setCancelable(true);
+        message.show();
+        TextView txtTitle = message.findViewById(R.id.txtTitle);
+        TextView txtBody = message.findViewById(R.id.txtBody);
+        TextView btnExit = message.findViewById(R.id.btnExit);
+        txtTitle.setText("پیام");
+        txtBody.setText(text);
+        btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i1 = new Intent(getContext(), MainActivity.class);
-                i1.putExtra("back", "1");
-
-                switch (tag) {
-                    case 1:
-                        tools.addToSharePrf("beautyshop", "1");
-
-                        break;
-
-                    case 2:
-                        tools.addToSharePrf("hairdersser", "1");
-
-                        break;
-                    case 3:
-                        tools.addToSharePrf("institude", "1");
-
-                        break;
-
-                    case 4:
-                        tools.addToSharePrf("teacher", "1");
-
-                        break;
-                    case 5:
-                        tools.addToSharePrf("store", "1");
-
-                        break;
-                }
-
-
                 i1.setAction(Intent.ACTION_MAIN);
-
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                getActivity().startActivity(i1);
-                customType(getContext(), LEFT_TO_RIGHT);
+                startActivity(i1);
+
+                customType(getContext(), RIGHT_TO_LEFT);
+
+
                 getActivity().finish();
-                dialog.dismiss();
+                message.dismiss();
             }
         });
-        btnGo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
-
+        message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     }
 
@@ -1621,7 +1766,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
 
                     Glide.with(getContext())
-                            .load("http://arayesh.myzibadasht.ir" + response.getData().getLogo())
+                            .load("http://arayesh.myzibadasht.ir/" + response.getData().getLogo())
                             .into(logoimg1);
 
 
@@ -1780,14 +1925,13 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     @Override
                     public void onClick(View view) {
                         if (drops.get(finalJ).getTag() == viewsList.get(finalJ).getTag()) {
-                                viewsList.get(finalJ).setVisibility(View.GONE);
+                            viewsList.get(finalJ).setVisibility(View.GONE);
                             deletePic(tag, key, id, inflatedLayout, member_id, linear);
                         }
                     }
                 });
             }
         }
-
 
 
     }
@@ -1820,6 +1964,79 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             }
         });
 
+    }
+
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+                new AlertDialog.Builder(getContext())
+                        .setTitle("موقعیت مکانی")
+                        .setMessage("برای مشخص کردن موقعیت مکانی بروی نقشه باید سیستم موقعیت مکانی روشن باشد")
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(getActivity(),
+                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                        1);
+                            }
+                        })
+                        .create()
+                        .show();
+
+
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        2);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // location-related task you need to do.
+                    if (ContextCompat.checkSelfPermission(getContext(),
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        //Request location updates:
+                        //   locationManager.requestLocationUpdates(provider, 400, 1, this);
+                    }
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+
+                }
+                return;
+            }
+
+        }
     }
 }
 

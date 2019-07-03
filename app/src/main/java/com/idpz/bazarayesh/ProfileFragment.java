@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.idpz.bazarayesh.Utils.Tools;
+
 import static com.idpz.bazarayesh.BaseActivity.LEFT_TO_RIGHT;
 import static com.idpz.bazarayesh.MainActivity.navigation;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
@@ -21,6 +23,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     TextView beautyshop, teacher, institude, store, hairdresser;
 
     ImageView check1, check2, check3, check4, check5;
+    Tools tools;
 
     @Nullable
     @Override
@@ -29,6 +32,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
 
         View v = inflater.inflate(R.layout.profile_fragment, container, false);
+        tools = new Tools(getContext());
 
         settoolbarText(getString(R.string.title_profile), v);
         initViews(v);
