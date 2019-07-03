@@ -74,7 +74,10 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:2.7.0'
 
-  //  implementation 'com.github.mumayank:AirLocation:1.2'
+    implementation 'com.jaredrummler:material-spinner:1.2.5'
+
+
+    //  implementation 'com.github.mumayank:AirLocation:1.2'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

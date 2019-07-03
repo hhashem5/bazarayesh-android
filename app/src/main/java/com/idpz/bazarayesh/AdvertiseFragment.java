@@ -12,17 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.idpz.bazarayesh.Adapters.MainAdvAdapter;
-import com.idpz.bazarayesh.Advertisements.BazdidAroosActivity;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.Utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.idpz.bazarayesh.BaseActivity.RIGHT_TO_LEFT;
 import static com.idpz.bazarayesh.MainActivity.navigation;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
-import static maes.tech.intentanim.CustomIntent.customType;
 
 public class AdvertiseFragment extends BaseFragment implements IOnBackPressed {
     List<MainItem> items;
@@ -50,9 +47,45 @@ public class AdvertiseFragment extends BaseFragment implements IOnBackPressed {
             @Override
             public void onItemClick(int position, Object object) {
                 MainItem mainItem = (MainItem) object;
+                Intent intent = new Intent(getActivity(), AdsMapActivity.class);
+
                 switch (mainItem.getTitle()) {
-
-
+                    case "استخدام":
+                        intent.putExtra("type", 3);//1
+                        getActivity().startActivity(intent);
+                        break;
+                    case "کارگاه اموزشی":
+                        intent.putExtra("type", 6);//2
+                        getActivity().startActivity(intent);
+                        break;
+                    case "واگذاری فضای آرایشگاهی":
+                        intent.putExtra("type", 4);//3
+                        getActivity().startActivity(intent);
+                        break;
+                    case "دوره های آموزشی":
+                        intent.putExtra("type", 5);//4
+                        getActivity().startActivity(intent);
+                        break;
+                    case " بازدید عروس":
+                        intent.putExtra("type", 7);//5
+                        getActivity().startActivity(intent);
+                        break;
+                    case "تخفیف خدمات آرایشی":
+                        intent.putExtra("type", 1);//6
+                        getActivity().startActivity(intent);
+                        break;
+                    case "واگذاری تجهیزات آرایشگاهی":
+                        intent.putExtra("type", 8);//7
+                        getActivity().startActivity(intent);
+                        break;
+                    case "تخفیف محصولات آرایشی":
+                        intent.putExtra("type", 9);//8
+                        getActivity().startActivity(intent);
+                        break;
+                    case "تخفیف دوره آموزشی":
+                        intent.putExtra("type", 2);//9
+                        getActivity().startActivity(intent);
+                        break;
                 }
             }
         });
@@ -67,17 +100,15 @@ public class AdvertiseFragment extends BaseFragment implements IOnBackPressed {
     public void addItems() {
 
         items = new ArrayList<>();
-
-        items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
-        items.add(new MainItem(R.drawable.ic_teaching, "کارگاه اموزشی"));
-        items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی"));
-        items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "دوره های آموزشی"));
-        items.add(new MainItem(R.drawable.ic_bride, " بازدید عروس"));
-        items.add(new MainItem(R.drawable.ic_facial_cream_tube, "تخفیف خدمات آرایشی"));
-        items.add(new MainItem(R.drawable.ic_spray_bottle, "واگذاری تجهیزات آرایشگاهی"));
-        items.add(new MainItem(R.drawable.ic_noun_facial_wash, "تخفیف محصولات آرایشی"));
-        items.add(new MainItem(R.drawable.ic_noun_teacher, "تخفیف دوره آموزشی"));
-
+        items.add(new MainItem(R.drawable.ic_employees, "استخدام", "1"));
+        items.add(new MainItem(R.drawable.ic_teaching, "کارگاه اموزشی", "2"));
+        items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی", "3"));
+        items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "دوره های آموزشی", "4"));
+        items.add(new MainItem(R.drawable.ic_bride, " بازدید عروس", "5"));
+        items.add(new MainItem(R.drawable.ic_facial_cream_tube, "تخفیف خدمات آرایشی", "6"));
+        items.add(new MainItem(R.drawable.ic_spray_bottle, "واگذاری تجهیزات آرایشگاهی", "7"));
+        items.add(new MainItem(R.drawable.ic_noun_facial_wash, "تخفیف محصولات آرایشی", "8"));
+        items.add(new MainItem(R.drawable.ic_noun_teacher, "تخفیف دوره آموزشی", "9"));
 
     }
 

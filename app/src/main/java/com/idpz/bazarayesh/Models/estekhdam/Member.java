@@ -1,12 +1,17 @@
 
-package com.idpz.bazarayesh.Models;
+package com.idpz.bazarayesh.Models.estekhdam;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class Member {
 
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("user_id")
+    @Expose
+    private Integer userId;
     @SerializedName("type")
     @Expose
     private String type;
@@ -21,7 +26,7 @@ public class Data {
     private String logo;
     @SerializedName("teaser")
     @Expose
-    private Integer teaser;
+    private Object teaser;
     @SerializedName("address")
     @Expose
     private String address;
@@ -36,31 +41,50 @@ public class Data {
     private String phone1;
     @SerializedName("phone2")
     @Expose
-    private String phone2;
+    private Object phone2;
     @SerializedName("website")
     @Expose
-    private String website;
+    private Object website;
     @SerializedName("telegram")
     @Expose
     private String telegram;
     @SerializedName("instagram")
     @Expose
     private String instagram;
-    @SerializedName("service")
+    @SerializedName("view")
     @Expose
-    private List<Service> service ;
-    @SerializedName("award")
+    private Integer view;
+    @SerializedName("score")
     @Expose
-    private List<Award> award;
-    @SerializedName("course")
+    private Integer score;
+    @SerializedName("active")
     @Expose
-    private List<Course> course ;
-    @SerializedName("workplace_pic")
+    private Integer active;
+    @SerializedName("remove")
     @Expose
-    private List<WorkplacePic> workplacePic ;
-    @SerializedName("famous_customer")
+    private Integer remove;
+    @SerializedName("created_at")
     @Expose
-    private List<FamousCustomer> famousCustomer ;
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getType() {
         return type;
@@ -94,11 +118,11 @@ public class Data {
         this.logo = logo;
     }
 
-    public Integer getTeaser() {
+    public Object getTeaser() {
         return teaser;
     }
 
-    public void setTeaser(Integer teaser) {
+    public void setTeaser(Object teaser) {
         this.teaser = teaser;
     }
 
@@ -134,19 +158,19 @@ public class Data {
         this.phone1 = phone1;
     }
 
-    public String getPhone2() {
+    public Object getPhone2() {
         return phone2;
     }
 
-    public void setPhone2(String phone2) {
+    public void setPhone2(Object phone2) {
         this.phone2 = phone2;
     }
 
-    public String getWebsite() {
+    public Object getWebsite() {
         return website;
     }
 
-    public void setWebsite(String website) {
+    public void setWebsite(Object website) {
         this.website = website;
     }
 
@@ -166,44 +190,52 @@ public class Data {
         this.instagram = instagram;
     }
 
-    public List<Service> getService() {
-        return service;
+    public Integer getView() {
+        return view;
     }
 
-    public void setService(List<Service> service) {
-        this.service = service;
+    public void setView(Integer view) {
+        this.view = view;
     }
 
-    public List<Award> getAward() {
-        return award;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setAward(List<Award> award) {
-        this.award = award;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
-    public List<Course> getCourse() {
-        return course;
+    public Integer getActive() {
+        return active;
     }
 
-    public void setCourse(List<Course> course) {
-        this.course = course;
+    public void setActive(Integer active) {
+        this.active = active;
     }
 
-    public List<WorkplacePic> getWorkplacePic() {
-        return workplacePic;
+    public Integer getRemove() {
+        return remove;
     }
 
-    public void setWorkplacePic(List<WorkplacePic> workplacePic) {
-        this.workplacePic = workplacePic;
+    public void setRemove(Integer remove) {
+        this.remove = remove;
     }
 
-    public List<FamousCustomer> getFamousCustomer() {
-        return famousCustomer;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setFamousCustomer(List<FamousCustomer> famousCustomer) {
-        this.famousCustomer = famousCustomer;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
 }

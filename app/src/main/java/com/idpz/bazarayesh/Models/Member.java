@@ -29,7 +29,7 @@ public class Member {
     private Object teaser;
     @SerializedName("address")
     @Expose
-    private Object address;
+    private String address;
     @SerializedName("lat")
     @Expose
     private double lat;
@@ -41,16 +41,16 @@ public class Member {
     private String phone1;
     @SerializedName("phone2")
     @Expose
-    private Object phone2;
+    private String phone2;
     @SerializedName("website")
     @Expose
-    private Object website;
+    private String website;
     @SerializedName("telegram")
     @Expose
-    private Object telegram;
+    private String telegram;
     @SerializedName("instagram")
     @Expose
-    private Object instagram;
+    private String instagram;
     @SerializedName("view")
     @Expose
     private Integer view;
@@ -123,11 +123,11 @@ public class Member {
         this.teaser = teaser;
     }
 
-    public Object getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Object address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
@@ -159,7 +159,7 @@ public class Member {
         return phone2;
     }
 
-    public void setPhone2(Object phone2) {
+    public void setPhone2(String phone2) {
         this.phone2 = phone2;
     }
 
@@ -167,15 +167,15 @@ public class Member {
         return website;
     }
 
-    public void setWebsite(Object website) {
+    public void setWebsite(String website) {
         this.website = website;
     }
 
-    public Object getTelegram() {
+    public String getTelegram() {
         return telegram;
     }
 
-    public void setTelegram(Object telegram) {
+    public void setTelegram(String telegram) {
         this.telegram = telegram;
     }
 
@@ -183,7 +183,7 @@ public class Member {
         return instagram;
     }
 
-    public void setInstagram(Object instagram) {
+    public void setInstagram(String instagram) {
         this.instagram = instagram;
     }
 

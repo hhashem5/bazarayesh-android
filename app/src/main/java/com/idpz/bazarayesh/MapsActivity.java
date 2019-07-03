@@ -121,6 +121,17 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
             public void onItemClick(int position, Object object) {
 
                 MainItem item = (MainItem) object;
+                if (item.getTitle().equals("جستجو")) {
+
+                    Intent intent = new Intent(context, ListShowActivty.class);
+                    intent.putExtra("type",type);
+                    intent.putExtra("lat",userLat);
+                    intent.putExtra("lng",userLng);
+                    customType(context, BOTTOM_TO_UP);
+                    startActivity(intent);
+                    customType(context, RIGHT_TO_LEFT);
+                    finish();
+                } else
                 if (service_type == 0) {
                     item.getTag();
                     getLists(type, item.getTag(), userLat, userLng);
@@ -134,7 +145,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
         recycle.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.HORIZONTAL, true));
         recycle.setAdapter(mapsItemAdapter);
 
-        checkLocationPermission();
+        try {
+            checkLocationPermission();
+        } catch (Exception e) {
+        }
 
 
     }
@@ -281,9 +295,10 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                mMap.clear();
 
                 try {
+                    mMap.clear();
+
                     if (!responseString.equals("ok")) {
 
                         ResponseListMember members = gson.fromJson(responseString, ResponseListMember.class);
@@ -304,7 +319,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
                     }
                 } catch (Exception e) {
-
+e.getMessage();
                 }
 
             }
@@ -402,6 +417,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
 
     public boolean checkLocationPermission() {
+
         if (ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -440,6 +456,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
             return true;
         }
+
     }
 
 
@@ -469,7 +486,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 startActivity(intent);
                 customType(context, RIGHT_TO_LEFT);
 
-              finish();
+                finish();
 
                 break;
         }

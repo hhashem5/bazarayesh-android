@@ -35,7 +35,7 @@ public class Tools {
 
     public Tools(Context context) {
         this.context = context;
-       // activity = (Activity) context;
+        // activity = (Activity) context;
 
     }
 
@@ -62,7 +62,7 @@ public class Tools {
         try {
             internetDialog.dismiss();
         } catch (Exception e) {
-
+            e.getMessage();
         }
     }
 
@@ -98,5 +98,6 @@ public class Tools {
         message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     }
+
 
 }
