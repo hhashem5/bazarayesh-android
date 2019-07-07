@@ -25,14 +25,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.idpz.bazarayesh.Adapters.MapsItemAdapter;
-import com.idpz.bazarayesh.Models.Data;
 import com.idpz.bazarayesh.Models.MainItem;
-import com.idpz.bazarayesh.Models.Member;
-import com.idpz.bazarayesh.Models.ResponseListMember;
 import com.idpz.bazarayesh.Models.estekhdam.Ad;
-import com.idpz.bazarayesh.Models.estekhdam.Memberchi;
+import com.idpz.bazarayesh.Models.estekhdam.AdsMapModel;
 import com.idpz.bazarayesh.Utils.MyLocation;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
@@ -129,14 +127,13 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
     }
 
     //list amozeshgah va arayeshgah va foroshgah
-    public void getLists(int type, String filterTag, double lat, double lng) {
+    public void getLists(final int type, String filterTag, double lat, double lng) {
 
         String url = tools.baseUrl + "ads_list";
-
         RequestParams params = new RequestParams();
         params.put("member_type", filterTag);
-        params.put("lat", lat);
-        params.put("lng", lng);
+        params.put("lat", 35.706337);
+        params.put("lng", 51.356085);
         params.put("type", type);
         params.put("api_token", tools.getSharePrf("api_token"));
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
@@ -152,23 +149,30 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-
                 try {
                     mMap.clear();
 
                     if (!responseString.equals("ok")) {
 
-                        Memberchi members = gson.fromJson(responseString, Memberchi.class);
+                        final AdsMapModel members = gson.fromJson(responseString, AdsMapModel.class);
 
-                        for (Ad ad: members.getAds()) {
+                        for (final Ad ad : members.getAds()) {
 
+                            Marker marker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(ad.getLat(), ad.getLng()))
+                                    .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin)));
+                            marker.setTitle(ad.getName());
 
-
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(ad.getMember().getLat(), ad.getMember().getLng()))
-                                    .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin))).setTitle(ad.getMember().getFullName());
-
-
+                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(Marker marker) {
+                                    Intent intent = new Intent(activity, AdsDetailsActivity.class);
+                                    intent.putExtra("id", ad.getId());
+                                    intent.putExtra("tag", "" + type);
+                                    startActivity(intent);
+                                    return false;
+                                }
+                            });
                             //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
                         }
 
@@ -233,6 +237,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
@@ -241,7 +246,6 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(tehran, 16);
         googleMap.moveCamera(cameraUpdate);
-
 
     }
 

@@ -1,26 +1,26 @@
-package com.idpz.bazarayesh.Models.estekhdam;
+
+package com.idpz.bazarayesh.Models.adDetails;
 
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
 public class Ad {
 
     @SerializedName("id")
-    private Long mId;
+    private Integer mId;
     @SerializedName("lat")
     private Double mLat;
     @SerializedName("lng")
     private Double mLng;
     @SerializedName("member_id")
-    private Long mMemberId;
+    private Integer mMemberId;
     @SerializedName("name")
     private String mName;
 
-    public Long getId() {
+    public Integer getId() {
         return mId;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         mId = id;
     }
 
@@ -40,11 +40,11 @@ public class Ad {
         mLng = lng;
     }
 
-    public Long getMemberId() {
+    public Integer getMemberId() {
         return mMemberId;
     }
 
-    public void setMemberId(Long memberId) {
+    public void setMemberId(Integer memberId) {
         mMemberId = memberId;
     }
 

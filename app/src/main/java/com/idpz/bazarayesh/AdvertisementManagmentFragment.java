@@ -37,6 +37,8 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
 
     CardView card3;
+    CardView card2;
+    CardView card1;
 
     List<MainItem> items;
 
@@ -55,7 +57,11 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
     public void initViews(View v) {
         card3 = v.findViewById(R.id.card3);
+        card2 = v.findViewById(R.id.card2);
+        card1 = v.findViewById(R.id.card1);
         card3.setOnClickListener(this);
+        card2.setOnClickListener(this);
+        card1.setOnClickListener(this);
     }
 
     @Override
@@ -103,6 +109,9 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                         break;
                 }
 
+                break;
+
+            case R.id.card1:
 
                 break;
         }
