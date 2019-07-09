@@ -30,6 +30,7 @@
                     android:layout_below="@+id/toolbar"
                     android:layout_marginRight="16dp"
                     android:text="مشخصات کلی"
+                    android:layout_marginTop="16dp"
                     android:textColor="@color/dark" />
 
                 <RelativeLayout
@@ -241,9 +242,9 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
-                    android:paddingRight="16dp"
+                    android:background="@drawable/layout_corners_shape_border"
                     android:paddingLeft="8dp"
-                    android:background="@drawable/layout_corners_shape_border" />
+                    android:paddingRight="16dp" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

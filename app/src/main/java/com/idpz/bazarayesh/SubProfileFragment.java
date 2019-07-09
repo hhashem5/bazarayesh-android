@@ -122,6 +122,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     ScrollView svL3;
 
 
+
     EditText txtName, txtBoss, txtFame, txtphone, txtaddress, txttelegram, txtinstagram;
     private BottomSheetBehavior mBehavior;
     private BottomSheetDialog mBottomSheetDialog;
@@ -271,8 +272,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         txtBoss = v.findViewById(R.id.txtBoss);
         txtphone = v.findViewById(R.id.txtphone);
         txtaddress = v.findViewById(R.id.txtaddress);
-        txttelegram = v.findViewById(R.id.txtaddress);
-        txtinstagram = v.findViewById(R.id.txtaddress);
+        txttelegram = v.findViewById(R.id.txttelegram);
+        txtinstagram = v.findViewById(R.id.txtinstagram);
 
 
         imgPic1 = v.findViewById(R.id.imgPic1);
@@ -1763,6 +1764,9 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     txtBoss.setText(response.getData().getManagerName());
 
                     txtphone.setText(response.getData().getPhone1());
+                    txtaddress.setText(response.getData().getAddress());
+                    txtinstagram.setText(response.getData().getInstagram());
+                    txttelegram.setText(response.getData().getTelegram());
 
 
                     Glide.with(getContext())

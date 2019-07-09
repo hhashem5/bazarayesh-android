@@ -1,18 +1,18 @@
-
 package com.idpz.bazarayesh.Models.estekhdam;
 
-import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.idpz.bazarayesh.Models.Data;
 
-public class Memberchi {
+public class ResponseMemberDetail {
 
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("ads")
+    @SerializedName("member")
     @Expose
-    private List<Ad> ads = null;
+    private Data member;
 
     public String getStatus() {
         return status;
@@ -22,12 +22,12 @@ public class Memberchi {
         this.status = status;
     }
 
-    public List<Ad> getAds() {
-        return ads;
+    public Data getMember() {
+        return member;
     }
 
-    public void setAds(List<Ad> ads) {
-        this.ads = ads;
+    public void setMember(Data member) {
+        this.member = member;
     }
 
 }

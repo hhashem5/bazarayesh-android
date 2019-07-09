@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
             android:layout_centerHorizontal="true"
-            app:lottie_fileName="alert.json"
+            app:lottie_fileName="tv.json"
             app:lottie_loop="true" />
 
         <LinearLayout
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <com.idpz.bazarayesh.Views.mTextViewB
-                android:id="@+id/txtTitle"
+                android:id="@+id/txtSubject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -38,13 +38,45 @@
                 android:textColor="@color/dark" />
 
             <com.idpz.bazarayesh.Views.mTextView
-                android:id="@+id/txtBody"
+                android:id="@+id/txtTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:gravity="center"
                 android:text="متن پیام"
                 android:textColor="@color/dark" />
+
+
+            <com.idpz.bazarayesh.Views.mTextView
+                android:id="@+id/txtlvl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="متن پیام"
+                android:textColor="@color/dark" />
+
+
+            <com.idpz.bazarayesh.Views.mTextView
+                android:id="@+id/txtTerms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="متن پیام"
+                android:textColor="@color/dark" />
+
+            <com.idpz.bazarayesh.Views.mTextView
+                android:id="@+id/txtDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="متن پیام"
+                android:textColor="@color/dark" />
+
+
+
 
             <com.idpz.bazarayesh.Views.mTextView
                 android:id="@+id/btnExit"

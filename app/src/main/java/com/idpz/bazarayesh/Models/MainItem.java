@@ -12,6 +12,15 @@ public class MainItem {
 
     public String tag;
 
+    public String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public int getImage() {
         return Image;
@@ -87,4 +96,12 @@ public class MainItem {
         this.id = id;
         this.title = title;
     }
+
+    public MainItem(String title,String imgUrl,int a){
+
+        this.title=title;
+        this.imgUrl=imgUrl;
+
+    }
+
 }

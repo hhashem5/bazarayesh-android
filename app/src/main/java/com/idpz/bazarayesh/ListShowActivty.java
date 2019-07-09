@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.idpz.bazarayesh.Adapters.MembersAdapter;
+import com.idpz.bazarayesh.Models.Data;
 import com.idpz.bazarayesh.Models.ResponseListMember;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.loopj.android.http.RequestParams;
@@ -46,6 +47,7 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
         } catch (Exception e) {
         }
 
+
         switch (type) {
 
             case 1:
@@ -72,6 +74,7 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
                 break;
 
         }
+        settoolbarText("جستجو");
 
         initViews();
 
@@ -103,12 +106,12 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
                         break;
 
                     case "امتیاز بالا":
-                        getList("alphabet");
+                        getList("view");//score
 
                         break;
 
                     case "حروف الفبا":
-                        getList("score");
+                        getList("alphabet");
 
                         break;
                 }
@@ -163,13 +166,19 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
                     pd.dismiss();
                     if (responseString.contains("ok")) {
 
-                        ResponseListMember responseListMember = gson.fromJson(responseString, ResponseListMember.class);
+                        final ResponseListMember responseListMember = gson.fromJson(responseString, ResponseListMember.class);
 
 
                         adapter = new MembersAdapter(responseListMember.getMembers(), context, new MembersAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(int position, Object object) {
+                                Data member = (Data) object;
+                                Intent intent = new Intent(ListShowActivty.this, ShowMemberDetail.class);
 
+                                intent.putExtra("backtag", 1);
+                                intent.putExtra("id", member.getId());
+
+                                startActivity(intent);
                             }
                         });
 
@@ -188,8 +197,7 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(ListShowActivty.this, MapsActivity.class);
-        startActivity(intent);
+
         finish();
 
     }
@@ -199,9 +207,7 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
         switch (view.getId()) {
 
             case R.id.imgbBack:
-                Intent intent = new Intent(ListShowActivty.this, MapsActivity.class);
-                intent.putExtra("type", type);
-                startActivity(intent);
+
                 finish();
                 break;
         }

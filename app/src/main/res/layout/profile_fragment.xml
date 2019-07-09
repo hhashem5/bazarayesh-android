@@ -23,6 +23,8 @@
             android:gravity="right"
             android:orientation="vertical">
 
+
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/myProfile_photoLikes"
                 android:layout_width="80dp"
@@ -31,11 +33,21 @@
                 android:layout_gravity="center"
                 android:src="@drawable/user" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtMobile"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                />
+
+
+
             <com.idpz.bazarayesh.Views.mEditText
                 android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_weight="1"
                 android:background="@drawable/layout_corners_shape"
                 android:ems="10"
@@ -44,42 +56,22 @@
                 android:paddingRight="16dp"
                 android:textColor="@color/dark" />
 
-            <com.idpz.bazarayesh.Views.mEditText
-                android:id="@+id/txtPhone"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/layout_corners_shape"
-                android:ems="10"
-                android:hint="@string/phone"
-                android:inputType="textPersonName"
-                android:paddingRight="16dp"
-                android:textColor="@color/dark" />
 
-            <com.idpz.bazarayesh.Views.mEditText
-                android:id="@+id/txtAddress"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/layout_corners_shape"
-                android:ems="10"
-                android:hint="آدرس:"
-                android:inputType="textPersonName"
-                android:paddingRight="16dp"
-                android:textColor="@color/dark" />
 
-            <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="2dp"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:background="@color/grey_60" />-->
+        <com.idpz.bazarayesh.Views.mButton
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/mdtp_ok"
+            android:background="@drawable/background_btn2"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"/>
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/layout_corners_shape_transparent">
 

@@ -27,12 +27,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.idpz.bazarayesh.Adapters.MapsItemAdapter;
-import com.idpz.bazarayesh.Models.Data;
 import com.idpz.bazarayesh.Models.MainItem;
-import com.idpz.bazarayesh.Models.Member;
-import com.idpz.bazarayesh.Models.ResponseListMember;
 import com.idpz.bazarayesh.Models.estekhdam.Ad;
-import com.idpz.bazarayesh.Models.estekhdam.Memberchi;
+import com.idpz.bazarayesh.Models.estekhdam.AdsMapModel;
 import com.idpz.bazarayesh.Utils.MyLocation;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
@@ -123,7 +120,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         recycle.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.HORIZONTAL, true));
         recycle.setAdapter(mapsItemAdapter);
 
-//        checkLocationPermission();
+        checkLocationPermission();
 
 
     }
@@ -135,8 +132,8 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
         RequestParams params = new RequestParams();
         params.put("member_type", filterTag);
-        params.put("lat", lat);
-        params.put("lng", lng);
+        params.put("lat", 35.706337);
+        params.put("lng", 51.356085);
         params.put("type", type);
         params.put("api_token", tools.getSharePrf("api_token"));
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
@@ -158,15 +155,14 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
                     if (!responseString.equals("ok")) {
 
-                        Memberchi members = gson.fromJson(responseString, Memberchi.class);
+                        AdsMapModel members = gson.fromJson(responseString, AdsMapModel.class);
 
-                        for (Ad ad: members.getAds()) {
-
+                        for (Ad ad : members.getAds()) {
 
 
                             mMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(ad.getMember().getLat(), ad.getMember().getLng()))
-                                    .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin))).setTitle(ad.getMember().getFullName());
+                                    .position(new LatLng(ad.getLat(), ad.getLng()))
+                                    .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin))).setTitle(ad.getName());
 
 
                             //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
@@ -251,7 +247,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -264,7 +260,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(getActivity(),
+                                ActivityCompat.requestPermissions(activity,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         1);
                             }
@@ -275,7 +271,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(getActivity(),
+                ActivityCompat.requestPermissions(activity,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         2);
             }

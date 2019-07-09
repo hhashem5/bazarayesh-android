@@ -24,9 +24,13 @@ import com.idpz.bazarayesh.Advertisements.TakhfifKhadamat;
 import com.idpz.bazarayesh.Advertisements.VagozariArayeshgah;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.Utils.Tools;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 import static com.idpz.bazarayesh.BaseActivity.RIGHT_TO_LEFT;
 import static com.idpz.bazarayesh.SubProfileActivity.tag;
@@ -36,11 +40,15 @@ import static maes.tech.intentanim.CustomIntent.customType;
 public class AdvertisementManagmentFragment extends BaseFragment implements View.OnClickListener {
 
 
-    CardView card3;
+    CardView card3, card2, card1;
 
     List<MainItem> items;
 
     Tools tools;
+
+    String cardTag;
+
+    String memberId;
 
     @Nullable
     @Override
@@ -50,12 +58,64 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
         initViews(v);
 
+
+        switch (tag) {
+            case 1:
+                if (!tools.getSharePrf("memberId1").equals("")) {
+
+                    memberId = tools.getSharePrf("memberId1");
+                }
+                break;
+
+            case 2:
+
+                if (!tools.getSharePrf("memberId2").equals("")) {
+
+                    memberId = tools.getSharePrf("memberId2");
+                }
+
+                break;
+
+            case 3:
+
+                if (!tools.getSharePrf("memberId3").equals("")) {
+
+                    memberId = tools.getSharePrf("memberId3");
+                }
+                break;
+            case 4:
+
+                if (!tools.getSharePrf("memberId4").equals("")) {
+
+                    memberId = tools.getSharePrf("memberId4");
+                }
+
+                break;
+            case 5:
+
+                if (!tools.getSharePrf("memberId5").equals("")) {
+
+
+                    memberId = tools.getSharePrf("memberId5");
+                }
+
+
+                break;
+        }
+
         return v;
     }
 
     public void initViews(View v) {
         card3 = v.findViewById(R.id.card3);
+        card2 = v.findViewById(R.id.card2);
+        card1 = v.findViewById(R.id.card1);
+
+
         card3.setOnClickListener(this);
+        card2.setOnClickListener(this);
+        card1.setOnClickListener(this);
+
     }
 
     @Override
@@ -63,33 +123,45 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
         switch (view.getId()) {
             case R.id.card3:
-
+                cardTag = "card3";
                 switch (tag) {
                     case 1:
                         if (tools.getSharePrf("memberId1").equals("")) {
                             tools.alertShow("ابتدا باید آرایشگاه خود را ثبت کنید سپس میتوانید آگهی ثبت کنید");
-                        } else AlertDialog();
+                        } else {
+                            memberId = tools.getSharePrf("memberId1");
+                            AlertDialog();
+                        }
                         break;
 
                     case 2:
 
                         if (tools.getSharePrf("memberId2").equals("")) {
                             tools.alertShow("ابتدا باید به عنوان آرایشگر ثبنام کنید سپس میتوانید آگهی ثبت کنید.");
-                        } else AlertDialog();
+                        } else {
+                            AlertDialog();
+                            memberId = tools.getSharePrf("memberId2");
+                        }
+
                         break;
 
                     case 3:
 
                         if (tools.getSharePrf("memberId3").equals("")) {
                             tools.alertShow("ابتدا باید آموزشگاه خود را ثبت کنید سپس میتوانید آگهی ثبت کنید.");
-                        } else
+                        } else {
                             AlertDialog();
+                            memberId = tools.getSharePrf("memberId3");
+                        }
                         break;
                     case 4:
 
                         if (tools.getSharePrf("memberId4").equals("")) {
                             tools.alertShow("ابتدا باید به عنوان مدرس ثبنام کنید سپس میتوانید آگهی ثبت کنید.");
-                        } else AlertDialog();
+                        } else {
+                            AlertDialog();
+                            memberId = tools.getSharePrf("memberId4");
+                        }
 
                         break;
                     case 5:
@@ -97,7 +169,10 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                         if (tools.getSharePrf("memberId5").equals("")) {
 
                             tools.alertShow("ابتدا باید فروشگاه خود را ثبت کنید سپس میتوانید آگهی ثبت کنید");
-                        } else AlertDialog();
+                        } else {
+                            AlertDialog();
+                            memberId = tools.getSharePrf("memberId5");
+                        }
 
 
                         break;
@@ -105,7 +180,22 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
 
                 break;
+
+
+            case R.id.card2:
+
+                cardTag = "card2";
+                AlertDialog();
+
+                break;
+
+            case R.id.card1:
+                cardTag = "card1";
+                AlertDialog();
+
+                break;
         }
+
     }
 
 
@@ -128,107 +218,183 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
             public void onItemClick(int position, Object object) {
 
                 MainItem item = (MainItem) object;
+                if (cardTag.equals("card3")) {
+                    switch (item.getTitle()) {
+                        case "آگهی بازدید عروس":
 
-                switch (item.getTitle()) {
-                    case "آگهی بازدید عروس":
+                            Intent i1 = new Intent(getContext(), BazdidAroosActivity.class);
+                            i1.putExtra("tag", tag);
 
-                        Intent i1 = new Intent(getContext(), BazdidAroosActivity.class);
-                        i1.putExtra("tag", tag);
+                            i1.setAction(Intent.ACTION_MAIN);
+                            i1.addCategory(Intent.CATEGORY_HOME);
+                            i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i1);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            getActivity().finish();
+                            break;
 
-                        i1.setAction(Intent.ACTION_MAIN);
-                        i1.addCategory(Intent.CATEGORY_HOME);
-                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i1);
-                        customType(getContext(), RIGHT_TO_LEFT);
-                        getActivity().finish();
-                        break;
+                        case "استخدام":
+                            Intent i2 = new Intent(getContext(), EstekhdamActivity.class);
+                            i2.putExtra("tag", tag);
 
-                    case "استخدام":
-                        Intent i2 = new Intent(getContext(), EstekhdamActivity.class);
-                        i2.putExtra("tag", tag);
+                            i2.setAction(Intent.ACTION_MAIN);
+                            i2.addCategory(Intent.CATEGORY_HOME);
+                            i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            i2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i2);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            getActivity().finish();
+                            break;
 
-                        i2.setAction(Intent.ACTION_MAIN);
-                        i2.addCategory(Intent.CATEGORY_HOME);
-                        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i2.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i2);
-                        customType(getContext(), RIGHT_TO_LEFT);
-                        getActivity().finish();
-                        break;
+                        case "ثبتنام دوره های آموزشی":
+                            Intent i3 = new Intent(getContext(), SabtnamDoreAmozeshi.class);
+                            i3.putExtra("tag", tag);
+                            i3.setAction(Intent.ACTION_MAIN);
+                            i3.addCategory(Intent.CATEGORY_HOME);
+                            i3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            i3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i3);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            getActivity().finish();
+                            break;
 
-                    case "ثبتنام دوره های آموزشی":
-                        Intent i3 = new Intent(getContext(), SabtnamDoreAmozeshi.class);
-                        i3.putExtra("tag", tag);
-                        i3.setAction(Intent.ACTION_MAIN);
-                        i3.addCategory(Intent.CATEGORY_HOME);
-                        i3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i3.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i3);
-                        customType(getContext(), RIGHT_TO_LEFT);
-                        getActivity().finish();
-                        break;
+                        case "شروع ثبتنام کارگاه آموزشی":
+                            Intent i4 = new Intent(getContext(), KargahAmozeshi.class);
+                            i4.putExtra("tag", tag);
 
-                    case "شروع ثبتنام کارگاه آموزشی":
-                        Intent i4 = new Intent(getContext(), KargahAmozeshi.class);
-                        i4.putExtra("tag", tag);
-
-                        i4.setAction(Intent.ACTION_MAIN);
-                        i4.addCategory(Intent.CATEGORY_HOME);
-                        i4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i4);
-                        customType(getContext(), RIGHT_TO_LEFT);
-                        getActivity().finish();
-                        break;
+                            i4.setAction(Intent.ACTION_MAIN);
+                            i4.addCategory(Intent.CATEGORY_HOME);
+                            i4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i4.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            i4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i4);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            getActivity().finish();
+                            break;
 
 
-                    case "تخفیف  دوره و کارگاه آموزشی":
-                        Intent i5 = new Intent(getContext(), TakhfifAmozeshi.class);
-                        i5.putExtra("tag", tag);
+                        case "تخفیف  دوره و کارگاه آموزشی":
+                            Intent i5 = new Intent(getContext(), TakhfifAmozeshi.class);
+                            i5.putExtra("tag", tag);
 
-                        i5.setAction(Intent.ACTION_MAIN);
-                        i5.addCategory(Intent.CATEGORY_HOME);
-                        i5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i5);
-                        customType(getContext(), RIGHT_TO_LEFT);
-                        getActivity().finish();
-                        break;
+                            i5.setAction(Intent.ACTION_MAIN);
+                            i5.addCategory(Intent.CATEGORY_HOME);
+                            i5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i5.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            i5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i5);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            getActivity().finish();
+                            break;
 
-                    case "واگذاری فضای آرایشگاهی":
-                        Intent i6 = new Intent(getContext(), VagozariArayeshgah.class);
-                        i6.putExtra("tag", tag);
+                        case "واگذاری فضای آرایشگاهی":
+                            Intent i6 = new Intent(getContext(), VagozariArayeshgah.class);
+                            i6.putExtra("tag", tag);
 
-                        i6.setAction(Intent.ACTION_MAIN);
-                        i6.addCategory(Intent.CATEGORY_HOME);
-                        i6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i6);
-                        customType(getContext(), RIGHT_TO_LEFT);
-                        getActivity().finish();
-                        break;
+                            i6.setAction(Intent.ACTION_MAIN);
+                            i6.addCategory(Intent.CATEGORY_HOME);
+                            i6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i6.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            i6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i6);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            getActivity().finish();
+                            break;
 
-                    case "تخفیف خدمات آرایشکاهی":
+                        case "تخفیف خدمات آرایشکاهی":
 
-                        Intent i7 = new Intent(getContext(), TakhfifKhadamat.class);
-                        i7.putExtra("tag", tag);
+                            Intent i7 = new Intent(getContext(), TakhfifKhadamat.class);
+                            i7.putExtra("tag", tag);
 
-                        i7.setAction(Intent.ACTION_MAIN);
-                        i7.addCategory(Intent.CATEGORY_HOME);
-                        i7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(i7);
-                        customType(getContext(), RIGHT_TO_LEFT);
-                        getActivity().finish();
-                        break;
+                            i7.setAction(Intent.ACTION_MAIN);
+                            i7.addCategory(Intent.CATEGORY_HOME);
+                            i7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            i7.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            i7.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(i7);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            getActivity().finish();
+                            break;
+
+                    }
+
+                } else {
+
+                    switch (item.getTitle()) {
+                        case "آگهی بازدید عروس":
+
+                            Intent i1 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i1.putExtra("tag", "Bride");
+                            i1.putExtra("memid", memberId);
+                            startActivity(i1);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "استخدام":
+                            Intent i2 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i2.putExtra("tag", "Recruiment");
+                            i2.putExtra("memid", memberId);
+
+                            startActivity(i2);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "ثبتنام دوره های آموزشی":
+                            Intent i3 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i3.putExtra("tag", "Reg_Course");
+                            i3.putExtra("memid", memberId);
+
+                            startActivity(i3);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "شروع ثبتنام کارگاه آموزشی":
+                            Intent i4 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i4.putExtra("tag", "Workshops");
+
+                            i4.putExtra("memid", memberId);
+
+                            startActivity(i4);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+
+                        case "تخفیف  دوره و کارگاه آموزشی":
+                            Intent i5 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i5.putExtra("tag", "Discount_ads");
+                            i5.putExtra("memid", memberId);
+
+                            startActivity(i5);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "واگذاری فضای آرایشگاهی":
+                            Intent i6 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i6.putExtra("tag", "Assignment");
+                            i6.putExtra("memid", memberId);
+
+
+                            startActivity(i6);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "تخفیف خدمات آرایشکاهی":
+
+                            Intent i7 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i7.putExtra("tag", "Discount_ads");
+                            i7.putExtra("memid", memberId);
+
+
+                            startActivity(i7);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+                    }
+
+
                 }
 
 
@@ -308,4 +474,6 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
         }
     }
+
+
 }

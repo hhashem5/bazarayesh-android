@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -173,32 +174,32 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                         VerifyResponse response = gson.fromJson(responseString, VerifyResponse.class);
 
                         tools.addToSharePrf("api_token", response.getUser().getApiToken());
-                        for (Member member:response.getUser().getMember()){
-                         switch (member.getType()){
+                        for (Member member : response.getUser().getMember()) {
+                            switch (member.getType()) {
 
-                             case "1":
-                                 tools.addToSharePrf("memberId1", member.getId().toString());
+                                case "1":
+                                    tools.addToSharePrf("memberId1", member.getId().toString());
 
-                                 break;
-                             case "2":
-                                 tools.addToSharePrf("memberId2",member.getId().toString());
+                                    break;
+                                case "2":
+                                    tools.addToSharePrf("memberId2", member.getId().toString());
 
-                                 break;
+                                    break;
 
-                             case "3":
-                                 tools.addToSharePrf("memberId3", member.getId().toString());
+                                case "3":
+                                    tools.addToSharePrf("memberId3", member.getId().toString());
 
-                                 break;
-                             case "4":
-                                 tools.addToSharePrf("memberId4", member.getId().toString());
+                                    break;
+                                case "4":
+                                    tools.addToSharePrf("memberId4", member.getId().toString());
 
-                                 break;
-                             case "5":
+                                    break;
+                                case "5":
 
-                                 tools.addToSharePrf("memberId5", member.getId().toString());
+                                    tools.addToSharePrf("memberId5", member.getId().toString());
 
-                                 break;
-                         }
+                                    break;
+                            }
                         }
                         Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
                         i1.setAction(Intent.ACTION_MAIN);
@@ -251,6 +252,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
             case R.id.resend:
                 if (tools.isNetworkAvailable()) {
 
+                    setResend();
 
                 }
 
@@ -309,5 +311,55 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
         secound %= 60;
         return String.format(Locale.ENGLISH, "%02d", mint) + " : " + String.format(Locale.ENGLISH, "%02d", secound);
     }
+
+
+    private void setResend() {
+
+        pd.show();
+        String url = tools.baseUrl + "registerWithMobile";
+        RequestParams params = new RequestParams();
+
+        params.put("mobile", tools.getSharePrf("mobile"));
+
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+
+
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d(TAG, "onFailure: " + throwable);
+
+                pd.dismiss();
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+
+
+                    tools.addToSharePrf("mobile", txtMobile.getText().toString());
+                    Intent i1 = new Intent(getApplicationContext(), VerificationActivity.class);
+                    i1.setAction(Intent.ACTION_MAIN);
+                    i1.addCategory(Intent.CATEGORY_HOME);
+                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    overridePendingTransition(0, 0);
+
+                    startActivity(i1);
+
+                    customType(context, LEFT_TO_RIGHT);
+
+                    finish();
+
+                    pd.dismiss();
+                    Log.d(TAG, "onSuccess: " + responseString);
+
+                } catch (Exception e) {
+                }
+            }
+        });
+    }
+
 
 }

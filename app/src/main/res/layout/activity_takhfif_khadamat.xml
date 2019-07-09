@@ -29,6 +29,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/toolbar"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="مشخصات کلی"
                     android:textColor="@color/dark" />
 

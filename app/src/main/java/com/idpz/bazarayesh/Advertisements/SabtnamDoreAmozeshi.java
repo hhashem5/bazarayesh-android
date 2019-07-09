@@ -326,7 +326,7 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
 
         params.put("scourse", since);
         params.put("duration", etDuration.getText().toString());
-        params.put("topic", Integer.getInteger(subject));
+        params.put("topic", Integer.valueOf(subject));
         params.put("ecourse", until);
         params.put("course_name", etRelation.getText().toString());
         params.put("evidence", etServices.getText().toString());

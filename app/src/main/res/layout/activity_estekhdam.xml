@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="60dp"
+        android:layout_marginTop="16dp"
         android:layout_below="@+id/toolbar">
 
     <LinearLayout
@@ -202,11 +203,12 @@
         android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="148dp"
-        android:gravity="right|top"
         android:layout_below="@+id/title3"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
+        android:gravity="top|right"
+
         android:background="@drawable/layout_corners_shape_border"
         android:paddingLeft="8dp"
         android:paddingRight="16dp" />

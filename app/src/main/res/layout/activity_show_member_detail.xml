@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShowMemberDetail">
+
+    <include layout="@layout/mtoolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginRight="8dp">
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+
+                android:id="@+id/imgLogo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:scaleType="centerCrop"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="right"
+                android:layout_toLeftOf="@id/imgLogo">
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"/>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtName"
+                    android:layout_alignParentRight="true"
+
+                    android:gravity="right"/>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/txttelegram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtAddress"
+                    android:layout_alignParentRight="true"
+
+                    android:gravity="right"/>
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/txtinsta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txttelegram"
+                    android:layout_alignParentRight="true"
+
+                    android:gravity="right"/>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative1"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp">
+
+            <com.idpz.bazarayesh.Views.mTextViewB
+                android:id="@id/workSpaceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="عکس های محیط داخلی "
+
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/workSpace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/workSpaceTitle"
+                android:layout_marginTop="8dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative2"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp">
+
+
+            <com.idpz.bazarayesh.Views.mTextViewB
+                android:id="@id/awardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="عکس های جوایز دریافت شده"
+
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/award"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/awardTitle"
+                android:layout_marginTop="8dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative3"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp">
+
+
+            <com.idpz.bazarayesh.Views.mTextViewB
+                android:id="@id/famousCustomerTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="مشتری های معروف"
+
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/famousCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/famousCustomerTitle"
+                android:layout_marginTop="8dp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relative5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative4"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            android:visibility="gone">
+
+
+            <com.idpz.bazarayesh.Views.mTextViewB
+                android:id="@id/workShopTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="دوره های گذرانده شده"
+
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/workShop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/workShopTitle"
+                android:layout_marginTop="8dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative5"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="8dp"
+            >
+
+
+            <com.idpz.bazarayesh.Views.mTextViewB
+                android:id="@id/servicesTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="خدمات قابل ارائه"
+
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/servicesTitle"
+                android:layout_marginTop="8dp" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

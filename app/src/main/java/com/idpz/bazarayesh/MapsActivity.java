@@ -10,6 +10,8 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +28,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.idpz.bazarayesh.Adapters.MapsItemAdapter;
 import com.idpz.bazarayesh.Models.Data;
@@ -85,16 +88,42 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
         MyLocation.LocationResult locationResult = new MyLocation.LocationResult() {
             @Override
-            public void gotLocation(Location location) {
+            public void gotLocation(final Location location) {
                 //Got the location!
+                imgbBack.setVisibility(View.VISIBLE);
 
                 userLat = location.getLatitude();
                 userLng = location.getLongitude();
                 if (service_type == 0) {
-                    getLists(type, "all", location.getLatitude(), location.getLongitude());
-                } else
-                    getStylishList(type, userLat, userLng, service_type, "");
 
+                    Handler mainHandler = new Handler(Looper.getMainLooper());
+                    Runnable myRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            //Code that uses AsyncHttpClient in your case ConsultaCaract()
+                            getLists(type, "all", location.getLatitude(), location.getLongitude());
+
+
+                        }
+                    };
+                    mainHandler.post(myRunnable);
+
+
+                } else {
+
+                    Handler mainHandler = new Handler(Looper.getMainLooper());
+
+                    Runnable myRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            //Code that uses AsyncHttpClient in your case ConsultaCaract()
+
+                            getStylishList(type, userLat, userLng, service_type, "");
+
+                        }
+                    };
+                    mainHandler.post(myRunnable);
+                }
             }
         };
         MyLocation myLocation = new MyLocation();
@@ -104,6 +133,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
     }
 
     public void initViews() {
+        checkLocationPermission();
 
         imgbBack.setVisibility(View.VISIBLE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -124,15 +154,14 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 if (item.getTitle().equals("جستجو")) {
 
                     Intent intent = new Intent(context, ListShowActivty.class);
-                    intent.putExtra("type",type);
-                    intent.putExtra("lat",userLat);
-                    intent.putExtra("lng",userLng);
+                    intent.putExtra("type", type);
+                    intent.putExtra("lat", userLat);
+                    intent.putExtra("lng", userLng);
                     customType(context, BOTTOM_TO_UP);
                     startActivity(intent);
                     customType(context, RIGHT_TO_LEFT);
-                    finish();
-                } else
-                if (service_type == 0) {
+
+                } else if (service_type == 0) {
                     item.getTag();
                     getLists(type, item.getTag(), userLat, userLng);
                 } else
@@ -144,11 +173,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
         recycle.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.HORIZONTAL, true));
         recycle.setAdapter(mapsItemAdapter);
-
-        try {
-            checkLocationPermission();
-        } catch (Exception e) {
-        }
 
 
     }
@@ -272,7 +296,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
 
     //list amozeshgah va arayeshgah va foroshgah
-    public void getLists(int type, String filterTag, double lat, double lng) {
+    public void getLists(final int type, String filterTag, double lat, double lng) {
 
         String url = tools.baseUrl + "barber_shop_list";
 
@@ -301,17 +325,42 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
                     if (!responseString.equals("ok")) {
 
-                        ResponseListMember members = gson.fromJson(responseString, ResponseListMember.class);
+                        final ResponseListMember members = gson.fromJson(responseString, ResponseListMember.class);
 
-                        for (Data member : members.getMembers()) {
+                        for (final Data member : members.getMembers()) {
 
                             member.getLat();
                             member.getLng();
 
 
-                            mMap.addMarker(new MarkerOptions()
+                            Marker marker = mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(member.getLat(), member.getLng()))
-                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin))).setTitle(member.getFullName());
+                                    .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin)));
+
+
+                            marker.setTitle(member.getFullName());
+
+                            marker.setTag(member.getId());
+
+                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(Marker marker) {
+
+
+                                    for (Data member2 : members.getMembers()) {
+                                        if (marker.getTag() .equals( member2.getId())) {
+                                            Intent intent = new Intent(MapsActivity.this, ShowMemberDetail.class);
+                                          //  intent.putExtra("type",type);
+                                            //intent.putExtra("service_type",service_type);
+                                            intent.putExtra("id", member2.getId());
+                                            startActivity(intent);
+                                        }
+                                    }
+                                    return false;
+
+
+                                }
+                            });
 
 
                             //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
@@ -319,7 +368,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
                     }
                 } catch (Exception e) {
-e.getMessage();
+                    e.getMessage();
                 }
 
             }
@@ -328,7 +377,8 @@ e.getMessage();
 
 
     //modares and arayeshgar
-    public void getStylishList(int type, double lat, double lng, int serviceType, String ad_filter) {
+    //agar ad_filter
+    public void getStylishList(final int type, double lat, double lng, final int serviceType, String ad_filter) {
 
         String url = tools.baseUrl + "stylist_list";
 
@@ -362,16 +412,39 @@ e.getMessage();
 
                         ResponseListMember members = gson.fromJson(responseString, ResponseListMember.class);
                         if (members.getMembers().size() != 0)
-                            for (Data member : members.getMembers()) {
+
+
+                            for (final Data member : members.getMembers()) {
 
 
                                 member.getLat();
                                 member.getLng();
 
 
-                                mMap.addMarker(new MarkerOptions()
+                                Marker marker = mMap.addMarker(new MarkerOptions()
                                         .position(new LatLng(member.getLat(), member.getLng()))
-                                        .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin))).setTitle(member.getFullName());
+                                        .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin)));
+
+
+                                marker.setTitle(member.getFullName());
+
+                                marker.setTag(member.getId());
+
+                                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                    @Override
+                                    public boolean onMarkerClick(Marker marker) {
+
+                                        Intent intent = new Intent(MapsActivity.this, ShowMemberDetail.class);
+
+                                        intent.putExtra("id", member.getId());
+                                        //intent.putExtra("type",type);
+                                      //  intent.putExtra("service_type",service_type);
+                                        startActivity(intent);
+
+                                        return false;
+                                    }
+                                });
+
 
                                 //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
                             }
@@ -423,7 +496,7 @@ e.getMessage();
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -436,7 +509,7 @@ e.getMessage();
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(getActivity(),
+                                ActivityCompat.requestPermissions(activity,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         1);
                             }
@@ -447,7 +520,7 @@ e.getMessage();
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(getActivity(),
+                ActivityCompat.requestPermissions(activity,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         2);
             }

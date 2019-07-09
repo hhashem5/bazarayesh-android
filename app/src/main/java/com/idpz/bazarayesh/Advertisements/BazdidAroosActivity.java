@@ -229,7 +229,7 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
         String url = tools.baseUrl + "ads_store";
         pd.show();
         RequestParams params = new RequestParams();
-        params.put("member", "bride");
+        params.put("member", "brides");
 
 
 

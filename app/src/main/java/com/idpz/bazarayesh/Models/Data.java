@@ -7,6 +7,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Data {
 
+    @SerializedName("id")
+    @Expose
+    private int id;
+
     @SerializedName("type")
     @Expose
     private String type;
@@ -60,7 +64,12 @@ public class Data {
     private List<WorkplacePic> workplacePic ;
     @SerializedName("famous_customer")
     @Expose
-    private List<FamousCustomer> famousCustomer ;
+    private List<FamousCustomer> famousCustomer;
+
+
+//    @SerializedName("Workshops")
+//    @Expose
+//    private List<> todo
 
     public String getType() {
         return type;
@@ -206,4 +215,11 @@ public class Data {
         this.famousCustomer = famousCustomer;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

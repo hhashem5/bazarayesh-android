@@ -55,7 +55,8 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
     Button btn;
     Typeface irsans;
 
-    String options,type;
+    String options, type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +76,8 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
 
         relative_case = findViewById(R.id.relative_case);
         relative_type = findViewById(R.id.relative_type);
-        btn=findViewById(R.id.btn);
-        etDescription=findViewById(R.id.etDescription);
+        btn = findViewById(R.id.btn);
+        etDescription = findViewById(R.id.etDescription);
 
 
         LinearLayout llBottomSheet = findViewById(R.id.linear_bottomsheet);
@@ -208,10 +209,10 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
                 if (status.equals("1") || status.equals("3")) {
                     txt_case.setText(item.getTitle());
 
-                    options=item.getId();
+                    options = item.getTitle();
                 } else if (status.equals("2")) {
                     txt_type.setText(item.getTitle());
-                    type=item.getId();
+                    type = item.getTitle();
 
                 }
 
@@ -234,12 +235,12 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
             case "1":
 
 
-                MainItem item1 = new MainItem("کل آرایشگاه با تجهیزات","3");
-                MainItem item2 = new MainItem("کل آرایشگاه بدون تجهیزات","4");
-                MainItem item3 = new MainItem("یک اتاق مستقل از آرایشگاه","5");
-                MainItem item4 = new MainItem("یک جایگاه میز و صندلی","6");
-                MainItem item5 = new MainItem("میز ویزه خدمات ناخن","7");
-                MainItem item6 = new MainItem("تخت اپیلاسیون","8");
+                MainItem item1 = new MainItem("کل آرایشگاه با تجهیزات", "3");
+                MainItem item2 = new MainItem("کل آرایشگاه بدون تجهیزات", "4");
+                MainItem item3 = new MainItem("یک اتاق مستقل از آرایشگاه", "5");
+                MainItem item4 = new MainItem("یک جایگاه میز و صندلی", "6");
+                MainItem item5 = new MainItem("میز ویزه خدمات ناخن", "7");
+                MainItem item6 = new MainItem("تخت اپیلاسیون", "8");
 
 
                 items.add(item1);
@@ -259,8 +260,8 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
 
             case "2":
 
-                MainItem item7 = new MainItem("فروش","1");
-                MainItem item8 = new MainItem("اجاره","2");
+                MainItem item7 = new MainItem("فروش", "1");
+                MainItem item8 = new MainItem("اجاره", "2");
                 items.add(item7);
                 items.add(item8);
 
@@ -268,8 +269,8 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
 
 
             case "3":
-                MainItem item9 = new MainItem("کل آرایشگاه با تجهیزات","1");
-                MainItem item10 = new MainItem("کل آرایشگاه بدون تجهیزات","2");
+                MainItem item9 = new MainItem("کل آرایشگاه با تجهیزات", "1");
+                MainItem item10 = new MainItem("کل آرایشگاه بدون تجهیزات", "2");
 
                 items.add(item9);
                 items.add(item10);
@@ -295,10 +296,8 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
         params.put("member", "assignment");
 
 
-
-        params.put("type",type );
+        params.put("type", type);
         params.put("options", options);
-
 
 
         params.put("description", etDescription.getText().toString());
@@ -349,7 +348,7 @@ public class VagozariArayeshgah extends BaseActivity implements View.OnClickList
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                    successDialog("آگهی شما با موفقیت ثبت شد.");
+                successDialog("آگهی شما با موفقیت ثبت شد.");
 
 
                 pd.dismiss();

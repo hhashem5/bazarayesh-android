@@ -57,7 +57,7 @@ public class EstekhdamActivity extends BaseActivity implements View.OnClickListe
 
     int tag;
 
-    int subject, title, lvl, conditions;
+    String subject, title, lvl, conditions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,24 +263,24 @@ public class EstekhdamActivity extends BaseActivity implements View.OnClickListe
 
                 if (status.equals("1")) {
                     txtSubject.setText(item.getTitle());
-                    subject= Integer.parseInt(item.getId());
+                    subject= item.getTitle();
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                 } else if (status.equals("2") || status.equals("3") || status.equals("4")
                         || status.equals("5") || status.equals("6") || status.equals("9") ||
                         status.equals("8")) {
                     txtTitle.setText(item.getTitle());
-                    title= Integer.parseInt(item.getId());
+                    title= item.getTitle();
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
                 } else if (status.equals("10")) {
                     txtExpert.setText(item.getTitle());
-                    lvl= Integer.parseInt(item.getId());
+                    lvl= item.getTitle();
 
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
                 } else if (status.equals("11")) {
                     txtTerms.setText(item.getTitle());
 
-                    conditions= Integer.parseInt(item.getId());
+                    conditions=item.getTitle();
 
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
@@ -435,7 +435,7 @@ public class EstekhdamActivity extends BaseActivity implements View.OnClickListe
     }
 
 
-    public void registerEstekhdam(int subject, int expertise, int lvl, int conditions) {
+    public void registerEstekhdam(String subject, String expertise, String lvl, String conditions) {
 
         String url = tools.baseUrl + "ads_store";
         pd.show();
