@@ -204,7 +204,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSans(FaNum).ttf");
 
-        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View inflatedLayout = getLayoutInflater().inflate(R.layout.choose_advertisement, null);
 
         RecyclerView recyclerView = inflatedLayout.findViewById(R.id.recycle);

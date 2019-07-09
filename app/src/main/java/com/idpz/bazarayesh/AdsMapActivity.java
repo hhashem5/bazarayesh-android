@@ -25,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.idpz.bazarayesh.Adapters.MapsItemAdapter;
 import com.idpz.bazarayesh.Models.MainItem;
@@ -120,16 +121,15 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         recycle.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.HORIZONTAL, true));
         recycle.setAdapter(mapsItemAdapter);
 
-        checkLocationPermission();
+//        checkLocationPermission();
 
 
     }
 
     //list amozeshgah va arayeshgah va foroshgah
-    public void getLists(int type, String filterTag, double lat, double lng) {
+    public void getLists(final int type, String filterTag, double lat, double lng) {
 
         String url = tools.baseUrl + "ads_list";
-
         RequestParams params = new RequestParams();
         params.put("member_type", filterTag);
         params.put("lat", 35.706337);
@@ -149,22 +149,30 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-
                 try {
                     mMap.clear();
 
                     if (!responseString.equals("ok")) {
 
-                        AdsMapModel members = gson.fromJson(responseString, AdsMapModel.class);
+                        final AdsMapModel members = gson.fromJson(responseString, AdsMapModel.class);
 
-                        for (Ad ad : members.getAds()) {
+                        for (final Ad ad : members.getAds()) {
 
-
-                            mMap.addMarker(new MarkerOptions()
+                            Marker marker = mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(ad.getLat(), ad.getLng()))
-                                    .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin))).setTitle(ad.getName());
+                                    .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin)));
+                            marker.setTitle(ad.getName());
 
-
+                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(Marker marker) {
+                                    Intent intent = new Intent(activity, AdsDetailsActivity.class);
+                                    intent.putExtra("id", ad.getId());
+                                    intent.putExtra("tag", "" + type);
+                                    startActivity(intent);
+                                    return false;
+                                }
+                            });
                             //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
                         }
 
@@ -229,6 +237,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
@@ -238,7 +247,6 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(tehran, 16);
         googleMap.moveCamera(cameraUpdate);
 
-
     }
 
     public boolean checkLocationPermission() {
@@ -247,7 +255,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(activity,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
                 // Show an explanation to the user *asynchronously* -- don't block
@@ -260,7 +268,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(activity,
+                                ActivityCompat.requestPermissions(getActivity(),
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         1);
                             }
@@ -271,7 +279,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
             } else {
                 // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(activity,
+                ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         2);
             }

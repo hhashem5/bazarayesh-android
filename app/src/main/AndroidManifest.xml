@@ -22,13 +22,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserAdvertisementActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3"></activity>
-        <activity
-            android:name=".ShowMemberDetail"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -39,11 +32,9 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
-        <activity
-            android:name=".ListShowActivty"
+        <activity android:name=".ListShowActivty"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3" />
+            android:theme="@style/AppTheme3"></activity>
         <activity android:name=".ShowMembersActivity" />
         <activity
             android:name=".Advertisements.TakhfifAmozeshi"
@@ -119,10 +110,13 @@
             android:name=".Utils.crop.CropImageActivity"
             android:screenOrientation="portrait" />
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-        <activity
-            android:name=".AdsMapActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme3" />
+
+        <activity android:name=".AdsMapActivity"
+            android:theme="@style/AppTheme3"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UserAdvertisementActivity"
+            android:theme="@style/AppTheme3"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
