@@ -8,8 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import com.google.gson.JsonArray;
 import com.idpz.bazarayesh.Adapters.UserAdvertisementAdapter;
 import com.idpz.bazarayesh.Models.AdAssignment.ResponseAssignment;
+import com.idpz.bazarayesh.Models.AdBride.ResponseBride;
 import com.idpz.bazarayesh.Models.AdDisscount.ResponseDiscountAds;
 import com.idpz.bazarayesh.Models.AdRecruiment.ResponseRecruiment;
+import com.idpz.bazarayesh.Models.AdRegCourse.ResponseRegCourse;
 import com.idpz.bazarayesh.Models.AdWorkShop.ResponseWorkShop;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -69,16 +71,22 @@ public class UserAdvertisementActivity extends BaseActivity {
 
                     switch (ad_type) {
 
-                        case "Bride":
 
+
+                        case "Bride":
+                            ResponseBride responseBride = gson.fromJson(responseString, ResponseBride.class);
+                            responseBride.getAds();
+                            UserAdvertisementAdapter advertisementAdapter1 = new UserAdvertisementAdapter(responseBride.getAds(), R.layout.disscounts_adapter, context, 1);
+                            recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
+                            recycler.setAdapter(advertisementAdapter1);
                             break;
 
                         case "Discount_ads":
                             ResponseDiscountAds responseDiscountAds = gson.fromJson(responseString, ResponseDiscountAds.class);
                             responseDiscountAds.getAds();
-                            UserAdvertisementAdapter advertisementAdapter1 = new UserAdvertisementAdapter(responseDiscountAds.getAds(), R.layout.disscounts_adapter, context, 1, 1);
+                            UserAdvertisementAdapter discountAdapter = new UserAdvertisementAdapter(responseDiscountAds.getAds(), R.layout.disscounts_adapter, context, 1, 1);
                             recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
-                            recycler.setAdapter(advertisementAdapter1);
+                            recycler.setAdapter(discountAdapter);
 
                             break;
 
@@ -112,8 +120,12 @@ public class UserAdvertisementActivity extends BaseActivity {
                             break;
 
                         case "Reg_Course":
-                            // ResponseAssignment responseAssignment=gson.fromJson(responseString,ResponseAssignment.class);
-                            //  responseAssignment.getAds();
+                             ResponseRegCourse responseCourses=gson.fromJson(responseString,ResponseRegCourse.class);
+                              responseCourses.getAds();
+                            UserAdvertisementAdapter CourseAdapter = new UserAdvertisementAdapter(1,responseCourses.getAds(), context, R.layout.recruiment_adapter);
+                            recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
+                            recycler.setAdapter(CourseAdapter);
+
                             break;
 
 

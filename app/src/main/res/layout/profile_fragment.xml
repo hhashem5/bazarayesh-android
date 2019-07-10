@@ -54,17 +54,34 @@
                 android:hint="@string/full_name"
                 android:inputType="textPersonName"
                 android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+
                 android:textColor="@color/dark" />
 
 
+            <com.idpz.bazarayesh.Views.mEditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/layout_corners_shape"
+                android:ems="10"
+                android:hint="ایمیل:"
+                android:inputType="textPersonName"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:textColor="@color/dark" />
 
-        <com.idpz.bazarayesh.Views.mButton
+
+            <com.idpz.bazarayesh.Views.mButton
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:text="@string/mdtp_ok"
             android:background="@drawable/background_btn2"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="16dp"
+            android:id="@+id/btnOk"/>
 
 
             <RelativeLayout
@@ -210,4 +227,14 @@
 
         </LinearLayout>
     </ScrollView>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/bottom_sheet_behavior" />
+    </android.support.design.widget.CoordinatorLayout>
 </RelativeLayout>

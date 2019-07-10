@@ -174,6 +174,8 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                         VerifyResponse response = gson.fromJson(responseString, VerifyResponse.class);
 
                         tools.addToSharePrf("api_token", response.getUser().getApiToken());
+
+                        tools.addToSharePrf("user_Id", String.valueOf(response.getUser().getId()));
                         for (Member member : response.getUser().getMember()) {
                             switch (member.getType()) {
 

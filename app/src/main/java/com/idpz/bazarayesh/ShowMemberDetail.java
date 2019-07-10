@@ -49,6 +49,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
     TextView txtName, txtAddress, txtTelegram, txtInsta, awardTitle, workSpaceTitle, servicesTitle, workShopTitle, famousCustomerTitle;
 
+    RelativeLayout relativeLayout6,relativeLayout2,relativeLayout3,relativeLayout4,relativeLayout5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,13 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
     public void initViews() {
 
         imgbBack.setVisibility(View.VISIBLE);
+
+        relativeLayout6=findViewById(R.id.relative6);
+        relativeLayout2=findViewById(R.id.relative2);
+        relativeLayout3=findViewById(R.id.relative3);
+        relativeLayout4=findViewById(R.id.relative4);
+        relativeLayout5=findViewById(R.id.relative5);
+
 
         recyclerfamausCustomer = findViewById(R.id.famousCustomer);
         recycleworkSpace = findViewById(R.id.workSpace);
@@ -149,7 +158,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
 
                     } else {
-                        awardTitle.setVisibility(View.GONE);
+                        relativeLayout3.setVisibility(View.GONE);
                     }
 
                     if (response.getMember().getService().size() != 0) {
@@ -164,7 +173,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
 
                     } else {
-                        servicesTitle.setVisibility(View.GONE);
+                        relativeLayout6.setVisibility(View.GONE);
                     }
 
                     if (response.getMember().getFamousCustomer().size() != 0) {
@@ -178,7 +187,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
 
                     } else {
-                        famousCustomerTitle.setVisibility(View.GONE);
+                        relativeLayout4.setVisibility(View.GONE);
                     }
 
 
@@ -194,7 +203,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
 
                     } else {
-                        workSpaceTitle.setVisibility(View.GONE);
+                        relativeLayout5.setVisibility(View.GONE);
                     }
 
 

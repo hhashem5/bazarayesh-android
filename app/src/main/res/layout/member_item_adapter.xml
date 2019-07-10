@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="100dp"
     android:layout_marginLeft="8dp"
     android:layout_marginTop="8dp"
-    android:layout_marginRight="8dp">
+    android:layout_marginRight="8dp"
+    >
 
     <RelativeLayout
         android:id="@+id/relative"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/layout_corners_shape"
+        android:elevation="3dp"
+        >
 
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_width="150dp"
+            android:layout_width="110dp"
             android:layout_height="100dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
             android:scaleType="fitXY"/>
 
         <RelativeLayout
@@ -32,6 +37,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
+                android:textColor="@color/dark"
                 android:text="nbnb" />
 
             <com.idpz.bazarayesh.Views.mTextView
@@ -42,6 +48,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
+                android:textColor="@color/colorPrimary"
+
                 android:text="ghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
 
 

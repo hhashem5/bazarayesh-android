@@ -22,7 +22,7 @@ public class User {
     private Object password;
     @SerializedName("full_name")
     @Expose
-    private Object fullName;
+    private String fullName;
     @SerializedName("api_token")
     @Expose
     private String apiToken;
@@ -96,11 +96,11 @@ public class User {
         this.password = password;
     }
 
-    public Object getFullName() {
+    public String getFullName() {
         return fullName;
     }
 
-    public void setFullName(Object fullName) {
+    public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 

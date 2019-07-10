@@ -162,7 +162,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
     private String bytePicMain, bytePic;
     File mainFile, file;
-    Typeface irsans;
 
     int service_type, type;
     String title;
@@ -2010,6 +2009,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             return true;
         }
     }
+
 
 
     @Override

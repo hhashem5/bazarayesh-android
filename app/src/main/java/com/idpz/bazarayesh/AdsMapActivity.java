@@ -167,7 +167,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                                 @Override
                                 public boolean onMarkerClick(Marker marker) {
                                     Intent intent = new Intent(activity, AdsDetailsActivity.class);
-                                    intent.putExtra("id", ad.getId());
+                                    intent.putExtra("id", String.valueOf(ad.getId()));
                                     intent.putExtra("tag", "" + type);
                                     startActivity(intent);
                                     return false;

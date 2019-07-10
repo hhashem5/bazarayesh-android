@@ -201,7 +201,7 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
             case 2:
 
                 until = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                txt_until.setText("تاریخ " + since);
+                txt_until.setText("تاریخ " + until);
                 break;
         }
     }
@@ -271,7 +271,7 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
                 MainItem item = (MainItem) object;
 
                 txt_subject.setText(item.getTitle());
-                subject = item.getId();
+                subject = item.getTitle();
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
             }
@@ -326,7 +326,7 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
 
         params.put("scourse", since);
         params.put("duration", etDuration.getText().toString());
-        params.put("topic", Integer.valueOf(subject));
+        params.put("topic",subject);
         params.put("ecourse", until);
         params.put("course_name", etRelation.getText().toString());
         params.put("evidence", etServices.getText().toString());

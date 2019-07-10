@@ -38,6 +38,8 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
     List<com.idpz.bazarayesh.Models.AdDisscount.Ad> disscounts;
     List<com.idpz.bazarayesh.Models.AdAssignment.Ad> assignments;
     List<com.idpz.bazarayesh.Models.AdRecruiment.Ad> recruiments;
+    List<com.idpz.bazarayesh.Models.AdBride.Ad> brides;
+    List<com.idpz.bazarayesh.Models.AdRegCourse.Ad> regcourses;
 
 
     public UserAdvertisementAdapter(List<Ad> workshops, Context context, int layout) {
@@ -55,6 +57,14 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         this.context = context;
     }
 
+
+    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdBride.Ad> brides, int layout, Context context, int lastPosition) {
+        this.brides = brides;
+        this.layout = layout;
+        this.context = context;
+    }
+
+
     public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdAssignment.Ad> assignments, int layout, Context context) {
         this.assignments = assignments;
         this.layout = layout;
@@ -67,6 +77,11 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         this.context = context;
     }
 
+    public UserAdvertisementAdapter(int a, List<com.idpz.bazarayesh.Models.AdRegCourse.Ad> regcourses, Context context, int layout) {
+        this.regcourses = regcourses;
+        this.layout = layout;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -109,17 +124,30 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
             case R.layout.recruiment_adapter:
                 try {
 
+                    if (recruiments != null) {
+                        holder.text1.setText(recruiments.get(position).getSubject());
+                        holder.text2.setText(recruiments.get(position).getDescription());
+                        holder.rel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
 
-                    holder.text1.setText(recruiments.get(position).getSubject());
-                    holder.text2.setText(recruiments.get(position).getDescription());
-                    holder.rel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
+                                AlertDialogRec(recruiments.get(position).getSubject(), recruiments.get(position).getExpertise(), recruiments.get(position).getLvl(), recruiments.get(position).getConditions(), recruiments.get(position).getDescription());
+                            }
+                        });
 
-                            AlertDialogRec(recruiments.get(position).getSubject(), recruiments.get(position).getExpertise(), recruiments.get(position).getLvl(), recruiments.get(position).getConditions(), recruiments.get(position).getDescription());
-                        }
-                    });
+                    } else {
 
+                        holder.text1.setText(regcourses.get(position).getCourseName());
+                        holder.text2.setText(regcourses.get(position).getDescription());
+                        holder.rel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                AlertDialogRegCourse("از تاریخ " + regcourses.get(position).getScourse() + " تا تاریخ", regcourses.get(position).getDuration(), regcourses.get(position).getTopic(), regcourses.get(position).getCourseName(), regcourses.get(position).getEvidence(), regcourses.get(position).getDescription());
+                            }
+                        });
+
+
+                    }
 
                 } catch (Exception e) {
                     e.getMessage();
@@ -129,12 +157,12 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
 
                 try {
 
-                    holder.text1.setText(assignments.get(position).getType()+" "+assignments.get(position).getOptions());
+                    holder.text1.setText(assignments.get(position).getType() + " " + assignments.get(position).getOptions());
                     holder.text2.setText(assignments.get(position).getDescription());
                     holder.rel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            AlertDialogAssignMent(assignments.get(position).getType(),assignments.get(position).getOptions(),assignments.get(position).getDescription());
+                            AlertDialogAssignMent(assignments.get(position).getType(), assignments.get(position).getOptions(), assignments.get(position).getDescription());
                         }
                     });
 
@@ -143,15 +171,30 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                 break;
             case R.layout.disscounts_adapter:
                 try {
-                    holder.text1.setText(disscounts.get(position).getAffair());
-                    holder.text2.setText(disscounts.get(position).getDescription());
+                    if (disscounts != null) {
+                        holder.text1.setText(disscounts.get(position).getAffair());
+                        holder.text2.setText(disscounts.get(position).getDescription());
 
-                    holder.rel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            AlertDialogDisscount(disscounts.get(position).getSdate(), disscounts.get(position).getEdate(), disscounts.get(position).getDiscount(), disscounts.get(position).getAdEvent(), disscounts.get(position).getAffair(), disscounts.get(position).getDescription());
-                        }
-                    });
+                        holder.rel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                AlertDialogDisscount(disscounts.get(position).getSdate(), disscounts.get(position).getEdate(), disscounts.get(position).getDiscount(), disscounts.get(position).getAdEvent(), disscounts.get(position).getAffair(), disscounts.get(position).getDescription());
+                            }
+                        });
+                    } else {
+
+
+                        holder.text1.setText("درتاریخ " + brides.get(position).getDate());
+                        holder.text2.setText(brides.get(position).getDescription());
+
+                        holder.rel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                AlertDialogAssignMent(" درتاریخ " + brides.get(position).getDate(), " از ساعت " + brides.get(position).getShour() + " تا ساعت " + brides.get(position).getEhour(), brides.get(position).getDescription());
+                            }
+                        });
+                    }
 
                 } catch (Exception e) {
 
@@ -170,11 +213,19 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
             case R.layout.assignment_adapter:
                 return assignments.size();
             case R.layout.recruiment_adapter:
-                return recruiments.size();
+                if (recruiments != null)
+                    return recruiments.size();
+                else return regcourses.size();
+
             case R.layout.workshop_adapter:
                 return workshops.size();
+
             case R.layout.disscounts_adapter:
-                return disscounts.size();
+
+
+                if (disscounts != null)
+                    return disscounts.size();
+                else return brides.size();
 
         }
         return 0;
@@ -350,12 +401,45 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
 
 
         TextView btnExit = message.findViewById(R.id.btnExit);
-        txtTitle.setText(type
-                + " "
+        txtSubject.setText(type
+                + ""
                 + optins);
-        txtSubject.setVisibility(View.GONE);
+        txtTitle.setVisibility(View.GONE);
         txtlvl.setVisibility(View.GONE);
         txtTerms.setVisibility(View.GONE);
+        txtDesc.setText(desc);
+
+        //txtBody.setText();
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message.dismiss();
+            }
+        });
+        message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+    }
+
+
+    public void AlertDialogRegCourse(String from, String since, String course, String corseName, String degree, String desc) {
+
+        final Dialog message = new Dialog(context);
+        message.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        message.setContentView(R.layout.message_details_dialog);
+        message.setCancelable(true);
+        message.show();
+        TextView txtTitle = message.findViewById(R.id.txtTitle);
+        TextView txtSubject = message.findViewById(R.id.txtSubject);
+        TextView txtlvl = message.findViewById(R.id.txtlvl);
+        TextView txtTerms = message.findViewById(R.id.txtTerms);
+        TextView txtDesc = message.findViewById(R.id.txtDesc);
+
+
+        TextView btnExit = message.findViewById(R.id.btnExit);
+        txtSubject.setText(corseName);
+        txtTitle.setText(from);
+        txtlvl.setText(since);
+        txtTerms.setText("مبحث "+course + "مدرک "+degree);
         txtDesc.setText(desc);
 
         //txtBody.setText();

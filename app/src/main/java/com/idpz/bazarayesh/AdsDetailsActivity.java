@@ -21,7 +21,7 @@ public class AdsDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_ads_details);
 
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
+        id = (String) intent.getExtras().get("id");
         tag = intent.getStringExtra("tag");
 
         getAddDetails();
@@ -32,6 +32,8 @@ public class AdsDetailsActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         params.put("type", tag);
         params.put("id", id);
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
