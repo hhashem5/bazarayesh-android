@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.R;
 
@@ -45,6 +46,8 @@ public class MapsItemAdapter extends RecyclerView.Adapter<MapsItemAdapter.MyView
         item = items.get(position);
 
         holder.image.setImageResource(item.getImage());
+
+
         holder.title.setText(item.getTitle());
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +70,7 @@ public class MapsItemAdapter extends RecyclerView.Adapter<MapsItemAdapter.MyView
         TextView title;
 
         RelativeLayout relativeLayout;
-        CircleImageView image;
+     ImageView image;
 
 
 

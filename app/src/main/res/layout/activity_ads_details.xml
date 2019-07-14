@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+
     tools:context=".AdsDetailsActivity">
 
     <include layout="@layout/mtoolbar" />

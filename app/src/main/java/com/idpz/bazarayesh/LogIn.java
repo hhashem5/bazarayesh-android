@@ -40,11 +40,17 @@ public class LogIn extends BaseActivity implements View.OnClickListener {
 
     Typeface irsans;
 
+    String mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+
+
+
+
+
         irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
 
         pd = new ProgressDialog(activity);
@@ -53,7 +59,14 @@ public class LogIn extends BaseActivity implements View.OnClickListener {
 
         initViews();
 
+        try {
+            mobile = (String) getIntent().getExtras().get("mobile");
 
+            if (mobile!=null)
+                txtMobile.setText(mobile);
+
+        } catch (Exception e) {
+        }
         txtMobile.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {

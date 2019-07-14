@@ -218,7 +218,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی", "workshops"));
                 items.add(new MainItem(R.drawable.ic_noun_facial_wash, "تخفیف خدمات آرایشکاهی", "discount_ads"));
                 items.add(new MainItem(R.drawable.ic_search, "جستجو"));
-                items.add(new MainItem(R.drawable.ic_search, "همه", "all"));
+                items.add(new MainItem(R.drawable.ic_all, "همه", "all"));
 
                 break;
 
@@ -230,7 +230,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی", "workshops"));
                 items.add(new MainItem(R.drawable.ic_teaching, "تخفیف  دوره و کارگاه آموزشی", "discount_ads"));
                 items.add(new MainItem(R.drawable.ic_search, "جستجو"));
-                items.add(new MainItem(R.drawable.ic_search, "همه", "all"));
+                items.add(new MainItem(R.drawable.ic_all, "همه", "all"));
 
                 break;
 
@@ -239,9 +239,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
             case 5:
 
                 items.add(new MainItem(R.drawable.ic_employees, "استخدام", "recruiment"));
-                items.add(new MainItem(R.drawable.ic_employees, "تخفیف محصولات آرایشی", "discount_ads"));
+                items.add(new MainItem(R.drawable.ic_spray_bottle, "تخفیف محصولات آرایشی", "discount_ads"));
                 items.add(new MainItem(R.drawable.ic_search, "جستجو"));
-                items.add(new MainItem(R.drawable.ic_search, "همه", "all"));
+                items.add(new MainItem(R.drawable.ic_all, "همه", "all"));
 
                 break;
 
@@ -399,15 +399,15 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
-                Toast.makeText(MapsActivity.this, "", Toast.LENGTH_SHORT).show();
 
             }
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                mMap.clear();
                 try {
+                    mMap.clear();
+
                     if (!responseString.equals("ok")) {
 
                         ResponseListMember members = gson.fromJson(responseString, ResponseListMember.class);

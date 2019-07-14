@@ -90,7 +90,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/layout_corners_shape_transparent">
+                android:background="@drawable/layout_corners_shape_transparent4">
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/beautyshop"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/layout_corners_shape_transparent">
+                android:background="@drawable/layout_corners_shape_transparent5">
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/store"
@@ -145,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/layout_corners_shape_transparent">
+                android:background="@drawable/layout_corners_shape_transparent3">
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/teacher"
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/layout_corners_shape_transparent">
+                android:background="@drawable/layout_corners_shape_transparent2">
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/hairdersser"

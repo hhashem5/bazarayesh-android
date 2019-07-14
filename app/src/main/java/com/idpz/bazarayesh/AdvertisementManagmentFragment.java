@@ -322,7 +322,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
 
                     }
 
-                } else {
+                } else if (cardTag=="card2"){
 
                     switch (item.getTitle()) {
                         case "آگهی بازدید عروس":
@@ -330,6 +330,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                             Intent i1 = new Intent(getContext(), UserAdvertisementActivity.class);
                             i1.putExtra("tag", "Bride");
                             i1.putExtra("memid", memberId);
+                            i1.putExtra("ex",1);
                             startActivity(i1);
                             customType(getContext(), RIGHT_TO_LEFT);
                             break;
@@ -338,6 +339,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                             Intent i2 = new Intent(getContext(), UserAdvertisementActivity.class);
                             i2.putExtra("tag", "Recruiment");
                             i2.putExtra("memid", memberId);
+                            i2.putExtra("ex",1);
 
                             startActivity(i2);
                             customType(getContext(), RIGHT_TO_LEFT);
@@ -347,6 +349,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                             Intent i3 = new Intent(getContext(), UserAdvertisementActivity.class);
                             i3.putExtra("tag", "Reg_Course");
                             i3.putExtra("memid", memberId);
+                            i3.putExtra("ex",1);
 
                             startActivity(i3);
                             customType(getContext(), RIGHT_TO_LEFT);
@@ -357,6 +360,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                             i4.putExtra("tag", "Workshops");
 
                             i4.putExtra("memid", memberId);
+                            i4.putExtra("ex",1);
 
                             startActivity(i4);
                             customType(getContext(), RIGHT_TO_LEFT);
@@ -367,6 +371,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                             Intent i5 = new Intent(getContext(), UserAdvertisementActivity.class);
                             i5.putExtra("tag", "Discount_ads");
                             i5.putExtra("memid", memberId);
+                            i5.putExtra("ex",1);
 
                             startActivity(i5);
                             customType(getContext(), RIGHT_TO_LEFT);
@@ -376,7 +381,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                             Intent i6 = new Intent(getContext(), UserAdvertisementActivity.class);
                             i6.putExtra("tag", "Assignment");
                             i6.putExtra("memid", memberId);
-
+                            i6.putExtra("ex",1);
 
                             startActivity(i6);
                             customType(getContext(), RIGHT_TO_LEFT);
@@ -387,6 +392,89 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
                             Intent i7 = new Intent(getContext(), UserAdvertisementActivity.class);
                             i7.putExtra("tag", "Discount_ads");
                             i7.putExtra("memid", memberId);
+                            i7.putExtra("ex",1);
+
+
+                            startActivity(i7);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+                    }
+
+
+                }
+
+                else {
+
+
+                    switch (item.getTitle()) {
+                        case "آگهی بازدید عروس":
+
+                            Intent i1 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i1.putExtra("tag", "Bride");
+                            i1.putExtra("memid", memberId);
+                            i1.putExtra("ex",0);
+                            startActivity(i1);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "استخدام":
+                            Intent i2 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i2.putExtra("tag", "Recruiment");
+                            i2.putExtra("memid", memberId);
+                            i2.putExtra("ex",0);
+
+                            startActivity(i2);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "ثبتنام دوره های آموزشی":
+                            Intent i3 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i3.putExtra("tag", "Reg_Course");
+                            i3.putExtra("memid", memberId);
+                            i3.putExtra("ex",0);
+
+                            startActivity(i3);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "شروع ثبتنام کارگاه آموزشی":
+                            Intent i4 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i4.putExtra("tag", "Workshops");
+
+                            i4.putExtra("memid", memberId);
+                            i4.putExtra("ex",0);
+
+                            startActivity(i4);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+
+                        case "تخفیف  دوره و کارگاه آموزشی":
+                            Intent i5 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i5.putExtra("tag", "Discount_ads");
+                            i5.putExtra("memid", memberId);
+                            i5.putExtra("ex",0);
+
+                            startActivity(i5);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "واگذاری فضای آرایشگاهی":
+                            Intent i6 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i6.putExtra("tag", "Assignment");
+                            i6.putExtra("memid", memberId);
+                            i6.putExtra("ex",0);
+
+                            startActivity(i6);
+                            customType(getContext(), RIGHT_TO_LEFT);
+                            break;
+
+                        case "تخفیف خدمات آرایشکاهی":
+
+                            Intent i7 = new Intent(getContext(), UserAdvertisementActivity.class);
+                            i7.putExtra("tag", "Discount_ads");
+                            i7.putExtra("memid", memberId);
+                            i7.putExtra("ex",0);
 
 
                             startActivity(i7);

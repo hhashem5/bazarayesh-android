@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.idpz.bazarayesh.Models.ResponseUserUpdate;
 import com.idpz.bazarayesh.Models.User;
 import com.idpz.bazarayesh.Utils.Tools;
 import com.idpz.bazarayesh.Utils.crop.CropUtil;
@@ -70,7 +71,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private File profilePictureDirectory;
     private Bitmap bitmap;
 
-    TextView beautyshop, teacher, institude, store, hairdresser, txtName, txtEmail;
+    TextView beautyshop, teacher, institude, store, hairdresser, txtName, txtEmail,txtMobile;
 
     ImageView check1, check2, check3, check4, check5, myProfile_photoLikes, clickedImageView;
     Tools tools;
@@ -115,6 +116,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         myProfile_photoLikes = v.findViewById(R.id.myProfile_photoLikes);
         txtName = v.findViewById(R.id.txtName);
         txtEmail = v.findViewById(R.id.txtEmail);
+        txtMobile=v.findViewById(R.id.txtMobile);
         btnOk = v.findViewById(R.id.btnOk);
 
         beautyshop = v.findViewById(R.id.beautyshop);
@@ -158,6 +160,10 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         hairdresser.setOnClickListener(this);
         btnOk.setOnClickListener(this);
         myProfile_photoLikes.setOnClickListener(this);
+        try {
+            txtMobile.setText(tools.getSharePrf("mobile"));
+
+        }catch (Exception e){}
 
         prepareProfilePictureDirectory();
 
@@ -284,7 +290,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             if (requestCode == PICK_PICTURE && resultCode == Activity.RESULT_OK) {
                 Crop.of(data.getData(), Uri.fromFile(profilePictureDirectory))
                         .withMaxSize(900, 900)
-                        .withAspect(16, 9)
+                        .withAspect(1, 1)
                         .start(getActivity(), ProfileFragment.this, CROP_PICTURE);
 
 
@@ -560,6 +566,17 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 pd.dismiss();
+
+                try {
+
+                    if (responseString.contains("ok")) {
+
+                        ResponseUserUpdate response = gson.fromJson(responseString, ResponseUserUpdate.class);
+
+                        tools.addToSharePrf("user_Id", response.getUser().getId().toString());
+                    }
+                } catch (Exception e) {
+                }
             }
         });
 
@@ -581,7 +598,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         params.put("api_token", tools.getSharePrf("api_token"));
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
 
-        String url = tools.baseUrl + "user_info";
+        final String url = tools.baseUrl + "user_info";
 
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
@@ -599,9 +616,10 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                     User user = gson.fromJson(responseString, User.class);
 
-                    Glide.with(getContext().getApplicationContext())
-                            .load("http://arayesh.myzibadasht.ir" + user.getPic()).error(R.drawable.iconnopic)
-                            .into(myProfile_photoLikes);
+                    if (user.getPic() != null)
+                        Glide.with(getContext().getApplicationContext())
+                                .load("http://arayesh.myzibadasht.ir" + user.getPic()).error(R.drawable.iconnopic)
+                                .into(myProfile_photoLikes);
 
                     txtName.setText(user.getFullName().toString());
                     txtEmail.setText(user.getEmail().toString());

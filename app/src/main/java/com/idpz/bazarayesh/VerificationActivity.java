@@ -176,31 +176,33 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
                         tools.addToSharePrf("api_token", response.getUser().getApiToken());
 
                         tools.addToSharePrf("user_Id", String.valueOf(response.getUser().getId()));
-                        for (Member member : response.getUser().getMember()) {
-                            switch (member.getType()) {
+                        if (response.getUser().getMember().size() != 0) {
+                            for (Member member : response.getUser().getMember()) {
+                                switch (member.getType()) {
 
-                                case "1":
-                                    tools.addToSharePrf("memberId1", member.getId().toString());
+                                    case "1":
+                                        tools.addToSharePrf("memberId1", member.getId().toString());
 
-                                    break;
-                                case "2":
-                                    tools.addToSharePrf("memberId2", member.getId().toString());
+                                        break;
+                                    case "2":
+                                        tools.addToSharePrf("memberId2", member.getId().toString());
 
-                                    break;
+                                        break;
 
-                                case "3":
-                                    tools.addToSharePrf("memberId3", member.getId().toString());
+                                    case "3":
+                                        tools.addToSharePrf("memberId3", member.getId().toString());
 
-                                    break;
-                                case "4":
-                                    tools.addToSharePrf("memberId4", member.getId().toString());
+                                        break;
+                                    case "4":
+                                        tools.addToSharePrf("memberId4", member.getId().toString());
 
-                                    break;
-                                case "5":
+                                        break;
+                                    case "5":
 
-                                    tools.addToSharePrf("memberId5", member.getId().toString());
+                                        tools.addToSharePrf("memberId5", member.getId().toString());
 
-                                    break;
+                                        break;
+                                }
                             }
                         }
                         Intent i1 = new Intent(getApplicationContext(), MainActivity.class);
@@ -263,6 +265,7 @@ public class VerificationActivity extends BaseActivity implements View.OnClickLi
 
             case R.id.correct:
                 Intent i1 = new Intent(getApplicationContext(), LogIn.class);
+                i1.putExtra("mobile", tools.getSharePrf("mobile"));
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

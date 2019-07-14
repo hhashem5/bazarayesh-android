@@ -1,9 +1,16 @@
 package com.idpz.bazarayesh;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.idpz.bazarayesh.Models.SingleAdRecruiment.ResponseSingleRecruiment;
 import com.idpz.bazarayesh.Models.adDetails.AdDetailsModel;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -44,8 +51,14 @@ public class AdsDetailsActivity extends BaseActivity {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Gson gson = new Gson();
                 try {
-                    AdDetailsModel model = gson.fromJson(responseString, AdDetailsModel.class);
-                    model.getAd().getName();
+
+                    ResponseSingleRecruiment responseSingleRecruiment=gson.fromJson(responseString,ResponseSingleRecruiment.class);
+                    responseSingleRecruiment.getAd();
+
+
+
+//                    AdDetailsModel model = gson.fromJson(responseString, AdDetailsModel.class);
+//                    model.getAd().getName();
                 } catch (Exception e) {
                     e.getMessage();
                 }
@@ -53,4 +66,6 @@ public class AdsDetailsActivity extends BaseActivity {
         });
 
     }
+
+
 }

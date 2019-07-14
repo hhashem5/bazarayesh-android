@@ -95,7 +95,7 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
                 MainItem item1 = new MainItem("1", R.drawable.ic_chair, "#a83a7f", "آرایشگاه");
                 MainItem item2 = new MainItem("2", R.drawable.ic_teacher, "#a492ac", "مدرس");
                 MainItem item3 = new MainItem("3", R.drawable.ic_makeover, "#87bcc2", "آرایشگر");
-                MainItem item4 = new MainItem("4", R.drawable.ic_salon, "#EC87AC", "آموزشگاه");
+                MainItem item4 = new MainItem("4", R.drawable.ic_school, "#EC87AC", "آموزشگاه");
                 MainItem item0 = new MainItem("0", R.drawable.ic_salon, "#E555AC", "فروشگاه");
                 items.add(item3);
 
@@ -107,12 +107,12 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
                 break;
 
             case "page2":
-                MainItem item5 = new MainItem("5", R.drawable.ic_chair, "#a83a7f", "مو");
-                MainItem item6 = new MainItem("6", R.drawable.ic_teacher, "#a482ac", "پوست");
-                MainItem item7 = new MainItem("7", R.drawable.ic_makeover, "#87b222", "ابرو");
-                MainItem item8 = new MainItem("8", R.drawable.ic_salon, "#EC877C", "ناخن");
-                MainItem item9 = new MainItem("9", R.drawable.ic_salon, "#Eb87AC", "مژه");
-                MainItem item10 = new MainItem("10", R.drawable.ic_salon, "#E887AC", "چهره");
+                MainItem item5 = new MainItem("5", R.drawable.ic_comb2, "#a83a7f", "مو");
+                MainItem item6 = new MainItem("6", R.drawable.ic_skin, "#a482ac", "پوست");
+                MainItem item7 = new MainItem("7", R.drawable.ic_eyebrows, "#87b222", "ابرو");
+                MainItem item8 = new MainItem("8", R.drawable.nail1, "#EC877C", "ناخن");
+                MainItem item9 = new MainItem("9", R.drawable.ic_eyelashes, "#Eb87AC", "مژه");
+                MainItem item10 = new MainItem("10", R.drawable.ic_face, "#E887AC", "چهره");
 
 
                 items.add(item5);
@@ -126,11 +126,11 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
             case "page3":
 
-                MainItem item11 = new MainItem("11", R.drawable.ic_chair, "#b83a7f", "شینیون");
-                MainItem item12 = new MainItem("12", R.drawable.ic_teacher, "#a592ac", "کراتین وصافی");
-                MainItem item13 = new MainItem("13", R.drawable.ic_makeover, "#c7bcc2", "کوتاهی مو");
-                MainItem item14 = new MainItem("14", R.drawable.ic_salon, "#EC77AC", "رنگ مش");
-                MainItem item15 = new MainItem("15", R.drawable.ic_salon, "#bC87AC", "بافت براشینگ");
+                MainItem item11 = new MainItem("11", R.drawable.ic_shinion, "#b83a7f", "شینیون");
+                MainItem item12 = new MainItem("12", R.drawable.ic_hairstyle, "#a592ac", "کراتین وصافی");
+                MainItem item13 = new MainItem("13", R.drawable.ic_haircut2, "#c7bcc2", "کوتاهی مو");
+                MainItem item14 = new MainItem("14", R.drawable.ic_hairstyle4, "#EC77AC", "رنگ مش");
+                MainItem item15 = new MainItem("15", R.drawable.ic_baft, "#bC87AC", "بافت براشینگ");
 
 
                 items.add(item11);
@@ -144,10 +144,10 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
             case "page3_1":
 
 
-                MainItem item16 = new MainItem("16", R.drawable.ic_chair, "#b83a7f", "اپیلاسیون");
-                MainItem item17 = new MainItem("17", R.drawable.ic_teacher, "#a592ac", "تاتو");
-                MainItem item18 = new MainItem("18", R.drawable.ic_makeover, "#c7bcc2", "مراقبت از پوست");
-                MainItem item19 = new MainItem("19", R.drawable.ic_salon, "#EC77AC", "اصلاح صورت");
+                MainItem item16 = new MainItem("16", R.drawable.ic_wax, "#b83a7f", "اپیلاسیون");
+                MainItem item17 = new MainItem("17", R.drawable.ic_tatoo, "#a592ac", "تاتو");
+                MainItem item18 = new MainItem("18", R.drawable.ic_skin_care, "#c7bcc2", "مراقبت از پوست");
+                MainItem item19 = new MainItem("19", R.drawable.ic_skin, "#EC77AC", "اصلاح صورت");
 
 
                 items.add(item16);
@@ -159,8 +159,8 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
             case "page3_2":
 
-                MainItem item20 = new MainItem("20", R.drawable.ic_chair, "#b83a7f", "مکاپ و گریم");
-                MainItem item21 = new MainItem("21", R.drawable.ic_teacher, "#a592ac", "آرایش عروس");
+                MainItem item20 = new MainItem("20", R.drawable.ic_face, "#b83a7f", "مکاپ و گریم");
+                MainItem item21 = new MainItem("21", R.drawable.ic_bride2, "#a592ac", "آرایش عروس");
 
 
                 items.add(item20);
@@ -170,7 +170,7 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
             case "page3_3":
 
-                MainItem item22 = new MainItem("22", R.drawable.ic_chair, "#b83a7f", "اکستنشن کار مژه");
+                MainItem item22 = new MainItem("22", R.drawable.ic_eyelashes, "#b83a7f", "اکستنشن کار مژه");
 
 
                 items.add(item22);
@@ -179,7 +179,7 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
             case "page3_4":
 
-                MainItem item23 = new MainItem("23", R.drawable.ic_chair, "#b83a7f", "ناخن کار");
+                MainItem item23 = new MainItem("23", R.drawable.nail1, "#b83a7f", "ناخن کار");
 
 
                 items.add(item23);
@@ -188,7 +188,7 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
             case "page3_5":
 
-                MainItem item24 = new MainItem("24", R.drawable.ic_chair, "#b83a7f", "ابرو کار");
+                MainItem item24 = new MainItem("24", R.drawable.ic_eyelashes, "#b83a7f", "ابرو کار");
 
 
                 items.add(item24);
@@ -520,56 +520,36 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
 
             case "page3_1":
-                imgbBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setMyAdapter("page2");
+
+                setMyAdapter("page2");
 
 
-                    }
-                });
                 break;
 
             case "page3_5":
-                imgbBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setMyAdapter("page2");
+
+                setMyAdapter("page2");
 
 
-                    }
-                });
                 break;
 
             case "page3_4":
-                imgbBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setMyAdapter("page2");
+
+                setMyAdapter("page2");
 
 
-                    }
-                });
                 break;
             case "page3_3":
-                imgbBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setMyAdapter("page2");
+
+                setMyAdapter("page2");
 
 
-                    }
-                });
                 break;
             case "page3_2":
-                imgbBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setMyAdapter("page2");
+
+                setMyAdapter("page2");
 
 
-                    }
-                });
                 break;
         }
 

@@ -57,6 +57,9 @@ public class MainActivity extends BaseActivity {
                 navigation.setSelectedItemId(R.id.navigation_profile);
                 loadFragment(new ProfileFragment());
 
+            } else if (getIntent().getStringExtra("back").equals("3")) {
+                navigation.setSelectedItemId(R.id.navigation_advertise);
+                loadFragment(new AdvertiseFragment());
             } else {
                 navigation.setSelectedItemId(R.id.navigation_home);
                 loadFragment(new HomeFragment());

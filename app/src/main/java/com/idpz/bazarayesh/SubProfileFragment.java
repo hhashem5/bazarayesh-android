@@ -1292,7 +1292,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         params.put("type", tag);
         params.put("full_name", txtName.getText().toString());
         params.put("manager_name", txtBoss.getText().toString());
-        params.put("phone1", txtphone.getText().toString());
+        params.put("phone1", tools.getSharePrf("mobile"));
         params.put("address", txtaddress.getText().toString());
         params.put("telegram", txttelegram.getText().toString());
         params.put("instagram", txtinstagram.getText().toString());
@@ -1680,6 +1680,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             public void onClick(View v) {
 
                 Intent i1 = new Intent(getContext(), MainActivity.class);
+                i1.putExtra("back","1");
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1766,6 +1767,11 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     txtaddress.setText(response.getData().getAddress());
                     txtinstagram.setText(response.getData().getInstagram());
                     txttelegram.setText(response.getData().getTelegram());
+
+                    googleMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(response.getData().getLat(),response.getData().getLng()))
+                            .draggable(true));
+
 
 
                     Glide.with(getContext())

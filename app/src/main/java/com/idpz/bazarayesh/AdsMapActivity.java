@@ -1,12 +1,15 @@
 package com.idpz.bazarayesh;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -16,6 +19,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,8 +32,16 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 import com.idpz.bazarayesh.Adapters.MapsItemAdapter;
+import com.idpz.bazarayesh.Models.AdRegCourse.ResponseRegCourse;
 import com.idpz.bazarayesh.Models.MainItem;
+import com.idpz.bazarayesh.Models.SingelAdBride.ResponseSingleBride;
+import com.idpz.bazarayesh.Models.SingleAdAssign.ResponseSingleAssign;
+import com.idpz.bazarayesh.Models.SingleAdCourse.ResponseSingleCourse;
+import com.idpz.bazarayesh.Models.SingleAdDiscount.ResponseSingleDiscount;
+import com.idpz.bazarayesh.Models.SingleAdWorkShop.ResponseSingleWorkShop;
+import com.idpz.bazarayesh.Models.SingleAdRecruiment.ResponseSingleRecruiment;
 import com.idpz.bazarayesh.Models.estekhdam.Ad;
 import com.idpz.bazarayesh.Models.estekhdam.AdsMapModel;
 import com.idpz.bazarayesh.Utils.MyLocation;
@@ -58,6 +71,8 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
     int type = 0;
 
     int service_type = 0;
+    String tag = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +143,44 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
     //list amozeshgah va arayeshgah va foroshgah
     public void getLists(final int type, String filterTag, double lat, double lng) {
+        switch (type) {
+            case 1:
+                tag = "discount_ads";
+                break;
+
+            case 2:
+                tag = "discount_ads";
+
+                break;
+
+            case 3:
+                tag = "recruiments";
+                break;
+
+            case 4:
+                tag = "assignments";
+                break;
+
+            case 5:
+                tag = "courses";
+                break;
+
+            case 6:
+                tag = "workshops";
+                break;
+
+            case 7:
+                tag = "brides";
+                break;
+
+            case 8:
+                tag = "assignments";
+                break;
+
+            case 9:
+                tag = "discount_ads";
+                break;
+        }
 
         String url = tools.baseUrl + "ads_list";
         RequestParams params = new RequestParams();
@@ -135,6 +188,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         params.put("lat", 35.706337);
         params.put("lng", 51.356085);
         params.put("type", type);
+
         params.put("api_token", tools.getSharePrf("api_token"));
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
 
@@ -154,6 +208,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
                     if (!responseString.equals("ok")) {
 
+
                         final AdsMapModel members = gson.fromJson(responseString, AdsMapModel.class);
 
                         for (final Ad ad : members.getAds()) {
@@ -162,14 +217,24 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                                     .position(new LatLng(ad.getLat(), ad.getLng()))
                                     .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin)));
                             marker.setTitle(ad.getName());
+                            marker.setTag(ad.getId());
 
                             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(Marker marker) {
-                                    Intent intent = new Intent(activity, AdsDetailsActivity.class);
-                                    intent.putExtra("id", String.valueOf(ad.getId()));
-                                    intent.putExtra("tag", "" + type);
-                                    startActivity(intent);
+
+                                    for (Ad ad : members.getAds()) {
+                                        if (ad.getId().equals(marker.getTag())) {
+//                                        Intent intent = new Intent(activity, AdsDetailsActivity.class);
+//                                        intent.putExtra("id", String.valueOf(ad.getId()));
+//                                        intent.putExtra("tag",  tag);
+//                                        startActivity(intent);
+
+                                            getAddDetails(String.valueOf(ad.getId()), tag);
+                                        }
+
+
+                                    }
                                     return false;
                                 }
                             });
@@ -190,46 +255,46 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
         switch (type) {
             case 3:
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگاه", "1"));
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگر", "2"));
-                items.add(new MainItem(R.drawable.ic_bride, "آموزشگاه", "3"));
-                items.add(new MainItem(R.drawable.ic_bride, "فروشگاه", "5"));
-                items.add(new MainItem(R.drawable.ic_bride, "مدرس", "4"));
+                items.add(new MainItem(R.drawable.ic_mirror, "آرایشگاه", "1"));
+                items.add(new MainItem(R.drawable.ic_businesswoman, "آرایشگر", "2"));
+                items.add(new MainItem(R.drawable.ic_classroom, "آموزشگاه", "3"));
+                items.add(new MainItem(R.drawable.ic_store, "فروشگاه", "5"));
+                items.add(new MainItem(R.drawable.ic_teacher, "مدرس", "4"));
                 break;
             case 6:
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگاه", "1"));
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگر", "2"));
-                items.add(new MainItem(R.drawable.ic_bride, "آموزشگاه", "3"));
-                items.add(new MainItem(R.drawable.ic_bride, "مدرس", "4"));
+                items.add(new MainItem(R.drawable.ic_mirror, "آرایشگاه", "1"));
+                items.add(new MainItem(R.drawable.ic_businesswoman, "آرایشگر", "2"));
+                items.add(new MainItem(R.drawable.ic_classroom, "آموزشگاه", "3"));
+                items.add(new MainItem(R.drawable.ic_teacher, "مدرس", "4"));
                 break;
             case 4:
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگاه", "1"));
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگر", "2"));
+                items.add(new MainItem(R.drawable.ic_businesswoman, "آرایشگر", "2"));
+                items.add(new MainItem(R.drawable.ic_classroom, "آموزشگاه", "3"));
                 break;
             case 5:
-                items.add(new MainItem(R.drawable.ic_bride, "آموزشگاه", "3"));
-                items.add(new MainItem(R.drawable.ic_bride, "مدرس", "4"));
+                items.add(new MainItem(R.drawable.ic_classroom, "آموزشگاه", "3"));
+                items.add(new MainItem(R.drawable.ic_teacher, "مدرس", "4"));
                 break;
             case 7:
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگاه", "1"));
+                items.add(new MainItem(R.drawable.ic_mirror, "آرایشگاه", "1"));
 
                 break;
             case 1:
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگاه", "1"));
-                items.add(new MainItem(R.drawable.ic_employees, "آرایشگر", "2"));
+                items.add(new MainItem(R.drawable.ic_mirror, "آرایشگاه", "1"));
+                items.add(new MainItem(R.drawable.ic_businesswoman, "آرایشگر", "2"));
 
                 break;
             case 8:
-                items.add(new MainItem(R.drawable.ic_bride, "آموزشگاه", "3"));
-                items.add(new MainItem(R.drawable.ic_bride, "مدرس", "4"));
+                items.add(new MainItem(R.drawable.ic_classroom, "آموزشگاه", "3"));
+                items.add(new MainItem(R.drawable.ic_teacher, "مدرس", "4"));
                 break;
             case 9:
-                items.add(new MainItem(R.drawable.ic_bride, "فروشگاه", "5"));
+                items.add(new MainItem(R.drawable.ic_store, "فروشگاه", "5"));
 
                 break;
             case 2:
-                items.add(new MainItem(R.drawable.ic_bride, "آموزشگاه", "3"));
-                items.add(new MainItem(R.drawable.ic_bride, "مدرس", "4"));
+                items.add(new MainItem(R.drawable.ic_classroom, "آموزشگاه", "3"));
+                items.add(new MainItem(R.drawable.ic_teacher, "مدرس", "4"));
                 break;
 
         }
@@ -310,6 +375,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.putExtra("back","3");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 customType(context, BOTTOM_TO_UP);
 
@@ -325,5 +391,181 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    private void getAddDetails(String id, final String tag) {
+        String url = tools.baseUrl + "single_ad";
+        RequestParams params = new RequestParams();
+        params.put("type", tag);
+        params.put("id", id);
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                statusCode = statusCode;
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Gson gson = new Gson();
+                try {
+
+                    switch (tag) {
+                        case "recruiments":
+
+                            ResponseSingleRecruiment responseSingleRecruiment = gson.fromJson(responseString, ResponseSingleRecruiment.class);
+                            responseSingleRecruiment.getAd();
+
+                            AlertDialog("عنوان تخصص: "+responseSingleRecruiment.getAd().getExpertise(),
+                                    "موضوع:" + responseSingleRecruiment.getAd().getSubject(), "سطح تخصص: " + responseSingleRecruiment.getAd().getLvl()
+                                    , "شرایط استخدام: " + responseSingleRecruiment.getAd().getConditions(), responseSingleRecruiment.getAd().getDescription(),responseSingleRecruiment.getAd().getMemId());
+                            break;
+
+                        case "workshops":
+                            ResponseSingleWorkShop responseSingleWorkShop = gson.fromJson(responseString, ResponseSingleWorkShop.class);
+                            responseSingleWorkShop.getAd();
+
+                            AlertDialog("موضوع کارگاه: "+responseSingleWorkShop.getAd().getSubject(), "در تاریخ: " + responseSingleWorkShop.getAd().getDate()
+                                    , "مدرک: " + responseSingleWorkShop.getAd().getEvidence(), responseSingleWorkShop.getAd().getDescription(), "",responseSingleWorkShop.getAd().getMemId());
+                            break;
+
+
+                        case "assignments":
+
+                            ResponseSingleAssign responseSingleAssign = gson.fromJson(responseString, ResponseSingleAssign.class);
+                            responseSingleAssign.getAd();
+
+                            AlertDialog("نوع واگذاری: " + responseSingleAssign.getAd().getType()
+                                    , "مورد واگذاری: " + responseSingleAssign.getAd().getOptions() + responseSingleAssign.getAd().getDescription()
+                                    , "", "", "",responseSingleAssign.getAd().getMemId());
+
+                            break;
+
+                        case "discount_ads":
+
+
+                            ResponseSingleDiscount responseSingleDiscount=gson.fromJson(responseString,ResponseSingleDiscount.class);
+                            responseSingleDiscount.getAd();
+                            AlertDialog("تخفیف: "+responseSingleDiscount.getAd().getAffair(),
+                                    "از تاریخ: "+responseSingleDiscount.getAd().getSdate()+" تا تاریخ: "+responseSingleDiscount.getAd().getEdate(),
+                                    " به مناسبت: "+responseSingleDiscount.getAd().getAdEvent(),
+                                    " درصد تخفیف: "+responseSingleDiscount.getAd().getDiscount(),
+                                    responseSingleDiscount.getAd().getDescription(),responseSingleDiscount.getAd().getMemId());
+                            break;
+
+                        case "brides":
+
+                            ResponseSingleBride responseSingleBride = gson.fromJson(responseString, ResponseSingleBride.class);
+                            responseSingleBride.getAd();
+
+                            AlertDialog("در تاریخ :" + responseSingleBride.getAd().getDate()
+                                    , "از ساعت: " + responseSingleBride.getAd().getShour() + "  تا ساعت: " + responseSingleBride.getAd().getEhour()
+                                    , responseSingleBride.getAd().getDescription(), "", "",responseSingleBride.getAd().getMemId());
+
+                            break;
+
+
+                        case "courses":
+
+                            ResponseSingleCourse responseSingleCourse = gson.fromJson(responseString, ResponseSingleCourse.class);
+                            responseSingleCourse.getAd();
+
+                            AlertDialog("موضوع: " + responseSingleCourse.getAd().getTopic(), "نام دوره: " + responseSingleCourse.getAd().getCourseName()
+                                    , "مدرک: " + responseSingleCourse.getAd().getEvidence(),
+                                    "مدت دوره: " + responseSingleCourse.getAd().getDuration() + "از تاریخ: " + responseSingleCourse.getAd().getScourse() + " تا تاریخ: " + responseSingleCourse.getAd().getEcourse(),
+                                    responseSingleCourse.getAd().getDescription(),responseSingleCourse.getAd().getMemId());
+                            break;
+
+                    }
+
+
+//                    AdDetailsModel model = gson.fromJson(responseString, AdDetailsModel.class);
+//                    model.getAd().getName();
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+            }
+        });
+
+    }
+
+    public void AlertDialog(String title, String subject, String text3, String text4, String text5, final int id) {
+
+        final Dialog message = new Dialog(context);
+        message.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        message.setContentView(R.layout.message_details_dialog);
+        message.setCancelable(true);
+        message.show();
+        TextView txtTitle = message.findViewById(R.id.txtTitle);
+        TextView txtSubject = message.findViewById(R.id.txtSubject);
+        TextView txt3 = message.findViewById(R.id.txtlvl);
+        TextView txt4 = message.findViewById(R.id.txtTerms);
+        TextView txt5 = message.findViewById(R.id.txtDesc);
+
+
+
+        TextView btnExit = message.findViewById(R.id.btnExit);
+        TextView btnProfile=message.findViewById(R.id.btnMember);
+        btnProfile.setVisibility(View.VISIBLE);
+        if (title.equals("")) {
+            txtTitle.setVisibility(View.GONE);
+        }
+        if (subject.equals("")) {
+            txtSubject.setVisibility(View.GONE);
+        }
+        if (text3.equals("")) {
+            txt3.setVisibility(View.GONE);
+        }
+        if (text4.equals("")) {
+            txt4.setVisibility(View.GONE);
+        }
+        if (text5.equals("")) {
+            txt5.setVisibility(View.GONE);
+        }
+
+
+        txtTitle.setText(title);
+        txtSubject.setText(subject);
+        txt3.setText(text3);
+        txt4.setText(text4);
+        txt5.setText(text5);
+
+        //txtBody.setText();
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                message.dismiss();
+            }
+        });
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent =new Intent(AdsMapActivity.this,ShowMemberDetail.class);
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
+
+        message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(getAppContext(), MainActivity.class);
+        intent.setAction(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("back","3");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        customType(context, BOTTOM_TO_UP);
+
+        startActivity(intent);
+        customType(context, RIGHT_TO_LEFT);
+
+        finish();
     }
 }

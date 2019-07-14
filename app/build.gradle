@@ -13,7 +13,7 @@ android {
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "android.support.show_member_detail.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -80,8 +80,8 @@ dependencies {
     //  implementation 'com.github.mumayank:AirLocation:1.2'
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.show_member_detail:runner:1.0.2'
+    androidTestImplementation 'com.android.support.show_member_detail.espresso:espresso-core:3.0.2'
     implementation 'org.jetbrains:annotations-java5:15.0'
     implementation 'org.jetbrains:annotations-java5:15.0'
 

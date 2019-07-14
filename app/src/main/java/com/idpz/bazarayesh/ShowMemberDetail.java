@@ -1,7 +1,7 @@
 package com.idpz.bazarayesh;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +15,6 @@ import com.idpz.bazarayesh.Adapters.MemberDetailAdapter;
 import com.idpz.bazarayesh.Models.Award;
 import com.idpz.bazarayesh.Models.FamousCustomer;
 import com.idpz.bazarayesh.Models.MainItem;
-import com.idpz.bazarayesh.Models.ResponseListMember;
 import com.idpz.bazarayesh.Models.Service;
 import com.idpz.bazarayesh.Models.WorkplacePic;
 import com.idpz.bazarayesh.Models.estekhdam.ResponseMemberDetail;
@@ -38,30 +37,29 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
     int service_type = 0;
     double lat, lng;
 
+    String Instagram, Telegram;
     List<MainItem> itemsAward = new ArrayList<>();
     List<MainItem> itemsServices = new ArrayList<>();
     List<MainItem> itemsWorkSpace = new ArrayList<>();
     List<MainItem> itemsFamous = new ArrayList<>();
 
-    RecyclerView recyclerfamausCustomer, recycleworkSpace, recycleservices, recycleaward, recyclerworkShop,recycleworkShop;
+    RecyclerView recyclerfamausCustomer, recycleworkSpace, recycleservices, recycleaward, recyclerworkShop, recycleworkShop;
 
-    ImageView imgLogo;
+    ImageView imgLogo, imgTelegram, imgInsta;
 
-    TextView txtName, txtAddress, txtTelegram, txtInsta, awardTitle, workSpaceTitle, servicesTitle, workShopTitle, famousCustomerTitle;
+    TextView txtName, txtAddress, awardTitle, workSpaceTitle, servicesTitle, workShopTitle, famousCustomerTitle;
 
-    RelativeLayout relativeLayout6,relativeLayout2,relativeLayout3,relativeLayout4,relativeLayout5;
+    RelativeLayout relativeLayout6, relativeLayout2, relativeLayout3, relativeLayout4, relativeLayout5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_member_detail);
+        setContentView(R.layout.show_member_detail);
 
         try {
             id = (int) getIntent().getExtras().get("id");
         } catch (Exception e) {
         }
-
-
 
 
         settoolbarText("جزئیات");
@@ -76,12 +74,14 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
         imgbBack.setVisibility(View.VISIBLE);
 
-        relativeLayout6=findViewById(R.id.relative6);
-        relativeLayout2=findViewById(R.id.relative2);
-        relativeLayout3=findViewById(R.id.relative3);
-        relativeLayout4=findViewById(R.id.relative4);
-        relativeLayout5=findViewById(R.id.relative5);
+        relativeLayout6 = findViewById(R.id.relative6);
+        relativeLayout2 = findViewById(R.id.relative2);
+        relativeLayout3 = findViewById(R.id.relative3);
+        relativeLayout4 = findViewById(R.id.relative4);
+        relativeLayout5 = findViewById(R.id.relative5);
 
+        imgInsta = findViewById(R.id.instagram);
+        imgTelegram = findViewById(R.id.telegram);
 
         recyclerfamausCustomer = findViewById(R.id.famousCustomer);
         recycleworkSpace = findViewById(R.id.workSpace);
@@ -91,11 +91,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
         imgLogo = findViewById(R.id.imgLogo);
 
-        txtInsta = findViewById(R.id.txtinsta);
         txtName = findViewById(R.id.txtName);
         txtAddress = findViewById(R.id.txtAddress);
-
-        txtTelegram = findViewById(R.id.txttelegram);
 
 
         awardTitle = findViewById(R.id.awardTitle);
@@ -107,6 +104,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
         imgbBack.setOnClickListener(this);
 
+        imgTelegram.setOnClickListener(this);
+        imgInsta.setOnClickListener(this);
     }
 
 
@@ -144,8 +143,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
                     txtAddress.setText(response.getMember().getAddress());
 
-                    txtInsta.setText(response.getMember().getInstagram());
-                    txtTelegram.setText(response.getMember().getTelegram());
+                    Instagram = response.getMember().getInstagram();
+                    Telegram = response.getMember().getTelegram();
                     if (response.getMember().getAward().size() != 0) {
 
                         for (Award award : response.getMember().getAward()) {
@@ -226,6 +225,16 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
                 finish();
 
+                break;
+
+            case R.id.instagram:
+                Intent instagram = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/" + Telegram));
+                startActivity(instagram);
+                break;
+
+            case R.id.telegram:
+                Intent telegram = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/" + Telegram));
+                startActivity(telegram);
                 break;
         }
     }

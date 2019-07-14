@@ -37,9 +37,18 @@ public class UserAdvertisementActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_advertisement);
 
-        memberId = (String) getIntent().getExtras().get("memid");
+       try {
+           memberId = (String) getIntent().getExtras().get("memid");
+       }catch (Exception e){}
 
-        ad_type = (String) getIntent().getExtras().get("tag");
+        try {
+            ad_type = (String) getIntent().getExtras().get("tag");
+        }catch (Exception e){}
+
+     try {
+         ex= (int) getIntent().getExtras().get("ex");
+     }catch (Exception e){}
+
 
         recycler = findViewById(R.id.recycle);
 

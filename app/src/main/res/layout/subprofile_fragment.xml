@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    >
 
     <RelativeLayout
         android:id="@+id/lnIndicator"
@@ -307,10 +309,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
+                    android:visibility="gone"
                     android:text="شماره تلفن همراه" />
 
                 <com.idpz.bazarayesh.Views.mEditText
                     android:id="@+id/txtphone"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_below="@+id/Name"
@@ -412,7 +416,7 @@
                 <RelativeLayout
                     android:id="@+id/lnRelFrag"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="180dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/dashed_back"
                     android:padding="4dp">

@@ -14,14 +14,20 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.idpz.bazarayesh.Models.AdWorkShop.Ad;
 import com.idpz.bazarayesh.R;
 import com.idpz.bazarayesh.Utils.Tools;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertisementAdapter.NewsViewHolder> {
@@ -55,6 +61,7 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         this.disscounts = disscounts;
         this.layout = layout;
         this.context = context;
+        tools = new Tools(context);
     }
 
 
@@ -62,6 +69,8 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         this.brides = brides;
         this.layout = layout;
         this.context = context;
+        tools = new Tools(context);
+
     }
 
 
@@ -69,18 +78,24 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         this.assignments = assignments;
         this.layout = layout;
         this.context = context;
+        tools = new Tools(context);
+
     }
 
     public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdRecruiment.Ad> recruiments, Context context, int layout, int lastPosition) {
         this.recruiments = recruiments;
         this.layout = layout;
         this.context = context;
+        tools = new Tools(context);
+
     }
 
     public UserAdvertisementAdapter(int a, List<com.idpz.bazarayesh.Models.AdRegCourse.Ad> regcourses, Context context, int layout) {
         this.regcourses = regcourses;
         this.layout = layout;
         this.context = context;
+        tools = new Tools(context);
+
     }
 
     @NonNull
@@ -114,6 +129,14 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                         }
                     });
 
+
+                    holder.trash.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            removeAds(position, "workshops", workshops.get(position).getId());
+
+                        }
+                    });
                 } catch (Exception e) {
                 }
 
@@ -135,6 +158,17 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                             }
                         });
 
+
+                        holder.trash.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                removeAds(position, "recruiments", recruiments.get(position).getId());
+
+                            }
+                        });
+
+
                     } else {
 
                         holder.text1.setText(regcourses.get(position).getCourseName());
@@ -147,6 +181,13 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                         });
 
 
+                        holder.trash.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                removeAds(position, "courses", regcourses.get(position).getId());
+
+                            }
+                        });
                     }
 
                 } catch (Exception e) {
@@ -166,6 +207,14 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                         }
                     });
 
+
+                    holder.trash.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            removeAds(position, "assignments", assignments.get(position).getId());
+
+                        }
+                    });
                 } catch (Exception e) {
                 }
                 break;
@@ -181,6 +230,15 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                                 AlertDialogDisscount(disscounts.get(position).getSdate(), disscounts.get(position).getEdate(), disscounts.get(position).getDiscount(), disscounts.get(position).getAdEvent(), disscounts.get(position).getAffair(), disscounts.get(position).getDescription());
                             }
                         });
+
+                        holder.trash.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                removeAds(position, "Discount_ads", disscounts.get(position).getId());
+
+                            }
+                        });
+
                     } else {
 
 
@@ -194,6 +252,16 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                                 AlertDialogAssignMent(" درتاریخ " + brides.get(position).getDate(), " از ساعت " + brides.get(position).getShour() + " تا ساعت " + brides.get(position).getEhour(), brides.get(position).getDescription());
                             }
                         });
+
+
+                        holder.trash.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                removeAds(position, "brides", brides.get(position).getId());
+
+                            }
+                        });
+
                     }
 
                 } catch (Exception e) {
@@ -239,6 +307,8 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
 
         RelativeLayout rel;
 
+        ImageView trash;
+
         public NewsViewHolder(View itemView) {
             // bind karadne view ha
             super(itemView);
@@ -248,6 +318,7 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                 case R.layout.assignment_adapter:
                     text1 = itemView.findViewById(R.id.text1);
                     text2 = itemView.findViewById(R.id.text2);
+                    trash = itemView.findViewById(R.id.trash);
 
                     rel = itemView.findViewById(R.id.rel);
 
@@ -256,18 +327,23 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
 
                     text1 = itemView.findViewById(R.id.text1);
                     text2 = itemView.findViewById(R.id.text2);
+                    trash = itemView.findViewById(R.id.trash);
 
                     rel = itemView.findViewById(R.id.rel);
                     break;
                 case R.layout.disscounts_adapter:
                     text1 = itemView.findViewById(R.id.text1);
                     text2 = itemView.findViewById(R.id.text2);
+                    trash = itemView.findViewById(R.id.trash);
+
                     rel = itemView.findViewById(R.id.rel);
 
                     break;
                 case R.layout.workshop_adapter:
                     text1 = itemView.findViewById(R.id.text1);
                     text2 = itemView.findViewById(R.id.text2);
+                    trash = itemView.findViewById(R.id.trash);
+
                     rel = itemView.findViewById(R.id.rel);
 
                     break;
@@ -439,7 +515,7 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         txtSubject.setText(corseName);
         txtTitle.setText(from);
         txtlvl.setText(since);
-        txtTerms.setText("مبحث "+course + "مدرک "+degree);
+        txtTerms.setText("مبحث " + course + "مدرک " + degree);
         txtDesc.setText(desc);
 
         //txtBody.setText();
@@ -452,4 +528,70 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     }
+
+    public void removeAds(final int position, final String type, int id) {
+
+        String url = "http://arayesh.myzibadasht.ir/api/ad_del";
+        RequestParams params = new RequestParams();
+        params.put("id", id);
+        params.put("type", type);
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        AsyncHttpClient client = new AsyncHttpClient();
+
+        client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    switch (type) {
+                        case "recruiments":
+                            recruiments.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, recruiments.size());
+
+                            break;
+
+                        case "assignmets":
+                            assignments.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, assignments.size());
+                            break;
+                        case "discount_ads":
+                            disscounts.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, disscounts.size());
+
+                            break;
+
+                        case "workshops":
+                            workshops.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, workshops.size());
+                            break;
+
+                        case "brides":
+                            brides.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, brides.size());
+                            break;
+
+                        case "courses":
+                            regcourses.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, regcourses.size());
+                            break;
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+
+    }
+
+
 }

@@ -17,9 +17,9 @@
             android:id="@+id/animation_view"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
-            android:layout_centerHorizontal="true"
             app:lottie_fileName="tv.json"
             app:lottie_loop="true" />
 
@@ -78,10 +78,9 @@
                 android:textColor="@color/dark" />
 
 
-            <com.idpz.bazarayesh.Views.mTextView
-                android:id="@+id/btnExit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
@@ -90,9 +89,67 @@
                 android:gravity="center|center_vertical"
                 android:paddingLeft="32dp"
                 android:paddingTop="8dp"
-                android:paddingRight="32dp"
-                android:text="بستن"
-                android:textColor="@color/colorPrimary" />
+                android:paddingRight="32dp">
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/btnExit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="32dp"
+                    android:text="بستن"
+                    android:textColor="@color/colorPrimary" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:visibility="gone"
+                    android:id="@+id/btnMember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentLeft="true"
+                    android:paddingLeft="32dp"
+                    android:paddingTop="8dp"
+                    android:paddingRight="32dp"
+                    android:text="مشاهده پروفایل"
+                    android:textColor="@color/colorPrimary" />
+
+            </RelativeLayout>
+
+
+            <!--<com.idpz.bazarayesh.Views.mTextView-->
+            <!--android:id="@+id/btnExit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:gravity="center|center_vertical"-->
+            <!--android:paddingLeft="32dp"-->
+            <!--android:paddingTop="8dp"-->
+            <!--android:paddingRight="32dp"-->
+            <!--android:text="بستن"-->
+            <!--android:textColor="@color/colorPrimary" />-->
+
+            <!--<com.idpz.bazarayesh.Views.mTextView-->
+            <!--android:id="@+id/btnExit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:gravity="center|center_vertical"-->
+            <!--android:paddingLeft="32dp"-->
+            <!--android:paddingTop="8dp"-->
+            <!--android:paddingRight="32dp"-->
+            <!--android:text="بستن"-->
+            <!--android:textColor="@color/colorPrimary" />-->
+            <!---->
         </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>
