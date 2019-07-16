@@ -219,7 +219,29 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             marker.setTitle(ad.getName());
                             marker.setTag(ad.getId());
 
-                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+                            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                @Override
+                                public void onInfoWindowClick(Marker marker) {
+
+                                    for (Ad ad : members.getAds()) {
+                                        if (ad.getId().equals(marker.getTag())) {
+                                        Intent intent = new Intent(activity, AdsDetailsActivity.class);
+                                        intent.putExtra("id", String.valueOf(ad.getId()));
+                                        intent.putExtra("tag",  tag);
+                                        startActivity(intent);
+
+                                            getAddDetails(String.valueOf(ad.getId()), tag);
+                                        }
+
+
+                                    }
+                                }
+                            });
+
+
+
+/*                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(Marker marker) {
 
@@ -237,7 +259,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                                     }
                                     return false;
                                 }
-                            });
+                            });*/
                             //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
                         }
 

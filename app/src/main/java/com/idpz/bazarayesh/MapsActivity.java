@@ -342,15 +342,30 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
                             marker.setTag(member.getId());
 
-                            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+                            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                                @Override
+                                public void onInfoWindowClick(Marker marker) {
+                                    for (Data member2 : members.getMembers()) {
+                                        if (marker.getTag().equals(member2.getId())) {
+                                            Intent intent = new Intent(MapsActivity.this, ShowMemberDetail.class);
+                                            //  intent.putExtra("type",type);
+                                            //intent.putExtra("service_type",service_type);
+                                            intent.putExtra("id", member2.getId());
+                                            startActivity(intent);
+                                        }
+                                    }
+                                }
+                            });
+                           /* mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(Marker marker) {
 
 
                                     for (Data member2 : members.getMembers()) {
-                                        if (marker.getTag() .equals( member2.getId())) {
+                                        if (marker.getTag().equals(member2.getId())) {
                                             Intent intent = new Intent(MapsActivity.this, ShowMemberDetail.class);
-                                          //  intent.putExtra("type",type);
+                                            //  intent.putExtra("type",type);
                                             //intent.putExtra("service_type",service_type);
                                             intent.putExtra("id", member2.getId());
                                             startActivity(intent);
@@ -360,7 +375,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
 
                                 }
-                            });
+                            });*/
 
 
                             //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
@@ -410,8 +425,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
                     if (!responseString.equals("ok")) {
 
-                        ResponseListMember members = gson.fromJson(responseString, ResponseListMember.class);
-                        if (members.getMembers().size() != 0)
+                        final ResponseListMember members = gson.fromJson(responseString, ResponseListMember.class);
+                        if (members.getMembers().size() != 0) {
 
 
                             for (final Data member : members.getMembers()) {
@@ -430,25 +445,42 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
                                 marker.setTag(member.getId());
 
-                                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                                     @Override
-                                    public boolean onMarkerClick(Marker marker) {
+                                    public void onInfoWindowClick(Marker marker) {
+                                        for (Data m : members.getMembers()) {
+                                            if (marker.getTag().equals(m.getId())) {
+                                                Intent intent = new Intent(MapsActivity.this, ShowMemberDetail.class);
 
-                                        Intent intent = new Intent(MapsActivity.this, ShowMemberDetail.class);
-
-                                        intent.putExtra("id", member.getId());
-                                        //intent.putExtra("type",type);
-                                      //  intent.putExtra("service_type",service_type);
-                                        startActivity(intent);
-
-                                        return false;
+                                                intent.putExtra("id", member.getId());
+                                                //intent.putExtra("type",type);
+                                                //  intent.putExtra("service_type",service_type);
+                                                startActivity(intent);
+                                            }
+                                        }
                                     }
                                 });
 
 
+//                                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//                                    @Override
+//                                    public boolean onMarkerClick(Marker marker) {
+//
+//                                        Intent intent = new Intent(MapsActivity.this, ShowMemberDetail.class);
+//
+//                                        intent.putExtra("id", member.getId());
+//                                        //intent.putExtra("type",type);
+//                                      //  intent.putExtra("service_type",service_type);
+//                                        startActivity(intent);
+//
+//                                        return false;
+//                                    }
+//                                });
+
+
                                 //    mMap.addMarker(new MarkerOptions().position(new LatLng(member.getLat(),member.getLng())));
                             }
-
+                        } else Toast.makeText(MapsActivity.this, "مکانی یافت نشد", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                 }

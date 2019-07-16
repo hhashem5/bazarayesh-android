@@ -271,7 +271,7 @@
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="8dp"
-            android:background="@color/black"
+            android:background="#DB4352"
             android:text="مرحله ی بعد"
             android:textColor="@color/white" />
     </RelativeLayout>
@@ -416,18 +416,11 @@
                 <RelativeLayout
                     android:id="@+id/lnRelFrag"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="280dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/dashed_back"
                     android:padding="4dp">
 
-                    <!--<fragment-->
-                    <!--android:id="@+id/map"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_marginTop="-100dp"-->
-                    <!--android:layout_marginBottom="-100dp"-->
-                    <!--class="com.google.android.gms.maps.SupportMapFragment"/>-->
 
                     <com.google.android.gms.maps.MapView
                         android:id="@+id/map"
@@ -451,7 +444,7 @@
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="8dp"
-            android:background="@color/black"
+            android:background="#DB4352"
             android:text="مرحله ی بعد"
             android:textColor="@color/white" />
     </RelativeLayout>
@@ -2311,7 +2304,7 @@
             android:layout_height="48dp"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="8dp"
-            android:background="@color/black"
+            android:background="#DB4352"
             android:text="تایید"
             android:textColor="@color/white" />
 

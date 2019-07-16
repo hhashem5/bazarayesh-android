@@ -116,12 +116,14 @@
         <activity android:name=".UserAdvertisementActivity"
             android:theme="@style/AppTheme3"
             android:screenOrientation="portrait"/>
-        <activity android:name="AdsDetailsActivity"
+        <activity android:name=".AdsDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme3"/>
-        <activity android:name="ShowMemberDetail"
-            android:theme="@style/AppTheme3"
-            android:screenOrientation="portrait"/>
+
+<activity android:name=".ShowMemberDetail"
+    android:screenOrientation="portrait"
+    android:theme="@style/AppTheme3"
+    />
     </application>
 
 </manifest>

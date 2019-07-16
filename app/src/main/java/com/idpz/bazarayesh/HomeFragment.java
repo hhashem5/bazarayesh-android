@@ -19,14 +19,21 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.idpz.bazarayesh.Adapters.MainItemAdapter;
 import com.idpz.bazarayesh.Adapters.MainSliderAdapter;
+import com.idpz.bazarayesh.Models.BannerModels.Baner;
+import com.idpz.bazarayesh.Models.BannerModels.ResponseBanner;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.Models.PicName;
+import com.idpz.bazarayesh.Utils.Tools;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cz.msebera.android.httpclient.Header;
 import ss.com.bannerslider.Slider;
 import ss.com.bannerslider.event.OnSlideClickListener;
 
@@ -51,6 +58,7 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
     public String page = "page1";
 
     int type;
+    Tools tools;
 
     @Nullable
     @Override
@@ -61,18 +69,17 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
         settoolbarText(getString(R.string.title_home), v);
         initViews(v);
-        picNames.add(new PicName(1, "jsj", "https://setare.com/files/fa/news/1397/8/21/200856_426.jpg", "memo0"));
-        picNames.add(new PicName(2, "jsj", "http://kheshtan.ir/wp-content/uploads/2019/04/kh9.jpg", "memo0"));
-
-        Slider.init(new GlideImageLoadingService(getContext()));
-
-        banner_slider.setAdapter(new MainSliderAdapter(picNames, getContext()));
-        banner_slider.setOnSlideClickListener(new OnSlideClickListener() {
-            @Override
-            public void onSlideClick(int position) {
-
-            }
-        });
+//        picNames.add(new PicName(1, "jsj", "https://setare.com/files/fa/news/1397/8/21/200856_426.jpg", "memo0"));
+//        picNames.add(new PicName(2, "jsj", "http://kheshtan.ir/wp-content/uploads/2019/04/kh9.jpg", "memo0"));
+//
+//
+//        banner_slider.setAdapter(new MainSliderAdapter(picNames, getContext()));
+//        banner_slider.setOnSlideClickListener(new OnSlideClickListener() {
+//            @Override
+//            public void onSlideClick(int position) {
+//
+//            }
+//        });
         setMyAdapter("page1");
 
         return v;
@@ -82,8 +89,12 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
     public void initViews(View v) {
 
+        tools = new Tools(getContext());
         banner_slider = v.findViewById(R.id.banner_slider);
         recyclerView = v.findViewById(R.id.recycle);
+        Slider.init(new GlideImageLoadingService(getContext()));
+
+        getBanner();
 
     }
 
@@ -574,4 +585,45 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
         getActivity().finish();
     }
 
+
+    public void getBanner() {
+
+        String url = tools.baseUrl + "slider";
+
+        RequestParams params = new RequestParams();
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                try {
+
+                    if (responseString.contains("ok")) {
+
+                        ResponseBanner responseBanner = tools.gson.fromJson(responseString, ResponseBanner.class);
+
+
+                        banner_slider.setAdapter(new MainBannerSliderAdapter(responseBanner.getBaners(), getContext()));
+                        banner_slider.setOnSlideClickListener(new OnSlideClickListener() {
+                            @Override
+                            public void onSlideClick(int position) {
+
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+
+            }
+        });
+    }
 }

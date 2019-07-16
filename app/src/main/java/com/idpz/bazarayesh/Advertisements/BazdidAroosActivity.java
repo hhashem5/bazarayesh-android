@@ -45,8 +45,8 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
     EditText etDescription;
     private static final String TIMEPICKER = "TimePickerDialog", DATEPICKER = "DatePickerDialog";
 
-    int flag,tag;
-    String member_id,mdate,shour,ehour;
+    int flag, tag;
+    String member_id, mdate, shour, ehour;
     Button btn;
     Typeface irsans;
 
@@ -69,8 +69,8 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
         relative_until = findViewById(R.id.relative_until);
         txtSince = findViewById(R.id.txtSince);
         txtDate = findViewById(R.id.txtDate);
-        etDescription=findViewById(R.id.etDescription);
-        btn=findViewById(R.id.btn);
+        etDescription = findViewById(R.id.etDescription);
+        btn = findViewById(R.id.btn);
 
         txtUntil = findViewById(R.id.txtUntil);
         imgbBack.setVisibility(View.VISIBLE);
@@ -178,8 +178,8 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
-        mdate =dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-        txtDate.setText( "تاریخ " + mdate);
+        mdate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+        txtDate.setText("تاریخ " + mdate);
 
 
     }
@@ -191,18 +191,17 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
         String minuteString = minute < 10 ? "0" + minute : "" + minute;
         switch (flag) {
             case 1:
-                shour=  hourString + ":" + minuteString;
+                shour = hourString + ":" + minuteString;
 
-                txtSince.setText("از ساعت " +shour);
+                txtSince.setText("از ساعت " + shour);
 
 
                 break;
 
             case 2:
-                ehour= hourString + ":" + minuteString;
+                ehour = hourString + ":" + minuteString;
 
                 txtUntil.setText("تا ساعت " + ehour);
-
 
 
                 break;
@@ -224,13 +223,13 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
         finish();
         super.onBackPressed();
     }
+
     public void registerBazdidAroos() {
 
         String url = tools.baseUrl + "ads_store";
         pd.show();
         RequestParams params = new RequestParams();
         params.put("member", "bride");
-
 
 
         params.put("date", mdate);
@@ -284,11 +283,15 @@ public class BazdidAroosActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                if (responseString.contains("200")){
+                try {
+                    if (responseString.contains("200")) {
 
-                    successDialog("آگهی شما با موفقیت ثبت شد.");
+                        successDialog("آگهی شما با موفقیت ثبت شد.");
+                    }
+
+                    pd.dismiss();
+                } catch (Exception e) {
                 }
-                pd.dismiss();
             }
         });
 

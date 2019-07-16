@@ -27,7 +27,10 @@
         android:paddingLeft="16dp"
         android:inputType="number"
         android:maxLength="2"
-        android:background="@drawable/layout_corners_shape_border">
+        android:background="@drawable/layout_corners_shape_border"
+
+        >
+
 
         <requestFocus />
 

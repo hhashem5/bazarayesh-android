@@ -94,6 +94,11 @@ import cz.msebera.android.httpclient.Header;
 
 import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
 import static com.idpz.bazarayesh.BaseActivity.LEFT_TO_RIGHT;
+import static com.idpz.bazarayesh.ProfileFragment.edit1;
+import static com.idpz.bazarayesh.ProfileFragment.edit2;
+import static com.idpz.bazarayesh.ProfileFragment.edit3;
+import static com.idpz.bazarayesh.ProfileFragment.edit4;
+import static com.idpz.bazarayesh.ProfileFragment.edit5;
 import static com.idpz.bazarayesh.SubProfileActivity.*;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 import static com.idpz.bazarayesh.Utils.Tools.gson;
@@ -120,7 +125,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     ImageView imgbOne, imgbTwo, imgbThree, clickedImageView, clickedDrop, imgPic1, imgPic3, logoimg1;
 
     ScrollView svL3;
-
 
 
     EditText txtName, txtBoss, txtFame, txtphone, txtaddress, txttelegram, txtinstagram;
@@ -166,6 +170,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     int service_type, type;
     String title;
 
+    boolean edit = false;
 
     boolean flag = true;
 
@@ -414,12 +419,14 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 googleMap = mMap;
                 LatLng latLong = new LatLng(35.684209, 51.388263);
 
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(35.709561, 51.372652), 5);
-                googleMap.moveCamera(cameraUpdate);
+                if (!edit) {
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(35.709561, 51.372652), 5);
+                    googleMap.moveCamera(cameraUpdate);
+                }
 
-                mMap.addMarker(new MarkerOptions()
-                        .position(latLong)
-                        .draggable(true));
+//                mMap.addMarker(new MarkerOptions()
+//                        .position(latLong)
+//                        .draggable(true));
                 mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng point) {
@@ -447,49 +454,91 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 }
                 mMap.setMyLocationEnabled(true);
 
+                if (!edit) {
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(latLong).zoom(18).build();
 
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(latLong).zoom(18).build();
+                    mMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(cameraPosition));
 
-                mMap.animateCamera(CameraUpdateFactory
-                        .newCameraPosition(cameraPosition));
+                }
 
                 mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                     @Override
                     public void onMyLocationChange(Location location) {
-                        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18);
-                        if (location_time < location_int)
+                        if (!edit){
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18);
                             mMap.moveCamera(cameraUpdate);
-                        location_time = location_time + 1;
                     }
-                });
-
-
-                // For showing a move to my location button
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
                 }
-                googleMap.setMyLocationEnabled(true);
-                googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+            });
 
 
+            // For showing a move to my location button
+                if(ActivityCompat.checkSelfPermission(
+
+            getContext(),Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED &&ActivityCompat.checkSelfPermission(
+
+            getContext(),Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
+
+            {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
             }
-        });
+                googleMap.setMyLocationEnabled(true);
+                googleMap.getUiSettings().
+
+            setMyLocationButtonEnabled(false);
 
 
-        prepareProfilePictureDirectory();
+        }
+    });
 
-        getMemberInfo();
 
+    prepareProfilePictureDirectory();
 
+    getMemberInfo();
+
+        switch(tag)
+
+    {
+        case 1:
+            if (edit1)
+                edit = true;
+            break;
+
+        case 2:
+
+            if (edit2)
+                edit = true;
+            break;
+
+        case 3:
+            if (edit3)
+                edit = true;
+            break;
+
+        case 4:
+
+            if (edit4)
+                edit = true;
+            break;
+
+        case 5:
+
+            if (edit5)
+                edit = true;
+            break;
     }
+
+
+}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -1073,7 +1122,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 break;
 
             case R.id.rel39:
-                AlertDialog(linear10);
+                AlertDialog(linear12);
                 break;
 
             case R.id.rel27:
@@ -1103,6 +1152,9 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             case R.id.rel79:
                 AlertDialog(linear17);
                 break;
+
+            case R.id.rel25:
+                AlertDialog(linear10);
 
 
         }
@@ -1388,7 +1440,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                     }
                 } catch (Exception e) {
-                    Log.e("parisa",e.toString());
+                    Log.e("parisa", e.toString());
                 }
 
 
@@ -1680,7 +1732,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             public void onClick(View v) {
 
                 Intent i1 = new Intent(getContext(), MainActivity.class);
-                i1.putExtra("back","1");
+                i1.putExtra("back", "1");
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -1768,10 +1820,15 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     txtinstagram.setText(response.getData().getInstagram());
                     txttelegram.setText(response.getData().getTelegram());
 
+                    googleMap.clear();
                     googleMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(response.getData().getLat(),response.getData().getLng()))
+                            .position(new LatLng(response.getData().getLat(), response.getData().getLng()))
                             .draggable(true));
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(new LatLng(response.getData().getLat(), response.getData().getLng())).zoom(18).build();
 
+                    googleMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(cameraPosition));
 
 
                     Glide.with(getContext())
@@ -2015,7 +2072,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             return true;
         }
     }
-
 
 
     @Override

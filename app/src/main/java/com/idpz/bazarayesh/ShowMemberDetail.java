@@ -102,6 +102,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         workSpaceTitle = findViewById(R.id.workSpaceTitle);
         famousCustomerTitle = findViewById(R.id.famousCustomerTitle);
 
+
+        Glide.with(ShowMemberDetail.this).load(R.drawable.instagram).into(imgInsta);
         imgbBack.setOnClickListener(this);
 
         imgTelegram.setOnClickListener(this);
@@ -202,7 +204,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
 
                     } else {
-                        relativeLayout5.setVisibility(View.GONE);
+                        relativeLayout2.setVisibility(View.GONE);
                     }
 
 

@@ -542,7 +542,7 @@ public class AdvertisementManagmentFragment extends BaseFragment implements View
             case 5:
                 tools.addToSharePrf("store", "1");
                 items.add(new MainItem(R.drawable.ic_employees, "استخدام"));
-                items.add(new MainItem(R.drawable.ic_employees, "تخفیف محصولات آرایشی"));
+                items.add(new MainItem(R.drawable.ic_facial_cream_tube, "تخفیف محصولات آرایشی"));
 
 
                 break;

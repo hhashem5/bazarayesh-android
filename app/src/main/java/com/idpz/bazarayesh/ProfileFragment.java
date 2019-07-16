@@ -71,7 +71,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private File profilePictureDirectory;
     private Bitmap bitmap;
 
-    TextView beautyshop, teacher, institude, store, hairdresser, txtName, txtEmail,txtMobile;
+    TextView beautyshop, teacher, institude, store, hairdresser, txtName, txtEmail, txtMobile;
 
     ImageView check1, check2, check3, check4, check5, myProfile_photoLikes, clickedImageView;
     Tools tools;
@@ -84,6 +84,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     double lat, lng;
 
+
+    public static boolean edit1, edit2, edit3, edit4, edit5;
 
     @Nullable
     @Override
@@ -116,7 +118,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         myProfile_photoLikes = v.findViewById(R.id.myProfile_photoLikes);
         txtName = v.findViewById(R.id.txtName);
         txtEmail = v.findViewById(R.id.txtEmail);
-        txtMobile=v.findViewById(R.id.txtMobile);
+        txtMobile = v.findViewById(R.id.txtMobile);
         btnOk = v.findViewById(R.id.btnOk);
 
         beautyshop = v.findViewById(R.id.beautyshop);
@@ -140,16 +142,26 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         try {
 
-            if (!tools.getSharePrf("memberId1").equals(""))
+            if (!tools.getSharePrf("memberId1").equals("")) {
+                edit1 = true;
                 check1.setVisibility(View.VISIBLE);
-            if (!tools.getSharePrf("memberId3").equals(""))
+            }
+            if (!tools.getSharePrf("memberId3").equals("")) {
+                edit3 = true;
                 check3.setVisibility(View.VISIBLE);
-            if (!tools.getSharePrf("memberId2").equals(""))
+            }
+            if (!tools.getSharePrf("memberId2").equals("")) {
                 check2.setVisibility(View.VISIBLE);
-            if (!tools.getSharePrf("memberId4").equals(""))
+                edit2 = true;
+            }
+            if (!tools.getSharePrf("memberId4").equals("")) {
+                edit4 = true;
                 check4.setVisibility(View.VISIBLE);
-            if (!tools.getSharePrf("memberId5").equals(""))
+            }
+            if (!tools.getSharePrf("memberId5").equals("")) {
+                 edit5 = true;
                 check5.setVisibility(View.VISIBLE);
+            }
 
         } catch (Exception e) {
         }
@@ -163,7 +175,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         try {
             txtMobile.setText(tools.getSharePrf("mobile"));
 
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
         prepareProfilePictureDirectory();
 
