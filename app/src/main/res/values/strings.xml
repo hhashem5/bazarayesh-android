@@ -23,4 +23,5 @@
     <string name="error2">کد تایید وارد شده صحیح نیست</string>
     <string name="title_activity_maps">Map</string>
     <string name="detail">جزئیات و نکات قابل توجه آگهی خود را کامل بنویسید. </string>
+    <string name="disable">غیرفعال</string>
 </resources>

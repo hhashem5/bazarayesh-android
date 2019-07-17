@@ -99,6 +99,11 @@ import static com.idpz.bazarayesh.ProfileFragment.edit2;
 import static com.idpz.bazarayesh.ProfileFragment.edit3;
 import static com.idpz.bazarayesh.ProfileFragment.edit4;
 import static com.idpz.bazarayesh.ProfileFragment.edit5;
+import static com.idpz.bazarayesh.ProfileFragment.ipub1;
+import static com.idpz.bazarayesh.ProfileFragment.ipub2;
+import static com.idpz.bazarayesh.ProfileFragment.ipub3;
+import static com.idpz.bazarayesh.ProfileFragment.ipub4;
+import static com.idpz.bazarayesh.ProfileFragment.ipub5;
 import static com.idpz.bazarayesh.SubProfileActivity.*;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 import static com.idpz.bazarayesh.Utils.Tools.gson;
@@ -127,7 +132,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     ScrollView svL3;
 
 
-    EditText txtName, txtBoss, txtFame, txtphone, txtaddress, txttelegram, txtinstagram;
+    EditText txtName, txtBoss, txtFame, txtphone, txtaddress, txttelegram, txtinstagram, txtphone2;
     private BottomSheetBehavior mBehavior;
     private BottomSheetDialog mBottomSheetDialog;
     private View bottom_sheet;
@@ -275,6 +280,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         txtFame = v.findViewById(R.id.txtfame);
         txtBoss = v.findViewById(R.id.txtBoss);
         txtphone = v.findViewById(R.id.txtphone);
+        txtphone2 = v.findViewById(R.id.txtphone2);
         txtaddress = v.findViewById(R.id.txtaddress);
         txttelegram = v.findViewById(R.id.txttelegram);
         txtinstagram = v.findViewById(R.id.txtinstagram);
@@ -466,79 +472,75 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                     @Override
                     public void onMyLocationChange(Location location) {
-                        if (!edit){
+                        if (!edit) {
                             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18);
                             mMap.moveCamera(cameraUpdate);
+                        }
                     }
+                });
+
+
+                // For showing a move to my location button
+                if (ActivityCompat.checkSelfPermission(
+
+                        getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+
+                        getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
                 }
-            });
-
-
-            // For showing a move to my location button
-                if(ActivityCompat.checkSelfPermission(
-
-            getContext(),Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED &&ActivityCompat.checkSelfPermission(
-
-            getContext(),Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
-
-            {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
                 googleMap.setMyLocationEnabled(true);
                 googleMap.getUiSettings().
 
-            setMyLocationButtonEnabled(false);
+                        setMyLocationButtonEnabled(false);
 
 
+            }
+        });
+
+
+        prepareProfilePictureDirectory();
+
+        getMemberInfo();
+
+        switch (tag) {
+            case 1:
+                if (edit1)
+                    edit = true;
+                break;
+
+            case 2:
+
+                if (edit2)
+                    edit = true;
+                break;
+
+            case 3:
+                if (edit3)
+                    edit = true;
+                break;
+
+            case 4:
+
+                if (edit4)
+                    edit = true;
+                break;
+
+            case 5:
+
+                if (edit5)
+                    edit = true;
+                break;
         }
-    });
 
 
-    prepareProfilePictureDirectory();
-
-    getMemberInfo();
-
-        switch(tag)
-
-    {
-        case 1:
-            if (edit1)
-                edit = true;
-            break;
-
-        case 2:
-
-            if (edit2)
-                edit = true;
-            break;
-
-        case 3:
-            if (edit3)
-                edit = true;
-            break;
-
-        case 4:
-
-            if (edit4)
-                edit = true;
-            break;
-
-        case 5:
-
-            if (edit5)
-                edit = true;
-            break;
     }
-
-
-}
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -984,47 +986,41 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             case R.id.btn1:
 
                 if (!txtName.getText().toString().equals("")) {
-                    if (!txtBoss.getText().toString().equals("")) {
 
-                        YoYo.with(Techniques.SlideInLeft)
-                                .duration(300)
-                                .repeat(0).withListener(new Animator.AnimatorListener() {
-                            @Override
-                            public void onAnimationStart(Animator animation) {
+                    YoYo.with(Techniques.SlideInLeft)
+                            .duration(300)
+                            .repeat(0).withListener(new Animator.AnimatorListener() {
+                        @Override
+                        public void onAnimationStart(Animator animation) {
 
-                                page1.setVisibility(View.GONE);
-                                page2.setVisibility(View.VISIBLE);
-                                imgbOne.setImageResource(R.drawable.step1);
-                                imgbTwo.setImageResource(R.drawable.step32);
-                                imgbThree.setImageResource(R.drawable.step2);
+                            page1.setVisibility(View.GONE);
+                            page2.setVisibility(View.VISIBLE);
+                            imgbOne.setImageResource(R.drawable.step1);
+                            imgbTwo.setImageResource(R.drawable.step32);
+                            imgbThree.setImageResource(R.drawable.step2);
 
-                            }
+                        }
 
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
 
-                            }
+                        }
 
-                            @Override
-                            public void onAnimationCancel(Animator animation) {
+                        @Override
+                        public void onAnimationCancel(Animator animation) {
 
-                            }
+                        }
 
-                            @Override
-                            public void onAnimationRepeat(Animator animation) {
+                        @Override
+                        public void onAnimationRepeat(Animator animation) {
 
-                            }
-                        })
-                                .playOn(v.findViewById(R.id.page1));
+                        }
+                    })
+                            .playOn(v.findViewById(R.id.page1));
 
-                        state = 2;
+                    state = 2;
 
 
-                    } else {
-                        txtBoss.setError(" نام مدیر آرایشگاه را وارد کنید ");
-
-                        txtBoss.requestFocus();
-                    }
                 } else {
                     txtName.setError(" نام را وارد کنید ");
 
@@ -1034,42 +1030,56 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
             case R.id.btn2:
 
-//                page2.setVisibility(View.GONE);
-//                page3.setVisibility(View.VISIBLE);
-//                imgbOne.setImageResource(R.drawable.step1);
-//                imgbTwo.setImageResource(R.drawable.step3);
-//                imgbThree.setImageResource(R.drawable.step22);
-                if (flag) {//&& !memberInfoFlag
+                if (!txtphone.getText().toString().equals("")) {
+                    if (!txtphone2.getText().toString().equals("")) {
+                        if (lat != 0) {
 
-                    pd.show();
-                    getMemberRegister();
+                            pd.show();
+                            getMemberRegister();
+                        } else {
+
+                            tools.alertShow("موقعیت مکانی روی نقشه حتما باید انتخاب شود");
+                        }
+
+                    } else {
+                        txtphone2.setError("تلفن ثابت حتما باید وارد شود");
+                        txtphone2.requestFocus();
+                    }
                 } else {
-                    YoYo.with(Techniques.SlideInLeft)
-                            .duration(300)
-                            .repeat(0).withListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animation) {
-                            page2.setVisibility(View.GONE);
-                            page3.setVisibility(View.VISIBLE);
-                            imgbOne.setImageResource(R.drawable.step1);
-                            imgbTwo.setImageResource(R.drawable.step3);
-                            imgbThree.setImageResource(R.drawable.step22);
-                        }
 
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-                        }
-                    }).playOn(v.findViewById(R.id.page2));
-                    state = 3;
+                    txtphone.setError("شماره مبایل حتما باید وارد شود");
+                    txtphone.requestFocus();
                 }
+
+
+// todo agar   khastim back bezane va dige request nazane
+//                if (flag) {//&& !memberInfoFlag
+//                    pd.show();
+//                    getMemberRegister();
+//                } else {
+//                    YoYo.with(Techniques.SlideInLeft)
+//                            .duration(300)
+//                            .repeat(0).withListener(new Animator.AnimatorListener() {
+//                        @Override
+//                        public void onAnimationStart(Animator animation) {
+//                            page2.setVisibility(View.GONE);
+//                            page3.setVisibility(View.VISIBLE);
+//                            imgbOne.setImageResource(R.drawable.step1);
+//                            imgbTwo.setImageResource(R.drawable.step3);
+//                            imgbThree.setImageResource(R.drawable.step22);
+//                        }
+//                        @Override
+//                        public void onAnimationEnd(Animator animation) {
+//                        }
+//                        @Override
+//                        public void onAnimationCancel(Animator animation) {
+//                        }
+//                        @Override
+//                        public void onAnimationRepeat(Animator animation) {
+//                        }
+//                    }).playOn(v.findViewById(R.id.page2));
+//                    state = 3;
+//                }
                 break;
 
             case R.id.btn3:
@@ -1344,7 +1354,11 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         params.put("type", tag);
         params.put("full_name", txtName.getText().toString());
         params.put("manager_name", txtBoss.getText().toString());
-        params.put("phone1", tools.getSharePrf("mobile"));
+        params.put("phone1", txtphone.getText().toString());
+        if (txtphone2.getText().toString() != null)
+            params.put("phone2", txtphone2.getText().toString());
+
+
         params.put("address", txtaddress.getText().toString());
         params.put("telegram", txttelegram.getText().toString());
         params.put("instagram", txtinstagram.getText().toString());
@@ -1649,71 +1663,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 .addApi(LocationServices.API).build();
     }
 
-//    public void successDialog(String text) {
-//
-//        final Dialog dialog = new Dialog(getContext());
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-//        dialog.setContentView(R.layout.payment_ok);
-//        dialog.setCancelable(false);
-//        dialog.show();
-//        TextView content = dialog.findViewById(R.id.content);
-//        Button btnOk = dialog.findViewById(R.id.btnOk);
-//        Button btnGo = dialog.findViewById(R.id.btnGo);
-//        content.setText(text);
-//        btnOk.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i1 = new Intent(getContext(), MainActivity.class);
-//                i1.putExtra("back", "1");
-//
-//                switch (tag) {
-//                    case 1:
-//                        tools.addToSharePrf("beautyshop", "1");
-//
-//                        break;
-//
-//                    case 2:
-//                        tools.addToSharePrf("hairdersser", "1");
-//
-//                        break;
-//                    case 3:
-//                        tools.addToSharePrf("institude", "1");
-//
-//                        break;
-//
-//                    case 4:
-//                        tools.addToSharePrf("teacher", "1");
-//
-//                        break;
-//                    case 5:
-//                        tools.addToSharePrf("store", "1");
-//
-//                        break;
-//                }
-//
-//
-//                i1.setAction(Intent.ACTION_MAIN);
-//
-//                i1.addCategory(Intent.CATEGORY_HOME);
-//                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                getActivity().startActivity(i1);
-//                customType(getContext(), LEFT_TO_RIGHT);
-//                getActivity().finish();
-//                dialog.dismiss();
-//            }
-//        });
-//        btnGo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
-//
-//
-//    }
 
     public void successDialog(String text) {
 
@@ -1811,6 +1760,29 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                     MyMember response = gson.fromJson(responseString, MyMember.class);
 
+
+                    if (response.getData().getPub() == 0) {
+                        switch (tag) {
+                            case 1:
+                                ipub1 = 0;
+                                break;
+                            case 2:
+                                ipub2 = 0;
+                                break;
+                            case 3:
+                                ipub3 = 0;
+                                break;
+                            case 4:
+                                ipub4 = 0;
+                                break;
+                            case 5:
+                                ipub5 = 0;
+                                break;
+
+                        }
+
+
+                    }
                     txtName.setText(response.getData().getFullName());
 
                     txtBoss.setText(response.getData().getManagerName());
@@ -1819,7 +1791,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     txtaddress.setText(response.getData().getAddress());
                     txtinstagram.setText(response.getData().getInstagram());
                     txttelegram.setText(response.getData().getTelegram());
-
+                    txtphone2.setText(response.getData().getPhone2());
                     googleMap.clear();
                     googleMap.addMarker(new MarkerOptions()
                             .position(new LatLng(response.getData().getLat(), response.getData().getLng()))

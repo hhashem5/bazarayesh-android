@@ -95,6 +95,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/layout_corners_shape_border"
                     android:ems="10"
+                    android:maxLength="10"
                     android:inputType="textPersonName"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
@@ -303,18 +304,22 @@
                 android:orientation="vertical"
                 android:padding="2dp">
 
+
                 <com.idpz.bazarayesh.Views.mTextView
-                    android:id="@+id/phone"
+                    android:id="@+id/phone2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
-                    android:visibility="gone"
-                    android:text="شماره تلفن همراه" />
+                    android:visibility="visible"
+
+
+                    android:text="شماره تلفن ثابت" />
 
                 <com.idpz.bazarayesh.Views.mEditText
-                    android:id="@+id/txtphone"
-                    android:visibility="gone"
+                    android:id="@+id/txtphone2"
+                    android:visibility="visible
+"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_below="@+id/Name"
@@ -324,10 +329,42 @@
                     android:layout_weight="1"
                     android:background="@drawable/layout_corners_shape_border"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
+                    android:maxLength="11"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
                     android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:visibility="visible"
+                    android:text="شماره تلفن همراه" />
+
+                <com.idpz.bazarayesh.Views.mEditText
+                    android:id="@+id/txtphone"
+                    android:visibility="visible
+"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/Name"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/layout_corners_shape_border"
+                    android:ems="10"
+                    android:maxLength="11"
+
+                    android:inputType="number"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:textColor="@color/dark" />
+
+
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/address"

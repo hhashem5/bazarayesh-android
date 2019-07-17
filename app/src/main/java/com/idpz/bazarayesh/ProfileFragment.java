@@ -19,6 +19,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -71,7 +72,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private File profilePictureDirectory;
     private Bitmap bitmap;
 
-    TextView beautyshop, teacher, institude, store, hairdresser, txtName, txtEmail, txtMobile;
+    TextView beautyshop, teacher, institude, store, hairdresser, txtName, txtEmail, txtMobile, phone, email, pub1, pub2, pub3, pub4, pub5;
 
     ImageView check1, check2, check3, check4, check5, myProfile_photoLikes, clickedImageView;
     Tools tools;
@@ -84,6 +85,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     double lat, lng;
 
+    static int ipub1 = 1, ipub2 = 1, ipub3 = 1, ipub4 = 1, ipub5 = 1;
 
     public static boolean edit1, edit2, edit3, edit4, edit5;
 
@@ -121,6 +123,13 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         txtMobile = v.findViewById(R.id.txtMobile);
         btnOk = v.findViewById(R.id.btnOk);
 
+        pub1 = v.findViewById(R.id.pub1);
+        pub2 = v.findViewById(R.id.pub2);
+        pub3 = v.findViewById(R.id.pub3);
+        pub4 = v.findViewById(R.id.pub4);
+        pub5 = v.findViewById(R.id.pub5);
+
+
         beautyshop = v.findViewById(R.id.beautyshop);
 
         teacher = v.findViewById(R.id.teacher);
@@ -137,8 +146,28 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         check4 = v.findViewById(R.id.check4);
         check5 = v.findViewById(R.id.check5);
         bottom_sheet = v.findViewById(R.id.bottom_sheet);
+        phone = v.findViewById(R.id.phone);
+        email = v.findViewById(R.id.email);
 
         mBehavior = BottomSheetBehavior.from(bottom_sheet);
+
+        //disable and enable
+        if (ipub1 == 0)
+            pub1.setVisibility(View.VISIBLE);
+        else pub1.setVisibility(View.GONE);
+        if (ipub2 == 0)
+            pub2.setVisibility(View.VISIBLE);
+        else pub2.setVisibility(View.GONE);
+        if (ipub3 == 0)
+            pub3.setVisibility(View.VISIBLE);
+        else pub3.setVisibility(View.GONE);
+        if (ipub4 == 0)
+            pub4.setVisibility(View.VISIBLE);
+        else pub4.setVisibility(View.GONE);
+        if (ipub5 == 0)
+            pub5.setVisibility(View.VISIBLE);
+        else pub5.setVisibility(View.GONE);
+
 
         try {
 
@@ -159,7 +188,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 check4.setVisibility(View.VISIBLE);
             }
             if (!tools.getSharePrf("memberId5").equals("")) {
-                 edit5 = true;
+                edit5 = true;
                 check5.setVisibility(View.VISIBLE);
             }
 
@@ -172,6 +201,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         hairdresser.setOnClickListener(this);
         btnOk.setOnClickListener(this);
         myProfile_photoLikes.setOnClickListener(this);
+        phone.setOnClickListener(this);
+        email.setOnClickListener(this);
         try {
             txtMobile.setText(tools.getSharePrf("mobile"));
 
@@ -187,6 +218,43 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View view) {
 
         switch (view.getId()) {
+
+            case R.id.phone:
+                Intent call = new Intent(Intent.ACTION_CALL);
+
+                call.setData(Uri.parse("tel:" + "09123302770"));
+                if (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.CALL_PHONE}, 1);
+
+                    // MY_PERMISSIONS_REQUEST_CALL_PHONE is an
+                    // app-defined int constant. The callback method gets the
+                    // result of the request.
+                } else {
+                    //You already have permission
+                    try {
+                        startActivity(call);
+                    } catch (SecurityException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+                break;
+
+            case R.id.email:
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"karayesh2017@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, "کاربر اپلیکیشن بازآرایش");
+                try {
+                    startActivity(Intent.createChooser(i, "Send mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                }
+                break;
             case R.id.beautyshop:
 
                 Intent intent = new Intent(getActivity(), SubProfileActivity.class);

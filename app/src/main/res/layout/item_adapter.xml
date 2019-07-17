@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="120dp"
+    android:layoutDirection="ltr"
+    android:id="@+id/relItem"
+    android:layout_height="150dp"
+    android:layout_margin="4dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imagview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="7dip"
+        app:riv_mutate_background="true" />
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shadow" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="4dp"
+        android:orientation="vertical">
+
+        <com.idpz.bazarayesh.Views.mTextViewB
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="11dp" />
+
+        <com.idpz.bazarayesh.Views.mTextView
+            android:id="@+id/txtContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text=""
+            android:gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+</RelativeLayout>

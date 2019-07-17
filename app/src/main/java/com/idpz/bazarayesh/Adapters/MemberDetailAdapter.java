@@ -7,17 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.R;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class MemberDetailAdapter extends RecyclerView.Adapter<MemberDetailAdapter.MyViewHolder> {
@@ -27,14 +25,14 @@ public class MemberDetailAdapter extends RecyclerView.Adapter<MemberDetailAdapte
     MainItem item;
     Context mContext;
     Activity activity;
-    private OnItemClickListener mListener;
+    OnItemClickListener  mListener;
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.member_detail_adapter, parent, false);
+                .inflate(R.layout.item_adapter, parent, false);
 
 
         return new MyViewHolder(v);
@@ -48,18 +46,26 @@ public class MemberDetailAdapter extends RecyclerView.Adapter<MemberDetailAdapte
 
         Glide.with(activity)
                 .load(item.imgUrl)
-                .into(holder.image);
+                .into(holder.imagview);
 
 
-        holder.title.setText(item.getTitle());
+        holder.txtContent.setText(item.getTitle());
 
-//        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mListener.onItemClick(position, items.get(position));
+        holder.relItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                DialogFullscreenImageFragment newFragment = new DialogFullscreenImageFragment();
 //
-//            }
-//        });
+//                FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//                transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
+
+                mListener.onItemClick( position, items.get(position));
+
+            }
+        });
 
     }
 
@@ -70,22 +76,24 @@ public class MemberDetailAdapter extends RecyclerView.Adapter<MemberDetailAdapte
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title;
+        TextView txtTitle,txtContent;
 
-        RelativeLayout relativeLayout;
-       ImageView image;
+        RelativeLayout relItem;
+
+
+       RoundedImageView imagview;
 
 
         public MyViewHolder(View view) {
             super(view);
 
 
-            title = view.findViewById(R.id.title);
+            txtContent = view.findViewById(R.id.txtContent);
 
-            image = view.findViewById(R.id.img);
+            imagview = view.findViewById(R.id.imagview);
 
 
-            relativeLayout = view.findViewById(R.id.rel);
+            relItem = view.findViewById(R.id.relItem);
 
 
         }
@@ -93,19 +101,22 @@ public class MemberDetailAdapter extends RecyclerView.Adapter<MemberDetailAdapte
 
     }
 
-    public MemberDetailAdapter(List<MainItem> items, Activity activity, OnItemClickListener onItemClickListener) {
-        this.items = items;
-        this.activity = activity;
-        this.mListener = onItemClickListener;
-    }
+
 
     public MemberDetailAdapter(List<MainItem> items, Activity activity) {
         this.items = items;
         this.activity = activity;
     }
 
+    public MemberDetailAdapter(List<MainItem> items, Activity activity, OnItemClickListener onItemClickListener) {
+        this.items = items;
+        this.activity = activity;
+        this.mListener=onItemClickListener;
+    }
+
 
     public interface OnItemClickListener {
         void onItemClick(int position, Object object);
     }
+
 }

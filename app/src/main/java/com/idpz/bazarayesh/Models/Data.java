@@ -66,10 +66,22 @@ public class Data {
     @Expose
     private List<FamousCustomer> famousCustomer;
 
+    @SerializedName("pub")
+    @Expose
+    private int pub;
 
 //    @SerializedName("Workshops")
 //    @Expose
 //    private List<> todo
+
+
+    public int getPub() {
+        return pub;
+    }
+
+    public void setPub(int pub) {
+        this.pub = pub;
+    }
 
     public String getType() {
         return type;

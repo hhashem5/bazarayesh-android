@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="ltr"
-    android:background="@color/activity_back">
+    android:background="@color/activity_back"
+    android:layoutDirection="ltr">
 
     <include layout="@layout/mtoolbar" />
 
@@ -13,16 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_marginBottom="4dp">
+        android:layout_marginBottom="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"
-            android:layout_marginBottom="48dp"
             android:gravity="right"
             android:orientation="vertical">
-
 
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -31,16 +28,15 @@
                 android:layout_height="80dp"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
+
                 android:src="@drawable/user" />
 
             <TextView
+                android:id="@+id/txtMobile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtMobile"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                />
-
+                android:layout_marginTop="16dp" />
 
 
             <com.idpz.bazarayesh.Views.mEditText
@@ -53,8 +49,8 @@
                 android:ems="10"
                 android:hint="@string/full_name"
                 android:inputType="textPersonName"
-                android:paddingRight="16dp"
                 android:paddingLeft="16dp"
+                android:paddingRight="16dp"
 
                 android:textColor="@color/dark" />
 
@@ -69,19 +65,19 @@
                 android:ems="10"
                 android:hint="ایمیل:"
                 android:inputType="textPersonName"
-                android:paddingRight="16dp"
                 android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:textColor="@color/dark" />
 
 
             <com.idpz.bazarayesh.Views.mButton
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/mdtp_ok"
-            android:background="@drawable/background_btn2"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:id="@+id/btnOk"/>
+                android:id="@+id/btnOk"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_btn2"
+                android:text="@string/mdtp_ok" />
 
 
             <RelativeLayout
@@ -94,12 +90,23 @@
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/beautyshop"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
                     android:gravity="center"
                     android:text="@string/barber_shop"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/pub1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@id/beautyshop"
+                    android:text="@string/disable"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/check1"
@@ -107,8 +114,9 @@
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    app:srcCompat="@drawable/mic_check_green"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/mic_check_green" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -120,8 +128,9 @@
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/store"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:text="@string/shop"
@@ -129,14 +138,24 @@
                     android:textColor="@color/white"
                     android:textSize="18dp" />
 
+                <TextView
+                    android:id="@+id/pub5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@id/store"
+                    android:text="@string/disable"
+                    android:visibility="gone" />
+
                 <ImageView
                     android:id="@+id/check5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    app:srcCompat="@drawable/mic_check_green"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/mic_check_green" />
 
             </RelativeLayout>
 
@@ -149,13 +168,25 @@
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/teacher"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:text="@string/teacher"
+
                     android:textColor="@color/white"
                     android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/pub4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@id/teacher"
+                    android:text="@string/disable"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/check4"
@@ -163,8 +194,8 @@
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    app:srcCompat="@drawable/mic_check_green"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/mic_check_green" />
 
             </RelativeLayout>
 
@@ -177,14 +208,24 @@
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/hairdersser"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:text="@string/hairdresser"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
 
+                <TextView
+                    android:id="@+id/pub2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@id/hairdersser"
+                    android:text="@string/disable"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/check2"
@@ -192,8 +233,8 @@
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    app:srcCompat="@drawable/mic_check_green"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/mic_check_green" />
 
             </RelativeLayout>
 
@@ -206,13 +247,24 @@
 
                 <com.idpz.bazarayesh.Views.mTextView
                     android:id="@+id/institude"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:text="@string/institude"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/pub3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@id/institude"
+                    android:text="@string/disable"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/check3"
@@ -220,13 +272,54 @@
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    app:srcCompat="@drawable/mic_check_green"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/mic_check_green" />
 
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/grey" />
+
+                <com.idpz.bazarayesh.Views.mTextViewB
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="پشتیبانی شرکت بازآرایش"
+                    android:textColor="@color/dark" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text=" تلفن تماس: 09123302770" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/phone"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="پست الکترونیک: karayesh2017@gmail.com" />
             </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

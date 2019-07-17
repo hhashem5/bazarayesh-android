@@ -3,6 +3,8 @@ package com.idpz.bazarayesh;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -33,6 +35,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
     int id, count, backtag;
 
 
+    static String url;
     int type = 0;
     int service_type = 0;
     double lat, lng;
@@ -47,9 +50,10 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
     ImageView imgLogo, imgTelegram, imgInsta;
 
-    TextView txtName, txtAddress, awardTitle, workSpaceTitle, servicesTitle, workShopTitle, famousCustomerTitle;
+    TextView txtName, txtAddress, awardTitle, workSpaceTitle, servicesTitle, workShopTitle, famousCustomerTitle,txtPhone,txtPhone2,managerName,fame,title6,title7;
 
     RelativeLayout relativeLayout6, relativeLayout2, relativeLayout3, relativeLayout4, relativeLayout5;
+    private DialogFullscreenImageFragment newFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,15 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         relativeLayout3 = findViewById(R.id.relative3);
         relativeLayout4 = findViewById(R.id.relative4);
         relativeLayout5 = findViewById(R.id.relative5);
+        title7 = findViewById(R.id.title7);
+        title6 = findViewById(R.id.title6);
+        managerName = findViewById(R.id.managerName);
+        fame = findViewById(R.id.fame);
+
+
+
+        txtPhone=findViewById(R.id.txtphone);
+        txtPhone2=findViewById(R.id.txtphone2);
 
         imgInsta = findViewById(R.id.instagram);
         imgTelegram = findViewById(R.id.telegram);
@@ -147,6 +160,18 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
                     Instagram = response.getMember().getInstagram();
                     Telegram = response.getMember().getTelegram();
+
+                    txtPhone.setText(response.getMember().getPhone1());
+                    txtPhone2.setText(response.getMember().getPhone2());
+
+                    if (response.getMember().getManagerName()!=null){
+
+                        managerName.setVisibility(View.VISIBLE);
+                        title6.setVisibility(View.VISIBLE);
+                        managerName.setText(response.getMember().getManagerName());
+                    }
+
+
                     if (response.getMember().getAward().size() != 0) {
 
                         for (Award award : response.getMember().getAward()) {
@@ -167,7 +192,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                         for (Service service : response.getMember().getService()) {
 
                             count++;
-                            itemsServices.add(new MainItem(count + "خدمت", "http://arayesh.myzibadasht.ir/" + service.getPic(), 1));
+                            itemsServices.add(new MainItem("خدمت "+count, "http://arayesh.myzibadasht.ir/" + service.getPic(), 1));
 
                         }
                         setAdapter(itemsServices, recycleservices);
@@ -214,7 +239,21 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
     }
 
     public void setAdapter(List<MainItem> items, RecyclerView recyclerView) {
-        MemberDetailAdapter adapter = new MemberDetailAdapter(items, activity);
+        MemberDetailAdapter adapter = new MemberDetailAdapter(items, activity, new MemberDetailAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, Object object) {
+
+                MainItem item = (MainItem) object;
+
+                url = item.imgUrl;
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                newFragment = new DialogFullscreenImageFragment();
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                transaction.add(android.R.id.content, newFragment).addToBackStack(null).commit();
+            }
+        });
         recyclerView.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.HORIZONTAL, true));
         recyclerView.setAdapter(adapter);
 
@@ -243,9 +282,13 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
 
-        finish();
+//        finish();
+//        newFragment.dismiss();
 
     }
+
+
 }
 

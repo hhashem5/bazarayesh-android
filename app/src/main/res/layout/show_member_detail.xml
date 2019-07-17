@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layoutDirection="ltr"
     tools:context=".ShowMemberDetail">
 
@@ -13,34 +13,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_marginBottom="30dp"
-        >
+        android:layout_marginBottom="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
-            <RelativeLayout
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/rel1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
 
-                android:background="@drawable/layout_corners_shape2">
 
-                <ImageView
+         >
+
+                <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/imgLogo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    app:riv_corner_radius_bottom_left="20dp"
+                    app:riv_corner_radius_bottom_right="20dp"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="1dp" />
+            </android.support.constraint.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/linear"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/rel1"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal"
@@ -62,24 +67,73 @@
                         android:textColor="@color/dark" />
 
                     <com.idpz.bazarayesh.Views.mTextView
-                        android:id="@+id/txtAddress"
+                        android:id="@+id/managerName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/txtName"
                         android:layout_alignParentRight="true"
-                        android:layout_alignParentBottom="true"
-                        android:gravity="bottom"
+                        android:layout_marginLeft="8dp"
+                        android:visibility="gone"
+
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="fgfdgfdgfg"
+                        android:textColor="@color/dark" />
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/fame"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/managerName"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:visibility="gone"
+                        android:text="fgfdgfdgfg"
+                        android:textColor="@color/dark" />
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtphone2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/fame"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="fgfdgfdgfg"
+                        android:textColor="@color/dark" />
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtphone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtphone2"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="fgfdgfdgfg"
+                        android:textColor="@color/dark" />
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtphone"
+                        android:layout_alignParentRight="true"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="4dp"
+                        android:gravity="bottom"
                         android:text="gdfgfgdf"
                         android:textColor="@color/dark" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="0.75">
 
                     <com.idpz.bazarayesh.Views.mTextView
@@ -89,19 +143,68 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="8dp"
                         android:gravity="right"
-                        android:text="نام آرایشگاه یا آموزشگاه:"
+                        android:text="آرایشگاه/آموزشگاه:"
+                        android:textColor="@color/gray" />
+
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/title6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/title1"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:gravity="right"
+                        android:text="نام مدیر"
+                        android:visibility="gone"
+                        android:textColor="@color/gray" />
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/title7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_below="@+id/title6"
+                        android:layout_marginRight="8dp"
+                        android:gravity="right"
+                        android:text="شهرت :"
+                        android:visibility="gone"
+                        android:textColor="@color/gray" />
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/title3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title7"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:gravity="right"
+                        android:text="تلفن ثابت: "
+                        android:textColor="@color/gray" />
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/title4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/title3"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:gravity="right"
+                        android:text="تلفن همراه: "
                         android:textColor="@color/gray" />
 
                     <com.idpz.bazarayesh.Views.mTextView
                         android:id="@+id/title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/title1"
+                        android:layout_below="@+id/title4"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_alignParentBottom="true"
-
                         android:layout_marginBottom="4dp"
                         android:gravity="bottom"
                         android:text="آدرس:"
@@ -144,8 +247,7 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginRight="16dp"
-                    android:layout_toLeftOf="@+id/telegram"
-                    />
+                    android:layout_toLeftOf="@+id/telegram" />
             </RelativeLayout>
 
             <View

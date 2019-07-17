@@ -226,10 +226,6 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
                                     for (Ad ad : members.getAds()) {
                                         if (ad.getId().equals(marker.getTag())) {
-                                        Intent intent = new Intent(activity, AdsDetailsActivity.class);
-                                        intent.putExtra("id", String.valueOf(ad.getId()));
-                                        intent.putExtra("tag",  tag);
-                                        startActivity(intent);
 
                                             getAddDetails(String.valueOf(ad.getId()), tag);
                                         }
@@ -334,6 +330,19 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(tehran, 16);
         googleMap.moveCamera(cameraUpdate);
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.setMyLocationEnabled(true);
     }
 
     public boolean checkLocationPermission() {
@@ -375,6 +384,9 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
             return true;
         }
+
+
+
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {

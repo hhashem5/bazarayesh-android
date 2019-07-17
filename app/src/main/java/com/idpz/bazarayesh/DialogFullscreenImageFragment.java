@@ -1,4 +1,4 @@
-package com.idpz.instacity.Tourism.New;
+package com.idpz.bazarayesh;
 
 import android.app.Dialog;
 import android.content.pm.ActivityInfo;
@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.bumptech.glide.Glide;
-import com.idpz.instacity.R;
-import com.idpz.instacity.Tools;
 import com.jsibbold.zoomage.ZoomageView;
+
+import static com.idpz.bazarayesh.ShowMemberDetail.*;
+
 
 public class DialogFullscreenImageFragment extends DialogFragment {
 
@@ -36,7 +37,7 @@ public class DialogFullscreenImageFragment extends DialogFragment {
 
         zoomageView = root_view.findViewById(R.id.zoomageview);
 
-        Glide.with(getContext()).load(Tools.url).into(zoomageView);
+        Glide.with(getContext()).load(url).into(zoomageView);
 
         //        toolbarText = root_view.findViewById(R.id.tooTitle);
 //        imgbBack = root_view.findViewById(R.id.imgbBack);
@@ -105,4 +106,13 @@ public class DialogFullscreenImageFragment extends DialogFragment {
 //
 //
 //    }
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+
+
+    }
+
+
 }

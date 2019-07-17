@@ -81,11 +81,11 @@ public class Tools {
 
         final Dialog message = new Dialog(context);
         message.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
-        message.setContentView(R.layout.message_details_dialog);
+        message.setContentView(R.layout.message_details_dialog2);
         message.setCancelable(true);
         message.show();
-        TextView txtTitle = message.findViewById(R.id.txtTitle);
-        TextView txtBody = message.findViewById(R.id.txtBody);
+        TextView txtTitle = message.findViewById(R.id.txtSubject);
+        TextView txtBody = message.findViewById(R.id.txtTitle);
         TextView btnExit = message.findViewById(R.id.btnExit);
         txtTitle.setText("پیام");
         txtBody.setText(text);
