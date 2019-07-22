@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.idpz.bazarayesh.Adapters.MembersAdapter;
 import com.idpz.bazarayesh.Models.Data;
@@ -22,7 +25,7 @@ import cz.msebera.android.httpclient.Header;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 
 public class ListShowActivty extends BaseActivity implements View.OnClickListener {
-    MaterialSpinner spinner;
+    Spinner spinner;
 
     RecyclerView recyclerView;
 
@@ -83,40 +86,49 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
     public void initViews() {
 
         imgbBack.setVisibility(View.VISIBLE);
-        spinner = (MaterialSpinner) findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);
+
+        irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
 
         recyclerView = findViewById(R.id.recycle);
 
         imgbBack.setOnClickListener(this);
 
+        String[] strings = new String[]{"پربازدیدترین", "امتیاز بالا", "حروف الفبا"};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, R.layout.spinner, strings);
 
-        spinner.setItems("پربازدیدترین", "امتیاز بالا", "حروف الفبا");
-        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+        arrayAdapter.setDropDownViewResource(R.layout.spinner);
+        spinner.setAdapter(arrayAdapter);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+                switch (i) {
 
-                switch (item) {
-
-                    case "پربازدیدترین":
+                    case 0:
                         getList("view");
 
                         break;
 
-                    case "امتیاز بالا":
+                    case 1:
                         getList("view");//score
 
                         break;
 
-                    case "حروف الفبا":
+                    case 2:
                         getList("alphabet");
 
                         break;
                 }
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
         });
+
 
 
         irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");

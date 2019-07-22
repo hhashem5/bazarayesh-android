@@ -17,7 +17,7 @@ public class GlideImageLoadingService implements ImageLoadingService {
 
     @Override
     public void loadImage(String url, ImageView imageView) {
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         try {
             Glide.with(context.getApplicationContext()).load(url).error(R.drawable.iconnopic).into(imageView);
         } catch (Exception e) {

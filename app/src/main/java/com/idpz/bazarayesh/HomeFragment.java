@@ -1,9 +1,5 @@
 package com.idpz.bazarayesh;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,14 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.idpz.bazarayesh.Adapters.MainBannerSliderAdapter;
+import com.idpz.bazarayesh.Adapters.MainBannerSliderAdapter2;
 import com.idpz.bazarayesh.Adapters.MainItemAdapter;
-import com.idpz.bazarayesh.Adapters.MainSliderAdapter;
-import com.idpz.bazarayesh.Models.BannerModels.Baner;
 import com.idpz.bazarayesh.Models.BannerModels.ResponseBanner;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.Models.PicName;
@@ -38,9 +31,7 @@ import ss.com.bannerslider.Slider;
 import ss.com.bannerslider.event.OnSlideClickListener;
 
 import static com.idpz.bazarayesh.BaseActivity.BOTTOM_TO_UP;
-import static com.idpz.bazarayesh.BaseActivity.LEFT_TO_RIGHT;
 import static com.idpz.bazarayesh.BaseActivity.RIGHT_TO_LEFT;
-import static com.idpz.bazarayesh.MainActivity.navigation;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 import static maes.tech.intentanim.CustomIntent.customType;
 
@@ -94,7 +85,20 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
         recyclerView = v.findViewById(R.id.recycle);
         Slider.init(new GlideImageLoadingService(getContext()));
 
-        getBanner();
+
+     //   if (tools.isNetworkAvailable())
+            getBanner();
+//        else
+//        {
+//                    picNames.add(new PicName(1, "jsj", "https://setare.com/files/fa/news/1397/8/21/200856_426.jpg", "memo0"));
+//            banner_slider.setAdapter(new MainBannerSliderAdapter2(picNames, getContext()));
+//            banner_slider.setOnSlideClickListener(new OnSlideClickListener() {
+//                @Override
+//                public void onSlideClick(int position) {
+//
+//                }
+//            });
+//        }
 
     }
 

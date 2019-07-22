@@ -23,6 +23,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,15 +32,19 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.idpz.bazarayesh.Models.Member;
 import com.idpz.bazarayesh.Models.ResponseUserUpdate;
 import com.idpz.bazarayesh.Models.User;
 import com.idpz.bazarayesh.Utils.Tools;
 import com.idpz.bazarayesh.Utils.crop.CropUtil;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.soundcloud.android.crop.Crop;
 
 import java.io.ByteArrayOutputStream;
@@ -68,16 +73,18 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     private int PICK_PICTURE = 970;
     private int CROP_PICTURE = 360;
 
+    RoundedImageView imagview1, imagview2, imagview3, imagview4, imagview5;
     private Handler mHandler;
     private File profilePictureDirectory;
     private Bitmap bitmap;
 
-    TextView beautyshop, teacher, institude, store, hairdresser, txtName, txtEmail, txtMobile, phone, email, pub1, pub2, pub3, pub4, pub5;
+    TextView txtName, txtEmail, txtMobile, phone, email, pub1, pub2, pub3, pub4, pub5;
 
+    CardView beautyshop, teacher, institude, store, hairdresser;
     ImageView check1, check2, check3, check4, check5, myProfile_photoLikes, clickedImageView;
     Tools tools;
 
-    Button btnOk;
+    TextView btnOk;
 
     String bytePic;
 
@@ -85,9 +92,11 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     double lat, lng;
 
-    static int ipub1 = 1, ipub2 = 1, ipub3 = 1, ipub4 = 1, ipub5 = 1;
+    public int ipub1 = 1, ipub2 = 1, ipub3 = 1, ipub4 = 1, ipub5 = 1;
 
     public static boolean edit1, edit2, edit3, edit4, edit5;
+
+    //  RelativeLayout relBeatyshop, relHairdreser, relShop, relInstitude, relTeacher;
 
     @Nullable
     @Override
@@ -95,11 +104,11 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         // tools.state = "1";
 
 
-        View v = inflater.inflate(R.layout.profile_fragment, container, false);
+        View v = inflater.inflate(R.layout.new_profile, container, false);
         tools = new Tools(getContext());
 
 
-        settoolbarText(getString(R.string.title_profile), v);
+//        settoolbarText(getString(R.string.title_profile), v);
         initViews(v);
 
         return v;
@@ -112,11 +121,13 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         irsans = Typeface.createFromAsset(getActivity().getAssets(), "fonts/iran_sans.ttf");
 
+
         pd = new ProgressDialog(getActivity());
         pd.setCancelable(false);
         pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
 
 
+        imgbBack=v.findViewById(R.id.imgbBack);
         myProfile_photoLikes = v.findViewById(R.id.myProfile_photoLikes);
         txtName = v.findViewById(R.id.txtName);
         txtEmail = v.findViewById(R.id.txtEmail);
@@ -128,6 +139,18 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         pub3 = v.findViewById(R.id.pub3);
         pub4 = v.findViewById(R.id.pub4);
         pub5 = v.findViewById(R.id.pub5);
+
+        imagview1 = v.findViewById(R.id.imagview1);
+        imagview2 = v.findViewById(R.id.imagview2);
+        imagview3 = v.findViewById(R.id.imagview3);
+        imagview4 = v.findViewById(R.id.imagview4);
+        imagview5 = v.findViewById(R.id.imagview5);
+
+//        relBeatyshop = v.findViewById(R.id.relBeatyShop);
+//        relHairdreser = v.findViewById(R.id.relHairdreser);
+//        relInstitude = v.findViewById(R.id.relInstitude);
+//        relTeacher = v.findViewById(R.id.relTeacher);
+//        relShop = v.findViewById(R.id.relShop);
 
 
         beautyshop = v.findViewById(R.id.beautyshop);
@@ -152,21 +175,21 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         mBehavior = BottomSheetBehavior.from(bottom_sheet);
 
         //disable and enable
-        if (ipub1 == 0)
-            pub1.setVisibility(View.VISIBLE);
-        else pub1.setVisibility(View.GONE);
-        if (ipub2 == 0)
-            pub2.setVisibility(View.VISIBLE);
-        else pub2.setVisibility(View.GONE);
-        if (ipub3 == 0)
-            pub3.setVisibility(View.VISIBLE);
-        else pub3.setVisibility(View.GONE);
-        if (ipub4 == 0)
-            pub4.setVisibility(View.VISIBLE);
-        else pub4.setVisibility(View.GONE);
-        if (ipub5 == 0)
-            pub5.setVisibility(View.VISIBLE);
-        else pub5.setVisibility(View.GONE);
+//        if (ipub1 == 0)
+//            pub1.setVisibility(View.VISIBLE);
+//        else pub1.setVisibility(View.GONE);
+//        if (ipub2 == 0)
+//            pub2.setVisibility(View.VISIBLE);
+//        else pub2.setVisibility(View.GONE);
+//        if (ipub3 == 0)
+//            pub3.setVisibility(View.VISIBLE);
+//        else pub3.setVisibility(View.GONE);
+//        if (ipub4 == 0)
+//            pub4.setVisibility(View.VISIBLE);
+//        else pub4.setVisibility(View.GONE);
+//        if (ipub5 == 0)
+//            pub5.setVisibility(View.VISIBLE);
+//        else pub5.setVisibility(View.GONE);
 
 
         try {
@@ -203,6 +226,16 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         myProfile_photoLikes.setOnClickListener(this);
         phone.setOnClickListener(this);
         email.setOnClickListener(this);
+        imgbBack.setOnClickListener(this);
+
+//        relShop.setOnClickListener(this);
+//        relTeacher.setOnClickListener(this);
+//        relInstitude.setOnClickListener(this);
+//        relBeatyshop.setOnClickListener(this);
+//
+//        relHairdreser.setOnClickListener(this);
+
+
         try {
             txtMobile.setText(tools.getSharePrf("mobile"));
 
@@ -212,13 +245,33 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         prepareProfilePictureDirectory();
 
         user_info();
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
+
     }
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
+            case R.id.imgbBack:
+                if (tools.state.equals("3")) {
+                    Fragment fragment = new AdvertiseFragment();
+                    loadFragment(fragment);
+                    navigation.setSelectedItemId(R.id.navigation_advertise);
+                    tools.state = "1";
 
+
+                } else if (tools.state.equals("2")) {
+                    Fragment fragment = new HomeFragment();
+                    loadFragment(fragment);
+                    navigation.setSelectedItemId(R.id.navigation_home);
+                    tools.state = "2";
+
+
+                }
+                break;
             case R.id.phone:
                 Intent call = new Intent(Intent.ACTION_CALL);
 
@@ -358,7 +411,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                 Crop.of(Uri.fromFile(photo), Uri.fromFile(profilePictureDirectory))
                         .withMaxSize(900, 900)
-                        .withAspect(16, 9)
+                        .withAspect(9, 9)
                         .start(getActivity(), ProfileFragment.this, CROP_PICTURE);
 
 
@@ -685,6 +738,18 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
+                tools.noInternet(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        if (tools.isNetworkAvailable()) {
+                            user_info();
+                            tools.hideInternet();
+                        } else
+                            Toast.makeText(getContext(), getString(R.string.nonet), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
                 pd.dismiss();
             }
 
@@ -697,6 +762,47 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                     User user = gson.fromJson(responseString, User.class);
 
+                    for (Member member : user.getMember()) {
+
+                        switch (member.getType()) {
+                            case "1":
+                                if (member.getActive() == 0)
+                                    pub1.setText("غیرفعال");
+                                else pub1.setText("فعال");
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview1);
+
+                                break;
+                            case "2":
+                                if (member.getActive() == 0)
+                                    pub2.setText("غیرفعال");
+                                else pub2.setText("فعال");
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview2);
+
+                                break;
+                            case "3":
+                                if (member.getActive() == 0)
+                                    pub3.setText("غیرفعال");
+                                else pub3.setText("فعال");
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview3);
+
+                                break;
+                            case "4":
+                                if (member.getActive() == 0)
+                                    pub4.setText("غیرفعال");
+                                else pub4.setText("فعال");
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview4);
+
+                                break;
+                            case "5":
+                                if (member.getActive() == 0)
+                                    pub5.setText("غیرفعال");
+                                else pub5.setText("فعال");
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview5);
+
+                                break;
+
+                        }
+                    }
                     if (user.getPic() != null)
                         Glide.with(getContext().getApplicationContext())
                                 .load("http://arayesh.myzibadasht.ir" + user.getPic()).error(R.drawable.iconnopic)
@@ -710,5 +816,4 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             }
         });
     }
-
 }

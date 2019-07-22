@@ -127,6 +127,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
                 MainItem mainItem = (MainItem) object;
                 memberType = mainItem.getTag();
+
                 getLists(type, memberType, userLat, userLng);
 
             }
@@ -218,6 +219,10 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                                     .icon(bitmapDescriptorFromVector(AdsMapActivity.this, R.drawable.ic_location_pin)));
                             marker.setTitle(ad.getName());
                             marker.setTag(ad.getId());
+
+
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ad.getLat(),ad.getLng()), 16);
+                            mMap.moveCamera(cameraUpdate);
 
 
                             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {

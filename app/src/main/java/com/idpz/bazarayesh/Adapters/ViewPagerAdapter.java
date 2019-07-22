@@ -27,6 +27,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                SubProfileFragment subProfileFragment = new SubProfileFragment();
+
                return subProfileFragment;
             case 1:
                 AdvertisementManagmentFragment advertisementManagmentFragment = new AdvertisementManagmentFragment();

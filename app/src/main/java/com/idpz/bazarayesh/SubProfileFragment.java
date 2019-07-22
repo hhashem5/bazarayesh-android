@@ -99,11 +99,7 @@ import static com.idpz.bazarayesh.ProfileFragment.edit2;
 import static com.idpz.bazarayesh.ProfileFragment.edit3;
 import static com.idpz.bazarayesh.ProfileFragment.edit4;
 import static com.idpz.bazarayesh.ProfileFragment.edit5;
-import static com.idpz.bazarayesh.ProfileFragment.ipub1;
-import static com.idpz.bazarayesh.ProfileFragment.ipub2;
-import static com.idpz.bazarayesh.ProfileFragment.ipub3;
-import static com.idpz.bazarayesh.ProfileFragment.ipub4;
-import static com.idpz.bazarayesh.ProfileFragment.ipub5;
+
 import static com.idpz.bazarayesh.SubProfileActivity.*;
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 import static com.idpz.bazarayesh.Utils.Tools.gson;
@@ -113,6 +109,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     private Handler mHandler;
     int state = 1;
     Tools tools;
+    String mtitle = "";
 
     private double lat = 0.0, lng = 0.0;
 
@@ -122,11 +119,11 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     private boolean doubleBackToExitPressedOnce = false;
 
     RelativeLayout rel12, relative, page1, page2, page3, relLogo, rel18, rel17, rel29, rel19, rel14,
-            rel24, rel6, rel26, rel25, rel27, rel39, rel49, rel59, rel69, rel2, lnRelFrag, rel55, rel79, relRoumer;
+            rel24, rel6, rel26, rel25, rel27, rel39, rel49, rel59, rel69, rel2, lnRelFrag, rel55, rel79, relRoumer, rel99;
     Button btn1, btn2, btn3;
     LinearLayout linear0, linear, tempLinear, linear2, linear3, linear5, linear6, linear7,
             linear8, linear9, linear10, linear11, linear12, linear13,
-            linear14, linear15, linear16, linear18, linear17, linearRetry;
+            linear14, linear15, linear16, linear18, linear17, linear19, linearRetry;
     ImageView imgbOne, imgbTwo, imgbThree, clickedImageView, clickedDrop, imgPic1, imgPic3, logoimg1;
 
     ScrollView svL3;
@@ -308,6 +305,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         lnRelFrag = v.findViewById(R.id.lnRelFrag);
         rel55 = v.findViewById(R.id.rel55);
         rel79 = v.findViewById(R.id.rel79);
+        rel99 = v.findViewById(R.id.rel99);
 
 
         txtPic1 = v.findViewById(R.id.txtPic1);
@@ -338,6 +336,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         linear16 = v.findViewById(R.id.linear16);
         linear17 = v.findViewById(R.id.linear17);
         linear18 = v.findViewById(R.id.linear18);
+        linear19 = v.findViewById(R.id.linear19);
+
 
         mMapView = (MapView) v.findViewById(R.id.map);
 
@@ -374,6 +374,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         rel6.setOnClickListener(this);
         rel79.setOnClickListener(this);
         rel55.setOnClickListener(this);
+        rel99.setOnClickListener(this);
 //        googleMap.setOnMapClickListener(this);
 
 
@@ -460,14 +461,14 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 }
                 mMap.setMyLocationEnabled(true);
 
-                if (!edit) {
-                    CameraPosition cameraPosition = new CameraPosition.Builder()
-                            .target(latLong).zoom(18).build();
-
-                    mMap.animateCamera(CameraUpdateFactory
-                            .newCameraPosition(cameraPosition));
-
-                }
+//                if (!edit) {
+//                    CameraPosition cameraPosition = new CameraPosition.Builder()
+//                            .target(latLong).zoom(18).build();
+//
+//                    mMap.animateCamera(CameraUpdateFactory
+//                            .newCameraPosition(cameraPosition));
+//
+//                }
 
                 mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                     @Override
@@ -501,6 +502,28 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                         setMyLocationButtonEnabled(false);
 
 
+                mMap.getUiSettings().setMyLocationButtonEnabled(true);
+                mMap.setMyLocationEnabled(true);
+
+                try {
+
+                    // زمانی که edit وارد بشه اجرا میشه
+                    if (lat != 0) {
+                        googleMap.clear();
+                        googleMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(lat, lng))
+                                .draggable(true));
+
+
+                        CameraPosition cameraPosition = new CameraPosition.Builder()
+                                .target(new LatLng(lat, lng)).zoom(18).build();
+
+                        googleMap.animateCamera(CameraUpdateFactory
+                                .newCameraPosition(cameraPosition));
+                    }
+
+                } catch (Exception e) {
+                }
             }
         });
 
@@ -553,7 +576,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                 Crop.of(Uri.fromFile(photo), Uri.fromFile(profilePictureDirectory))
                         .withMaxSize(900, 900)
-                        .withAspect(16, 9)
+                        .withAspect(1, 1)
                         .start(getActivity(), SubProfileFragment.this, CROP_PICTURE);
 
 
@@ -671,9 +694,10 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 //
 //                                    break;
 //                            }
+                            //اپلاسیون
                             if (tempLinear == linear) {
 
-                                membersFilesRegister("service", 1, "service_id", "2", file, "");
+                                membersFilesRegister("service", 1, "service_id", "1", file, title);
 
                                 mtag = "service";
                                 key = "service_id";
@@ -685,90 +709,102 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                                 key = "famous_customer_id";
 
 
+                                //تاتو
                             } else if (tempLinear == linear2) {
-                                membersFilesRegister("service", 1, "service_id", "3", file, "");
+                                membersFilesRegister("service", 1, "service_id", "2", file, title);
                                 mtag = "service";
                                 key = "service_id";
 
 
+                                // مراقبت از پوست
                             } else if (tempLinear == linear3) {
-                                membersFilesRegister("service", 1, "service_id", "4", file, "");
+                                membersFilesRegister("service", 1, "service_id", "3", file, title);
 
                                 mtag = "service";
                                 key = "service_id";
 
 
+                                //شینیون
                             } else if (tempLinear == linear5) {
-                                membersFilesRegister("service", 1, "service_id", "5", file, "");
+                                membersFilesRegister("service", 1, "service_id", "5", file, title);
 
                                 mtag = "service";
                                 key = "service_id";
 
 
+                                //کوتاهی مو
                             } else if (tempLinear == linear6) {
-                                membersFilesRegister("service", 1, "service_id", "6", file, "");
+                                membersFilesRegister("service", 1, "service_id", "6", file, title);
 
 
                                 mtag = "service";
                                 key = "service_id";
 
+                                //رنگ و مش
                             } else if (tempLinear == linear7) {
-                                membersFilesRegister("service", 1, "service_id", "7", file, "");
+                                membersFilesRegister("service", 1, "service_id", "7", file, title);
                                 mtag = "service";
                                 key = "service_id";
 
 
+                                //کراتین
                             } else if (tempLinear == linear8) {
-                                membersFilesRegister("service", 1, "service_id", "8", file, "");
+                                membersFilesRegister("service", 1, "service_id", "10", file, title);
 
                                 mtag = "service";
                                 key = "service_id";
 
-
+                                //اکستنشن مو
                             } else if (tempLinear == linear9) {
-                                membersFilesRegister("service", 1, "service_id", "9", file, "");
+                                membersFilesRegister("service", 1, "service_id", "9", file, title);
 
 
                                 mtag = "service";
                                 key = "service_id";
 
+                                //بافت و براشینگ
                             } else if (tempLinear == linear10) {
-                                membersFilesRegister("service", 1, "service_id", "10", file, "");
+                                membersFilesRegister("service", 1, "service_id", "8", file, title);
 
 
                                 mtag = "service";
                                 key = "service_id";
 
+                                //میکاپ وگریم عمومی
                             } else if (tempLinear == linear11) {
-                                membersFilesRegister("service", 1, "service_id", "11", file, "");
+                                membersFilesRegister("service", 1, "service_id", "11", file, title);
 
 
                                 mtag = "service";
                                 key = "service_id";
 
+                                //ابرو و میکروپیگمنتیشن
                             } else if (tempLinear == linear12) {
-                                membersFilesRegister("service", 1, "service_id", "14", file, "");
+                                membersFilesRegister("service", 1, "service_id", "15", file, title);
 
 
                                 mtag = "service";
                                 key = "service_id";
 
+                                //ناخن
                             } else if (tempLinear == linear13) {
-                                membersFilesRegister("service", 1, "service_id", "13", file, "");
+                                membersFilesRegister("service", 1, "service_id", "14", file, title);
 
                                 mtag = "service";
                                 key = "service_id";
 
 
+                                //اکستنشن مژه
                             } else if (tempLinear == linear14) {
-                                membersFilesRegister("service", 1, "service_id", "12", file, "");
+                                membersFilesRegister("service", 1, "service_id", "13", file, title);
 
 
                                 mtag = "service";
                                 key = "service_id";
 
+                                //خودآرایی
                             } else if (tempLinear == linear15) {
-                                membersFilesRegister("service", 1, "service_id", "15", file, "");
+                                membersFilesRegister("service", 1, "service_id", "4", file, title);
 
 
                                 mtag = "service";
@@ -787,7 +823,13 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                                 key = "award_id";
 
                             } else if (tempLinear == linear18) {
-                                membersFilesRegister("workplace_pic", 4, "workplace_pic_id", "", file, "");
+                                membersFilesRegister("workplace_pic", 4, "workplace_pic_id", "", file, title);
+                                mtag = "workplace_pic";
+                                key = "workplace_pic_id";
+                            }
+                            //آرایش ویژه عروس
+                            else if (tempLinear == linear19) {
+                                membersFilesRegister("service", 1, "service_id", "12", file, title);
                                 mtag = "workplace_pic";
                                 key = "workplace_pic_id";
                             }
@@ -1166,6 +1208,10 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             case R.id.rel25:
                 AlertDialog(linear10);
 
+                break;
+
+            case R.id.rel99:
+                AlertDialog(linear19);
 
         }
     }
@@ -1748,7 +1794,18 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                tools.noInternet(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                        if (tools.isNetworkAvailable()) {
+                            getMemberInfo();
+                            tools.hideInternet();
+                        } else
+                            Toast.makeText(getContext(), getString(R.string.nonet), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
 
             @Override
@@ -1760,29 +1817,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                     MyMember response = gson.fromJson(responseString, MyMember.class);
 
-
-                    if (response.getData().getPub() == 0) {
-                        switch (tag) {
-                            case 1:
-                                ipub1 = 0;
-                                break;
-                            case 2:
-                                ipub2 = 0;
-                                break;
-                            case 3:
-                                ipub3 = 0;
-                                break;
-                            case 4:
-                                ipub4 = 0;
-                                break;
-                            case 5:
-                                ipub5 = 0;
-                                break;
-
-                        }
-
-
-                    }
+//
                     txtName.setText(response.getData().getFullName());
 
                     txtBoss.setText(response.getData().getManagerName());
@@ -1792,16 +1827,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     txtinstagram.setText(response.getData().getInstagram());
                     txttelegram.setText(response.getData().getTelegram());
                     txtphone2.setText(response.getData().getPhone2());
-                    googleMap.clear();
-                    googleMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(response.getData().getLat(), response.getData().getLng()))
-                            .draggable(true));
-                    CameraPosition cameraPosition = new CameraPosition.Builder()
-                            .target(new LatLng(response.getData().getLat(), response.getData().getLng())).zoom(18).build();
-
-                    googleMap.animateCamera(CameraUpdateFactory
-                            .newCameraPosition(cameraPosition));
-
 
                     Glide.with(getContext())
                             .load("http://arayesh.myzibadasht.ir/" + response.getData().getLogo())
@@ -1809,6 +1834,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
 
                     for (final Award award : response.getData().getAward()) {
+
 
                         setImage("http://arayesh.myzibadasht.ir" + award.getData(), linear17, "award", "award_id", award.getId().toString(), award.getTitle(), member_id);
 
@@ -1818,83 +1844,154 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
 
                         switch (service.getServiceType()) {
+
                             case 1:
+
 //todo arayesh vize aros
                                 //   setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear17);
+
+                                //اپلاسیون
+                                tempLinear = linear;
+
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear, "service", "service_id", service.getId().toString(), mtitle, member_id);
+
 
                                 break;
 
                             case 2:
-                                tempLinear = linear;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear, "service", "service_id", service.getId().toString(), "", member_id);
+                                //تاتو
+                                tempLinear = linear2;
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear2, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 3:
-                                tempLinear = linear2;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear2, "service", "service_id", service.getId().toString(), "", member_id);
+
+                                tempLinear = linear3;
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear3, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 4:
-                                tempLinear = linear3;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear3, "service", "service_id", service.getId().toString(), "", member_id);
+                                tempLinear = linear15;
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear15, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
 
                             case 5:
                                 tempLinear = linear5;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear5, "service", "service_id", service.getId().toString(), "", member_id);
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear5, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
 
                             case 6:
                                 tempLinear = linear6;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear6, "service", "service_id", service.getId().toString(), "", member_id);
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear6, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
 
                             case 7:
                                 tempLinear = linear7;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear7, "service", "service_id", service.getId().toString(), "", member_id);
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear7, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 8:
-                                tempLinear = linear8;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear8, "service", "service_id", service.getId().toString(), "", member_id);
+                                tempLinear = linear10;
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear10, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 9:
                                 tempLinear = linear9;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear9, "service", "service_id", service.getId().toString(), "", member_id);
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear9, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 10:
-                                tempLinear = linear10;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear10, "service", "service_id", service.getId().toString(), "", member_id);
+                                tempLinear = linear8;
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear8, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 11:
                                 tempLinear = linear11;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear11, "service", "service_id", service.getId().toString(), "", member_id);
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear11, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 12:
-                                tempLinear = linear17;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear17, "service", "service_id", service.getId().toString(), "", member_id);
+                                tempLinear = linear19;
+
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear19, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 13:
-                                tempLinear = linear13;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear13, "service", "service_id", service.getId().toString(), "", member_id);
+                                tempLinear = linear14;
+
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear14, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 14:
-                                tempLinear = linear14;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear12, "service", "service_id", service.getId().toString(), "", member_id);
+                                tempLinear = linear13;
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear13, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
                             case 15:
-                                tempLinear = linear15;
-                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear15, "service", "service_id", service.getId().toString(), "", member_id);
+                                tempLinear = linear12;
+                                if (service.getTitle() != null)
+                                    mtitle = service.getTitle();
+                                else mtitle = "";
+
+                                setImage("http://arayesh.myzibadasht.ir/" + service.getPic(), linear12, "service", "service_id", service.getId().toString(), mtitle, member_id);
 
                                 break;
 
@@ -1905,25 +2002,55 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     }
 
                     for (Course course : response.getData().getCourse()) {
-                        setImage("http://arayesh.myzibadasht.ir/" + course.getData(), linear16, "course", "course_id", course.getId().toString(), course.getTitle(), member_id);
+                        if (course.getTitle() != null)
+                            mtitle = course.getTitle();
+                        else mtitle = "";
+
+                        setImage("http://arayesh.myzibadasht.ir/" + course.getData(), linear16, "course", "course_id", course.getId().toString(), mtitle, member_id);
 
                     }
 
                     for (WorkplacePic workplacePic : response.getData().getWorkplacePic()) {
-                        setImage("http://arayesh.myzibadasht.ir/" + workplacePic.getPic(), linear18, "workplace_pic", "workplace_pic_id", workplacePic.getId().toString(), "", member_id);
+                        if (workplacePic.getTitle() != null)
+                            mtitle = workplacePic.getTitle();
+                        else mtitle = "";
+
+
+                        setImage("http://arayesh.myzibadasht.ir/" + workplacePic.getPic(), linear18, "workplace_pic", "workplace_pic_id", workplacePic.getId().toString(), mtitle, member_id);
 
                     }
 
                     for (FamousCustomer famousCustomer : response.getData().getFamousCustomer()) {
-                        setImage("http://arayesh.myzibadasht.ir/" + famousCustomer.getPic(), linear0, "famous_customer", "famous_customer_id", famousCustomer.getId().toString(), "", member_id);
+                        if (famousCustomer.getTitle() != null)
+                            mtitle = famousCustomer.getTitle();
+                        else mtitle = "";
+
+
+                        setImage("http://arayesh.myzibadasht.ir/" + famousCustomer.getPic(), linear0, "famous_customer", "famous_customer_id", famousCustomer.getId().toString(), mtitle, member_id);
 
 
                     }
+                    lat = response.getData().getLat();
+                    lng = response.getData().getLng();
+
+                    googleMap.clear();
+                    googleMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(response.getData().getLat(), response.getData().getLng()))
+                            .draggable(true));
+
+
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(new LatLng(response.getData().getLat(), response.getData().getLng())).zoom(18).build();
+
+                    googleMap.animateCamera(CameraUpdateFactory
+                            .newCameraPosition(cameraPosition));
 
 
                 } catch (Exception e) {
                     Log.d("error", e.toString());
                 }
+
+
             }
         });
     }
@@ -1947,7 +2074,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         linearLayouts.add(linear);
 
 
-        txtTilte.setText(title);
+        if (title != null)
+            txtTilte.setText(title);
 
         Glide.with(getContext())
                 .load(url)
@@ -2047,8 +2175,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case 1: {
                 // If request is cancelled, the result arrays are empty.

@@ -95,7 +95,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/layout_corners_shape_border"
                     android:ems="10"
-                    android:maxLength="10"
+                    android:maxLength="20"
                     android:inputType="textPersonName"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
@@ -892,6 +892,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="اپلاسیون"
                     android:textColor="@color/dark_gray"
 
@@ -1187,7 +1188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
                     android:text="تاتو"
                     android:textColor="@color/dark_gray"
@@ -1272,7 +1273,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginRight="16dp"
                     android:text=" مراقبت از پوست"
                     android:textColor="@color/dark_gray"
@@ -1375,6 +1376,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="شینیون"
                     android:textColor="@color/dark_gray"
 
@@ -1457,6 +1459,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="کوتاهی مو"
                     android:textColor="@color/dark_gray"
 
@@ -1538,6 +1541,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="رنگ ومش"
                     android:textColor="@color/dark_gray"
 
@@ -1620,7 +1624,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
-                    android:text="کراتین کوتاهی مو"
+                    android:layout_marginTop="16dp"
+                    android:text="کراتین صافی و احیای مو"
                     android:textColor="@color/dark_gray"
 
                     />
@@ -1702,6 +1707,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="اکستنشن مو"
                     android:textColor="@color/dark_gray"
 
@@ -1783,6 +1789,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="بافت و براشینگ"
                     android:textColor="@color/dark_gray"
 
@@ -1874,7 +1881,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginRight="16dp"
                     android:text="چهره"
-                    android:textColor="@color/dark_gray" />
+                    android:textColor="@color/dark" />
 
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -1883,7 +1890,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
-                    android:text="مکاپ و گریم عمومی"
+                    android:layout_marginTop="16dp"
+                    android:text="میکاپ و گریم عمومی"
                     android:textColor="@color/dark_gray"
 
                     />
@@ -1981,6 +1989,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="ابرو و میکروپیگمنتیشن"
                     android:textColor="@color/dark_gray"
 
@@ -2166,6 +2175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="اکستنشن مژه"
                     android:textColor="@color/dark_gray"
 
@@ -2248,6 +2258,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
                     android:text="خودآرایی"
                     android:textColor="@color/dark_gray"
 
@@ -2329,6 +2340,90 @@
                     android:layout_height="2dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/light_gray" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/mtitle99"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="آرایش ویژه عروس"
+                    android:textColor="@color/dark_gray"
+
+
+                    />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/linear19"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="1">
+
+
+                            <RelativeLayout
+                                android:id="@+id/rel99"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/dashed_back"
+                                android:gravity="bottom">
+
+
+                                <ImageView
+                                    android:id="@+id/imgPic99"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="8dp"
+                                    app:srcCompat="@drawable/ic_camera" />
+
+
+                                <com.idpz.bazarayesh.Views.mTextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/imgPic99"
+                                    android:layout_marginTop="4dp"
+                                    android:gravity="center"
+                                    android:text="افزودن عکس"
+                                    android:textColor="@color/gray" />
+
+                                <ImageButton
+                                    android:id="@+id/imgbDropPic99"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="right"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_iconfinder_close_2190987" />
+
+                                <ImageView
+                                    android:id="@+id/imgbDonePic99"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/round_black_transparent"
+                                    android:padding="8dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_done_all_green" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
 
 
             </LinearLayout>

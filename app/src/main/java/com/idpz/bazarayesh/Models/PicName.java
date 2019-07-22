@@ -21,6 +21,7 @@ public class PicName {
         this.name = name;
         this.url = url;
         this.memo = memo;
+
     }
 
     public int getId() {

@@ -22,6 +22,11 @@ public class WorkplacePic {
     @Expose
     private String updatedAt;
 
+    @SerializedName("title")
+    @Expose
+    private String title;
+
+
     public Integer getId() {
         return id;
     }
@@ -62,4 +67,11 @@ public class WorkplacePic {
         this.updatedAt = updatedAt;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

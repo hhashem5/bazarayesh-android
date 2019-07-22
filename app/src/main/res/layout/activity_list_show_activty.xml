@@ -4,28 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListShowActivty"
+    android:background="@color/activity_back"
     android:layoutDirection="ltr"
 
-    android:background="@color/activity_back">
+    tools:context=".ListShowActivty">
 
-    <include layout="@layout/mtoolbar"/>
+    <include layout="@layout/mtoolbar" />
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/spinner"
+    <LinearLayout
+        android:id="@+id/lispinner"
         android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="8dp"
+        android:layout_alignParentRight="true"
         android:layout_marginTop="16dp"
-        app:ms_text_color="@color/dark"
-        android:layout_height="wrap_content"/>
+        android:layout_marginRight="8dp"
+        android:background="@drawable/layout_corners_shape"
+
+
+        >
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:ms_text_color="@color/dark" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner"
-        android:layout_marginTop="8dp"
-        android:id="@+id/recycle"/>
+        android:layout_below="@+id/lispinner"
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>

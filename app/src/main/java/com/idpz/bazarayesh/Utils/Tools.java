@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -99,5 +100,15 @@ public class Tools {
 
     }
 
+    public static void hideKeyboard(Activity activity,View view) {
+
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 }

@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.idpz.bazarayesh.Adapters.ViewPagerAdapter;
 
 import java.util.List;
 
 import static com.idpz.bazarayesh.Utils.AppController.getActivity;
+import static com.idpz.bazarayesh.Utils.Tools.hideKeyboard;
 
 public class SubProfileActivity extends BaseActivity {
     TabLayout tabLayout;
@@ -88,6 +90,9 @@ public class SubProfileActivity extends BaseActivity {
         tabLayout = findViewById(R.id.tabLayout);
 
         viewPager = findViewById(R.id.viewPager);
+
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
     }
 
     @Override

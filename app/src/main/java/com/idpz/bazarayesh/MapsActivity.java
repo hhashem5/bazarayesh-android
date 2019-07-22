@@ -170,7 +170,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
             }
         });
 
-
         recycle.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.HORIZONTAL, true));
         recycle.setAdapter(mapsItemAdapter);
 
@@ -194,7 +193,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
         // Add a marker in Sydney and move the camera
         LatLng tehran = new LatLng(35.684209, 51.388263);
-        mMap.addMarker(new MarkerOptions().position(tehran));
+        //mMap.addMarker(new MarkerOptions().position(tehran));
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(tehran, 16);
         googleMap.moveCamera(cameraUpdate);
@@ -352,6 +351,9 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                                     .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin)));
 
 
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(member.getLat(),member.getLng()), 16);
+                            mMap.moveCamera(cameraUpdate);
+
                             marker.setTitle(member.getFullName());
 
                             marker.setTag(member.getId());
@@ -454,6 +456,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                                         .position(new LatLng(member.getLat(), member.getLng()))
                                         .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin)));
 
+                                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(member.getLat(),member.getLng()), 16);
+                                mMap.moveCamera(cameraUpdate);
 
                                 marker.setTitle(member.getFullName());
 

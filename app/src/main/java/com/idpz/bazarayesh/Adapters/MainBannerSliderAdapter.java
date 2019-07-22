@@ -1,9 +1,11 @@
-package com.idpz.bazarayesh;
+package com.idpz.bazarayesh.Adapters;
 
 import android.content.Context;
 
+import com.bumptech.glide.Glide;
 import com.idpz.bazarayesh.Models.BannerModels.Baner;
 import com.idpz.bazarayesh.Models.PicName;
+import com.idpz.bazarayesh.R;
 
 import java.util.List;
 
@@ -33,7 +35,10 @@ public class MainBannerSliderAdapter extends SliderAdapter {
 
 
         try {
-            viewHolder.bindImageSlide("http://arayesh.myzibadasht.ir" + banners.get(position).getPic());
+          Glide.with(mContext.getApplicationContext()).load("http://arayesh.myzibadasht.ir" + banners.get(position).getPic()).error(R.drawable.logo_gray).into(viewHolder.imageView);
+
+
+         //   viewHolder.bindImageSlide("http://arayesh.myzibadasht.ir" + banners.get(position).getPic());
         } catch (Exception e) {
             e.getMessage();
 

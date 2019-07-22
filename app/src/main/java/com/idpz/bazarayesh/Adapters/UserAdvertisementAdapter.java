@@ -527,7 +527,7 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         });
         message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-    }
+}
 
     public void removeAds(final int position, final String type, int id) {
 

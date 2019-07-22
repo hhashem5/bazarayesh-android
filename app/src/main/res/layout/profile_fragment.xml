@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,6 +86,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
+                android:id="@+id/relBeatyShop"
                 android:background="@drawable/layout_corners_shape_transparent4">
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -124,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
+                android:id="@+id/relShop"
                 android:background="@drawable/layout_corners_shape_transparent5">
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -164,6 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
+                android:id="@+id/relTeacher"
                 android:background="@drawable/layout_corners_shape_transparent3">
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -204,6 +207,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="16dp"
+                android:id="@+id/relHairdreser"
                 android:background="@drawable/layout_corners_shape_transparent2">
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -242,6 +246,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:id="@+id/relInstitude"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/layout_corners_shape_transparent">
 
@@ -253,6 +258,7 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:text="@string/institude"
+
                     android:textColor="@color/white"
                     android:textSize="18dp" />
 
