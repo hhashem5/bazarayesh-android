@@ -111,6 +111,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     Tools tools;
     String mtitle = "";
 
+
     private double lat = 0.0, lng = 0.0;
 
     boolean imgLogoFlag = false;
@@ -582,6 +583,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
             }
 
+
         } catch (Exception e) {
             Log.d("pari", e.toString());
         }
@@ -589,7 +591,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             if (requestCode == PICK_PICTURE && resultCode == Activity.RESULT_OK) {
                 Crop.of(data.getData(), Uri.fromFile(profilePictureDirectory))
                         .withMaxSize(900, 900)
-                        .withAspect(16, 9)
+                        .withAspect(9, 9)
                         .start(getActivity(), SubProfileFragment.this, CROP_PICTURE);
 
 
@@ -1293,19 +1295,22 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             case 1:
 
 
-                if (doubleBackToExitPressedOnce) {
-                    Intent i1 = new Intent(getContext(), MainActivity.class);
-                    i1.putExtra("back", "1");
-                    i1.setAction(Intent.ACTION_MAIN);
+               try {
+                   if (doubleBackToExitPressedOnce) {
+                       Intent i1 = new Intent(getContext(), ShowMemberDetail.class);
+                       i1.putExtra("type",type);
+                       i1.putExtra("id",Integer.valueOf(member_id));
+                       i1.setAction(Intent.ACTION_MAIN);
 
-                    i1.addCategory(Intent.CATEGORY_HOME);
-                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    getActivity().startActivity(i1);
-                    customType(getContext(), LEFT_TO_RIGHT);
-                    getActivity().finish();
-                }
+                       i1.addCategory(Intent.CATEGORY_HOME);
+                       i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                       i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       getActivity().startActivity(i1);
+                       customType(getContext(), LEFT_TO_RIGHT);
+                       getActivity().finish();
+                   }
+               }catch (Exception e){}
 
                 doubleBackToExitPressedOnce = true;
                 Toast.makeText(getContext(), "برای خروج دوباره کلید بازگشت را بزنید", Toast.LENGTH_SHORT).show();
@@ -1794,18 +1799,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         tools.client.post(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                tools.noInternet(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
 
-                        if (tools.isNetworkAvailable()) {
-                            getMemberInfo();
-                            tools.hideInternet();
-                        } else
-                            Toast.makeText(getContext(), getString(R.string.nonet), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
             }
 
             @Override

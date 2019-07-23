@@ -2,6 +2,7 @@ package com.idpz.bazarayesh;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,15 +24,21 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,6 +87,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
     TextView txtName, txtEmail, txtMobile, phone, email, pub1, pub2, pub3, pub4, pub5;
 
+    ImageButton edit;
     CardView beautyshop, teacher, institude, store, hairdresser;
     ImageView check1, check2, check3, check4, check5, myProfile_photoLikes, clickedImageView;
     Tools tools;
@@ -97,6 +105,9 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     public static boolean edit1, edit2, edit3, edit4, edit5;
 
     //  RelativeLayout relBeatyshop, relHairdreser, relShop, relInstitude, relTeacher;
+
+    int memberId1, memberId2, memberId3, memberId4, memberId5;
+
 
     @Nullable
     @Override
@@ -127,12 +138,12 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
 
 
-        imgbBack=v.findViewById(R.id.imgbBack);
+        edit = v.findViewById(R.id.edit);
+        imgbBack = v.findViewById(R.id.imgbBack);
         myProfile_photoLikes = v.findViewById(R.id.myProfile_photoLikes);
         txtName = v.findViewById(R.id.txtName);
         txtEmail = v.findViewById(R.id.txtEmail);
         txtMobile = v.findViewById(R.id.txtMobile);
-        btnOk = v.findViewById(R.id.btnOk);
 
         pub1 = v.findViewById(R.id.pub1);
         pub2 = v.findViewById(R.id.pub2);
@@ -222,7 +233,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         store.setOnClickListener(this);
         institude.setOnClickListener(this);
         hairdresser.setOnClickListener(this);
-        btnOk.setOnClickListener(this);
+        edit.setOnClickListener(this);
         myProfile_photoLikes.setOnClickListener(this);
         phone.setOnClickListener(this);
         email.setOnClickListener(this);
@@ -255,6 +266,10 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View view) {
 
         switch (view.getId()) {
+
+            case R.id.edit:
+                showDialog();
+                break;
             case R.id.imgbBack:
                 if (tools.state.equals("3")) {
                     Fragment fragment = new AdvertiseFragment();
@@ -308,59 +323,57 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 } catch (android.content.ActivityNotFoundException ex) {
                 }
                 break;
+
             case R.id.beautyshop:
 
-                Intent intent = new Intent(getActivity(), SubProfileActivity.class);
+                Intent intent = new Intent(getActivity(), ShowMemberDetail.class);
                 intent.putExtra("type", 1);
+                intent.putExtra("id", memberId1);
                 getActivity().startActivity(intent);
                 customType(getContext(), LEFT_TO_RIGHT);
-                getActivity().finish();
                 break;
 
 
             case R.id.teacher:
 
-                Intent intent2 = new Intent(getActivity(), SubProfileActivity.class);
+                Intent intent2 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent2.putExtra("type", 4);
+                intent2.putExtra("id", memberId4);
                 getActivity().startActivity(intent2);
                 customType(getContext(), LEFT_TO_RIGHT);
-                getActivity().finish();
                 break;
 
             case R.id.store:
-                Intent intent3 = new Intent(getActivity(), SubProfileActivity.class);
+                Intent intent3 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent3.putExtra("type", 5);
+                intent3.putExtra("id", memberId5);
                 getActivity().startActivity(intent3);
                 customType(getContext(), LEFT_TO_RIGHT);
-                getActivity().finish();
                 break;
 
 
             case R.id.hairdersser:
-                Intent intent4 = new Intent(getActivity(), SubProfileActivity.class);
+                Intent intent4 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent4.putExtra("type", 2);
+                intent4.putExtra("id", memberId2);
                 getActivity().startActivity(intent4);
                 customType(getContext(), LEFT_TO_RIGHT);
-                getActivity().finish();
                 break;
 
             case R.id.institude:
-                Intent intent5 = new Intent(getActivity(), SubProfileActivity.class);
+                Intent intent5 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent5.putExtra("type", 3);
+                intent5.putExtra("id", memberId3);
+
                 getActivity().startActivity(intent5);
                 customType(getContext(), LEFT_TO_RIGHT);
-                getActivity().finish();
                 break;
 
-            case R.id.myProfile_photoLikes:
-                clickedImageView = myProfile_photoLikes;
-                showBottomSheetDialog();
-
-                break;
-
-            case R.id.btnOk:
-                update_member();
-                break;
+//            case R.id.myProfile_photoLikes:
+//                clickedImageView = myProfile_photoLikes;
+//                showBottomSheetDialog();
+//f
+//                break;
 
 
         }
@@ -411,7 +424,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                 Crop.of(Uri.fromFile(photo), Uri.fromFile(profilePictureDirectory))
                         .withMaxSize(900, 900)
-                        .withAspect(9, 9)
+                        .withAspect(1, 1)
                         .start(getActivity(), ProfileFragment.this, CROP_PICTURE);
 
 
@@ -669,15 +682,15 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     }
 
 
-    public void update_member() {
+    public void update_member(final String name, final String email) {
 
 
         pd.show();
         RequestParams params = new RequestParams();
-        params.put("full_name", txtName.getText().toString());
+        params.put("full_name", name);
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("email", txtEmail.getText().toString());
+        params.put("email", email);
         try {
             params.put("pic", proPic);
         } catch (FileNotFoundException e) {
@@ -707,7 +720,13 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
                         ResponseUserUpdate response = gson.fromJson(responseString, ResponseUserUpdate.class);
 
-                        tools.addToSharePrf("user_Id", response.getUser().getId().toString());
+                        txtName.setText(response.getUser().getFullName());
+                        txtEmail.setText(response.getUser().getEmail().toString());
+
+
+                        Glide.with(getContext().getApplicationContext())
+                                .load("http://arayesh.myzibadasht.ir" + response.getUser().getPic()).error(R.drawable.user2)
+                                .into(myProfile_photoLikes);
                     }
                 } catch (Exception e) {
                 }
@@ -738,18 +757,6 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
-                tools.noInternet(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        if (tools.isNetworkAvailable()) {
-                            user_info();
-                            tools.hideInternet();
-                        } else
-                            Toast.makeText(getContext(), getString(R.string.nonet), Toast.LENGTH_SHORT).show();
-
-                    }
-                });
                 pd.dismiss();
             }
 
@@ -769,51 +776,99 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                                 if (member.getActive() == 0)
                                     pub1.setText("غیرفعال");
                                 else pub1.setText("فعال");
-                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview1);
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/" + member.getLogo()).error(R.drawable.bazarayesh).into(imagview1);
 
+                                memberId1 = member.getId();
                                 break;
                             case "2":
                                 if (member.getActive() == 0)
                                     pub2.setText("غیرفعال");
                                 else pub2.setText("فعال");
-                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview2);
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/" + member.getLogo()).error(R.drawable.bazarayesh).into(imagview2);
 
+                                memberId2 = member.getId();
                                 break;
                             case "3":
                                 if (member.getActive() == 0)
                                     pub3.setText("غیرفعال");
                                 else pub3.setText("فعال");
-                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview3);
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/" + member.getLogo()).error(R.drawable.bazarayesh).into(imagview3);
 
+                                memberId3 = member.getId();
                                 break;
                             case "4":
                                 if (member.getActive() == 0)
                                     pub4.setText("غیرفعال");
                                 else pub4.setText("فعال");
-                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview4);
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/" + member.getLogo()).error(R.drawable.bazarayesh).into(imagview4);
 
+                                memberId4 = member.getId();
                                 break;
                             case "5":
                                 if (member.getActive() == 0)
                                     pub5.setText("غیرفعال");
                                 else pub5.setText("فعال");
-                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/"+member.getLogo()).error(R.drawable.bazarayesh).into(imagview5);
+                                Glide.with(getActivity()).load("http://arayesh.myzibadasht.ir/" + member.getLogo()).error(R.drawable.bazarayesh).into(imagview5);
 
+                                memberId5 = member.getId();
                                 break;
 
                         }
                     }
                     if (user.getPic() != null)
                         Glide.with(getContext().getApplicationContext())
-                                .load("http://arayesh.myzibadasht.ir" + user.getPic()).error(R.drawable.iconnopic)
+                                .load("http://arayesh.myzibadasht.ir" + user.getPic()).error(R.drawable.user2)
                                 .into(myProfile_photoLikes);
 
-                    txtName.setText(user.getFullName().toString());
-                    txtEmail.setText(user.getEmail().toString());
+                    if (user.getFullName() != null) {
+                        txtName.setVisibility(View.VISIBLE);
+                        txtName.setText(user.getFullName().toString());
+                    }
 
+                    if (user.getEmail() != null) {
+                        txtEmail.setVisibility(View.VISIBLE);
+                        txtEmail.setText(user.getEmail().toString());
+                    }
                 } catch (Exception e) {
                 }
             }
         });
     }
+
+
+    public void showDialog() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog);
+
+        final ImageView imageView = dialog.findViewById(R.id.myProfile_photoLikes);
+        final EditText name = dialog.findViewById(R.id.Name);
+        final EditText email = dialog.findViewById(R.id.Email);
+
+        Button btn_dialog = dialog.findViewById(R.id.btn);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickedImageView = imageView;
+                showBottomSheetDialog();
+
+
+            }
+        });
+
+
+        btn_dialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                update_member(name.getText().toString(), email.getText().toString());
+
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
 }

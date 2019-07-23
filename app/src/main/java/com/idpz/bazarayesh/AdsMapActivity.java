@@ -97,10 +97,18 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
             @Override
             public void gotLocation(Location location) {
                 //Got the location!
+                try {
 
-                userLat = location.getLatitude();
-                userLng = location.getLongitude();
-                getLists(type, memberType, location.getLatitude(), location.getLongitude());
+
+                    userLat = location.getLatitude();
+                    userLng = location.getLongitude();
+                    getLists(type, memberType, location.getLatitude(), location.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
+
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 16);
+                    mMap.moveCamera(cameraUpdate);
+                } catch (Exception e) {
+                }
 
             }
         };
@@ -221,7 +229,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             marker.setTag(ad.getId());
 
 
-                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ad.getLat(),ad.getLng()), 16);
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ad.getLat(), ad.getLng()), 16);
                             mMap.moveCamera(cameraUpdate);
 
 
@@ -329,11 +337,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng tehran = new LatLng(35.684209, 51.388263);
-        mMap.addMarker(new MarkerOptions().position(tehran));
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(tehran, 16);
-        googleMap.moveCamera(cameraUpdate);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -391,7 +395,6 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         }
 
 
-
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
@@ -414,7 +417,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.putExtra("back","3");
+                intent.putExtra("back", "3");
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 customType(context, BOTTOM_TO_UP);
 
@@ -456,17 +459,17 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             ResponseSingleRecruiment responseSingleRecruiment = gson.fromJson(responseString, ResponseSingleRecruiment.class);
                             responseSingleRecruiment.getAd();
 
-                            AlertDialog("عنوان تخصص: "+responseSingleRecruiment.getAd().getExpertise(),
+                            AlertDialog("عنوان تخصص: " + responseSingleRecruiment.getAd().getExpertise(),
                                     "موضوع:" + responseSingleRecruiment.getAd().getSubject(), "سطح تخصص: " + responseSingleRecruiment.getAd().getLvl()
-                                    , "شرایط استخدام: " + responseSingleRecruiment.getAd().getConditions(), responseSingleRecruiment.getAd().getDescription(),responseSingleRecruiment.getAd().getMemId());
+                                    , "شرایط استخدام: " + responseSingleRecruiment.getAd().getConditions(), responseSingleRecruiment.getAd().getDescription(), responseSingleRecruiment.getAd().getMemId());
                             break;
 
                         case "workshops":
                             ResponseSingleWorkShop responseSingleWorkShop = gson.fromJson(responseString, ResponseSingleWorkShop.class);
                             responseSingleWorkShop.getAd();
 
-                            AlertDialog("موضوع کارگاه: "+responseSingleWorkShop.getAd().getSubject(), "در تاریخ: " + responseSingleWorkShop.getAd().getDate()
-                                    , "مدرک: " + responseSingleWorkShop.getAd().getEvidence(), responseSingleWorkShop.getAd().getDescription(), "",responseSingleWorkShop.getAd().getMemId());
+                            AlertDialog("موضوع کارگاه: " + responseSingleWorkShop.getAd().getSubject(), "در تاریخ: " + responseSingleWorkShop.getAd().getDate()
+                                    , "مدرک: " + responseSingleWorkShop.getAd().getEvidence(), responseSingleWorkShop.getAd().getDescription(), "", responseSingleWorkShop.getAd().getMemId());
                             break;
 
 
@@ -477,20 +480,20 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
                             AlertDialog("نوع واگذاری: " + responseSingleAssign.getAd().getType()
                                     , "مورد واگذاری: " + responseSingleAssign.getAd().getOptions() + responseSingleAssign.getAd().getDescription()
-                                    , "", "", "",responseSingleAssign.getAd().getMemId());
+                                    , "", "", "", responseSingleAssign.getAd().getMemId());
 
                             break;
 
                         case "discount_ads":
 
 
-                            ResponseSingleDiscount responseSingleDiscount=gson.fromJson(responseString,ResponseSingleDiscount.class);
+                            ResponseSingleDiscount responseSingleDiscount = gson.fromJson(responseString, ResponseSingleDiscount.class);
                             responseSingleDiscount.getAd();
-                            AlertDialog("تخفیف: "+responseSingleDiscount.getAd().getAffair(),
-                                    "از تاریخ: "+responseSingleDiscount.getAd().getSdate()+" تا تاریخ: "+responseSingleDiscount.getAd().getEdate(),
-                                    " به مناسبت: "+responseSingleDiscount.getAd().getAdEvent(),
-                                    " درصد تخفیف: "+responseSingleDiscount.getAd().getDiscount(),
-                                    responseSingleDiscount.getAd().getDescription(),responseSingleDiscount.getAd().getMemId());
+                            AlertDialog("تخفیف: " + responseSingleDiscount.getAd().getAffair(),
+                                    "از تاریخ: " + responseSingleDiscount.getAd().getSdate() + " تا تاریخ: " + responseSingleDiscount.getAd().getEdate(),
+                                    " به مناسبت: " + responseSingleDiscount.getAd().getAdEvent(),
+                                    " درصد تخفیف: " + responseSingleDiscount.getAd().getDiscount(),
+                                    responseSingleDiscount.getAd().getDescription(), responseSingleDiscount.getAd().getMemId());
                             break;
 
                         case "brides":
@@ -500,7 +503,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
 
                             AlertDialog("در تاریخ :" + responseSingleBride.getAd().getDate()
                                     , "از ساعت: " + responseSingleBride.getAd().getShour() + "  تا ساعت: " + responseSingleBride.getAd().getEhour()
-                                    , responseSingleBride.getAd().getDescription(), "", "",responseSingleBride.getAd().getMemId());
+                                    , responseSingleBride.getAd().getDescription(), "", "", responseSingleBride.getAd().getMemId());
 
                             break;
 
@@ -513,7 +516,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             AlertDialog("موضوع: " + responseSingleCourse.getAd().getTopic(), "نام دوره: " + responseSingleCourse.getAd().getCourseName()
                                     , "مدرک: " + responseSingleCourse.getAd().getEvidence(),
                                     "مدت دوره: " + responseSingleCourse.getAd().getDuration() + "از تاریخ: " + responseSingleCourse.getAd().getScourse() + " تا تاریخ: " + responseSingleCourse.getAd().getEcourse(),
-                                    responseSingleCourse.getAd().getDescription(),responseSingleCourse.getAd().getMemId());
+                                    responseSingleCourse.getAd().getDescription(), responseSingleCourse.getAd().getMemId());
                             break;
 
                     }
@@ -543,9 +546,8 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         TextView txt5 = message.findViewById(R.id.txtDesc);
 
 
-
         TextView btnExit = message.findViewById(R.id.btnExit);
-        TextView btnProfile=message.findViewById(R.id.btnMember);
+        TextView btnProfile = message.findViewById(R.id.btnMember);
         btnProfile.setVisibility(View.VISIBLE);
         if (title.equals("")) {
             txtTitle.setVisibility(View.GONE);
@@ -580,8 +582,8 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(AdsMapActivity.this,ShowMemberDetail.class);
-                intent.putExtra("id",id);
+                Intent intent = new Intent(AdsMapActivity.this, ShowMemberDetail.class);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });
@@ -598,7 +600,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra("back","3");
+        intent.putExtra("back", "3");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         customType(context, BOTTOM_TO_UP);
 

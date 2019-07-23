@@ -53,6 +53,8 @@ public class UserAdvertisementActivity extends BaseActivity {
         recycler = findViewById(R.id.recycle);
 
         getMyAds();
+
+        settoolbarText("مشاهده آگهی ها");
     }
 
     public void getMyAds() {

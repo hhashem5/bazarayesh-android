@@ -3,6 +3,7 @@ package com.idpz.bazarayesh;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,11 +33,10 @@ import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 
 public class ShowMemberDetail extends BaseActivity implements View.OnClickListener {
 
-    int id, count, backtag;
+    int id, count, backtag, type = 0;
 
 
     static String url;
-    int type = 0;
     int service_type = 0;
     double lat, lng;
 
@@ -50,7 +50,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
     ImageView imgLogo, imgTelegram, imgInsta;
 
-    TextView txtName, txtAddress, awardTitle, workSpaceTitle, servicesTitle, workShopTitle, famousCustomerTitle,txtPhone,txtPhone2,managerName,fame,title6,title7;
+    TextView txtName, txtAddress, awardTitle, workSpaceTitle, servicesTitle, workShopTitle,
+            famousCustomerTitle, txtPhone, txtPhone2, managerName, fame, title6, title7, edit;
 
     RelativeLayout relativeLayout6, relativeLayout2, relativeLayout3, relativeLayout4, relativeLayout5;
     private DialogFullscreenImageFragment newFragment;
@@ -60,14 +61,29 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_member_detail);
 
+        settoolbarText("جزئیات");
+        initViews();
+
         try {
-            id = (int) getIntent().getExtras().get("id");
+            if (getIntent().getExtras().get("id") != null)
+                id = (int) getIntent().getExtras().get("id");
+
         } catch (Exception e) {
         }
 
+        try {
 
-        settoolbarText("جزئیات");
-        initViews();
+            if (getIntent().getExtras().get("type") != null) {
+
+                type = (int) getIntent().getExtras().get("type");
+                edit.setVisibility(View.VISIBLE);
+
+            }
+
+        } catch (Exception e) {
+
+        }
+
 
         memberDetail();
 
@@ -78,6 +94,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
         imgbBack.setVisibility(View.VISIBLE);
 
+        edit = findViewById(R.id.edit);
         relativeLayout6 = findViewById(R.id.relative6);
         relativeLayout2 = findViewById(R.id.relative2);
         relativeLayout3 = findViewById(R.id.relative3);
@@ -89,9 +106,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         fame = findViewById(R.id.fame);
 
 
-
-        txtPhone=findViewById(R.id.txtphone);
-        txtPhone2=findViewById(R.id.txtphone2);
+        txtPhone = findViewById(R.id.txtphone);
+        txtPhone2 = findViewById(R.id.txtphone2);
 
         imgInsta = findViewById(R.id.instagram);
         imgTelegram = findViewById(R.id.telegram);
@@ -121,6 +137,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
         imgTelegram.setOnClickListener(this);
         imgInsta.setOnClickListener(this);
+
+        edit.setOnClickListener(this);
     }
 
 
@@ -146,93 +164,96 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                     //   ResponseListMember response=gson.fromJson(responseString,ResponseListMember.class);
                     //   response.getMembers().
 
-
-                    ResponseMemberDetail response = gson.fromJson(responseString, ResponseMemberDetail.class);
-
-                    Glide.with(activity)
-                            .load("http://arayesh.myzibadasht.ir/" + response.getMember().getLogo())
-                            .into(imgLogo);
+                    try {
 
 
-                    txtName.setText(response.getMember().getFullName());
+                        ResponseMemberDetail response = gson.fromJson(responseString, ResponseMemberDetail.class);
 
-                    txtAddress.setText(response.getMember().getAddress());
-
-                    Instagram = response.getMember().getInstagram();
-                    Telegram = response.getMember().getTelegram();
-
-                    txtPhone.setText(response.getMember().getPhone1());
-                    txtPhone2.setText(response.getMember().getPhone2());
-
-                    if (response.getMember().getManagerName()!=null){
-
-                        managerName.setVisibility(View.VISIBLE);
-                        title6.setVisibility(View.VISIBLE);
-                        managerName.setText(response.getMember().getManagerName());
-                    }
+                        Glide.with(activity)
+                                .load("http://arayesh.myzibadasht.ir/" + response.getMember().getLogo())
+                                .into(imgLogo);
 
 
-                    if (response.getMember().getAward().size() != 0) {
+                        txtName.setText(response.getMember().getFullName());
 
-                        for (Award award : response.getMember().getAward()) {
-                            award.getData();
+                        txtAddress.setText(response.getMember().getAddress());
 
-                            itemsAward.add(new MainItem(award.getTitle(), "http://arayesh.myzibadasht.ir/" + award.getData(), 1));
+                        Instagram = response.getMember().getInstagram();
+                        Telegram = response.getMember().getTelegram();
 
-                        }
-                        setAdapter(itemsAward, recycleaward);
+                        txtPhone.setText(response.getMember().getPhone1());
+                        txtPhone2.setText(response.getMember().getPhone2());
 
+                        if (response.getMember().getManagerName() != null) {
 
-                    } else {
-                        relativeLayout3.setVisibility(View.GONE);
-                    }
-
-                    if (response.getMember().getService().size() != 0) {
-                        count = 0;
-                        for (Service service : response.getMember().getService()) {
-
-                            count++;
-                            itemsServices.add(new MainItem("خدمت "+count, "http://arayesh.myzibadasht.ir/" + service.getPic(), 1));
-
-                        }
-                        setAdapter(itemsServices, recycleservices);
-
-
-                    } else {
-                        relativeLayout6.setVisibility(View.GONE);
-                    }
-
-                    if (response.getMember().getFamousCustomer().size() != 0) {
-                        for (FamousCustomer famousCustomer : response.getMember().getFamousCustomer()) {
-
-                            itemsFamous.add(new MainItem(famousCustomer.getTitle(), "http://arayesh.myzibadasht.ir/" + famousCustomer.getPic(), 1));
-
+                            managerName.setVisibility(View.VISIBLE);
+                            title6.setVisibility(View.VISIBLE);
+                            managerName.setText(response.getMember().getManagerName());
                         }
 
-                        setAdapter(itemsFamous, recyclerfamausCustomer);
+
+                        if (response.getMember().getAward().size() != 0) {
+
+                            for (Award award : response.getMember().getAward()) {
+                                award.getData();
+
+                                itemsAward.add(new MainItem(award.getTitle(), "http://arayesh.myzibadasht.ir/" + award.getData(), 1));
+
+                            }
+                            setAdapter(itemsAward, recycleaward);
 
 
-                    } else {
-                        relativeLayout4.setVisibility(View.GONE);
-                    }
-
-
-                    if (response.getMember().getWorkplacePic().size() != 0) {
-                        count = 0;
-                        for (WorkplacePic workplacePic : response.getMember().getWorkplacePic()) {
-
-                            count++;
-                            itemsWorkSpace.add(new MainItem(count + " عکس ", "http://arayesh.myzibadasht.ir/" + workplacePic.getPic(), 1));
-
+                        } else {
+                            relativeLayout3.setVisibility(View.GONE);
                         }
-                        setAdapter(itemsWorkSpace, recycleworkSpace);
+
+                        if (response.getMember().getService().size() != 0) {
+                            count = 0;
+                            for (Service service : response.getMember().getService()) {
+
+                                count++;
+                                itemsServices.add(new MainItem("خدمت " + count, "http://arayesh.myzibadasht.ir/" + service.getPic(), 1));
+
+                            }
+                            setAdapter(itemsServices, recycleservices);
 
 
-                    } else {
-                        relativeLayout2.setVisibility(View.GONE);
+                        } else {
+                            relativeLayout6.setVisibility(View.GONE);
+                        }
+
+                        if (response.getMember().getFamousCustomer().size() != 0) {
+                            for (FamousCustomer famousCustomer : response.getMember().getFamousCustomer()) {
+
+                                itemsFamous.add(new MainItem(famousCustomer.getTitle(), "http://arayesh.myzibadasht.ir/" + famousCustomer.getPic(), 1));
+
+                            }
+
+                            setAdapter(itemsFamous, recyclerfamausCustomer);
+
+
+                        } else {
+                            relativeLayout4.setVisibility(View.GONE);
+                        }
+
+
+                        if (response.getMember().getWorkplacePic().size() != 0) {
+                            count = 0;
+                            for (WorkplacePic workplacePic : response.getMember().getWorkplacePic()) {
+
+                                count++;
+                                itemsWorkSpace.add(new MainItem(count + " عکس ", "http://arayesh.myzibadasht.ir/" + workplacePic.getPic(), 1));
+
+                            }
+                            setAdapter(itemsWorkSpace, recycleworkSpace);
+
+
+                        } else {
+                            relativeLayout2.setVisibility(View.GONE);
+                        }
+
+                    } catch (Exception e) {
                     }
-
-
                 }
             }
         });
@@ -276,6 +297,14 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
             case R.id.telegram:
                 Intent telegram = new Intent(Intent.ACTION_VIEW, Uri.parse("https://telegram.me/" + Telegram));
                 startActivity(telegram);
+                break;
+
+            case R.id.edit:
+
+                Intent intent = new Intent(ShowMemberDetail.this, SubProfileActivity.class);
+                intent.putExtra("type", type);
+                startActivity(intent);
+
                 break;
         }
     }

@@ -20,25 +20,49 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+            <RelativeLayout
                 android:id="@+id/rel1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
 
-         >
+                    >
 
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/imgLogo"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintDimensionRatio="H,16:9"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_editor_absoluteX="1dp" />
-            </android.support.constraint.ConstraintLayout>
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imgLogo"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@color/activity_back"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/logo_gray"
+                        app:layout_constraintDimensionRatio="H,9:9"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="1dp" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/roundshape"
+                    android:gravity="center|center_horizontal|center_vertical"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="ویرایش "
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/linear"
@@ -61,7 +85,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="fgfdgfdgfg"
+                        android:text=""
                         android:textColor="@color/dark" />
 
                     <com.idpz.bazarayesh.Views.mTextView
@@ -71,12 +95,12 @@
                         android:layout_below="@+id/txtName"
                         android:layout_alignParentRight="true"
                         android:layout_marginLeft="8dp"
-                        android:visibility="gone"
-
                         android:layout_marginTop="8dp"
+
                         android:layout_marginRight="8dp"
                         android:text="fgfdgfdgfg"
-                        android:textColor="@color/dark" />
+                        android:textColor="@color/dark"
+                        android:visibility="gone" />
 
                     <com.idpz.bazarayesh.Views.mTextView
                         android:id="@+id/fame"
@@ -87,9 +111,10 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
-                        android:visibility="gone"
                         android:text="fgfdgfdgfg"
-                        android:textColor="@color/dark" />
+                        android:textColor="@color/dark"
+                        android:visibility="gone" />
+
                     <com.idpz.bazarayesh.Views.mTextView
                         android:id="@+id/txtphone2"
                         android:layout_width="wrap_content"
@@ -99,7 +124,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="fgfdgfdgfg"
+                        android:text=""
                         android:textColor="@color/dark" />
 
                     <com.idpz.bazarayesh.Views.mTextView
@@ -111,7 +136,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
-                        android:text="fgfdgfdgfg"
+                        android:text=""
                         android:textColor="@color/dark" />
 
                     <com.idpz.bazarayesh.Views.mTextView
@@ -125,7 +150,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="4dp"
                         android:gravity="bottom"
-                        android:text="gdfgfgdf"
+                        android:text=""
                         android:textColor="@color/dark" />
                 </RelativeLayout>
 
@@ -149,27 +174,27 @@
                         android:id="@+id/title6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
                         android:layout_below="@+id/title1"
+                        android:layout_alignParentRight="true"
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:gravity="right"
                         android:text="نام مدیر"
-                        android:visibility="gone"
-                        android:textColor="@color/gray" />
+                        android:textColor="@color/gray"
+                        android:visibility="gone" />
 
                     <com.idpz.bazarayesh.Views.mTextView
                         android:id="@+id/title7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/title6"
                         android:layout_alignParentRight="true"
                         android:layout_marginTop="8dp"
-                        android:layout_below="@+id/title6"
                         android:layout_marginRight="8dp"
                         android:gravity="right"
                         android:text="شهرت :"
-                        android:visibility="gone"
-                        android:textColor="@color/gray" />
+                        android:textColor="@color/gray"
+                        android:visibility="gone" />
 
                     <com.idpz.bazarayesh.Views.mTextView
                         android:id="@+id/title3"

@@ -16,7 +16,7 @@ public class User {
     private String mobile;
     @SerializedName("email")
     @Expose
-    private Object email;
+    private String email;
     @SerializedName("password")
     @Expose
     private Object password;
@@ -80,11 +80,11 @@ public class User {
         this.mobile = mobile;
     }
 
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

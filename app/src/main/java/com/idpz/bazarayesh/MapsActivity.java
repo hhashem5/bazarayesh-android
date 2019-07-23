@@ -192,11 +192,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng tehran = new LatLng(35.684209, 51.388263);
-        //mMap.addMarker(new MarkerOptions().position(tehran));
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(tehran, 16);
-        googleMap.moveCamera(cameraUpdate);
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -264,7 +260,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی", "workshop"));
                 items.add(new MainItem(R.drawable.ic_noun_facial_wash, "تخفیف خدمات آرایشکاهی", "discount"));
                 items.add(new MainItem(R.drawable.ic_door, "واگذاری فضای آرایشگاهی", "assignment"));
-
+                items.add(new MainItem(R.drawable.ic_search, "جستجو"));
+                items.add(new MainItem(R.drawable.ic_all, "همه", "all"));
                 break;
 
             case 4:
@@ -272,7 +269,8 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 items.add(new MainItem(R.drawable.ic_clipboard_with_pencil, "ثبتنام دوره های آموزشی", "reg_Course"));
                 items.add(new MainItem(R.drawable.ic_teaching, "تخفیف  دوره و کارگاه آموزشی", "discount"));
                 items.add(new MainItem(R.drawable.ic_noun_teacher, "شروع ثبتنام کارگاه آموزشی", "workshop"));
-
+                items.add(new MainItem(R.drawable.ic_search, "جستجو"));
+                items.add(new MainItem(R.drawable.ic_all, "همه", "all"));
                 break;
 
 

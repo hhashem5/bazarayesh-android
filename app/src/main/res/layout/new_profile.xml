@@ -5,658 +5,666 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/relTitle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/colorAccent">
+        android:layout_height="match_parent">
 
-
-        <ImageButton
-            android:id="@+id/imgbBack"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_back2" />
-
-        <com.idpz.bazarayesh.Views.mTextView
-            android:id="@+id/btnOk"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:text="ذخیره"
-            android:textColor="@color/white" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relProf"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_below="@id/relTitle"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="-64dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/white"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-
-        <TextView
-            android:id="@+id/txtMobile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp" />
-
-
-        <com.idpz.bazarayesh.Views.mEditText
-            android:id="@+id/txtName"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/txtMobile"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/layout_corners_shape"
-            android:ems="10"
-            android:hint="@string/full_name"
-            android:inputType="textPersonName"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            android:textColor="@color/dark" />
-
-
-        <com.idpz.bazarayesh.Views.mEditText
-            android:id="@+id/txtEmail"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_below="@+id/txtName"
-            android:layout_marginTop="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/layout_corners_shape"
-            android:ems="10"
-            android:hint="ایمیل:"
-            android:inputType="textPersonName"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/dark" />
-
-    </RelativeLayout>
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/myProfile_photoLikes"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="8dp"
-       android:src="@drawable/user2" />
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/relProf"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="16dp">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
                 <RelativeLayout
+                    android:id="@+id/relTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="150dp"
+                    android:background="@color/colorAccent">
+
+
+                    <ImageButton
+                        android:id="@+id/imgbBack"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:srcCompat="@drawable/ic_back2" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relProf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relTitle"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="-64dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@color/white"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp">
 
-                    <LinearLayout
-                        android:id="@+id/linear1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
 
-                        <android.support.v7.widget.CardView
-                            android:id="@+id/beautyshop"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <android.support.constraint.ConstraintLayout
-                                    android:id="@+id/consImage"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/toolbar"
-                                    android:orientation="vertical">
-
-                                    <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/imagview1"
-                                        android:layout_width="0dp"
-                                        android:layout_height="0dp"
-                                        android:background="@color/activity_back"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/bazarayesh"
-                                        app:layout_constraintDimensionRatio="H,9:9"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:riv_corner_radius_top_left="7dip"
-                                        app:riv_corner_radius_top_right="7dip"
-                                        app:riv_mutate_background="true"
-                                        tools:layout_editor_absoluteX="1dp" />
-
-                                </android.support.constraint.ConstraintLayout>
-
-                                <ImageView
-                                    android:id="@+id/check1"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:textSize="13dp"
-                                    android:visibility="gone"
-                                    app:srcCompat="@drawable/mic_check_green" />
-
-
-                                <com.idpz.bazarayesh.Views.mTextViewB
-                                    android:id="@+id/txt"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/consImage"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="right|bottom"
-                                    android:text="آرایشگاه"
-                                    android:textColor="@color/dark"
-                                    android:textSize="15dp" />
-
-
-                                <com.idpz.bazarayesh.Views.mTextView
-                                    android:id="@+id/pub1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txt"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-
-                                    android:gravity="right|bottom"
-                                    android:text="غیرفعال"
-                                    android:textColor="@color/dark_gray"
-                                    android:textSize="14dp" />
-
-                            </RelativeLayout>
-
-                        </android.support.v7.widget.CardView>
-
-                        <android.support.v7.widget.CardView
-                            android:id="@+id/hairdersser"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <android.support.constraint.ConstraintLayout
-                                    android:id="@+id/consImage2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/toolbar"
-                                    android:orientation="vertical">
-
-                                    <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/imagview2"
-                                        android:layout_width="0dp"
-                                        android:layout_height="0dp"
-                                        android:background="@color/activity_back"
-                                        android:scaleType="fitXY"
-
-                                        android:src="@drawable/bazarayesh"
-                                        app:layout_constraintDimensionRatio="H,9:9"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:riv_corner_radius_top_left="7dip"
-                                        app:riv_corner_radius_top_right="7dip"
-                                        app:riv_mutate_background="true"
-
-                                        tools:layout_editor_absoluteX="1dp" />
-
-                                </android.support.constraint.ConstraintLayout>
-
-                                <ImageView
-                                    android:id="@+id/check2"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:textSize="13dp"
-                                    android:visibility="gone"
-                                    app:srcCompat="@drawable/mic_check_green"  />
-
-
-                                <com.idpz.bazarayesh.Views.mTextViewB
-                                    android:id="@+id/txt2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/consImage2"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="right|bottom"
-                                    android:text="آرایشگر"
-                                    android:textColor="@color/dark"
-                                    android:textSize="15dp" />
-
-
-                                <com.idpz.bazarayesh.Views.mTextView
-                                    android:id="@+id/pub2"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txt2"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-
-                                    android:gravity="right|bottom"
-                                    android:text="غیرفعال"
-                                    android:textColor="@color/dark_gray"
-                                    android:textSize="14dp" />
-
-                            </RelativeLayout>
-
-                        </android.support.v7.widget.CardView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linear2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/linear1"
-                        android:layout_marginTop="16dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <android.support.v7.widget.CardView
-                            android:id="@+id/institude"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <android.support.constraint.ConstraintLayout
-                                    android:id="@+id/consImage3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/toolbar"
-                                    android:orientation="vertical">
-
-                                    <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/imagview3"
-                                        android:layout_width="0dp"
-                                        android:layout_height="0dp"
-                                        android:background="@color/activity_back"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/bazarayesh"
-                                        app:layout_constraintDimensionRatio="H,9:9"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:riv_corner_radius_top_left="7dip"
-
-                                        app:riv_corner_radius_top_right="7dip"
-
-                                        app:riv_mutate_background="true"
-                                        tools:layout_editor_absoluteX="1dp" />
-
-                                </android.support.constraint.ConstraintLayout>
-
-                                <ImageView
-                                    android:id="@+id/check3"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:textSize="13dp"
-                                    android:visibility="gone"
-                                    app:srcCompat="@drawable/mic_check_green"  />
-
-
-                                <com.idpz.bazarayesh.Views.mTextViewB
-                                    android:id="@+id/txt3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/consImage3"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="right|bottom"
-                                    android:text="آموزشگاه"
-                                    android:textColor="@color/dark"
-                                    android:textSize="15dp" />
-
-
-                                <com.idpz.bazarayesh.Views.mTextView
-                                    android:id="@+id/pub3"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txt3"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_marginBottom="16dp"
-
-                                    android:layout_weight="1"
-                                    android:gravity="right|bottom"
-                                    android:text="غیرفعال"
-
-                                    android:textColor="@color/dark_gray"
-                                    android:textSize="14dp" />
-
-                            </RelativeLayout>
-
-                        </android.support.v7.widget.CardView>
-
-                        <android.support.v7.widget.CardView
-                            android:id="@id/teacher"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <android.support.constraint.ConstraintLayout
-                                    android:id="@+id/consImage4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/toolbar"
-                                    android:orientation="vertical">
-
-                                    <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/imagview4"
-                                        android:layout_width="0dp"
-                                        android:layout_height="0dp"
-                                        android:background="@color/activity_back"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/bazarayesh"
-                                        app:layout_constraintDimensionRatio="H,9:9"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:riv_corner_radius_top_left="7dip"
-                                        app:riv_corner_radius_top_right="7dip"
-                                        app:riv_mutate_background="true"
-
-                                        tools:layout_editor_absoluteX="1dp" />
-
-                                </android.support.constraint.ConstraintLayout>
-
-                                <ImageView
-                                    android:id="@+id/check4"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:textSize="13dp"
-                                    android:visibility="gone"
-                                    app:srcCompat="@drawable/mic_check_green"  />
-
-
-                                <com.idpz.bazarayesh.Views.mTextViewB
-                                    android:id="@+id/txt4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/consImage4"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="right|bottom"
-                                    android:text="مدرس"
-                                    android:textColor="@color/dark"
-                                    android:textSize="15dp" />
-
-
-                                <com.idpz.bazarayesh.Views.mTextView
-                                    android:id="@+id/pub4"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txt4"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="right|bottom"
-
-                                    android:text="غیرفعال"
-                                    android:textColor="@color/dark_gray"
-                                    android:textSize="14dp" />
-
-                            </RelativeLayout>
-
-                        </android.support.v7.widget.CardView>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/linear3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/linear2"
-                        android:layout_marginTop="16dp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <android.support.v7.widget.CardView
-                            android:id="@id/store"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginRight="8dp"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="0dp">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <android.support.constraint.ConstraintLayout
-                                    android:id="@+id/consImage5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/toolbar"
-                                    android:orientation="vertical">
-
-                                    <com.makeramen.roundedimageview.RoundedImageView
-                                        android:id="@+id/imagview5"
-                                        android:layout_width="0dp"
-                                        android:layout_height="0dp"
-                                        android:background="@color/activity_back"
-                                        android:scaleType="fitXY"
-                                        android:src="@drawable/bazarayesh"
-                                        app:layout_constraintDimensionRatio="H,9:9"
-                                        app:layout_constraintEnd_toEndOf="parent"
-                                        app:layout_constraintStart_toStartOf="parent"
-                                        app:layout_constraintTop_toTopOf="parent"
-                                        app:riv_corner_radius_top_left="7dip"
-                                        app:riv_corner_radius_top_right="7dip"
-
-                                        app:riv_mutate_background="true"
-                                        tools:layout_editor_absoluteX="1dp" />
-
-                                </android.support.constraint.ConstraintLayout>
-
-                                <ImageView
-                                    android:id="@+id/check5"
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:layout_marginLeft="8dp"
-                                    android:layout_marginTop="8dp"
-                                    android:textSize="13dp"
-                                    android:visibility="gone"
-                                    app:srcCompat="@drawable/mic_check_green"  />
-
-
-                                <com.idpz.bazarayesh.Views.mTextViewB
-                                    android:id="@+id/txt5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/consImage5"
-                                    android:layout_marginTop="16dp"
-                                    android:layout_weight="1"
-                                    android:gravity="right|bottom"
-                                    android:layout_marginRight="16dp"
-                                    android:text="فروشگاه"
-                                    android:textColor="@color/dark"
-                                    android:textSize="15dp" />
-
-
-                                <com.idpz.bazarayesh.Views.mTextView
-                                    android:id="@+id/pub5"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@+id/txt5"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginRight="16dp"
-                                    android:layout_marginBottom="16dp"
-                                    android:layout_weight="1"
-
-                                    android:gravity="right|bottom"
-                                    android:text="غیرفعال"
-                                    android:textColor="@color/dark_gray"
-
-                                    android:textSize="14dp" />
-
-                            </RelativeLayout>
-
-                        </android.support.v7.widget.CardView>
-
-                        <android.support.v7.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginBottom="16dp"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="5dp"
-
-                            app:cardElevation="0dp">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-
-                            </RelativeLayout>
-
-                        </android.support.v7.widget.CardView>
-
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/grey" />
-
-                    <com.idpz.bazarayesh.Views.mTextViewB
-                        android:id="@+id/title"
+                    <ImageButton
+                        android:id="@+id/edit"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:srcCompat="@drawable/ic_edit_black" />
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtMobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="16dp"
+
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="16dp" />
+
+
+
+
+                    <com.idpz.bazarayesh.Views.mTextView
+                        android:id="@+id/txtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txtMobile"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:visibility="gone"
                         android:gravity="center"
-                        android:text="پشتیبانی شرکت بازآرایش"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:layout_marginBottom="8dp"
                         android:textColor="@color/dark" />
 
                     <com.idpz.bazarayesh.Views.mTextView
-                        android:id="@+id/phone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/title"
 
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"
-                        android:paddingRight="16dp"
-                        android:paddingLeft="16dp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/link1"
-                        android:text=" تلفن تماس: 09123302770" />
-
-                    <com.idpz.bazarayesh.Views.mTextView
-                        android:id="@+id/email"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txtEmail"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/phone"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"
-                        android:paddingRight="16dp"
-                        android:paddingLeft="16dp"
-                        android:layout_centerHorizontal="true"
-                        android:textColor="@color/white"
+                        android:layout_below="@+id/txtName"
+                        android:layout_weight="1"
+                        android:ems="10"
                         android:gravity="center"
-                        android:background="@drawable/link2"
-                        android:layout_marginTop="4dp"
-                        android:text="پست الکترونیک: karayesh2017@gmail.com" />
+                        android:visibility="gone"
+                        android:inputType="textPersonName"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="@color/dark" />
                 </RelativeLayout>
 
-            </LinearLayout>
-        </ScrollView>
-    </android.support.v7.widget.CardView>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/myProfile_photoLikes"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:src="@drawable/user2" />
 
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/relProf"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp">
+
+                            <LinearLayout
+                                android:id="@+id/linear1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <android.support.v7.widget.CardView
+                                    android:id="@+id/beautyshop"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_weight="1"
+
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <android.support.constraint.ConstraintLayout
+                                            android:id="@+id/consImage"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/toolbar"
+                                            android:orientation="vertical">
+
+                                            <com.makeramen.roundedimageview.RoundedImageView
+                                                android:id="@+id/imagview1"
+                                                android:layout_width="0dp"
+                                                android:layout_height="0dp"
+                                                android:background="@color/activity_back"
+                                                android:scaleType="fitXY"
+                                                android:src="@drawable/bazarayesh"
+                                                app:layout_constraintDimensionRatio="H,9:9"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent"
+                                                app:riv_corner_radius_top_left="7dip"
+                                                app:riv_corner_radius_top_right="7dip"
+                                                app:riv_mutate_background="true"
+                                                tools:layout_editor_absoluteX="1dp" />
+
+                                        </android.support.constraint.ConstraintLayout>
+
+                                        <ImageView
+                                            android:id="@+id/check1"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_marginTop="8dp"
+                                            android:textSize="13dp"
+                                            android:visibility="gone"
+                                            app:srcCompat="@drawable/mic_check_green" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextViewB
+                                            android:id="@+id/txt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/consImage"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="1"
+                                            android:gravity="right|bottom"
+                                            android:text="آرایشگاه"
+                                            android:textColor="@color/dark"
+                                            android:textSize="15dp" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextView
+                                            android:id="@+id/pub1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="1"
+
+                                            android:gravity="right|bottom"
+                                            android:text="غیرفعال"
+                                            android:textColor="@color/dark_gray"
+                                            android:textSize="14dp" />
+
+                                    </RelativeLayout>
+
+                                </android.support.v7.widget.CardView>
+
+                                <android.support.v7.widget.CardView
+                                    android:id="@+id/hairdersser"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <android.support.constraint.ConstraintLayout
+                                            android:id="@+id/consImage2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/toolbar"
+                                            android:orientation="vertical">
+
+                                            <com.makeramen.roundedimageview.RoundedImageView
+                                                android:id="@+id/imagview2"
+                                                android:layout_width="0dp"
+                                                android:layout_height="0dp"
+                                                android:background="@color/activity_back"
+                                                android:scaleType="fitXY"
+
+                                                android:src="@drawable/bazarayesh"
+                                                app:layout_constraintDimensionRatio="H,9:9"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent"
+                                                app:riv_corner_radius_top_left="7dip"
+                                                app:riv_corner_radius_top_right="7dip"
+                                                app:riv_mutate_background="true"
+
+                                                tools:layout_editor_absoluteX="1dp" />
+
+                                        </android.support.constraint.ConstraintLayout>
+
+                                        <ImageView
+                                            android:id="@+id/check2"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_marginTop="8dp"
+                                            android:textSize="13dp"
+                                            android:visibility="gone"
+                                            app:srcCompat="@drawable/mic_check_green" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextViewB
+                                            android:id="@+id/txt2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/consImage2"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="1"
+                                            android:gravity="right|bottom"
+                                            android:text="آرایشگر"
+                                            android:textColor="@color/dark"
+                                            android:textSize="15dp" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextView
+                                            android:id="@+id/pub2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt2"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="1"
+
+                                            android:gravity="right|bottom"
+                                            android:text="غیرفعال"
+                                            android:textColor="@color/dark_gray"
+                                            android:textSize="14dp" />
+
+                                    </RelativeLayout>
+
+                                </android.support.v7.widget.CardView>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linear2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/linear1"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <android.support.v7.widget.CardView
+                                    android:id="@+id/institude"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <android.support.constraint.ConstraintLayout
+                                            android:id="@+id/consImage3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/toolbar"
+                                            android:orientation="vertical">
+
+                                            <com.makeramen.roundedimageview.RoundedImageView
+                                                android:id="@+id/imagview3"
+                                                android:layout_width="0dp"
+                                                android:layout_height="0dp"
+                                                android:background="@color/activity_back"
+                                                android:scaleType="fitXY"
+                                                android:src="@drawable/bazarayesh"
+                                                app:layout_constraintDimensionRatio="H,9:9"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent"
+                                                app:riv_corner_radius_top_left="7dip"
+
+                                                app:riv_corner_radius_top_right="7dip"
+
+                                                app:riv_mutate_background="true"
+                                                tools:layout_editor_absoluteX="1dp" />
+
+                                        </android.support.constraint.ConstraintLayout>
+
+                                        <ImageView
+                                            android:id="@+id/check3"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_marginTop="8dp"
+                                            android:textSize="13dp"
+                                            android:visibility="gone"
+                                            app:srcCompat="@drawable/mic_check_green" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextViewB
+                                            android:id="@+id/txt3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/consImage3"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="1"
+                                            android:gravity="right|bottom"
+                                            android:text="آموزشگاه"
+                                            android:textColor="@color/dark"
+                                            android:textSize="15dp" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextView
+                                            android:id="@+id/pub3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt3"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_marginBottom="16dp"
+
+                                            android:layout_weight="1"
+                                            android:gravity="right|bottom"
+                                            android:text="غیرفعال"
+
+                                            android:textColor="@color/dark_gray"
+                                            android:textSize="14dp" />
+
+                                    </RelativeLayout>
+
+                                </android.support.v7.widget.CardView>
+
+                                <android.support.v7.widget.CardView
+                                    android:id="@id/teacher"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <android.support.constraint.ConstraintLayout
+                                            android:id="@+id/consImage4"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/toolbar"
+                                            android:orientation="vertical">
+
+                                            <com.makeramen.roundedimageview.RoundedImageView
+                                                android:id="@+id/imagview4"
+                                                android:layout_width="0dp"
+                                                android:layout_height="0dp"
+                                                android:background="@color/activity_back"
+                                                android:scaleType="fitXY"
+                                                android:src="@drawable/bazarayesh"
+                                                app:layout_constraintDimensionRatio="H,9:9"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent"
+                                                app:riv_corner_radius_top_left="7dip"
+                                                app:riv_corner_radius_top_right="7dip"
+                                                app:riv_mutate_background="true"
+
+                                                tools:layout_editor_absoluteX="1dp" />
+
+                                        </android.support.constraint.ConstraintLayout>
+
+                                        <ImageView
+                                            android:id="@+id/check4"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_marginTop="8dp"
+                                            android:textSize="13dp"
+                                            android:visibility="gone"
+                                            app:srcCompat="@drawable/mic_check_green" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextViewB
+                                            android:id="@+id/txt4"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/consImage4"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="1"
+                                            android:gravity="right|bottom"
+                                            android:text="مدرس"
+                                            android:textColor="@color/dark"
+                                            android:textSize="15dp" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextView
+                                            android:id="@+id/pub4"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt4"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_marginBottom="16dp"
+                                            android:layout_weight="1"
+                                            android:gravity="right|bottom"
+
+                                            android:text="غیرفعال"
+                                            android:textColor="@color/dark_gray"
+                                            android:textSize="14dp" />
+
+                                    </RelativeLayout>
+
+                                </android.support.v7.widget.CardView>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linear3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/linear2"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <android.support.v7.widget.CardView
+                                    android:id="@id/store"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="8dp"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="5dp"
+                                    app:cardElevation="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+                                        <android.support.constraint.ConstraintLayout
+                                            android:id="@+id/consImage5"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/toolbar"
+                                            android:orientation="vertical">
+
+                                            <com.makeramen.roundedimageview.RoundedImageView
+                                                android:id="@+id/imagview5"
+                                                android:layout_width="0dp"
+                                                android:layout_height="0dp"
+                                                android:background="@color/activity_back"
+                                                android:scaleType="fitXY"
+                                                android:src="@drawable/bazarayesh"
+                                                app:layout_constraintDimensionRatio="H,9:9"
+                                                app:layout_constraintEnd_toEndOf="parent"
+                                                app:layout_constraintStart_toStartOf="parent"
+                                                app:layout_constraintTop_toTopOf="parent"
+                                                app:riv_corner_radius_top_left="7dip"
+                                                app:riv_corner_radius_top_right="7dip"
+
+                                                app:riv_mutate_background="true"
+                                                tools:layout_editor_absoluteX="1dp" />
+
+                                        </android.support.constraint.ConstraintLayout>
+
+                                        <ImageView
+                                            android:id="@+id/check5"
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_marginLeft="8dp"
+                                            android:layout_marginTop="8dp"
+                                            android:textSize="13dp"
+                                            android:visibility="gone"
+                                            app:srcCompat="@drawable/mic_check_green" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextViewB
+                                            android:id="@+id/txt5"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/consImage5"
+                                            android:layout_marginTop="16dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_weight="1"
+                                            android:gravity="right|bottom"
+                                            android:text="فروشگاه"
+                                            android:textColor="@color/dark"
+                                            android:textSize="15dp" />
+
+
+                                        <com.idpz.bazarayesh.Views.mTextView
+                                            android:id="@+id/pub5"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt5"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_marginRight="16dp"
+                                            android:layout_marginBottom="16dp"
+                                            android:layout_weight="1"
+
+                                            android:gravity="right|bottom"
+                                            android:text="غیرفعال"
+                                            android:textColor="@color/dark_gray"
+
+                                            android:textSize="14dp" />
+
+                                    </RelativeLayout>
+
+                                </android.support.v7.widget.CardView>
+
+                                <android.support.v7.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="8dp"
+                                    android:layout_marginBottom="16dp"
+                                    android:layout_weight="1"
+                                    app:cardCornerRadius="5dp"
+
+                                    app:cardElevation="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
+
+
+                                    </RelativeLayout>
+
+                                </android.support.v7.widget.CardView>
+
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:background="@color/grey" />
+
+                            <com.idpz.bazarayesh.Views.mTextViewB
+                                android:id="@+id/title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center"
+                                android:text="پشتیبانی شرکت بازآرایش"
+                                android:textColor="@color/dark" />
+
+                            <com.idpz.bazarayesh.Views.mTextView
+                                android:id="@+id/phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/title"
+
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/link1"
+                                android:gravity="center"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="4dp"
+                                android:text=" تلفن تماس: 09123302770"
+                                android:textColor="@color/white" />
+
+                            <com.idpz.bazarayesh.Views.mTextView
+                                android:id="@+id/email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/phone"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/link2"
+                                android:gravity="center"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="4dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="4dp"
+                                android:text="پست الکترونیک: karayesh2017@gmail.com"
+                                android:textColor="@color/white" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

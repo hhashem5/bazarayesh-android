@@ -126,6 +126,8 @@
         android:layout_marginRight="16dp"
         android:gravity="right|top"
         android:layout_marginTop="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
         android:background="@drawable/layout_corners_shape_border" />
 
 

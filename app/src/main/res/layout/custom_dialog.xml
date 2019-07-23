@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/relProf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/activity_back"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/myProfile_photoLikes"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/user2" />
+
+
+
+
+        <com.idpz.bazarayesh.Views.mEditText
+            android:id="@+id/Name"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/myProfile_photoLikes"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:paddingLeft="16dp"
+            android:background="@drawable/layout_corners_shape"
+
+            android:hint="@string/full_name"
+            android:paddingRight="16dp"
+            android:textColor="@color/dark" />
+
+
+        <com.idpz.bazarayesh.Views.mEditText
+            android:id="@+id/Email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/Name"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="ایمیل:"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/layout_corners_shape"
+            android:inputType="textPersonName"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="@color/dark" />
+
+
+    <com.idpz.bazarayesh.Views.mButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:layout_below="@+id/Email"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/background_btn2"
+        android:text="@string/mdtp_ok" />
+
+    </RelativeLayout>
+
