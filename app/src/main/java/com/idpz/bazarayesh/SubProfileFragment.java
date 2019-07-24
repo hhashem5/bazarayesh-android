@@ -607,6 +607,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 try {
 
 
+                    //   if (tempLinear.getChildCount()<4)
                     tempLinear.addView(tempView);
                     myViews.add(tempView);
                     myLinears.add(tempLinear);
@@ -1214,7 +1215,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
             case R.id.rel99:
                 AlertDialog(linear19);
-
+                break;
         }
     }
 
@@ -1233,7 +1234,9 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     }
 
     public void AlertDialog(final LinearLayout linear) {
-        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSans(FaNum).ttf");
+        if (linear.getChildCount() < 4){
+
+            Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSans(FaNum).ttf");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(FontUtils.typeface(typeface, "عنوان را وارد کنید"));
@@ -1246,6 +1249,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         builder.setPositiveButton(FontUtils.typeface(typeface, "تایید"), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 inflatedLayout = getLayoutInflater().inflate(R.layout.my_image_layout, null);
 
                 txtTilte = inflatedLayout.findViewById(R.id.title);
@@ -1266,6 +1270,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
                 title = input.getText().toString();
                 dialog.dismiss();
+
+
             }
         });
 
@@ -1277,7 +1283,10 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         });
 
         builder.show();
+
     }
+      else tools.alertShow("شما برای هر دسته تنها 3 عکس می تونید بزارید.");
+   }
 
     @Override
     public void onResume() {
@@ -1295,32 +1304,24 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             case 1:
 
 
-               try {
-                   if (doubleBackToExitPressedOnce) {
-                       Intent i1 = new Intent(getContext(), ShowMemberDetail.class);
-                       i1.putExtra("type",type);
-                       i1.putExtra("id",Integer.valueOf(member_id));
-                       i1.setAction(Intent.ACTION_MAIN);
+                try {
+                        Intent i1 = new Intent(getContext(), ShowMemberDetail.class);
+                        i1.putExtra("type", type);
+                        i1.putExtra("id", Integer.valueOf(member_id));
+                        i1.setAction(Intent.ACTION_MAIN);
 
-                       i1.addCategory(Intent.CATEGORY_HOME);
-                       i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                       i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                       i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                       getActivity().startActivity(i1);
-                       customType(getContext(), LEFT_TO_RIGHT);
-                       getActivity().finish();
-                   }
-               }catch (Exception e){}
+                        i1.addCategory(Intent.CATEGORY_HOME);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        getActivity().startActivity(i1);
+                        customType(getContext(), LEFT_TO_RIGHT);
+                        getActivity().finish();
 
-                doubleBackToExitPressedOnce = true;
-                Toast.makeText(getContext(), "برای خروج دوباره کلید بازگشت را بزنید", Toast.LENGTH_SHORT).show();
-                new Handler().postDelayed(new Runnable() {
+                } catch (Exception e) {
+                }
 
-                    @Override
-                    public void run() {
-                        doubleBackToExitPressedOnce = false;
-                    }
-                }, 2000);
+
 
                 break;
             case 2:
@@ -1560,7 +1561,6 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         params.put("type", type);
         if (!service_type.equals(""))
             params.put("service_type", service_type);
-        if (!title.equals(""))
             params.put("title", title);
 
         String url = tools.baseUrl + "membersFilesRegister";
@@ -2070,12 +2070,14 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
         if (title != null)
             txtTilte.setText(title);
+        else txtTilte.setText("");
 
         Glide.with(getContext())
                 .load(url)
                 .into(myImageView);
 
-        linear.addView(inflatedLayout);
+        if (linear.getChildCount() < 4)
+            linear.addView(inflatedLayout);
 
         for (int i = 0; i < drops.size(); i++) {
             final int finalI = i;

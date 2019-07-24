@@ -1,6 +1,8 @@
 package com.idpz.bazarayesh;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.idpz.bazarayesh.Adapters.MemberDetailAdapter;
 import com.idpz.bazarayesh.Models.Award;
+import com.idpz.bazarayesh.Models.Course;
 import com.idpz.bazarayesh.Models.FamousCustomer;
 import com.idpz.bazarayesh.Models.MainItem;
 import com.idpz.bazarayesh.Models.Service;
@@ -36,15 +39,17 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
     int id, count, backtag, type = 0;
 
 
-    static String url;
+    static String url, tag;
     int service_type = 0;
     double lat, lng;
+    Typeface irsans;
 
     String Instagram, Telegram;
     List<MainItem> itemsAward = new ArrayList<>();
     List<MainItem> itemsServices = new ArrayList<>();
     List<MainItem> itemsWorkSpace = new ArrayList<>();
     List<MainItem> itemsFamous = new ArrayList<>();
+    List<MainItem> itemsCourse = new ArrayList<>();
 
     RecyclerView recyclerfamausCustomer, recycleworkSpace, recycleservices, recycleaward, recyclerworkShop, recycleworkShop;
 
@@ -61,6 +66,12 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show_member_detail);
 
+
+        irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
+
+        pd = new ProgressDialog(context);
+        pd.setCancelable(false);
+        pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
         settoolbarText("جزئیات");
         initViews();
 
@@ -84,6 +95,12 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
         }
 
+        try {
+
+            if (getIntent().getExtras().get("tag") != null)
+                tag = (String) getIntent().getExtras().get("tag");
+        } catch (Exception e) {
+        }
 
         memberDetail();
 
@@ -144,17 +161,23 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
     public void memberDetail() {
 
+        pd.show();
         RequestParams params = new RequestParams();
         params.put("id", id);
         params.put("api_token", tools.getSharePrf("api_token"));
         params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        if (tag != null)
+            params.put("tag", tag);
         String url = tools.baseUrl + "single_member";
 
         tools.client.post(url, params, new TextHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
+                try {
+                    pd.dismiss();
+                } catch (Exception e) {
+                }
             }
 
             @Override
@@ -166,7 +189,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
                     try {
 
-
+                        pd.dismiss();
                         ResponseMemberDetail response = gson.fromJson(responseString, ResponseMemberDetail.class);
 
                         Glide.with(activity)
@@ -184,6 +207,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                         txtPhone.setText(response.getMember().getPhone1());
                         txtPhone2.setText(response.getMember().getPhone2());
 
+
                         if (response.getMember().getManagerName() != null) {
 
                             managerName.setVisibility(View.VISIBLE);
@@ -192,10 +216,26 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                         }
 
 
+                        if (response.getMember().getCourse().size() != 0) {
+
+                            for (Course course : response.getMember().getCourse()) {
+
+                                if (course.getTitle() == null)
+                                    course.setTitle("");
+
+                                itemsCourse.add(new MainItem(course.getTitle(), "http://arayesh.myzibadasht.ir/" + course.getData(), 1));
+
+                            }
+                            setAdapter(itemsCourse, recyclerworkShop);
+                        } else relativeLayout5.setVisibility(View.GONE);
+
+
                         if (response.getMember().getAward().size() != 0) {
 
                             for (Award award : response.getMember().getAward()) {
-                                award.getData();
+
+                                if (award.getTitle() == null)
+                                    award.setTitle("");
 
                                 itemsAward.add(new MainItem(award.getTitle(), "http://arayesh.myzibadasht.ir/" + award.getData(), 1));
 
@@ -212,7 +252,12 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                             for (Service service : response.getMember().getService()) {
 
                                 count++;
-                                itemsServices.add(new MainItem("خدمت " + count, "http://arayesh.myzibadasht.ir/" + service.getPic(), 1));
+
+                                if (service.getTitle() == null)
+                                    service.setTitle("");
+
+
+                                itemsServices.add(new MainItem(service.getTitle(), "http://arayesh.myzibadasht.ir/" + service.getPic(), 1));
 
                             }
                             setAdapter(itemsServices, recycleservices);
@@ -225,6 +270,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                         if (response.getMember().getFamousCustomer().size() != 0) {
                             for (FamousCustomer famousCustomer : response.getMember().getFamousCustomer()) {
 
+                                if (famousCustomer.getTitle() == null)
+                                    famousCustomer.setTitle("");
                                 itemsFamous.add(new MainItem(famousCustomer.getTitle(), "http://arayesh.myzibadasht.ir/" + famousCustomer.getPic(), 1));
 
                             }
@@ -242,7 +289,10 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                             for (WorkplacePic workplacePic : response.getMember().getWorkplacePic()) {
 
                                 count++;
-                                itemsWorkSpace.add(new MainItem(count + " عکس ", "http://arayesh.myzibadasht.ir/" + workplacePic.getPic(), 1));
+
+                                if (workplacePic.getTitle() == null)
+                                    workplacePic.setTitle("");
+                                itemsWorkSpace.add(new MainItem(workplacePic.getTitle(), "http://arayesh.myzibadasht.ir/" + workplacePic.getPic(), 1));
 
                             }
                             setAdapter(itemsWorkSpace, recycleworkSpace);
@@ -315,7 +365,6 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
 //        finish();
 //        newFragment.dismiss();
-
     }
 
 

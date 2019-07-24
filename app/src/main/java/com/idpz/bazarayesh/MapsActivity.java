@@ -27,6 +27,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -94,6 +95,12 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
 
                 userLat = location.getLatitude();
                 userLng = location.getLongitude();
+
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(userLat,userLng)).zoom(16).build();
+
+                mMap.animateCamera(CameraUpdateFactory
+                        .newCameraPosition(cameraPosition));
                 if (service_type == 0) {
 
                     Handler mainHandler = new Handler(Looper.getMainLooper());
@@ -191,8 +198,16 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
         // Add a marker in Sydney and move the camera
 
+//        LatLng latLong = new LatLng(35.684209, 51.388263);
+//
+//        CameraPosition cameraPosition = new CameraPosition.Builder()
+//                .target(latLong).zoom(16).build();
+//
+//        mMap.animateCamera(CameraUpdateFactory
+//                .newCameraPosition(cameraPosition));
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -371,6 +386,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                                     }
                                 }
                             });
+
                            /* mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                                 @Override
                                 public boolean onMarkerClick(Marker marker) {
@@ -502,7 +518,6 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 }
             }
         });
-
     }
 
     @Override

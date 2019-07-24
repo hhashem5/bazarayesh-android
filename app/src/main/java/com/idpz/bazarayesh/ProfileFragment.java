@@ -329,6 +329,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent = new Intent(getActivity(), ShowMemberDetail.class);
                 intent.putExtra("type", 1);
                 intent.putExtra("id", memberId1);
+                intent.putExtra("tag","own");
                 getActivity().startActivity(intent);
                 customType(getContext(), LEFT_TO_RIGHT);
                 break;
@@ -339,6 +340,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent2 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent2.putExtra("type", 4);
                 intent2.putExtra("id", memberId4);
+                intent2.putExtra("tag","own");
+
                 getActivity().startActivity(intent2);
                 customType(getContext(), LEFT_TO_RIGHT);
                 break;
@@ -347,6 +350,9 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent3 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent3.putExtra("type", 5);
                 intent3.putExtra("id", memberId5);
+                intent3.putExtra("tag","own");
+
+
                 getActivity().startActivity(intent3);
                 customType(getContext(), LEFT_TO_RIGHT);
                 break;
@@ -356,6 +362,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent4 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent4.putExtra("type", 2);
                 intent4.putExtra("id", memberId2);
+                intent4.putExtra("tag","own");
+
                 getActivity().startActivity(intent4);
                 customType(getContext(), LEFT_TO_RIGHT);
                 break;
@@ -364,6 +372,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent5 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent5.putExtra("type", 3);
                 intent5.putExtra("id", memberId3);
+                intent5.putExtra("tag","own");
 
                 getActivity().startActivity(intent5);
                 customType(getContext(), LEFT_TO_RIGHT);
