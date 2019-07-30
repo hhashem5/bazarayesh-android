@@ -24,7 +24,7 @@
             <RelativeLayout
                 android:id="@+id/rel1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
@@ -60,9 +60,25 @@
                     android:gravity="center|center_horizontal|center_vertical"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
-                    android:text="ویرایش "
+                    android:text="ویرایش پروفایل "
                     android:textColor="@color/colorPrimary"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:id="@+id/manage_ads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/roundshapepink"
+                    android:gravity="center|center_horizontal|center_vertical"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="مدیریت آگهی "
+
+                    android:layout_toLeftOf="@+id/edit"
+                    android:textColor="@color/white"
+                    android:visibility="visible" />
             </RelativeLayout>
 
             <LinearLayout
@@ -262,16 +278,50 @@
 
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="16dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="16dp"
+
                     app:srcCompat="@drawable/ic_telegram" />
 
                 <ImageView
                     android:id="@+id/instagram"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_toLeftOf="@+id/telegram" />
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/telegram" />
+
+                <ImageView
+                    android:id="@+id/img_views"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="4dp"
+                    app:srcCompat="@drawable/ic_eye" />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title"
+
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toLeftOf="@+id/img_views"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:text="بازدید: " />
+
+                <com.idpz.bazarayesh.Views.mTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtView"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toLeftOf="@+id/title"
+                    android:gravity="center_vertical"
+                    android:text="0" />
+
+
             </RelativeLayout>
 
             <View
@@ -413,8 +463,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/relative4"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="8dp"
-                >
+                android:layout_marginRight="8dp">
 
 
                 <com.idpz.bazarayesh.Views.mTextView
@@ -424,9 +473,7 @@
                     android:layout_marginTop="16dp"
                     android:text="دوره های گذرانده شده"
                     android:textColor="@color/dark"
-                    android:textSize="16dp"
-
-                    />
+                    android:textSize="16dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/workShop"

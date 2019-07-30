@@ -128,6 +128,8 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+
+
     }
 
     public void initViews() {
@@ -329,6 +331,7 @@ public class MainActivity extends BaseActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == 100) {
+
             progressDialog = new ProgressDialog(this);
             progressDialog.setCancelable(true);
             progressDialog.setMessage("درحال دریافت فایل ");

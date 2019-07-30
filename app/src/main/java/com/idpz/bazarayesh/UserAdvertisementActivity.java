@@ -1,11 +1,9 @@
 package com.idpz.bazarayesh;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.google.gson.JsonArray;
 import com.idpz.bazarayesh.Adapters.UserAdvertisementAdapter;
 import com.idpz.bazarayesh.Models.AdAssignment.ResponseAssignment;
 import com.idpz.bazarayesh.Models.AdBride.ResponseBride;
@@ -16,9 +14,6 @@ import com.idpz.bazarayesh.Models.AdWorkShop.ResponseWorkShop;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import cz.msebera.android.httpclient.Header;
 
 import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
@@ -27,7 +22,7 @@ public class UserAdvertisementActivity extends BaseActivity {
 
     String ad_type, memberId;
 
-    int ex;
+   public static int ex;
 
 
     RecyclerView recycler;
@@ -87,7 +82,7 @@ public class UserAdvertisementActivity extends BaseActivity {
                         case "Bride":
                             ResponseBride responseBride = gson.fromJson(responseString, ResponseBride.class);
                             responseBride.getAds();
-                            UserAdvertisementAdapter advertisementAdapter1 = new UserAdvertisementAdapter(responseBride.getAds(), R.layout.disscounts_adapter, context, 1);
+                            UserAdvertisementAdapter advertisementAdapter1 = new UserAdvertisementAdapter(responseBride.getAds(),"", context, 1,"bride");
                             recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
                             recycler.setAdapter(advertisementAdapter1);
                             break;
@@ -95,7 +90,7 @@ public class UserAdvertisementActivity extends BaseActivity {
                         case "Discount_ads":
                             ResponseDiscountAds responseDiscountAds = gson.fromJson(responseString, ResponseDiscountAds.class);
                             responseDiscountAds.getAds();
-                            UserAdvertisementAdapter discountAdapter = new UserAdvertisementAdapter(responseDiscountAds.getAds(), R.layout.disscounts_adapter, context, 1, 1);
+                            UserAdvertisementAdapter discountAdapter = new UserAdvertisementAdapter(responseDiscountAds.getAds(), "", context, 1, 1,"discount");
                             recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
                             recycler.setAdapter(discountAdapter);
 
@@ -105,7 +100,7 @@ public class UserAdvertisementActivity extends BaseActivity {
                         case "Workshops":
                             ResponseWorkShop responseWorkShop = gson.fromJson(responseString, ResponseWorkShop.class);
                             responseWorkShop.getAds();
-                            UserAdvertisementAdapter workshopadapter = new UserAdvertisementAdapter(responseWorkShop.getAds(), context, R.layout.workshop_adapter);
+                            UserAdvertisementAdapter workshopadapter = new UserAdvertisementAdapter(responseWorkShop.getAds(), context,"","workshop");
                             recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
                             recycler.setAdapter(workshopadapter);
 
@@ -114,9 +109,7 @@ public class UserAdvertisementActivity extends BaseActivity {
                             ResponseAssignment responseAssignment = gson.fromJson(responseString, ResponseAssignment.class);
                             responseAssignment.getAds();
 
-
-
-                            UserAdvertisementAdapter assignmentadapter = new UserAdvertisementAdapter(responseAssignment.getAds(),  R.layout.assignment_adapter,context);
+                            UserAdvertisementAdapter assignmentadapter = new UserAdvertisementAdapter(responseAssignment.getAds(),"",  context,"assignment");
                             recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
                             recycler.setAdapter(assignmentadapter);
 
@@ -124,7 +117,7 @@ public class UserAdvertisementActivity extends BaseActivity {
                         case "Recruiment":
                             ResponseRecruiment responseRecruiment = gson.fromJson(responseString, ResponseRecruiment.class);
                             responseRecruiment.getAds();
-                            UserAdvertisementAdapter advertisementAdapter2 = new UserAdvertisementAdapter(responseRecruiment.getAds(), context, R.layout.recruiment_adapter, 1);
+                            UserAdvertisementAdapter advertisementAdapter2 = new UserAdvertisementAdapter(responseRecruiment.getAds(), context,"",1,"recruiment");
                             recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
                             recycler.setAdapter(advertisementAdapter2);
 
@@ -133,7 +126,7 @@ public class UserAdvertisementActivity extends BaseActivity {
                         case "Reg_Course":
                              ResponseRegCourse responseCourses=gson.fromJson(responseString,ResponseRegCourse.class);
                               responseCourses.getAds();
-                            UserAdvertisementAdapter CourseAdapter = new UserAdvertisementAdapter(1,responseCourses.getAds(), context, R.layout.recruiment_adapter);
+                            UserAdvertisementAdapter CourseAdapter = new UserAdvertisementAdapter(1,responseCourses.getAds(), context,"", "regcourse");
                             recycler.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, false));
                             recycler.setAdapter(CourseAdapter);
 

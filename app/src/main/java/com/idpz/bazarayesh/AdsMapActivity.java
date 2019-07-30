@@ -105,7 +105,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                     getLists(type, memberType, location.getLatitude(), location.getLongitude());
                     mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
 
-                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 16);
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14);
                     mMap.moveCamera(cameraUpdate);
                 } catch (Exception e) {
                 }
@@ -229,7 +229,7 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             marker.setTag(ad.getId());
 
 
-                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ad.getLat(), ad.getLng()), 16);
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(ad.getLat(), ad.getLng()), 14);
                             mMap.moveCamera(cameraUpdate);
 
 
@@ -479,8 +479,8 @@ public class AdsMapActivity extends BaseActivity implements OnMapReadyCallback, 
                             responseSingleAssign.getAd();
 
                             AlertDialog("نوع واگذاری: " + responseSingleAssign.getAd().getType()
-                                    , "مورد واگذاری: " + responseSingleAssign.getAd().getOptions() + responseSingleAssign.getAd().getDescription()
-                                    , "", "", "", responseSingleAssign.getAd().getMemId());
+                                    , "مورد واگذاری: " + responseSingleAssign.getAd().getOptions()
+                                    , responseSingleAssign.getAd().getDescription(), "", "", responseSingleAssign.getAd().getMemId());
 
                             break;
 

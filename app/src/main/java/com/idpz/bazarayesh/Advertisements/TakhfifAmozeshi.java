@@ -137,6 +137,8 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
             case R.id.imgbBack:
 
                 Intent i1 = new Intent(TakhfifAmozeshi.this, SubProfileActivity.class);
+                i1.putExtra("back","2");
+
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -216,6 +218,8 @@ public class TakhfifAmozeshi extends BaseActivity implements View.OnClickListene
     @Override
     public void onBackPressed() {
         Intent i1 = new Intent(TakhfifAmozeshi.this, SubProfileActivity.class);
+        i1.putExtra("back","2");
+
         i1.setAction(Intent.ACTION_MAIN);
         i1.addCategory(Intent.CATEGORY_HOME);
         i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -129,6 +129,8 @@ public class TakhfifKhadamat extends BaseActivity implements View.OnClickListene
 
             case R.id.imgbBack:
                 Intent i1 = new Intent(TakhfifKhadamat.this, SubProfileActivity.class);
+                i1.putExtra("back","2");
+
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -281,4 +283,19 @@ public class TakhfifKhadamat extends BaseActivity implements View.OnClickListene
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i1 = new Intent(TakhfifKhadamat.this, SubProfileActivity.class);
+        i1.putExtra("back","2");
+
+        i1.setAction(Intent.ACTION_MAIN);
+        i1.addCategory(Intent.CATEGORY_HOME);
+        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(i1);
+        customType(TakhfifKhadamat.this, LEFT_TO_RIGHT);
+        finish();
+        super.onBackPressed();
+    }
 }

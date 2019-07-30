@@ -15,6 +15,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.idpz.bazarayesh.Utils.Tools;
 import com.loopj.android.http.RequestParams;
@@ -42,13 +43,11 @@ public class BaseActivity extends AppCompatActivity {
     public TextView tooTitle;
     public ImageView imgbBack;
     Gson gson = new Gson();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         tools = new Tools(context);
-
     }
 
     public void settoolbarText(String tag) {
@@ -74,6 +73,7 @@ public class BaseActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i1 = new Intent(getApplicationContext(), SubProfileActivity.class);
+                i1.putExtra("back","2");
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

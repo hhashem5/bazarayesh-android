@@ -61,8 +61,28 @@ public class SubProfileActivity extends BaseActivity {
 
         //   tabLayout.setTabGravity(TabLayout.MODE_FIXED);
 
+
         final ViewPagerAdapter adapter = new ViewPagerAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
+
+
+        try {
+
+
+            if (getIntent().getExtras().get("back") != null) {
+
+                if (getIntent().getExtras().get("back").equals("2")) {
+
+                    tabLayout.setVerticalScrollbarPosition(1);
+                    viewPager.setCurrentItem(1);
+
+                }
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        }
+
+
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

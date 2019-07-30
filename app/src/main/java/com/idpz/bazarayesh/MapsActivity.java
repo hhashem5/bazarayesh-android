@@ -97,7 +97,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                 userLng = location.getLongitude();
 
                 CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(new LatLng(userLat,userLng)).zoom(16).build();
+                        .target(new LatLng(userLat,userLng)).zoom(14).build();
 
                 mMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(cameraPosition));
@@ -364,7 +364,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                                     .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin)));
 
 
-                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(member.getLat(),member.getLng()), 16);
+                            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(member.getLat(),member.getLng()), 14);
                             mMap.moveCamera(cameraUpdate);
 
                             marker.setTitle(member.getFullName());
@@ -470,7 +470,7 @@ public class MapsActivity extends BaseActivity implements OnMapReadyCallback, Vi
                                         .position(new LatLng(member.getLat(), member.getLng()))
                                         .icon(bitmapDescriptorFromVector(MapsActivity.this, R.drawable.ic_location_pin)));
 
-                                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(member.getLat(),member.getLng()), 16);
+                                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(new LatLng(member.getLat(),member.getLng()), 14);
                                 mMap.moveCamera(cameraUpdate);
 
                                 marker.setTitle(member.getFullName());

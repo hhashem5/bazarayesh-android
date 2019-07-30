@@ -3,6 +3,7 @@ package com.idpz.bazarayesh.Adapters;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -14,12 +15,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.idpz.bazarayesh.MainActivity;
 import com.idpz.bazarayesh.Models.AdWorkShop.Ad;
 import com.idpz.bazarayesh.R;
+import com.idpz.bazarayesh.UserAdvertisementActivity;
 import com.idpz.bazarayesh.Utils.Tools;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
@@ -28,6 +32,10 @@ import com.loopj.android.http.TextHttpResponseHandler;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+
+import static com.idpz.bazarayesh.BaseActivity.RIGHT_TO_LEFT;
+import static com.idpz.bazarayesh.UserAdvertisementActivity.ex;
+import static maes.tech.intentanim.CustomIntent.customType;
 
 
 public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertisementAdapter.NewsViewHolder> {
@@ -40,6 +48,10 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
     Typeface typeface;
     int layout;
 
+    String key;
+    private Dialog internetDialog;
+
+
     List<Ad> workshops;
     List<com.idpz.bazarayesh.Models.AdDisscount.Ad> disscounts;
     List<com.idpz.bazarayesh.Models.AdAssignment.Ad> assignments;
@@ -48,53 +60,58 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
     List<com.idpz.bazarayesh.Models.AdRegCourse.Ad> regcourses;
 
 
-    public UserAdvertisementAdapter(List<Ad> workshops, Context context, int layout) {
+    public UserAdvertisementAdapter(List<Ad> workshops, Context context, String layout, String key) {
         this.workshops = workshops;
         this.context = context;
         this.typeface = typeface;
         this.activity = (Activity) context;
-        this.layout = layout;
+
+        this.key = key;
         tools = new Tools(context);
     }
 
-    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdDisscount.Ad> disscounts, int layout, Context context, int lastPosition, int a) {
+    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdDisscount.Ad> disscounts, String layout, Context context, int lastPosition, int a, String key) {
         this.disscounts = disscounts;
-        this.layout = layout;
+
         this.context = context;
         tools = new Tools(context);
+        this.key = key;
     }
 
 
-    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdBride.Ad> brides, int layout, Context context, int lastPosition) {
+    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdBride.Ad> brides, String layout, Context context, int lastPosition, String key) {
         this.brides = brides;
-        this.layout = layout;
+
         this.context = context;
         tools = new Tools(context);
+        this.key = key;
 
     }
 
 
-    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdAssignment.Ad> assignments, int layout, Context context) {
+    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdAssignment.Ad> assignments, String layout, Context context, String key) {
         this.assignments = assignments;
-        this.layout = layout;
         this.context = context;
         tools = new Tools(context);
+        this.key = key;
 
     }
 
-    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdRecruiment.Ad> recruiments, Context context, int layout, int lastPosition) {
+    public UserAdvertisementAdapter(List<com.idpz.bazarayesh.Models.AdRecruiment.Ad> recruiments, Context context, String layout, int lastPosition, String key) {
         this.recruiments = recruiments;
-        this.layout = layout;
+
         this.context = context;
         tools = new Tools(context);
+        this.key = key;
+
 
     }
 
-    public UserAdvertisementAdapter(int a, List<com.idpz.bazarayesh.Models.AdRegCourse.Ad> regcourses, Context context, int layout) {
+    public UserAdvertisementAdapter(int a, List<com.idpz.bazarayesh.Models.AdRegCourse.Ad> regcourses, Context context, String layout, String key) {
         this.regcourses = regcourses;
-        this.layout = layout;
         this.context = context;
         tools = new Tools(context);
+        this.key = key;
 
     }
 
@@ -102,7 +119,7 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.ads_item_adapter, parent, false);
 
 
         return new NewsViewHolder(view);
@@ -112,10 +129,17 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
     public void onBindViewHolder(@NonNull final NewsViewHolder holder, final int position) {
 
 
-        switch (layout) {
+        if (ex == 1)
+            holder.btnExtend.setVisibility(View.VISIBLE);
+
+         else
+            holder.btnExtend.setVisibility(View.GONE);
 
 
-            case R.layout.workshop_adapter:
+        switch (key) {
+
+
+            case "workshop":
 
                 try {
                     holder.text1.setText(workshops.get(position).getSubject());
@@ -133,21 +157,34 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                     holder.trash.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            removeAds(position, "workshops", workshops.get(position).getId());
+
+                            deleteDialog(position, "workshops", workshops.get(position).getId());
+                            //  removeAds(position, "workshops",workshops.get(position).getId() );
 
                         }
                     });
+
+                    holder.btnExtend.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ExtendDilog( workshops.get(position).getId(),"Workshops",position,workshops.get(position).getMemId());
+                        }
+                    });
+
                 } catch (Exception e) {
                 }
+
 
 
                 break;
 
 
-            case R.layout.recruiment_adapter:
+            case "recruiment":
                 try {
 
+
                     if (recruiments != null) {
+
                         holder.text1.setText(recruiments.get(position).getSubject());
                         holder.text2.setText(recruiments.get(position).getDescription());
                         holder.rel.setOnClickListener(new View.OnClickListener() {
@@ -162,14 +199,32 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                         holder.trash.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                deleteDialog(position, "recruiments", recruiments.get(position).getId());
 
-                                removeAds(position, "recruiments", recruiments.get(position).getId());
+                                //    removeAds(position, "recruiments", recruiments.get(position).getId());
 
                             }
                         });
 
+                        holder.btnExtend.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ExtendDilog( recruiments.get(position).getId(),"Recruiment",position,recruiments.get(position).getMemId());
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.getMessage();
+                }
+                break;
 
-                    } else {
+
+            case "regcourse":
+                try {
+
+
+                    if (regcourses != null) {
+
 
                         holder.text1.setText(regcourses.get(position).getCourseName());
                         holder.text2.setText(regcourses.get(position).getDescription());
@@ -184,17 +239,24 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                         holder.trash.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                removeAds(position, "courses", regcourses.get(position).getId());
+                                deleteDialog(position, "courses", regcourses.get(position).getId());
+
+                                //removeAds(position, "courses", regcourses.get(position).getId());
 
                             }
                         });
-                    }
 
+                        holder.btnExtend.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ExtendDilog( regcourses.get(position).getId(),"Reg_Course",position,regcourses.get(position).getMemId());
+                            }
+                        });
+                    }
                 } catch (Exception e) {
-                    e.getMessage();
                 }
                 break;
-            case R.layout.assignment_adapter:
+            case "assignment":
 
                 try {
 
@@ -211,15 +273,27 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                     holder.trash.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            removeAds(position, "assignments", assignments.get(position).getId());
+                            deleteDialog(position, "assignments", assignments.get(position).getId());
+
+                            //   removeAds(position, "assignments", assignments.get(position).getId());
 
                         }
                     });
+
+                    holder.btnExtend.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ExtendDilog( assignments.get(position).getId(),"Assignment",position,assignments.get(position).getMemId());
+                        }
+                    });
+
                 } catch (Exception e) {
                 }
                 break;
-            case R.layout.disscounts_adapter:
+            case "discount":
                 try {
+
+
                     if (disscounts != null) {
                         holder.text1.setText(disscounts.get(position).getAffair());
                         holder.text2.setText(disscounts.get(position).getDescription());
@@ -234,39 +308,62 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                         holder.trash.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                removeAds(position, "Discount_ads", disscounts.get(position).getId());
+                                deleteDialog(position, "discount_ads", disscounts.get(position).getId());
+
+                                // removeAds(position, "Discount_ads", disscounts.get(position).getId());
 
                             }
                         });
 
-                    } else {
-
-
-                        holder.text1.setText("درتاریخ " + brides.get(position).getDate());
-                        holder.text2.setText(brides.get(position).getDescription());
-
-                        holder.rel.setOnClickListener(new View.OnClickListener() {
+                        holder.btnExtend.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-
-                                AlertDialogAssignMent(" درتاریخ " + brides.get(position).getDate(), " از ساعت " + brides.get(position).getShour() + " تا ساعت " + brides.get(position).getEhour(), brides.get(position).getDescription());
-                            }
-                        });
-
-
-                        holder.trash.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                removeAds(position, "brides", brides.get(position).getId());
-
+                                ExtendDilog( disscounts.get(position).getId(),"Discount_ads",position,disscounts.get(position).getMemId());
                             }
                         });
 
                     }
-
                 } catch (Exception e) {
 
-                    e.getMessage();
+                }
+
+                break;
+            case "bride":
+                try {
+
+
+                    holder.text1.setText("درتاریخ " + brides.get(position).getDate());
+                    holder.text2.setText(brides.get(position).getDescription());
+
+
+                    holder.rel.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            AlertDialogAssignMent(" درتاریخ " + brides.get(position).getDate(), " از ساعت " + brides.get(position).getShour() + " تا ساعت " + brides.get(position).getEhour(), brides.get(position).getDescription());
+                        }
+                    });
+
+
+                    holder.trash.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //  removeAds(position, "brides", brides.get(position).getId());
+                            deleteDialog(position, "brides", brides.get(position).getId());
+
+
+                        }
+                    });
+
+                    holder.btnExtend.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ExtendDilog( brides.get(position).getId(),"Bride",position,brides.get(position).getMemId());
+                        }
+                    });
+
+
+                } catch (Exception e) {
                 }
                 break;
 
@@ -277,23 +374,25 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
 
     @Override
     public int getItemCount() {
-        switch (layout) {
-            case R.layout.assignment_adapter:
+        switch (key) {
+            case "assignment":
                 return assignments.size();
-            case R.layout.recruiment_adapter:
-                if (recruiments != null)
-                    return recruiments.size();
-                else return regcourses.size();
+            case "recruiment":
+                return recruiments.size();
 
-            case R.layout.workshop_adapter:
+            case "regcourse":
+                return regcourses.size();
+
+            case "workshop":
                 return workshops.size();
 
-            case R.layout.disscounts_adapter:
+            case "discount":
 
 
-                if (disscounts != null)
-                    return disscounts.size();
-                else return brides.size();
+                return disscounts.size();
+
+            case "bride":
+                return brides.size();
 
         }
         return 0;
@@ -309,47 +408,17 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
 
         ImageView trash;
 
+        Button btnExtend;
+
         public NewsViewHolder(View itemView) {
             // bind karadne view ha
             super(itemView);
+            text1 = itemView.findViewById(R.id.text1);
+            text2 = itemView.findViewById(R.id.text2);
+            trash = itemView.findViewById(R.id.trash);
+            rel = itemView.findViewById(R.id.rel);
+            btnExtend = itemView.findViewById(R.id.btnExtend);
 
-
-            switch (layout) {
-                case R.layout.assignment_adapter:
-                    text1 = itemView.findViewById(R.id.text1);
-                    text2 = itemView.findViewById(R.id.text2);
-                    trash = itemView.findViewById(R.id.trash);
-
-                    rel = itemView.findViewById(R.id.rel);
-
-                    break;
-                case R.layout.recruiment_adapter:
-
-                    text1 = itemView.findViewById(R.id.text1);
-                    text2 = itemView.findViewById(R.id.text2);
-                    trash = itemView.findViewById(R.id.trash);
-
-                    rel = itemView.findViewById(R.id.rel);
-                    break;
-                case R.layout.disscounts_adapter:
-                    text1 = itemView.findViewById(R.id.text1);
-                    text2 = itemView.findViewById(R.id.text2);
-                    trash = itemView.findViewById(R.id.trash);
-
-                    rel = itemView.findViewById(R.id.rel);
-
-                    break;
-                case R.layout.workshop_adapter:
-                    text1 = itemView.findViewById(R.id.text1);
-                    text2 = itemView.findViewById(R.id.text2);
-                    trash = itemView.findViewById(R.id.trash);
-
-                    rel = itemView.findViewById(R.id.rel);
-
-                    break;
-
-
-            }
 
         }
     }
@@ -527,7 +596,7 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
         });
         message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
-}
+    }
 
     public void removeAds(final int position, final String type, int id) {
 
@@ -556,7 +625,7 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
 
                             break;
 
-                        case "assignmets":
+                        case "assignments":
                             assignments.remove(position);
                             notifyItemRemoved(position);
                             notifyItemRangeChanged(position, assignments.size());
@@ -590,6 +659,152 @@ public class UserAdvertisementAdapter extends RecyclerView.Adapter<UserAdvertise
                 }
             }
         });
+
+    }
+
+    public void deleteDialog(final int position, final String type, final int id) {
+        internetDialog = new Dialog(context);
+        internetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        internetDialog.setContentView(R.layout.delete_dialog);
+        internetDialog.setCancelable(false);
+        internetDialog.show();
+        TextView btnOk = internetDialog.findViewById(R.id.ok);
+        TextView btnCancel = internetDialog.findViewById(R.id.cancel);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeAds(position, type, id);
+                successDialog("آگهی مورد نظر با موفقیت حذف شد.");
+                internetDialog.dismiss();
+
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                internetDialog.dismiss();
+            }
+        });
+        internetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+
+    public void extendFunc(int ad_id, final String ad_type, final int position,final int mem_id ) {
+        String url = tools.baseUrl + "ads_extende";
+        RequestParams params = new RequestParams();
+        params.put("member_id",mem_id );
+        params.put("ad_id",ad_id);
+        params.put("ad_type", ad_type);
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                try {
+                    switch (ad_type) {
+                        case "Recruiment":
+                            recruiments.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, recruiments.size());
+
+                            break;
+
+                        case "Assignment":
+                            assignments.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, assignments.size());
+                            break;
+                        case "Discount_ads":
+                            disscounts.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, disscounts.size());
+
+                            break;
+
+                        case "Workshops":
+                            workshops.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, workshops.size());
+                            break;
+
+                        case "Bride":
+                            brides.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, brides.size());
+                            break;
+
+                        case "Reg_Course":
+                            regcourses.remove(position);
+                            notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, regcourses.size());
+                            break;
+                    }
+
+                    successDialog("با موفقیت تمدید شد.");
+                } catch (Exception e) {
+                }
+            }
+        });
+
+
+    }
+
+
+    public void ExtendDilog(final int ad_id, final String ad_type, final int position, final int mem_id ) {
+        internetDialog = new Dialog(context);
+        internetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        internetDialog.setContentView(R.layout.extend_dialog);
+        internetDialog.setCancelable(false);
+        internetDialog.show();
+        TextView btnOk = internetDialog.findViewById(R.id.ok);
+        TextView btnCancel = internetDialog.findViewById(R.id.cancel);
+
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                extendFunc(ad_id,ad_type,position,mem_id);
+                internetDialog.dismiss();
+
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                internetDialog.dismiss();
+            }
+        });
+        internetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    public void successDialog(String text) {
+
+        final Dialog message = new Dialog(context);
+        message.requestWindowFeature(Window.FEATURE_NO_TITLE); // before
+        message.setContentView(R.layout.success_dialog);
+        message.setCancelable(true);
+        message.show();
+        TextView txtTitle = message.findViewById(R.id.txtTitle);
+        TextView txtBody = message.findViewById(R.id.txtBody);
+        TextView btnExit = message.findViewById(R.id.btnExit);
+        txtTitle.setText("پیام");
+        txtBody.setText(text);
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                message.dismiss();
+            }
+        });
+        message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
     }
 

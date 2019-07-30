@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.opengl.ETC1;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -268,7 +269,16 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         switch (view.getId()) {
 
             case R.id.edit:
-                showDialog();
+
+                String name = "";
+                String email = "";
+                if (txtName.getText().toString() != null)
+                    name = txtName.getText().toString();
+                if (txtEmail.getText().toString() != null)
+                    email = txtEmail.getText().toString();
+
+                showDialog(name, email);
+
                 break;
             case R.id.imgbBack:
                 if (tools.state.equals("3")) {
@@ -278,7 +288,8 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                     tools.state = "1";
 
 
-                } else if (tools.state.equals("2")) {
+                } else
+                    if (tools.state.equals("2")) {
                     Fragment fragment = new HomeFragment();
                     loadFragment(fragment);
                     navigation.setSelectedItemId(R.id.navigation_home);
@@ -329,7 +340,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent = new Intent(getActivity(), ShowMemberDetail.class);
                 intent.putExtra("type", 1);
                 intent.putExtra("id", memberId1);
-                intent.putExtra("tag","own");
+                intent.putExtra("tag", "own");
                 getActivity().startActivity(intent);
                 customType(getContext(), LEFT_TO_RIGHT);
                 break;
@@ -340,7 +351,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent2 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent2.putExtra("type", 4);
                 intent2.putExtra("id", memberId4);
-                intent2.putExtra("tag","own");
+                intent2.putExtra("tag", "own");
 
                 getActivity().startActivity(intent2);
                 customType(getContext(), LEFT_TO_RIGHT);
@@ -350,7 +361,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent3 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent3.putExtra("type", 5);
                 intent3.putExtra("id", memberId5);
-                intent3.putExtra("tag","own");
+                intent3.putExtra("tag", "own");
 
 
                 getActivity().startActivity(intent3);
@@ -362,7 +373,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent4 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent4.putExtra("type", 2);
                 intent4.putExtra("id", memberId2);
-                intent4.putExtra("tag","own");
+                intent4.putExtra("tag", "own");
 
                 getActivity().startActivity(intent4);
                 customType(getContext(), LEFT_TO_RIGHT);
@@ -372,17 +383,17 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                 Intent intent5 = new Intent(getActivity(), ShowMemberDetail.class);
                 intent5.putExtra("type", 3);
                 intent5.putExtra("id", memberId3);
-                intent5.putExtra("tag","own");
+                intent5.putExtra("tag", "own");
 
                 getActivity().startActivity(intent5);
                 customType(getContext(), LEFT_TO_RIGHT);
                 break;
 
-//            case R.id.myProfile_photoLikes:
-//                clickedImageView = myProfile_photoLikes;
-//                showBottomSheetDialog();
-//f
-//                break;
+            case R.id.myProfile_photoLikes:
+                clickedImageView = myProfile_photoLikes;
+                showBottomSheetDialog();
+
+                break;
 
 
         }
@@ -526,6 +537,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
                         Glide.with(getContext())
                                 .load(stream.toByteArray())
                                 .into(clickedImageView);
+                        update_member("", "");
 
 
                     } catch (Exception E) {
@@ -696,10 +708,12 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
 
         pd.show();
         RequestParams params = new RequestParams();
-        params.put("full_name", name);
+        if (!name.equals(""))
+            params.put("full_name", name);
         params.put("lat", lat);
         params.put("lng", lng);
-        params.put("email", email);
+        if (!email.equals(""))
+            params.put("email", email);
         try {
             params.put("pic", proPic);
         } catch (FileNotFoundException e) {
@@ -845,16 +859,20 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     }
 
 
-    public void showDialog() {
+    public void showDialog(String name, String email) {
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog);
 
         final ImageView imageView = dialog.findViewById(R.id.myProfile_photoLikes);
-        final EditText name = dialog.findViewById(R.id.Name);
-        final EditText email = dialog.findViewById(R.id.Email);
+        final EditText etName = dialog.findViewById(R.id.Name);
+        final EditText etEmail = dialog.findViewById(R.id.Email);
 
         Button btn_dialog = dialog.findViewById(R.id.btn);
+
+        etName.setText(name);
+        etEmail.setText(email);
+
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -870,7 +888,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         btn_dialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                update_member(name.getText().toString(), email.getText().toString());
+                update_member(etName.getText().toString(), etEmail.getText().toString());
 
                 dialog.dismiss();
             }

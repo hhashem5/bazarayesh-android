@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layoutDirection="ltr"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:layout_marginRight="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="4dp"
-        android:id="@+id/rel"
         android:background="@drawable/layout_corners_shape"
-        android:elevation="3dp">
+        android:elevation="3dp"
+        android:id="@+id/rel">
 
         <View
             android:layout_width="8dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:layout_alignParentRight="true"
             android:id="@+id/view"
@@ -44,7 +44,7 @@
                 android:text=""
 
                 android:textColor="@color/dark"
-               android:textSize="18dp" />
+                android:textSize="18dp" />
 
             <com.idpz.bazarayesh.Views.mTextView
                 android:id="@+id/text2"
@@ -55,10 +55,24 @@
                 android:layout_marginBottom="4dp"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text=""
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textColor="@color/colorPrimary"
                 android:textSize="15dp"
-               />
+                />
+            <com.idpz.bazarayesh.Views.mButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text2"
+                android:text="تمدید کردن"
+                android:textColor="@color/white"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:textSize="12dp"
+                android:background="@drawable/background_btn2"
+                android:layout_centerHorizontal="true"
+                android:visibility="visible"
+                android:id="@+id/btnExtend"/>
 
         </RelativeLayout>
         <ImageView

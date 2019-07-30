@@ -20,33 +20,60 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="nointernet.json"
+            app:lottie_fileName="delete.json"
             app:lottie_loop="true" />
 
         <com.idpz.bazarayesh.Views.mTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/animation_view"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="مشکلی پیش آمده، دوباره تلاش کنید."
+            android:text="آیا مطمئن هستید میخواهید حذف کنید؟"
             android:textColor="@color/dark" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:paddingTop="8dp"
+    android:paddingBottom="4dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="8dp"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:orientation="horizontal"
 
+    android:weightSum="2"
+    android:layout_marginBottom="4dp">
         <com.idpz.bazarayesh.Views.mTextView
-            android:id="@+id/btnTry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:background="@color/white"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
-            android:layout_marginBottom="8dp"
-            android:text="تلاش مجدد"
+            android:text="بله"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="1"/>
+        <com.idpz.bazarayesh.Views.mTextView
+            android:id="@+id/cancel"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="8dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:text="خیر "
             android:textColor="@color/colorPrimary" />
+</LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

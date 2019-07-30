@@ -193,6 +193,12 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         v = inflater.inflate(R.layout.subprofile_fragment, container, false);
         tools = new Tools(getContext());
 
+        try {
+
+            if (getActivity().getIntent().getExtras() != null)
+                type = (int) getActivity().getIntent().getExtras().get("type");
+        } catch (Exception e) {
+        }
 
         initviews(v);
 
@@ -1078,9 +1084,14 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 if (!txtphone.getText().toString().equals("")) {
                     if (!txtphone2.getText().toString().equals("")) {
                         if (lat != 0) {
+                            if (txtphone.getText().toString().startsWith("09")){
 
                             pd.show();
-                            getMemberRegister();
+                            getMemberRegister();}
+
+                            else {
+                                txtphone.setError("شماره معتبر نیست");
+                            }
                         } else {
 
                             tools.alertShow("موقعیت مکانی روی نقشه حتما باید انتخاب شود");
@@ -1234,59 +1245,59 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
     }
 
     public void AlertDialog(final LinearLayout linear) {
-        if (linear.getChildCount() < 4){
 
+
+        if (linear.getChildCount() == 4 || linear.getChildCount() > 4) {
+            tools.alertShow("برای هردسته بندی تنها سه عکس میتونید بزارید.");
+        } else {
             Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/IRANSans(FaNum).ttf");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(FontUtils.typeface(typeface, "عنوان را وارد کنید"));
-        final EditText input = new EditText(getContext());
-        input.setPadding(40, 20, 40, 20);
-        input.setTypeface(typeface);
-        input.setGravity(Gravity.RIGHT);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage(FontUtils.typeface(typeface, "عنوان را وارد کنید"));
+            final EditText input = new EditText(getContext());
+            input.setPadding(40, 20, 40, 20);
+            input.setTypeface(typeface);
+            input.setGravity(Gravity.RIGHT);
 
-        builder.setView(input);
-        builder.setPositiveButton(FontUtils.typeface(typeface, "تایید"), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+            builder.setView(input);
+            builder.setPositiveButton(FontUtils.typeface(typeface, "تایید"), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-                inflatedLayout = getLayoutInflater().inflate(R.layout.my_image_layout, null);
+                    inflatedLayout = getLayoutInflater().inflate(R.layout.my_image_layout, null);
 
-                txtTilte = inflatedLayout.findViewById(R.id.title);
-                myImageView = inflatedLayout.findViewById(R.id.img);
-                imgbDropPic13 = inflatedLayout.findViewById(R.id.imgbDropPic1);
-                imgRetry = inflatedLayout.findViewById(R.id.retry);
-                linearRetry = inflatedLayout.findViewById(R.id.linearRetry);
+                    txtTilte = inflatedLayout.findViewById(R.id.title);
+                    myImageView = inflatedLayout.findViewById(R.id.img);
+                    imgbDropPic13 = inflatedLayout.findViewById(R.id.imgbDropPic1);
+                    imgRetry = inflatedLayout.findViewById(R.id.retry);
+                    linearRetry = inflatedLayout.findViewById(R.id.linearRetry);
 
-                tempView = inflatedLayout;
-                btnSelect(myImageView, imgbDropPic13, linear);
-                txtTilte.setText(input.getText().toString());
-                tempTextView = txtTilte;
+                    tempView = inflatedLayout;
+                    btnSelect(myImageView, imgbDropPic13, linear);
+                    txtTilte.setText(input.getText().toString());
+                    tempTextView = txtTilte;
+                    viewsList.add(inflatedLayout);
+                    drops.add(imgbDropPic13);
+                    linearLayouts.add(linear);
 
-
-                viewsList.add(inflatedLayout);
-                drops.add(imgbDropPic13);
-                linearLayouts.add(linear);
-
-                title = input.getText().toString();
-                dialog.dismiss();
+                    title = input.getText().toString();
+                    dialog.dismiss();
 
 
-            }
-        });
+                }
+            });
 
-        builder.setNegativeButton(FontUtils.typeface(typeface, "انصراف"), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
+            builder.setNegativeButton(FontUtils.typeface(typeface, "انصراف"), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
 
-        builder.show();
-
+            builder.show();
+        }
     }
-      else tools.alertShow("شما برای هر دسته تنها 3 عکس می تونید بزارید.");
-   }
+
 
     @Override
     public void onResume() {
@@ -1305,22 +1316,26 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
 
 
                 try {
-                        Intent i1 = new Intent(getContext(), ShowMemberDetail.class);
-                        i1.putExtra("type", type);
-                        i1.putExtra("id", Integer.valueOf(member_id));
-                        i1.setAction(Intent.ACTION_MAIN);
-
-                        i1.addCategory(Intent.CATEGORY_HOME);
-                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        getActivity().startActivity(i1);
-                        customType(getContext(), LEFT_TO_RIGHT);
-                        getActivity().finish();
+//                    Intent i1 = new Intent(getContext(), ShowMemberDetail.class);
+//                    i1.putExtra("type", type);
+//                    if (member_id != null) {
+//                        if (!member_id.equals("")) {
+//                            i1.putExtra("id", Integer.valueOf(member_id));
+//                        }
+//                    }
+//                    i1.setAction(Intent.ACTION_MAIN);
+//
+//                    i1.addCategory(Intent.CATEGORY_HOME);
+//                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    getActivity().startActivity(i1);
+//                    customType(getContext(), LEFT_TO_RIGHT);
+                    getActivity().finish();
 
                 } catch (Exception e) {
+                    e.getMessage();
                 }
-
 
 
                 break;
@@ -1406,6 +1421,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         params.put("type", tag);
         params.put("full_name", txtName.getText().toString());
         params.put("manager_name", txtBoss.getText().toString());
+
         params.put("phone1", txtphone.getText().toString());
         if (txtphone2.getText().toString() != null)
             params.put("phone2", txtphone2.getText().toString());
@@ -1561,7 +1577,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
         params.put("type", type);
         if (!service_type.equals(""))
             params.put("service_type", service_type);
-            params.put("title", title);
+        params.put("title", title);
 
         String url = tools.baseUrl + "membersFilesRegister";
 
@@ -1629,8 +1645,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                             @Override
                             public void onClick(View view) {
                                 if (drops1.get(finalJ).getTag() == viewsList1.get(finalJ).getTag()) {
-                                    viewsList1.get(finalJ).setVisibility(View.GONE);
-                                    deletePic(mtag, key, ids.get(finalI), inflatedLayout, tools.getSharePrf("userId"), linear);
+                                    deletePic(mtag, key, ids.get(finalI), viewsList1.get(finalJ), tools.getSharePrf("userId"), linear);
                                 }
                             }
                         });
@@ -1740,18 +1755,14 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 i1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i1);
 
-                customType(getContext(), RIGHT_TO_LEFT);
-
+                customType(getContext(),RIGHT_TO_LEFT);
 
                 getActivity().finish();
                 message.dismiss();
             }
         });
         message.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
     }
-
-
     public void getMemberInfo() {
 
         String url = tools.baseUrl + "member_info";
@@ -2076,8 +2087,7 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                 .load(url)
                 .into(myImageView);
 
-        if (linear.getChildCount() < 4)
-            linear.addView(inflatedLayout);
+        linear.addView(inflatedLayout);
 
         for (int i = 0; i < drops.size(); i++) {
             final int finalI = i;
@@ -2087,8 +2097,8 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
                     @Override
                     public void onClick(View view) {
                         if (drops.get(finalJ).getTag() == viewsList.get(finalJ).getTag()) {
-                            viewsList.get(finalJ).setVisibility(View.GONE);
-                            deletePic(tag, key, id, inflatedLayout, member_id, linear);
+                            //viewsList.get(finalJ).setVisibility(View.GONE);
+                            deletePic(tag, key, id, viewsList.get(finalJ), member_id, linear);
                         }
                     }
                 });
@@ -2120,7 +2130,9 @@ public class SubProfileFragment extends BaseFragment implements View.OnClickList
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
                 if (responseString.contains("ok")) {
-                    linear.removeView(v);
+                    //linear.removeView(v);
+                    //    v.setVisibility(View.GONE);
+                    ((ViewGroup) v.getParent()).removeView(v);
 
                 }
             }

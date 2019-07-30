@@ -83,11 +83,14 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
         tools = new Tools(getContext());
         banner_slider = v.findViewById(R.id.banner_slider);
         recyclerView = v.findViewById(R.id.recycle);
+        banner_slider.setFocusableInTouchMode(true);
+
+
         Slider.init(new GlideImageLoadingService(getContext()));
 
 
-     //   if (tools.isNetworkAvailable())
-            getBanner();
+        //   if (tools.isNetworkAvailable())
+        getBanner();
 //        else
 //        {
 //                    picNames.add(new PicName(1, "jsj", "https://setare.com/files/fa/news/1397/8/21/200856_426.jpg", "memo0"));
@@ -485,6 +488,9 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setAdapter(itemAdapter);
 
+
+
+
     }
 
 
@@ -612,14 +618,23 @@ public class HomeFragment extends BaseFragment implements IOnBackPressed {
 
                     if (responseString.contains("ok")) {
 
-                        ResponseBanner responseBanner = tools.gson.fromJson(responseString, ResponseBanner.class);
+                        final ResponseBanner responseBanner = tools.gson.fromJson(responseString, ResponseBanner.class);
 
 
                         banner_slider.setAdapter(new MainBannerSliderAdapter(responseBanner.getBaners(), getContext()));
                         banner_slider.setOnSlideClickListener(new OnSlideClickListener() {
                             @Override
                             public void onSlideClick(int position) {
+                                try {
 
+
+                                    responseBanner.getBaners().get(position).getLink();
+
+                                    Intent i = new Intent(getActivity(), ShowMemberDetail.class);
+                                    i.putExtra("id", Integer.valueOf(responseBanner.getBaners().get(position).getLink()));
+                                    startActivity(i);
+                                } catch (Exception e) {
+                                }
                             }
                         });
                     }

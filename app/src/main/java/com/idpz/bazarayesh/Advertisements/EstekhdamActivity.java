@@ -117,6 +117,8 @@ public class EstekhdamActivity extends BaseActivity implements View.OnClickListe
             case R.id.imgbBack:
 
                 Intent i1 = new Intent(EstekhdamActivity.this, SubProfileActivity.class);
+                i1.putExtra("back","2");
+
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -423,6 +425,8 @@ public class EstekhdamActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
         Intent i1 = new Intent(EstekhdamActivity.this, SubProfileActivity.class);
+        i1.putExtra("back","2");
+
         i1.setAction(Intent.ACTION_MAIN);
         i1.addCategory(Intent.CATEGORY_HOME);
         i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

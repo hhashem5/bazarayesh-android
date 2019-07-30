@@ -16,7 +16,7 @@ import com.jsibbold.zoomage.ZoomageView;
 import static com.idpz.bazarayesh.ShowMemberDetail.*;
 
 
-public class DialogFullscreenImageFragment extends DialogFragment {
+public class DialogFullscreenImageFragment extends DialogFragment implements IOnBackPressed{
 
     public CallbackResult callbackResult;
 
@@ -80,6 +80,12 @@ public class DialogFullscreenImageFragment extends DialogFragment {
         this.request_code = request_code;
     }
 
+    @Override
+    public boolean onBackPressed() {
+        dismiss();
+        return false;
+    }
+
     public interface CallbackResult {
         void sendResult(int requestCode, Object obj);
     }
@@ -113,6 +119,8 @@ public class DialogFullscreenImageFragment extends DialogFragment {
 
 
     }
+
+
 
 
 }

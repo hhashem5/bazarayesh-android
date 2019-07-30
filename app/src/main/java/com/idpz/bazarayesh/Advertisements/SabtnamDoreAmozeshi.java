@@ -168,6 +168,8 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
             case R.id.imgbBack:
 
                 Intent i1 = new Intent(SabtnamDoreAmozeshi.this, SubProfileActivity.class);
+                i1.putExtra("back","2");
+
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -304,6 +306,8 @@ public class SabtnamDoreAmozeshi extends BaseActivity implements View.OnClickLis
     @Override
     public void onBackPressed() {
         Intent i1 = new Intent(SabtnamDoreAmozeshi.this, SubProfileActivity.class);
+        i1.putExtra("back","2");
+
         i1.setAction(Intent.ACTION_MAIN);
         i1.addCategory(Intent.CATEGORY_HOME);
         i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

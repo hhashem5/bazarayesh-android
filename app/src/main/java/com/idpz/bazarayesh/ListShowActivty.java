@@ -1,18 +1,24 @@
 package com.idpz.bazarayesh;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.idpz.bazarayesh.Adapters.MembersAdapter;
 import com.idpz.bazarayesh.Models.Data;
 import com.idpz.bazarayesh.Models.ResponseListMember;
@@ -35,6 +41,7 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
 
     Typeface irsans;
 
+    private Dialog internetDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +137,6 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
         });
 
 
-
         irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
 
         pd = new ProgressDialog(context);
@@ -158,15 +164,7 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 pd.dismiss();
-                tools.noInternet(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        pd.dismiss();
-                        getList(tag);
-                        tools.hideInternet();
 
-                    }
-                });
             }
 
             @Override
@@ -180,19 +178,20 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
 
                         final ResponseListMember responseListMember = gson.fromJson(responseString, ResponseListMember.class);
 
+                        if (responseListMember.getMembers().size() == 0)
+                            notFound();
+                            adapter = new MembersAdapter(responseListMember.getMembers(), context, new MembersAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position, Object object) {
+                                    Data member = (Data) object;
+                                    Intent intent = new Intent(ListShowActivty.this, ShowMemberDetail.class);
 
-                        adapter = new MembersAdapter(responseListMember.getMembers(), context, new MembersAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position, Object object) {
-                                Data member = (Data) object;
-                                Intent intent = new Intent(ListShowActivty.this, ShowMemberDetail.class);
+                                    intent.putExtra("backtag", 1);
+                                    intent.putExtra("id", member.getId());
 
-                                intent.putExtra("backtag", 1);
-                                intent.putExtra("id", member.getId());
-
-                                startActivity(intent);
-                            }
-                        });
+                                    startActivity(intent);
+                                }
+                            });
 
 
                         recyclerView.setLayoutManager(new LinearLayoutManager(getAppContext(), LinearLayoutManager.VERTICAL, true));
@@ -224,4 +223,23 @@ public class ListShowActivty extends BaseActivity implements View.OnClickListene
                 break;
         }
     }
+
+
+    public void notFound() {
+        internetDialog = new Dialog(context);
+        internetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE); //before
+        internetDialog.setContentView(R.layout.notfound_dialog);
+
+        internetDialog.setCancelable(false);
+        internetDialog.show();
+        TextView btnExit = internetDialog.findViewById(R.id.btnExit);
+        internetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
 }

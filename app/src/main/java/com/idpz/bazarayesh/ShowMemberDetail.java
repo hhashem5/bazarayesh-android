@@ -5,16 +5,17 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.idpz.bazarayesh.Adapters.MemberDetailAdapter;
 import com.idpz.bazarayesh.Models.Award;
@@ -36,14 +37,16 @@ import static com.idpz.bazarayesh.Utils.AppController.getAppContext;
 
 public class ShowMemberDetail extends BaseActivity implements View.OnClickListener {
 
-    int id, count, backtag, type = 0;
+    int id, count, type = 0;
 
 
     static String url, tag;
     int service_type = 0;
     double lat, lng;
     Typeface irsans;
+    TextView txtView;
 
+    boolean flagEdit = false;
     String Instagram, Telegram;
     List<MainItem> itemsAward = new ArrayList<>();
     List<MainItem> itemsServices = new ArrayList<>();
@@ -56,7 +59,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
     ImageView imgLogo, imgTelegram, imgInsta;
 
     TextView txtName, txtAddress, awardTitle, workSpaceTitle, servicesTitle, workShopTitle,
-            famousCustomerTitle, txtPhone, txtPhone2, managerName, fame, title6, title7, edit;
+            famousCustomerTitle, txtPhone, txtPhone2, managerName, fame, title6, title7, edit,manage_ads;
 
     RelativeLayout relativeLayout6, relativeLayout2, relativeLayout3, relativeLayout4, relativeLayout5;
     private DialogFullscreenImageFragment newFragment;
@@ -67,14 +70,13 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.show_member_detail);
 
 
+
         irsans = Typeface.createFromAsset(getAssets(), "fonts/iran_sans.ttf");
 
         pd = new ProgressDialog(context);
         pd.setCancelable(false);
         pd.setMessage(FontUtils.typeface(irsans, getString(R.string.wait)));
         settoolbarText("جزئیات");
-        initViews();
-
         try {
             if (getIntent().getExtras().get("id") != null)
                 id = (int) getIntent().getExtras().get("id");
@@ -88,6 +90,9 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
                 type = (int) getIntent().getExtras().get("type");
                 edit.setVisibility(View.VISIBLE);
+                manage_ads.setVisibility(View.VISIBLE);
+
+                flagEdit = true;
 
             }
 
@@ -102,6 +107,12 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         } catch (Exception e) {
         }
 
+        initViews();
+
+
+
+
+
         memberDetail();
 
 
@@ -112,6 +123,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         imgbBack.setVisibility(View.VISIBLE);
 
         edit = findViewById(R.id.edit);
+        manage_ads=findViewById(R.id.manage_ads);
         relativeLayout6 = findViewById(R.id.relative6);
         relativeLayout2 = findViewById(R.id.relative2);
         relativeLayout3 = findViewById(R.id.relative3);
@@ -119,13 +131,14 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         relativeLayout5 = findViewById(R.id.relative5);
         title7 = findViewById(R.id.title7);
         title6 = findViewById(R.id.title6);
+        txtView=findViewById(R.id.txtView);
+
         managerName = findViewById(R.id.managerName);
         fame = findViewById(R.id.fame);
 
 
         txtPhone = findViewById(R.id.txtphone);
         txtPhone2 = findViewById(R.id.txtphone2);
-
         imgInsta = findViewById(R.id.instagram);
         imgTelegram = findViewById(R.id.telegram);
 
@@ -156,6 +169,12 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
         imgInsta.setOnClickListener(this);
 
         edit.setOnClickListener(this);
+        manage_ads.setOnClickListener(this);
+
+        if (!flagEdit)
+        getView();
+
+
     }
 
 
@@ -177,7 +196,8 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                 try {
                     pd.dismiss();
                 } catch (Exception e) {
-                }
+
+               e.getMessage(); }
             }
 
             @Override
@@ -186,12 +206,10 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                 if (responseString.contains("ok")) {
                     //   ResponseListMember response=gson.fromJson(responseString,ResponseListMember.class);
                     //   response.getMembers().
+                    pd.dismiss();
 
                     try {
-
-                        pd.dismiss();
                         ResponseMemberDetail response = gson.fromJson(responseString, ResponseMemberDetail.class);
-
                         Glide.with(activity)
                                 .load("http://arayesh.myzibadasht.ir/" + response.getMember().getLogo())
                                 .into(imgLogo);
@@ -205,14 +223,17 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                         Telegram = response.getMember().getTelegram();
 
                         txtPhone.setText(response.getMember().getPhone1());
+
                         txtPhone2.setText(response.getMember().getPhone2());
+                        txtView.setText(String.valueOf(response.getMember().getView()));
 
 
                         if (response.getMember().getManagerName() != null) {
 
+                            if (!response.getMember().getManagerName().equals("0")){
                             managerName.setVisibility(View.VISIBLE);
                             title6.setVisibility(View.VISIBLE);
-                            managerName.setText(response.getMember().getManagerName());
+                            managerName.setText(response.getMember().getManagerName());}
                         }
 
 
@@ -303,6 +324,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
                         }
 
                     } catch (Exception e) {
+                        e.getMessage();
                     }
                 }
             }
@@ -334,8 +356,7 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.imgbBack:
-
-                finish();
+             onBackPressed();
 
                 break;
 
@@ -351,20 +372,52 @@ public class ShowMemberDetail extends BaseActivity implements View.OnClickListen
 
             case R.id.edit:
 
+
                 Intent intent = new Intent(ShowMemberDetail.this, SubProfileActivity.class);
                 intent.putExtra("type", type);
                 startActivity(intent);
 
                 break;
+
+            case R.id.manage_ads:
+                Intent intent2 = new Intent(ShowMemberDetail.this, SubProfileActivity.class);
+                intent2.putExtra("back","2");
+                intent2.putExtra("type", type);
+                startActivity(intent2);
+
+
+                break;
         }
+    }
+
+
+    public void getView(){
+        pd.show();
+        RequestParams params = new RequestParams();
+        params.put("member_id",String.valueOf(id));
+        params.put("api_token", tools.getSharePrf("api_token"));
+        params.put("APP_KEY", "bazarayesh:barber:11731e11b");
+        String url=tools.baseUrl+"member_view";
+        tools.client.post(url, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+
+            }
+        });
+
     }
 
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
 
-//        finish();
-//        newFragment.dismiss();
     }
 
 

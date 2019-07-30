@@ -20,7 +20,7 @@
             android:layout_height="150dp"
             android:layout_gravity="center"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="nointernet.json"
+            app:lottie_fileName="404.json"
             app:lottie_loop="true" />
 
         <com.idpz.bazarayesh.Views.mTextView
@@ -29,11 +29,11 @@
             android:layout_below="@id/animation_view"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="مشکلی پیش آمده، دوباره تلاش کنید."
+            android:text="موردی برای نمایش یافت نشد."
             android:textColor="@color/dark" />
 
         <com.idpz.bazarayesh.Views.mTextView
-            android:id="@+id/btnTry"
+            android:id="@+id/btnExit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -46,7 +46,7 @@
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
             android:layout_marginBottom="8dp"
-            android:text="تلاش مجدد"
+            android:text="خروج"
             android:textColor="@color/colorPrimary" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

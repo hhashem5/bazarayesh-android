@@ -132,6 +132,8 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
             case R.id.imgbBack:
 
                 Intent i1 = new Intent(KargahAmozeshi.this, SubProfileActivity.class);
+                i1.putExtra("back", "2");
+
                 i1.setAction(Intent.ACTION_MAIN);
                 i1.addCategory(Intent.CATEGORY_HOME);
                 i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -265,6 +267,8 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
     @Override
     public void onBackPressed() {
         Intent i1 = new Intent(KargahAmozeshi.this, SubProfileActivity.class);
+        i1.putExtra("back", "2");
+
         i1.setAction(Intent.ACTION_MAIN);
         i1.addCategory(Intent.CATEGORY_HOME);
         i1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -282,7 +286,6 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
         pd.show();
         RequestParams params = new RequestParams();
         params.put("member", "workshop");
-
 
 
         params.put("date", day);
@@ -337,7 +340,7 @@ public class KargahAmozeshi extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                if (responseString.contains("200")){
+                if (responseString.contains("200")) {
 
 
                     successDialog("آگهی شما با موفقیت ثبت شد.");

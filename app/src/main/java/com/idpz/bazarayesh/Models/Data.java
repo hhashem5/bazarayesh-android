@@ -70,6 +70,10 @@ public class Data {
     @Expose
     private int pub;
 
+    @SerializedName("view")
+    @Expose
+    private int view;
+
 //    @SerializedName("Workshops")
 //    @Expose
 //    private List<> todo
@@ -233,5 +237,14 @@ public class Data {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
     }
 }
